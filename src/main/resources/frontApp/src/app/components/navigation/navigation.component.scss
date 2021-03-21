@@ -1,0 +1,56 @@
+@import "./../../../scss/bootstrap/functions";
+@import "./../../../scss/bootstrap/variables";
+
+.navbar-footer {
+  .nav-link,
+  a {
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto;
+
+    &,
+    &:visited {
+      color: $secondary;
+    }
+
+    &:hover {
+      color:  $thirtary;
+    }
+  }
+
+  .nav-link {
+    padding: $nav-link-padding-y $nav-link-padding-x * 0.5 !important;
+  }
+
+  .navbar-brand {
+    font-size: 72px;
+  }
+
+  .navbar-nav {
+    max-width: 75%;
+    margin: 1rem auto 0;
+    flex-direction: unset;
+  }
+
+  .active {
+    .nav-link,
+    a {
+      &,
+      &:visited {
+        color: $secondary !important;
+      }
+
+      &:before {
+        background-color: $secondary;
+      }
+
+      &:hover {
+        color:  $thirtary !important;
+
+        &:before {
+          background-color: $thirtary;
+        }
+      }
+    }
+  }
+}

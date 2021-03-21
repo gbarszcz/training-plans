@@ -1,12 +1,14 @@
-<nav class="navbar fixed-top navbar-expand-lg">
-  <div class="container" [innerHTML]="navigation.getBrandItem() + navigation.getToggleButton()">
+<nav class="navbar {{position == 'fixed' ? 'fixed-top navbar-expand-lg' : 'navbar-footer'}}">
+  <div class="container">
+    <div [innerHTML]="navigation?.getBrandItem()"></div>
+    <div [innerHTML]="navigation?.getToggleButton()"></div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li *ngFor="let link of navigation.getLeftNavItems()" [innerHTML]="link" class="nav-item">
+        <li *ngFor="let link of navigation?.getLeftNavItems()" [innerHTML]="link" class="nav-item">
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li *ngFor="let link of navigation.getRightNavItems()" [innerHTML]="link" class="nav-item">
+        <li *ngFor="let link of navigation?.getRightNavItems()" [innerHTML]="link" class="nav-item">
         </li>
       </ul>
     </div>
@@ -14,7 +16,7 @@
   <hr>
   <div class="container">
     <ul class="navbar-nav nav_secondary">
-      <li *ngFor="let link of navigation.getSecNavItems()" [innerHTML]="link">
+      <li *ngFor="let link of navigation?.getSecNavItems()" [innerHTML]="link" class="nav-item">
       </li>
     </ul>
   </div>

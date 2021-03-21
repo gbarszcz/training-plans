@@ -15,6 +15,7 @@ export class Navigation {
   private leftNavItems: string[];
   private rightNavItems: string[];
   private secNavItems: string[];
+  private currentRoute: string;
 
   private NAV_LINK = 'nav-link';
   private DROPDOWN_LINK = 'dropdown-item';
@@ -26,7 +27,7 @@ export class Navigation {
   ]);
   private ICON_COMPONENTS = new Map([
     ['start', '<i class="bi '],
-    ['end', '"></i>']
+    ['end', '"></i> ']
   ]);
   private IMG_COMPONENTS = new Map([
     ['start', '<img src="'],
@@ -42,9 +43,10 @@ export class Navigation {
    *    subNav: INavigationItem[];
    * }
    * */
-  constructor(navJSON: string) {
-    const nav = JSON.parse(navJSON);
+  constructor(navJSON: string, currentRoute: string) {
+    const nav = JSON.parse(navJSON.replace(currentRoute, '#top'));
 
+    this.currentRoute = currentRoute;
     this.leftNavItems = this.prepareNavItems(nav.mainNav.filter(
       (navItem: INavigationItem) => navItem.left
     ), this.NAV_LINK);
@@ -53,6 +55,10 @@ export class Navigation {
     ), this.NAV_LINK);
     this.secNavItems = this.prepareNavItems(nav.subNav, this.NAV_LINK);
     this.brandItem = this.prepareBrandItem(nav.brandItem, nav.mainNav[0].link);
+  }
+
+  public getCurrentRoute(): string {
+    return this.currentRoute;
   }
 
   public getBrandItem(): string {
@@ -108,12 +114,21 @@ export class Navigation {
 
     if (item.disabled) {
       html += ' disabled';
+      item.link = '';
+      item.subItems = [];
     }
-    html += this.LINK_COMPONENTS.get('href') + item.link + this.LINK_COMPONENTS.get('close');
-    html += this.createLinkContent(item.content) + this.LINK_COMPONENTS.get('end');
-
+    if (item.link) {
+      html += this.LINK_COMPONENTS.get('href') + item.link;
+    }
     if (item.subItems.length > 0) {
+      html = '<div class="dropdown">' + html.replace(linkCSSClass, linkCSSClass + ' dropdown-toggle');
+      html += this.LINK_COMPONENTS.get('close') + this.createLinkContent(item.content) + this.LINK_COMPONENTS.get('end');
       html += this.createDropdown(item.subItems);
+      html += '</div>';
+    }
+    else {
+      // id="navbarDropdown" role="button" data-toggle="dropdown"
+      html += this.LINK_COMPONENTS.get('close') + this.createLinkContent(item.content) + this.LINK_COMPONENTS.get('end');
     }
     return html;
   }
@@ -149,16 +164,16 @@ export class Navigation {
   }
 
   private createDropdown(subItems: INavigationItem[]): string {
-    let html = '<div class="dropdown"><div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+    let html = '<div class="dropdown-menu" aria-labelledby="navbarDropdown">';
 
     subItems.forEach((item) => {
       if (item.divider) {
         html += '<div class="dropdown-divider"></div>';
       }
 
-      html += this.prepareNavItems(item.subItems, this.DROPDOWN_LINK);
+      html += this.prepareNavItems([item], this.DROPDOWN_LINK);
     });
 
-    return html += '</div></div>';
+    return html += '</div>';
   }
 }

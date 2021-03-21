@@ -1,0 +1,45 @@
+.navbar-footer .nav-link,
+.navbar-footer a {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.navbar-footer .nav-link, .navbar-footer .nav-link:visited,
+.navbar-footer a,
+.navbar-footer a:visited {
+  color: var(--bs-secondary);
+}
+.navbar-footer .nav-link:hover,
+.navbar-footer a:hover {
+  color: var(--bs-thirtary);
+}
+.navbar-footer .nav-link {
+  padding: 0.5rem 0.5rem !important;
+}
+.navbar-footer .navbar-brand {
+  font-size: 72px;
+}
+.navbar-footer .navbar-nav {
+  max-width: 75%;
+  margin: 1rem auto 0;
+  flex-direction: unset;
+}
+.navbar-footer .active .nav-link, .navbar-footer .active .nav-link:visited,
+.navbar-footer .active a,
+.navbar-footer .active a:visited {
+  color: var(--bs-secondary) !important;
+}
+.navbar-footer .active .nav-link:before,
+.navbar-footer .active a:before {
+  background-color: var(--bs-secondary);
+}
+.navbar-footer .active .nav-link:hover,
+.navbar-footer .active a:hover {
+  color: var(--bs-thirtary) !important;
+}
+.navbar-footer .active .nav-link:hover:before,
+.navbar-footer .active a:hover:before {
+  background-color: var(--bs-thirtary);
+}
+
+/*# sourceMappingURL=navigation.component.css.map */

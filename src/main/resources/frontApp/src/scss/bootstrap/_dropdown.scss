@@ -9,6 +9,7 @@
 .dropdown-toggle {
   white-space: nowrap;
   display: none !important;
+  cursor: pointer;
 
   @media (min-width: map-get($grid-breakpoints, 'xl')) {
     display: block !important;
