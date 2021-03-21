@@ -5459,6 +5459,7 @@ textarea.form-control-lg {
 .dropdown-toggle {
   white-space: nowrap;
   display: none !important;
+  cursor: pointer;
 }
 @media (min-width: 1200px) {
   .dropdown-toggle {
@@ -7958,6 +7959,44 @@ a.dropdown-item:before,
 /*! --------------------------- End: Bootstrap ---------------------------
 
 *** ------------------------------ MyStyles ------------------------------ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--bs-secondary);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--bs-primary);
+  transition: all 0.3s ease-in-out;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bs-thirtary);
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(0.5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.dropdown-menu {
+  animation-duration: 0.3s;
+  -webkit-animation-duration: 0.3s;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+}
+
 /*! --------------------------- End: MyStyles ---------------------------- */
 
 /*# sourceMappingURL=styles.css.map */

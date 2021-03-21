@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
 
 export class AppService {
   /** sub nav should be for url param */
-  getNavigation(url: string): string {
+  getNavigation(url: string): string{
     return `
 {
   "brandItem": [{
@@ -148,6 +148,25 @@ export class AppService {
       "disabled": false,
       "divider": false,
       "left": true
+    }
+  ]
+}
+    `;
+  }
+
+  getSocialMedia(): string {
+    return `
+{
+  "socialMedia": [
+    {
+      "name": "Facebook",
+      "link": "https://www.facebook.com/",
+      "icon": "bi-facebook"
+    },
+    {
+      "name": "Twitter",
+      "link": "https://www.twitter.com/",
+      "icon": "bi-twitter"
     }
   ]
 }
