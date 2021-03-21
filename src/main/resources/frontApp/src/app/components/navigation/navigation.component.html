@@ -1,0 +1,21 @@
+<nav class="navbar fixed-top navbar-expand-lg">
+  <div class="container" [innerHTML]="navigation.getBrandItem() + navigation.getToggleButton()">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li *ngFor="let link of navigation.getLeftNavItems()" [innerHTML]="link" class="nav-item">
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li *ngFor="let link of navigation.getRightNavItems()" [innerHTML]="link" class="nav-item">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="container">
+    <ul class="navbar-nav nav_secondary">
+      <li *ngFor="let link of navigation.getSecNavItems()" [innerHTML]="link">
+      </li>
+    </ul>
+  </div>
+</nav>

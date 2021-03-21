@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {AppService} from './app.service';
+import {Navigation} from './utils/Navigation';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontApp';
+  private appService: AppService;
+  navigation: Navigation | null;
+
+  constructor(navigationService: AppService) {
+    this.appService = navigationService;
+
+    this.navigation = null;
+  }
 }
