@@ -1,0 +1,28 @@
+<section *ngFor="let section of sections" id="{{section.metaData.id}}"
+         class="{{section.metaData.type ? (section.metaData.background ? section.metaData.background : ('section ' + section.metaData.type)) : section.metaData.background}}">
+  <div *ngIf="section.metaData.background == 'image-hero_container'" class="image-hero"
+       style="{{section.background ? 'background-image: url(' + section.background + ')' : ''}}"></div>
+
+  <video *ngIf="section.metaData.background == 'background_video'" autoplay loop muted>
+    <source src="{{section.background}}" type="video/mp4">
+  </video>
+
+  <div class="container{{section.metaData.background == 'image-hero_container' ? ' image-hero_content' : (section.metaData.background == 'background_video' ? (' section ' + section.metaData.type) : '')}}">
+    <div *ngIf="section.headerInfos.insideFirstColumn == false" class="row">
+      <div class="{{section.content[0].column}}">
+        <h1>{{section.headerInfos.title}}</h1>
+        <b>{{section.headerInfos.subTitle}}</b>
+      </div>
+    </div>
+
+    <div class="row">
+      <div *ngFor="let content of section.content; let i = index" class="{{content.column}}">
+        <div *ngIf="i == 0 && section.headerInfos.insideFirstColumn">
+          <h1>{{section.headerInfos.title}}</h1>
+          <b>{{section.headerInfos.subTitle}}</b>
+        </div>
+        <div [innerHTML]="content.text"></div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -7,7 +7,7 @@ import {Injectable} from '@angular/core';
 export class AppService {
   /** sub nav should be for url param */
   getNavigation(url: string): string {
-    //todo api
+    // todo api
     if (url === '/') {
       return `
 {
@@ -400,5 +400,117 @@ export class AppService {
   }
 }
     `;
+  }
+
+  getPageContent(url: string): string {
+    if (url === '/') {
+      return `
+{
+    "type": "section",
+    "sections": [
+      {
+        "metaData": {
+          "id": "top",
+          "type": null,
+          "background": "image-hero_container"
+        },
+        "headerInfos": {
+          "title": "Lorem ipsum dolor sit amet",
+          "subTitle": "Aenean tempor porta ante non aliquam",
+          "insideFirstColumn": true
+        },
+        "content": [{
+          "column": "col-12 col-md-11 col-lg-7 col-xxl-6",
+          "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/signin' class='btn btn_alt'>Sign in</a>&#10;<a href='/register' class='btn'>Register</a>"
+        }],
+        "background": "assets/images/gymguy.jpg"
+      },
+        {
+        "metaData": {
+          "id": "stats",
+          "type": "section_th",
+          "background": null
+        },
+        "headerInfos": {
+          "title": "Stats",
+          "subTitle": "Aenean tempor porta ante non aliquam",
+          "insideFirstColumn": true
+        },
+        "content": [
+          {
+            "column": "col-12 col-md-8 col-lg-6",
+            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='#' class='btn'>Learn more</a>"
+          },
+          {
+            "column": "col-12 col-md-8 col-lg-6 img_container",
+            "text": "<img src='assets/images/arrow.png'/>"
+          }
+        ],
+        "background": null
+      },
+        {
+        "metaData": {
+          "id": "exercises",
+          "type": "section_pr",
+          "background": "background_video"
+        },
+        "headerInfos": {
+          "title": "Exercises",
+          "subTitle": "Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis.",
+          "insideFirstColumn": false
+        },
+        "content": [
+          {
+            "column": "col-12 col-lg-6",
+            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='#' class='btn'>Go to exercises atlas</a>"
+          },
+          {
+            "column": "col-12 col-md-8 col-lg-6",
+            "text": "<p>Lorem ipsum dolor sit amet. Aenean tempor porta ante non aliquam. Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu.</p>"
+          }
+        ],
+        "background": "assets/videos/trening.mp4"
+      },
+        {
+        "metaData": {
+          "id": "plans",
+          "type": "section_se",
+          "background": null
+        },
+        "headerInfos": {
+          "title": "Training plans",
+          "subTitle": "Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis.",
+          "insideFirstColumn": false
+        },
+        "content": [
+          {
+            "column": "col-12",
+            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>"
+          },
+          {
+            "column": "col-12 col-sm-6 col-lg-3",
+            "text": "<div class='card'><div class='icon'><i class='bi bi-calendar3'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>"
+          },
+          {
+            "column": "col-12 col-sm-6 col-lg-3",
+            "text": "<div class='card'><div class='icon'><i class='bi bi-card-checklist'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>"
+          },
+          {
+            "column": "col-12 col-sm-6 col-lg-3",
+            "text": "<div class='card'><div class='icon'><i class='bi bi-clock-history'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>"
+          },
+          {
+            "column": "col-12 col-sm-6 col-lg-3",
+            "text": "<div class='card'><div class='icon'><i class='bi bi-heart'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>"
+          }
+        ],
+        "background": null
+      }
+    ]
+}
+    `;
+    } else {
+      return '';
+    }
   }
 }

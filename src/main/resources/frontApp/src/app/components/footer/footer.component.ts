@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Router} from '@angular/router';
 import {Navigation} from '../../models/Navigation';
 import {ISocialMedia} from '../../models/ISocialMedia';
 import {AppService} from '../../app.service';
@@ -19,7 +18,7 @@ export class FooterComponent implements OnInit {
   footerText = '';
   footerCopyright = '';
 
-  constructor(private appService: AppService, private router: Router) {
+  constructor(private appService: AppService) {
   }
 
   ngOnInit(): void {

@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {SocialMediaComponent} from './components/social_media/social-media.component';
 import {FooterComponent} from './components/footer/footer.component';
+import {SectionPageComponent} from './components/section_page/section-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     SocialMediaComponent,
-    FooterComponent
+    FooterComponent,
+    SectionPageComponent
   ],
   imports: [
     BrowserModule,
