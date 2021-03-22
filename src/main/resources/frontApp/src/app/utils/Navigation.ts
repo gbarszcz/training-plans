@@ -77,16 +77,6 @@ export class Navigation {
     return this.secNavItems;
   }
 
-  public getToggleButton(): string {
-    return `<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>`;
-  }
-
   private prepareBrandItem(brandItem: IStringItem[], homeURL: string): string {
     const item: INavigationItem = {
       content: brandItem,

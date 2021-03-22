@@ -5461,7 +5461,7 @@ textarea.form-control-lg {
   display: none !important;
   cursor: pointer;
 }
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .dropdown-toggle {
     display: block !important;
   }
@@ -5506,7 +5506,7 @@ textarea.form-control-lg {
   z-index: 1000;
   transition: opacity 0.3s ease-in-out;
 }
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .dropdown-menu {
     display: none;
     position: absolute;
@@ -7995,6 +7995,79 @@ a.dropdown-item:before,
   -webkit-animation-fill-mode: both;
   -webkit-animation-name: slideIn;
   animation-name: slideIn;
+}
+
+footer .navbar-brand {
+  margin: 0 auto;
+  font-size: 72px;
+}
+footer .navbar-brand, footer .navbar-brand:visited {
+  color: var(--bs-secondary);
+}
+footer .navbar-brand:hover {
+  color: var(--bs-thirtary);
+}
+footer .navbar-footer .nav-link,
+footer .navbar-footer a {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+footer .navbar-footer .nav-link, footer .navbar-footer .nav-link:visited,
+footer .navbar-footer a,
+footer .navbar-footer a:visited {
+  color: var(--bs-secondary);
+}
+footer .navbar-footer .nav-link:hover,
+footer .navbar-footer a:hover {
+  color: var(--bs-thirtary);
+}
+footer .navbar-footer .navbar-brand {
+  display: none;
+}
+footer .navbar-footer .navbar-nav {
+  max-width: 75%;
+  margin: 1rem auto 0;
+  display: inline-flex;
+  flex-direction: unset;
+  flex-wrap: wrap;
+}
+footer .navbar-footer .navbar-nav .nav-item {
+  min-width: 175px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  footer .navbar-footer .navbar-nav .nav-item {
+    min-width: 200px;
+  }
+}
+@media screen and (min-width: 992px) {
+  footer .navbar-footer .navbar-nav .nav-item {
+    min-width: 250px;
+  }
+}
+footer .navbar-footer .navbar-nav .nav-item .nav-link {
+  padding: 0.5rem 0.5rem;
+}
+footer .navbar-footer .nav_secondary {
+  display: none;
+}
+footer .navbar-footer .active .nav-link, footer .navbar-footer .active .nav-link:visited,
+footer .navbar-footer .active a,
+footer .navbar-footer .active a:visited {
+  color: var(--bs-secondary) !important;
+}
+footer .navbar-footer .active .nav-link:before,
+footer .navbar-footer .active a:before {
+  background-color: var(--bs-secondary);
+}
+footer .navbar-footer .active .nav-link:hover,
+footer .navbar-footer .active a:hover {
+  color: var(--bs-thirtary) !important;
+}
+footer .navbar-footer .active .nav-link:hover:before,
+footer .navbar-footer .active a:hover:before {
+  background-color: var(--bs-thirtary);
 }
 
 /*! --------------------------- End: MyStyles ---------------------------- */

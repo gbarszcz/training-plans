@@ -8,11 +8,8 @@ import {Navigation} from '../../utils/Navigation';
 })
 
 export class NavigationComponent implements AfterViewInit {
-  @Input() position = 'fixed';
+  @Input() position = 'fixed-top';
   @Input() navigation: Navigation | null = null;
-
-  constructor() {
-  }
 
   ngAfterViewInit(): void {
     this.dropdownEvent();
@@ -23,8 +20,10 @@ export class NavigationComponent implements AfterViewInit {
     document.querySelectorAll('.dropdown').forEach(dropdown => {
       window.addEventListener('click', e => {
         if (dropdown.contains(e.target as Node)) {
-          dropdown.classList.toggle('show');
-          dropdown.querySelector('.dropdown-menu')?.classList.toggle('show');
+          if (!dropdown.classList.contains('show')) {
+            dropdown.classList.add('show');
+            dropdown.querySelector('.dropdown-menu')?.classList.add('show');
+          }
         } else {
           if (dropdown.classList.contains('show')) {
             dropdown.classList.remove('show');
@@ -45,21 +44,23 @@ export class NavigationComponent implements AfterViewInit {
   }
 
   private changeNavActiveItem(): void {
-    const NAV = document.querySelector('nav .collapse .navbar-nav');
+    const NAV = document.querySelectorAll('nav .nav_primary .navbar-nav');
     if (NAV) {
-      NAV?.querySelectorAll('li a').forEach((item) => {
-        const TARGET_ID = item.getAttribute('href');
-        if (item) {
-          if (TARGET_ID !== '#top') {
-            if (item.parentElement?.classList.contains('active')) {
-              item.parentElement?.classList.toggle('active');
-            }
-          } else {
-            if (!item.parentElement?.classList.contains('active')) {
-              item.parentElement?.classList.toggle('active');
+      NAV.forEach((nav) => {
+        nav?.querySelectorAll('li a').forEach((item) => {
+          const TARGET_ID = item.getAttribute('href');
+          if (item) {
+            if (TARGET_ID !== '#top') {
+              if (item.parentElement?.classList.contains('active')) {
+                item.parentElement?.classList.toggle('active');
+              }
+            } else {
+              if (!item.parentElement?.classList.contains('active')) {
+                item.parentElement?.classList.toggle('active');
+              }
             }
           }
-        }
+        });
       });
     }
   }

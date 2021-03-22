@@ -172,4 +172,15 @@ export class AppService {
 }
     `;
   }
+
+  getFooterInfos(): string {
+    return `
+{
+  "infos": {
+    "text": "<b>Lorem ipsum dolor sit amet</b><br>Aliquam purus massa, lobortis <b>non</b> bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.",
+    "copyright": "© Copyright 2021 — G. Barszcz — J. Tusiński — J. Ostrowski — K. Słotwiński — "
+  }
+}
+    `;
+  }
 }

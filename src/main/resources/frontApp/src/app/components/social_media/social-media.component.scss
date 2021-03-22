@@ -23,6 +23,10 @@
       padding: 0 $spacer / 4;
       vertical-align: middle;
     }
+
+    &:before {
+      content: unset;
+    }
   }
 
   &.sm-left,

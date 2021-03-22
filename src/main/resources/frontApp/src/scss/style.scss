@@ -37,3 +37,92 @@
   -webkit-animation-name: slideIn;
   animation-name: slideIn;
 }
+
+footer {
+  .navbar-brand {
+    margin: 0 auto;
+    font-size: 72px;
+
+    &,
+    &:visited {
+      color: $secondary;
+    }
+
+    &:hover {
+      color:  $thirtary;
+    }
+  }
+
+  .navbar-footer {
+    .nav-link,
+    a {
+      width: max-content;
+      max-width: 100%;
+      margin: 0 auto;
+
+      &,
+      &:visited {
+        color: $secondary;
+      }
+
+      &:hover {
+        color:  $thirtary;
+      }
+    }
+
+    .navbar-brand {
+      display: none;
+    }
+
+    .navbar-nav {
+      max-width: 75%;
+      margin: 1rem auto 0;
+      display: inline-flex;
+      flex-direction: unset;
+      flex-wrap: wrap;
+
+      .nav-item {
+        min-width: 175px;
+        margin: 0 auto;
+
+        @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+          min-width: 200px;
+        }
+
+        @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+          min-width: 250px;
+        }
+
+        .nav-link {
+          padding: $nav-link-padding-y $nav-link-padding-x * 0.5;
+        }
+      }
+    }
+
+    .nav_secondary {
+      display: none;
+    }
+
+    .active {
+      .nav-link,
+      a {
+        &,
+        &:visited {
+          color: $secondary !important;
+        }
+
+        &:before {
+          background-color: $secondary;
+        }
+
+        &:hover {
+          color:  $thirtary !important;
+
+          &:before {
+            background-color: $thirtary;
+          }
+        }
+      }
+    }
+  }
+}

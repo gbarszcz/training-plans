@@ -11,7 +11,7 @@
   display: none !important;
   cursor: pointer;
 
-  @media (min-width: map-get($grid-breakpoints, 'xl')) {
+  @media (min-width: map-get($grid-breakpoints, 'lg')) {
     display: block !important;
   }
 
@@ -54,7 +54,7 @@
   z-index: $zindex-dropdown;
   transition: opacity .3s ease-in-out;
 
-  @media (min-width: map-get($grid-breakpoints, 'xl')) {
+  @media (min-width: map-get($grid-breakpoints, 'lg')) {
     display: none; // none by default, but block on "open" of the menu
     position: absolute;
     padding: 0;

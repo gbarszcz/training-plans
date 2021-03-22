@@ -1,0 +1,19 @@
+<footer>
+  <div class="container">
+    <div [innerHTML]="navigation?.getBrandItem()"></div>
+
+    <div class="row">
+      <div class="col-12 col-sm-10 offset-sm-1 col-md-9 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+        <p [innerHTML]="footerText"></p>
+      </div>
+      <div class="col-12">
+        <social-media [position]="smPosition" [socialMedia]="socialMedia"></social-media>
+      </div>
+    </div>
+    <main-navigation [position]="'bottom'" [navigation]="navigation"></main-navigation>
+  </div>
+  <hr>
+  <div class="container">
+    <p [innerHTML]="footerCopyright"></p>
+  </div>
+</footer>

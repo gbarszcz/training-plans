@@ -17,6 +17,9 @@
   padding: 0 0.25rem;
   vertical-align: middle;
 }
+.sm-container .sm-item:before {
+  content: unset;
+}
 .sm-container.sm-left, .sm-container.sm-right {
   position: fixed;
   width: min-content;
