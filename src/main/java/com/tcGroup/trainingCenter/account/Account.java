@@ -41,7 +41,8 @@ public class Account extends AuditData {
     private String accountPassword;
 
     @Column(name = "ACC_STATUS")
-    private String accountStatus;
+    @Convert(converter = AccountStatusConverter.class)
+    private AccountStatus accountStatus;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
