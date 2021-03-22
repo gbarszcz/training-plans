@@ -23,4 +23,41 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 <br><br>
 
 # Components
-[comment]: <> (TODO)
+
+## AppComponent
+- The main component.
+- All the components on the site are in it.
+- Distributes data to other components.
+
+### NavigationComponent
+<main-navigation (URLEvent)="changeURL($event)" [position]="'position'" [navigation]="Navigation"></main-navigation>
+___
+```(URLEvent)="changeURL($event)"``` Emits an event to the parent when the button is clicked<br>
+```[position]="'position'"``` navigation position (typ: ```string``` default: ```'fixed'``` options: ```'fixed' | 'bottom'```)<br>
+```[navigation]="navigation object"``` navigation object (instance of: ```Navigation``` default: ```null```)
+
+### SocialMediaComponent
+<social-media [position]="'position'" [socialMedia]="ISocialMedia"></social-media>
+___
+```[position]="'position'"``` navigation position (typ: ```string``` default: ```' '``` options: ```'' | 'left' | 'right'```)<br>
+```[socialMedia]="social media interface"``` navigation object (instance of: ```ISocialMedia``` default: ```[]```)
+
+### FooterComponent
+Contain: NavigationComponent & SocialMediaComponent
+___
+<page-footer (URLEvent)="changeURL($event)"
+             [navPosition]="'position'" [navigation]="Navigation"
+             [smPosition]="'position'" [socialMedia]="ISocialMedia">
+</page-footer>
+___
+```(URLEvent)="changeURL($event)"``` Emits an event to the parent when the button is clicked<br>
+```[navPosition]="'position'"``` & ```[navigation]="Navigation"``` Params for NavigationComponent<br>
+```[smPosition]="'position'"``` & ```[socialMedia]="ISocialMedia"``` Params for SocialMediaComponent<br>
+
+### SectionPageComponent
+<section-page [sections]="IPageContent"></section-page>
+___
+```[sections]="social media interface"``` page object (instance of: ```IPageContent``` default: ```[]```)
+
+### SearchComponent
+<search-exercises></search-exercises>

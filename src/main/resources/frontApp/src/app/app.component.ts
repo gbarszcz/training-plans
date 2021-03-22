@@ -3,7 +3,7 @@ import {AppService} from './app.service';
 import {Navigation} from './models/Navigation';
 import {Router} from '@angular/router';
 import {ISocialMedia} from './models/ISocialMedia';
-import {IPageSection} from './models/IPageSection';
+import {IPageContent} from './models/IPageContent';
 import { Location } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   navigation: Navigation | null = null;
-  pageContent: IPageSection[] = [];
+  pageContent: IPageContent[] = [];
   pageType = 'section';
   socialMedia: ISocialMedia[] = [];
   url: string;

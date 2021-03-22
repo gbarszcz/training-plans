@@ -27,7 +27,7 @@ interface ISectionContent {
   component: string;
 }
 
-export interface IPageSection {
+export interface IPageContent {
   metaData: ISectionMetaData;
   headerInfos: ISectionTitle;
   content: ISectionContent[];

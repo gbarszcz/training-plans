@@ -8,7 +8,7 @@ import {Navigation} from '../../models/Navigation';
 })
 
 export class NavigationComponent implements AfterViewInit {
-  @Input() position = 'fixed-top';
+  @Input() position = 'fixed';
   @Input() navigation: Navigation | null = null;
   @Output() URLEvent = new EventEmitter<string>();
 

@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy} from '@angular/core';
 
-import {IPageSection} from '../../models/IPageSection';
+import {IPageContent} from '../../models/IPageContent';
 
 @Component({
   selector: 'section-page',
@@ -8,7 +8,7 @@ import {IPageSection} from '../../models/IPageSection';
 })
 
 export class SectionPageComponent implements OnDestroy{
-  @Input() sections: IPageSection[] = [];
+  @Input() sections: IPageContent[] = [];
 
   ngOnDestroy(): void {
     this.sections = [];
