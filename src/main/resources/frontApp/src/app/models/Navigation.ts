@@ -48,24 +48,16 @@ export class Navigation {
   }
 
   public createNavItemContent(item: IStringItem[]): string {
-    const ICON_COMPONENTS = new Map([
-      ['start', '<i class="bi '],
-      ['end', '"></i> ']
-    ]);
-    const IMG_COMPONENTS = new Map([
-      ['start', '<img src="'],
-      ['end', '">']
-    ]);
     let html = '';
 
     item.forEach((content) => {
       switch (content.type) {
         case EStringItemType.i: {
-          html += ICON_COMPONENTS.get('start') + content.value + ICON_COMPONENTS.get('end');
+          html += '<i class="bi ' + content.value + '"></i> ';
           break;
         }
         case EStringItemType.img: {
-          html += IMG_COMPONENTS.get('start') + content.value + IMG_COMPONENTS.get('end');
+          html += '<img src="' + content.value + '">';
           break;
         }
         default: {
