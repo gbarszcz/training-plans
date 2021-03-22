@@ -24,6 +24,7 @@ interface ISectionTitle {
 interface ISectionContent {
   column: string;
   text: string;
+  component: string;
 }
 
 export interface IPageSection {

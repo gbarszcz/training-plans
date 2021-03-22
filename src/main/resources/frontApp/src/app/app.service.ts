@@ -75,7 +75,7 @@ export class AppService {
             "value": "Sign in"
           }],
           "subItems": [],
-          "link": "/login",
+          "link": "/signin",
           "disabled": false,
           "divider": false,
           "left": true
@@ -421,7 +421,8 @@ export class AppService {
         },
         "content": [{
           "column": "col-12 col-md-11 col-lg-7 col-xxl-6",
-          "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/signin' class='btn btn_alt'>Sign in</a>&#10;<a href='/register' class='btn'>Register</a>"
+          "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/signin' class='btn btn_alt'>Sign in</a>&#10;<a href='/register' class='btn'>Register</a>",
+          "component": null
         }],
         "background": "assets/images/gymguy.jpg"
       },
@@ -439,11 +440,13 @@ export class AppService {
         "content": [
           {
             "column": "col-12 col-md-8 col-lg-6",
-            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='#' class='btn'>Learn more</a>"
+            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='#' class='btn'>Learn more</a>",
+            "component": null
           },
           {
             "column": "col-12 col-md-8 col-lg-6 img_container",
-            "text": "<img src='assets/images/arrow.png'/>"
+            "text": "<img src='assets/images/arrow.png'/>",
+            "component": null
           }
         ],
         "background": null
@@ -462,11 +465,13 @@ export class AppService {
         "content": [
           {
             "column": "col-12 col-lg-6",
-            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='#' class='btn'>Go to exercises atlas</a>"
+            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='#' class='btn'>Go to exercises atlas</a>",
+            "component": null
           },
           {
             "column": "col-12 col-md-8 col-lg-6",
-            "text": "<p>Lorem ipsum dolor sit amet. Aenean tempor porta ante non aliquam. Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu.</p>"
+            "text": "<p>Lorem ipsum dolor sit amet. Aenean tempor porta ante non aliquam. Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu.</p>",
+            "component": "search"
           }
         ],
         "background": "assets/videos/trening.mp4"
@@ -485,23 +490,28 @@ export class AppService {
         "content": [
           {
             "column": "col-12",
-            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>"
+            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>",
+          "component": null
           },
           {
             "column": "col-12 col-sm-6 col-lg-3",
-            "text": "<div class='card'><div class='icon'><i class='bi bi-calendar3'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>"
+            "text": "<div class='card'><div class='icon'><i class='bi bi-calendar3'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>",
+            "component": null
           },
           {
             "column": "col-12 col-sm-6 col-lg-3",
-            "text": "<div class='card'><div class='icon'><i class='bi bi-card-checklist'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>"
+            "text": "<div class='card'><div class='icon'><i class='bi bi-card-checklist'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>",
+            "component": null
           },
           {
             "column": "col-12 col-sm-6 col-lg-3",
-            "text": "<div class='card'><div class='icon'><i class='bi bi-clock-history'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>"
+            "text": "<div class='card'><div class='icon'><i class='bi bi-clock-history'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>",
+            "component": null
           },
           {
             "column": "col-12 col-sm-6 col-lg-3",
-            "text": "<div class='card'><div class='icon'><i class='bi bi-heart'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>"
+            "text": "<div class='card'><div class='icon'><i class='bi bi-heart'></i></div><p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. </p><a href='#' class='btn btn_alt'>Learn more</a></div>",
+            "component": null
           }
         ],
         "background": null

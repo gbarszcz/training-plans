@@ -7,6 +7,7 @@ import {NavigationComponent} from './components/navigation/navigation.component'
 import {SocialMediaComponent} from './components/social_media/social-media.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {SectionPageComponent} from './components/section_page/section-page.component';
+import {SearchComponent} from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {SectionPageComponent} from './components/section_page/section-page.compo
     NavigationComponent,
     SocialMediaComponent,
     FooterComponent,
-    SectionPageComponent
+    SectionPageComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

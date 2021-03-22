@@ -22,6 +22,7 @@
           <b>{{section.headerInfos.subTitle}}</b>
         </div>
         <div [innerHTML]="content.text"></div>
+        <search-exercises *ngIf="content.component == 'search'"></search-exercises>
       </div>
     </div>
   </div>
