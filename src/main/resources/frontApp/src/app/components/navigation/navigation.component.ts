@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, Input} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {Navigation} from '../../utils/Navigation';
+import {Navigation} from '../../models/Navigation';
 
 @Component({
   selector: 'main-navigation',
@@ -10,59 +10,18 @@ import {Navigation} from '../../utils/Navigation';
 export class NavigationComponent implements AfterViewInit {
   @Input() position = 'fixed-top';
   @Input() navigation: Navigation | null = null;
+  @Output() URLEvent = new EventEmitter<string>();
 
   ngAfterViewInit(): void {
-    this.dropdownEvent();
     this.navEvent();
   }
 
-  private dropdownEvent(): void {
-    document.querySelectorAll('.dropdown').forEach(dropdown => {
-      window.addEventListener('click', e => {
-        if (dropdown.contains(e.target as Node)) {
-          if (!dropdown.classList.contains('show')) {
-            dropdown.classList.add('show');
-            dropdown.querySelector('.dropdown-menu')?.classList.add('show');
-          }
-        } else {
-          if (dropdown.classList.contains('show')) {
-            dropdown.classList.remove('show');
-            dropdown.querySelector('.dropdown-menu')?.classList.remove('show');
-          }
-        }
-      });
-    });
-  }
-
   private navEvent(): void {
-    this.changeNavActiveItem();
     this.changeSubNavActiveItem();
     window.addEventListener('scroll', () => {
       this.changeSubNavActiveItem();
     });
     // More actions can be put below
-  }
-
-  private changeNavActiveItem(): void {
-    const NAV = document.querySelectorAll('nav .nav_primary .navbar-nav');
-    if (NAV) {
-      NAV.forEach((nav) => {
-        nav?.querySelectorAll('li a').forEach((item) => {
-          const TARGET_ID = item.getAttribute('href');
-          if (item) {
-            if (TARGET_ID !== '#top') {
-              if (item.parentElement?.classList.contains('active')) {
-                item.parentElement?.classList.toggle('active');
-              }
-            } else {
-              if (!item.parentElement?.classList.contains('active')) {
-                item.parentElement?.classList.toggle('active');
-              }
-            }
-          }
-        });
-      });
-    }
   }
 
   private changeSubNavActiveItem(): void {
@@ -93,5 +52,9 @@ export class NavigationComponent implements AfterViewInit {
         }
       });
     }
+  }
+
+  public changeURL(url: string): void {
+    this.URLEvent.emit(url);
   }
 }

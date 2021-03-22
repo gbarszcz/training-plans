@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
-import {Navigation} from '../../utils/Navigation';
+import {Navigation} from '../../models/Navigation';
 import {ISocialMedia} from '../../models/ISocialMedia';
 import {AppService} from '../../app.service';
 
@@ -15,6 +15,7 @@ export class FooterComponent implements OnInit {
   @Input() navPosition = 'bottom';
   @Input() smPosition = '';
   @Input() socialMedia: ISocialMedia[] = [];
+  @Output() URLEvent = new EventEmitter<string>();
   footerText = '';
   footerCopyright = '';
 
@@ -28,5 +29,9 @@ export class FooterComponent implements OnInit {
       this.footerText = INFOS.text || '';
       this.footerCopyright = INFOS.copyright || '';
     }
+  }
+
+  public changeURL(url: string): void {
+    this.URLEvent.emit(url);
   }
 }

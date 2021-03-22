@@ -275,7 +275,7 @@ a {
     text-decoration: none;
   }
 
-  &[href]:not(.navbar-brand) {
+  &:not(.navbar-brand) {
     &:before {
       content: '';
       position: absolute;
@@ -320,7 +320,7 @@ a:not([href]):not([class]) {
   a {
     color: $primary !important;
 
-    &[href]:not(.navbar-brand):before {
+    &:not(.navbar-brand):before {
       opacity: 1 !important;
     }
   }

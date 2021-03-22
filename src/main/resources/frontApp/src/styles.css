@@ -2824,8 +2824,8 @@ a:visited {
   color: var(--bs-primary);
   text-decoration: none;
 }
-.btn-link[href]:not(.navbar-brand):before,
-a[href]:not(.navbar-brand):before {
+.btn-link:not(.navbar-brand):before,
+a:not(.navbar-brand):before {
   content: "";
   position: absolute;
   width: 100%;
@@ -2836,8 +2836,8 @@ a[href]:not(.navbar-brand):before {
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
-.btn-link[href]:not(.navbar-brand):hover:before,
-a[href]:not(.navbar-brand):hover:before {
+.btn-link:not(.navbar-brand):hover:before,
+a:not(.navbar-brand):hover:before {
   opacity: 1;
 }
 .btn-link.disabled,
@@ -2856,8 +2856,8 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .active a {
   color: var(--bs-primary) !important;
 }
-.active .btn-link[href]:not(.navbar-brand):before,
-.active a[href]:not(.navbar-brand):before {
+.active .btn-link:not(.navbar-brand):before,
+.active a:not(.navbar-brand):before {
   opacity: 1 !important;
 }
 
@@ -5883,6 +5883,7 @@ a.dropdown-item,
   padding: 0.5rem 1rem;
   color: var(--bs-thirtary);
   text-decoration: none;
+  cursor: pointer;
 }
 a.dropdown-item:visited,
 .nav-link:visited {

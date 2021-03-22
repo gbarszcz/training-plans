@@ -19,6 +19,7 @@ a.dropdown-item,
   font-weight: $nav-link-font-weight;
   color: $thirtary;
   text-decoration: none;
+  cursor: pointer;
 
   &:visited {
     color: $thirtary;
