@@ -7,7 +7,10 @@ import javax.persistence.Converter;
 public class AccountStatusConverter implements AttributeConverter<AccountStatus, String> {
     @Override
     public String convertToDatabaseColumn(AccountStatus attribute) {
-        return attribute.getAbbreviation();
+        if (attribute != null)
+            return attribute.getAbbreviation();
+        else
+            return null;
     }
 
     @Override
