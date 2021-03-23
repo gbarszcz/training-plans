@@ -1,0 +1,35 @@
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin button-variant($color, $secondary-color: $secondary) {
+  color: $color;
+  border-color: $color;
+
+  .btn-check:focus + &,
+  &:hover,
+  &:focus {
+    color: $secondary-color;
+    background-color: $color;
+  }
+
+  //.btn-check:checked + &,
+  //.btn-check:active + &,
+  //&:active,
+  //&.active,
+  //.show > &.dropdown-toggle {
+  //  color: $active-color;
+  //  border-color: $active-border;
+  //
+  //  &:focus {
+  //  }
+  //}
+}
+
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $border-radius) {
+  padding: $padding-y $padding-x;
+  @include font-size($font-size);
+  // Manually declare to provide an override to the browser default
+}

@@ -1,0 +1,24 @@
+<footer>
+  <div class="container">
+    <a *ngIf="navigation?.currentRoute != '/'" class="navbar-brand"
+       (click)="changeURL(navigation?.currentRoute || '/')">
+      {{navigation?.brandItem?.value}}
+    </a>
+    <a *ngIf="navigation?.currentRoute == '/'" class="navbar-brand" href="#top">
+      {{navigation?.brandItem?.value}}
+    </a>
+
+    <div class="row">
+      <div class="col-12 col-sm-10 offset-sm-1 col-md-9 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+        <p [innerHTML]="footerText"></p>
+      </div>
+      <div class="col-12">
+        <social-media [position]="smPosition" [socialMedia]="socialMedia"></social-media>
+      </div>
+    </div>
+    <main-navigation (URLEvent)="changeURL($event)" [position]="'bottom'" [navigation]="navigation"></main-navigation>
+  </div>
+  <hr>
+  <div class="container" [innerHTML]="footerCopyright">
+  </div>
+</footer>

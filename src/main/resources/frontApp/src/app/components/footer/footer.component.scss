@@ -1,0 +1,17 @@
+@import "./../../../scss/bootstrap/functions";
+@import "./../../../scss/bootstrap/variables";
+
+footer {
+  padding: 5.5rem 0 1rem;
+  background-color: $primary;
+  color: $secondary;
+  text-align: center;
+
+  hr {
+    margin: 4.75rem 0 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,14 @@
+footer {
+  padding: 5.5rem 0 1rem;
+  background-color: var(--bs-primary);
+  color: var(--bs-secondary);
+  text-align: center;
+}
+footer hr {
+  margin: 4.75rem 0 1rem;
+}
+footer p {
+  margin-bottom: 1rem;
+}
+
+/*# sourceMappingURL=footer.component.css.map */
