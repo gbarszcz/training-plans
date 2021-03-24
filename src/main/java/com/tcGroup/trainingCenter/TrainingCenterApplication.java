@@ -10,5 +10,4 @@ public class TrainingCenterApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TrainingCenterApplication.class, args);
 	}
-
 }

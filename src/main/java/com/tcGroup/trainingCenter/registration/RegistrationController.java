@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
@@ -20,10 +19,8 @@ public class RegistrationController extends AbstractController {
     @Autowired
     public AccountService accountService;
 
-
-
     @PostMapping("/register")
-    public String register(@RequestBody RegistrationRequest registrationRequest){
+    public Long register(@RequestBody RegistrationRequest registrationRequest) {
         Pattern patternEmail = Pattern.compile(AppParams.EMAIL_REGEX);
         Pattern patternPassword = Pattern.compile(AppParams.PASSWORD_POLICY);
 
@@ -32,26 +29,21 @@ public class RegistrationController extends AbstractController {
 
         Account existingAccount = accountService.getAccountByEmail(email);
 
-        if(existingAccount != null){
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Account with given email already exist");
+        if (existingAccount != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account with given email already exist");
         }
 
-        if(email == null || email.isBlank() || !patternEmail.matcher(email).matches()){
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Email invalid");
+        if (email == null || email.isBlank() || !patternEmail.matcher(email).matches()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email invalid");
         }
 
-        if(password == null || password.isBlank() || !patternPassword.matcher(password).matches()){
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Password invalid");
+        if (password == null || password.isBlank() || !patternPassword.matcher(password).matches()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password invalid");
         }
 
         Long accountID = accountService.register(registrationRequest);
 
-        //accountService.save()
-        return "succesfull";
+        return accountID;
     }
-
 
 }

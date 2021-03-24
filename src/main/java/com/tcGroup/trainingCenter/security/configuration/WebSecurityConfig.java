@@ -35,9 +35,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index", "/register").permitAll()
-                .anyRequest().authenticated().and().csrf().ignoringAntMatchers("/phpmyadmin/**").and().headers()
-                .frameOptions().sameOrigin();
+        http.cors().and().csrf().disable();
+        // TODO to be configured
+        /*http.authorizeRequests().antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index", "/register").permitAll()
+                .and().csrf().ignoringAntMatchers("/phpmyadmin/**").and().headers()
+                .frameOptions().sameOrigin(); */
     }
 
 }

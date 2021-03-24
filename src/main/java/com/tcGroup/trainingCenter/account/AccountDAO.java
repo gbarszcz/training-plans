@@ -14,14 +14,14 @@ public class AccountDAO extends AbstractDAO<Account, Long> {
     }
 
     protected AccountRepository getRepository() {
-        return this.getRepository();
+        return (AccountRepository) super.getRepository();
     }
 
     @Override
     public void removeItem(UserContext ctx, Account accountData) {
         super.removeItem(ctx, accountData);
         Account foundAccount = getRepository().findByAccountEmail(accountData.getAccountEmail());
-        foundAccount.setAccountStatus(AccountStatus.INACTIVE);
+        foundAccount.setAccountStatus(Account.ACCOUNT_STATUSES.INACTIVE);
         getRepository().save(foundAccount);
     }
 

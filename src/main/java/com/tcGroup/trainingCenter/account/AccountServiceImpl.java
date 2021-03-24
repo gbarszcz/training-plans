@@ -10,12 +10,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service(value = "accountService")
 public class AccountServiceImpl extends AbstractService implements AccountService {
+
     @Autowired
     private RoleRepository roleRepository;
 
@@ -46,7 +49,7 @@ public class AccountServiceImpl extends AbstractService implements AccountServic
 
         account.setAccountEmail(registrationRequest.getEmail());
         account.setAccountPassword(bCryptPasswordEncoder.encode(registrationRequest.getPassword()));
-        account.setAccountStatus(AccountStatus.ACTIVE);
+        account.setAccountStatus(Account.ACCOUNT_STATUSES.ACTIVE);
         account.addRole(roleRepository.findByRoleName(Role.Roles.USER));
 
         return accountDAO.createItem(getUserContext(), account);
