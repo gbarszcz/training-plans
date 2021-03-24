@@ -1,12 +1,14 @@
-package com.tcGroup.trainingCenter.account;
+package com.tcGroup.trainingCenter.user.dao;
 
+import com.tcGroup.trainingCenter.user.entity.AccountData;
+import com.tcGroup.trainingCenter.user.repository.AccountRepository;
 import com.tcGroup.trainingCenter.utility.context.UserContext;
 import com.tcGroup.trainingCenter.utility.logic.AbstractDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component(value = "accountDAO")
-public class AccountDAO extends AbstractDAO<Account, Long> {
+public class AccountDAO extends AbstractDAO<AccountData, Long> {
 
     @Autowired
     protected void setRepository(AccountRepository accountRepository) {
@@ -18,14 +20,14 @@ public class AccountDAO extends AbstractDAO<Account, Long> {
     }
 
     @Override
-    public void removeItem(UserContext ctx, Account accountData) {
+    public void removeItem(UserContext ctx, AccountData accountData) {
         super.removeItem(ctx, accountData);
-        Account foundAccount = getRepository().findByAccountEmail(accountData.getAccountEmail());
-        foundAccount.setAccountStatus(Account.ACCOUNT_STATUSES.INACTIVE);
+        AccountData foundAccount = getRepository().findByAccountEmail(accountData.getAccountEmail());
+        foundAccount.setAccountStatus(AccountData.ACCOUNT_STATUSES.INACTIVE);
         getRepository().save(foundAccount);
     }
 
-    public Account findByAccountEmail(String email){
+    public AccountData findAccountByEmail(String email){
         return getRepository().findByAccountEmail(email);
     }
 }

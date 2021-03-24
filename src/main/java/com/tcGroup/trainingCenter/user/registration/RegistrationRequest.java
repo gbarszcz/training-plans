@@ -1,4 +1,4 @@
-package com.tcGroup.trainingCenter.registration;
+package com.tcGroup.trainingCenter.user.registration;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

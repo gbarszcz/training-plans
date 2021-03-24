@@ -1,6 +1,5 @@
-package com.tcGroup.trainingCenter.role;
+package com.tcGroup.trainingCenter.user.entity;
 
-import com.tcGroup.trainingCenter.account.Account;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
 
@@ -17,7 +16,7 @@ import java.util.Set;
                 @AttributeOverride(name = "auditRD", column = @Column(name = "ROL_AUDIT_RD")),
                 @AttributeOverride(name = "auditRU", column = @Column(name = "ROL_AUDIT_RU")) })
 @Data
-public class Role extends AuditData {
+public class RoleData extends AuditData {
 
         public interface Roles {
                 public static final String ADMIN = "ADMIN";
@@ -33,7 +32,7 @@ public class Role extends AuditData {
         private String roleName;
 
         @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "roles")
-        Set<Account> accounts;
+        Set<AccountData> accounts;
 
         @Override
         public Long getId() {
@@ -48,7 +47,7 @@ public class Role extends AuditData {
                         return false;
                 if (!super.equals(o))
                         return false;
-                Role role = (Role) o;
+                RoleData role = (RoleData) o;
                 return id == role.id && roleName.equals(role.roleName) && Objects.equals(accounts, role.accounts);
         }
 
