@@ -5,76 +5,70 @@ import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
 
 import javax.persistence.*;
+
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "ACCOUNTS",
-        uniqueConstraints=
-        @UniqueConstraint(columnNames={"ACC_EMAIL"})
-)
-@AttributeOverrides({
-        @AttributeOverride(name="auditCD",
-                column=@Column(name="ACC_AUDIT_CD")),
-        @AttributeOverride(name="auditCU",
-                column=@Column(name="ACC_AUDIT_CU")),
-        @AttributeOverride(name="auditMD",
-                column=@Column(name="ACC_AUDIT_MD")),
-        @AttributeOverride(name="auditMU",
-                column=@Column(name="ACC_AUDIT_MU")),
-        @AttributeOverride(name="auditRD",
-                column=@Column(name="ACC_AUDIT_RD")),
-        @AttributeOverride(name="auditRU",
-                column=@Column(name="ACC_AUDIT_RU"))
-})
+@Table(name = "ACCOUNTS", uniqueConstraints = @UniqueConstraint(columnNames = { "ACC_EMAIL" }))
+@AttributeOverrides({ @AttributeOverride(name = "auditCD", column = @Column(name = "ACC_AUDIT_CD")),
+                @AttributeOverride(name = "auditCU", column = @Column(name = "ACC_AUDIT_CU")),
+                @AttributeOverride(name = "auditMD", column = @Column(name = "ACC_AUDIT_MD")),
+                @AttributeOverride(name = "auditMU", column = @Column(name = "ACC_AUDIT_MU")),
+                @AttributeOverride(name = "auditRD", column = @Column(name = "ACC_AUDIT_RD")),
+                @AttributeOverride(name = "auditRU", column = @Column(name = "ACC_AUDIT_RU")) })
 @Data
 public class Account extends AuditData {
-    @Id
-    @Column(name = "ACC_ID")
-    @GeneratedValue
-    protected long id;
 
-    @Column(name = "ACC_EMAIL")
-    private String accountEmail;
+        public interface ACCOUNT_STATUSES {
+                public static final String ACTIVE = "A";
+                public static final String INACTIVE = "I";
+        }
 
-    @Column(name = "ACC_PASSWORD")
-    private String accountPassword;
+        @Id
+        @Column(name = "ACC_ID")
+        @GeneratedValue
+        protected long id;
 
-    @Column(name = "ACC_STATUS")
-    @Convert(converter = AccountStatusConverter.class)
-    private AccountStatus accountStatus;
+        @Column(name = "ACC_EMAIL")
+        private String accountEmail;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "ACCOUNT_ROLE",
-            joinColumns = @JoinColumn(name = "ACC_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ROL_ID"))
-    private Set<Role> roles;
+        @Column(name = "ACC_PASSWORD")
+        private String accountPassword;
 
-    @Override
-    public Long getId() {
-        return this.id;
-    }
+        @Column(name = "ACC_STATUS")
+        private String accountStatus;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Account account = (Account) o;
-        return id == account.id
-                && accountEmail.equals(account.accountEmail)
-                && accountPassword.equals(account.accountPassword)
-                && accountStatus.equals(account.accountStatus)
-                && Objects.equals(roles, account.roles);
-    }
+        @ManyToMany(cascade = CascadeType.PERSIST)
+        @JoinTable(name = "ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "ACC_ID"), inverseJoinColumns = @JoinColumn(name = "ROL_ID"))
+        private Set<Role> roles = new HashSet<>();
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id, accountEmail, accountPassword, accountStatus);
-    }
+        @Override
+        public Long getId() {
+                return this.id;
+        }
 
-    public void addRole(Role role){
-        roles.add(role);
-    }
+        @Override
+        public boolean equals(Object o) {
+                if (this == o)
+                        return true;
+                if (o == null || getClass() != o.getClass())
+                        return false;
+                if (!super.equals(o))
+                        return false;
+                Account account = (Account) o;
+                return id == account.id && accountEmail.equals(account.accountEmail)
+                                && accountPassword.equals(account.accountPassword)
+                                && accountStatus.equals(account.accountStatus) && Objects.equals(roles, account.roles);
+        }
+
+        @Override
+        public int hashCode() {
+                return Objects.hash(super.hashCode(), id, accountEmail, accountPassword, accountStatus);
+        }
+
+        public void addRole(Role role) {
+                roles.add(role);
+        }
 }
