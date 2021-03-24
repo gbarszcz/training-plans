@@ -1,6 +1,5 @@
-package com.tcGroup.trainingCenter.account;
+package com.tcGroup.trainingCenter.user.entity;
 
-import com.tcGroup.trainingCenter.role.Role;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
 
@@ -19,7 +18,7 @@ import java.util.Set;
                 @AttributeOverride(name = "auditRD", column = @Column(name = "ACC_AUDIT_RD")),
                 @AttributeOverride(name = "auditRU", column = @Column(name = "ACC_AUDIT_RU")) })
 @Data
-public class Account extends AuditData {
+public class AccountData extends AuditData {
 
         public interface ACCOUNT_STATUSES {
                 public static final String ACTIVE = "A";
@@ -42,7 +41,7 @@ public class Account extends AuditData {
 
         @ManyToMany(cascade = CascadeType.PERSIST)
         @JoinTable(name = "ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "ACC_ID"), inverseJoinColumns = @JoinColumn(name = "ROL_ID"))
-        private Set<Role> roles = new HashSet<>();
+        private Set<RoleData> roles = new HashSet<>();
 
         @Override
         public Long getId() {
@@ -57,7 +56,7 @@ public class Account extends AuditData {
                         return false;
                 if (!super.equals(o))
                         return false;
-                Account account = (Account) o;
+                AccountData account = (AccountData) o;
                 return id == account.id && accountEmail.equals(account.accountEmail)
                                 && accountPassword.equals(account.accountPassword)
                                 && accountStatus.equals(account.accountStatus) && Objects.equals(roles, account.roles);
@@ -68,7 +67,7 @@ public class Account extends AuditData {
                 return Objects.hash(super.hashCode(), id, accountEmail, accountPassword, accountStatus);
         }
 
-        public void addRole(Role role) {
+        public void addRole(RoleData role) {
                 roles.add(role);
         }
 }
