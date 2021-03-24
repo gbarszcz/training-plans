@@ -24,4 +24,8 @@ public class AccountDAO extends AbstractDAO<Account, Long> {
         foundAccount.setAccountStatus(AccountStatus.INACTIVE);
         getRepository().save(foundAccount);
     }
+
+    public Account findByAccountEmail(String email){
+        return getRepository().findByAccountEmail(email);
+    }
 }
