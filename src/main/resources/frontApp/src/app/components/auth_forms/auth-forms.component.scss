@@ -1,0 +1,31 @@
+@import "./../../../scss/bootstrap/functions";
+@import "./../../../scss/bootstrap/variables";
+
+.validation {
+  box-sizing: content-box;
+  min-height: .875rem;
+  line-height: 1;
+  font: {
+    size: .875rem;
+    weight: bold;
+  }
+  padding: .15rem 0;
+}
+
+.success {
+  .validation {
+    color: var(--bs-success);
+  }
+}
+
+.warning {
+  .validation {
+    color: var(--bs-warning);
+  }
+}
+
+.danger {
+  .validation {
+    color: var(--bs-danger);
+  }
+}

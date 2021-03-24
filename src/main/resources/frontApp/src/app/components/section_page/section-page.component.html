@@ -23,6 +23,7 @@
         </div>
         <div [innerHTML]="content.text"></div>
         <search-exercises *ngIf="content.component == 'search'"></search-exercises>
+        <auth-forms *ngIf="content.component == 'auth'" [formType]="section.metaData.id"></auth-forms>
       </div>
     </div>
   </div>

@@ -3045,13 +3045,19 @@ th {
 }
 
 label {
-  width: 1%;
-  margin: 0;
+  width: 100%;
+  margin: 0 0 1rem;
   position: relative;
   display: inline-block;
+  vertical-align: middle;
+}
+
+.input-group label {
+  width: 1%;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
+  margin: 0;
 }
 
 button {
@@ -3114,17 +3120,16 @@ textarea {
 
 fieldset {
   min-width: 0;
-  padding: 0;
   margin: 0;
-  border: 0;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px solid var(--bs-primary);
 }
 
 legend {
-  float: left;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 0.5rem;
+  padding: 0 1rem;
   font-size: calc(1.275rem + 0.3vw);
+  font-weight: bold;
   line-height: inherit;
 }
 @media (min-width: 1200px) {
@@ -4805,28 +4810,14 @@ progress {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--bs-secondary);
-  background-color: transparent;
-  background-clip: padding-box;
   border: 2px solid var(--bs-primary);
   appearance: none;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-@media (prefers-reduced-motion: reduce) {
-  .form-control {
-    transition: none;
-  }
 }
 .form-control[type=file] {
   overflow: hidden;
 }
 .form-control[type=file]:not(:disabled):not([readonly]) {
   cursor: pointer;
-}
-.form-control:focus {
-  color: var(--bs-secondary);
-  background-color: transparent;
-  outline: 0;
 }
 .form-control::-webkit-date-and-time-value {
   height: 1.5em;
@@ -5991,6 +5982,10 @@ a.dropdown-item:before,
   font-size: 1.25rem;
   text-decoration: none;
   white-space: nowrap;
+}
+
+a.navbar-brand {
+  cursor: pointer;
 }
 
 .navbar-nav {
@@ -8071,6 +8066,7 @@ footer .navbar-footer .active a:hover:before {
   background-color: var(--bs-thirtary);
 }
 
+#register,
 section,
 .image-hero_content {
   padding: 5.5rem 0 4.75rem;
@@ -8169,6 +8165,101 @@ input:focus {
   color: var(--bs-secondary);
   background-color: var(--bs-primary);
   outline: none;
+}
+
+.success input {
+  border-color: var(--bs-success);
+  color: var(--bs-success);
+}
+.success input::placeholder {
+  color: var(--bs-success);
+}
+.success input:-ms-input-placeholder {
+  color: var(--bs-success);
+}
+.success input::-ms-input-placeholder {
+  color: var(--bs-success);
+}
+.success input:focus {
+  background-color: var(--bs-success);
+  color: var(--bs-secondary);
+}
+.success .input-group-text {
+  background-color: var(--bs-success);
+  border-color: var(--bs-success);
+}
+
+.warning input {
+  border-color: var(--bs-warning);
+  color: var(--bs-warning);
+}
+.warning input::placeholder {
+  color: var(--bs-warning);
+}
+.warning input:-ms-input-placeholder {
+  color: var(--bs-warning);
+}
+.warning input::-ms-input-placeholder {
+  color: var(--bs-warning);
+}
+.warning input:focus {
+  background-color: var(--bs-warning);
+  color: var(--bs-secondary);
+}
+.warning .input-group-text {
+  background-color: var(--bs-warning);
+  border-color: var(--bs-warning);
+}
+
+.danger input {
+  border-color: var(--bs-danger);
+  color: var(--bs-danger);
+}
+.danger input::placeholder {
+  color: var(--bs-danger);
+}
+.danger input:-ms-input-placeholder {
+  color: var(--bs-danger);
+}
+.danger input::-ms-input-placeholder {
+  color: var(--bs-danger);
+}
+.danger input:focus {
+  background-color: var(--bs-danger);
+  color: var(--bs-secondary);
+}
+.danger .input-group-text {
+  background-color: var(--bs-danger);
+  border-color: var(--bs-danger);
+}
+
+label {
+  position: relative;
+}
+label.required:after {
+  content: "*";
+  position: absolute;
+  top: 1rem;
+  right: 0.25rem;
+  font-weight: bold;
+}
+label.success.required:after {
+  color: var(--bs-success);
+}
+label.warning.required:after {
+  color: var(--bs-warning);
+}
+label.danger.required:after {
+  color: var(--bs-danger);
+}
+label .bi-eye {
+  cursor: pointer;
+}
+
+fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .section {
@@ -8299,7 +8390,7 @@ input:focus {
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translateX(0) translateY(-50%);
+  transform: translateX(0) translateY(-50%) scale(1.05);
   z-index: 0;
   opacity: 0.25;
 }
@@ -8312,6 +8403,26 @@ input:focus {
 .background_video .section {
   background-color: transparent;
   z-index: 1;
+}
+
+#register {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--bs-secondary);
+}
+#register video {
+  height: 100%;
+  width: auto;
+  opacity: 0.15;
+  transform: translateX(0) translateY(-50%) scale(1.25);
+}
+#register .row > * {
+  align-self: center;
+}
+
+legend {
+  text-transform: capitalize;
 }
 
 /*! --------------------------- End: MyStyles ---------------------------- */

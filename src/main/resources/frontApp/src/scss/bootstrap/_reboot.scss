@@ -519,13 +519,21 @@ th {
 // 1. Allow labels to use `margin` for spacing.
 
 label {
-  width: 1%;
-  margin: 0;
+  width: 100%;
+  margin: 0 0 $spacer;
   position: relative;
   display: inline-block; // 1
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
+  vertical-align: middle;
+}
+
+.input-group {
+  label {
+    width: 1%;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    margin: 0;
+  }
 }
 
 // Remove the default `border-radius` that macOS Chrome adds.
@@ -624,9 +632,10 @@ textarea {
 
 fieldset {
   min-width: 0; // 1
-  padding: 0; // 2
   margin: 0; // 2
-  border: 0; // 2
+  margin-top: $spacer;
+  padding: $spacer;
+  border: $border-width $border-style $border-color;
 }
 
 // 1. By using `float: left`, the legend will behave like a block element.
@@ -635,10 +644,8 @@ fieldset {
 //    See https://github.com/twbs/bootstrap/issues/29712
 
 legend {
-  float: left; // 1
-  width: 100%;
-  padding: 0;
-  margin-bottom: $legend-margin-bottom;
+  //float: left; // 1
+  padding: 0 $spacer;
   @include font-size($legend-font-size);
   font-weight: $legend-font-weight;
   line-height: inherit;

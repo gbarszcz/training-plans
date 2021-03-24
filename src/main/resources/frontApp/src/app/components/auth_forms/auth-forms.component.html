@@ -1,0 +1,19 @@
+<form>
+  <fieldset>
+    <legend>{{formType}}</legend>
+    <label *ngFor="let input of inputsParams" class="{{input.required.value ? 'required' : ''}}">
+      <div id="{{input.name}}-validation" class="validation"></div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="bi {{input.icon}}"></i>
+          </span>
+        </div>
+        <input class="form-control" type="{{input.type.value}}" max="{{input.max.value}}" name="{{input.name}}"
+               placeholder="{{input.placeholder}}" required="{{input.required.value ? 'required' : ''}}">
+      </div>
+    </label>
+
+    <button class="btn btn_alt" type="submit" disabled="disabled">{{formType}}</button>
+  </fieldset>
+</form>

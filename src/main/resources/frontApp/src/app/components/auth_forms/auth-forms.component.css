@@ -1,0 +1,22 @@
+.validation {
+  box-sizing: content-box;
+  min-height: 0.875rem;
+  line-height: 1;
+  font-size: 0.875rem;
+  font-weight: bold;
+  padding: 0.15rem 0;
+}
+
+.success .validation {
+  color: var(--bs-success);
+}
+
+.warning .validation {
+  color: var(--bs-warning);
+}
+
+.danger .validation {
+  color: var(--bs-danger);
+}
+
+/*# sourceMappingURL=auth-forms.component.css.map */

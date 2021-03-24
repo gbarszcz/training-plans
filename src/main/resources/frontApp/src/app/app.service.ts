@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AppService {
+  constructor(private http: HttpClient) { }
+
   /** sub nav should be for url param */
   getNavigation(url: string): string {
     // todo api
@@ -519,6 +522,39 @@ export class AppService {
     ]
 }
     `;
+    } else if ('/register') {
+      return `
+{
+    "type": "section",
+    "sections": [
+      {
+        "metaData": {
+          "id": "register",
+          "type": "section_se",
+          "background": "background_video"
+        },
+        "headerInfos": {
+          "title": "Lorem ipsum",
+          "subTitle": "Aenean tempor porta ante non aliquam",
+          "insideFirstColumn": true
+        },
+        "content": [
+          {
+            "column": "col-12 col-lg-6",
+            "text": "<p>Aliquam purusmassa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/signin' class='btn btn_alt'>Sign in</a>",
+            "component": null
+          },
+          {
+            "column": "col-12 col-lg-6",
+            "text": null,
+            "component": "auth"
+          }
+        ],
+        "background": "assets/videos/trening.mp4"
+      }
+    ]
+}
+      `;
     } else {
       return '';
     }
