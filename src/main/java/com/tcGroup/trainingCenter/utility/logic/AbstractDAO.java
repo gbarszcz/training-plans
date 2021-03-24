@@ -26,7 +26,10 @@ public abstract class AbstractDAO<T extends AuditData, ID extends Serializable> 
     public Long createItem(UserContext ctx, T itemData) {
         validate();
         itemData.setAuditCD(new Date());
-        itemData.setAuditCU(ctx.getUserId());
+
+        if(ctx != null){
+            itemData.setAuditCU(ctx.getUserId());
+        }
 
         itemData = this.repository.save(itemData);
 
@@ -36,7 +39,10 @@ public abstract class AbstractDAO<T extends AuditData, ID extends Serializable> 
     public Long modifyItem(UserContext ctx, T itemData) {
         validate();
         itemData.setAuditMD(new Date());
-        itemData.setAuditMU(ctx.getUserId());
+
+        if(ctx != null){
+            itemData.setAuditMU(ctx.getUserId());
+        }
 
         itemData = this.repository.save(itemData);
 
@@ -45,7 +51,10 @@ public abstract class AbstractDAO<T extends AuditData, ID extends Serializable> 
 
     public void removeItem(UserContext ctx, T itemData) {
         itemData.setAuditRD(new Date());
-        itemData.setAuditRU(ctx.getUserId());
+
+        if(ctx != null){
+            itemData.setAuditRU(ctx.getUserId());
+        }
 
         this.repository.save(itemData);
     }

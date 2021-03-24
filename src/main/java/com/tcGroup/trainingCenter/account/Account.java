@@ -73,4 +73,8 @@ public class Account extends AuditData {
     public int hashCode() {
         return Objects.hash(super.hashCode(), id, accountEmail, accountPassword, accountStatus);
     }
+
+    public void addRole(Role role){
+        roles.add(role);
+    }
 }
