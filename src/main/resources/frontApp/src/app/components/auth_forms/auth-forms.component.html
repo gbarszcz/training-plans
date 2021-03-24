@@ -23,3 +23,8 @@
     <button class="btn btn_alt" type="submit" disabled="disabled">{{formType}}</button>
   </fieldset>
 </form>
+
+<div *ngIf="formType === 'register'" class="alert alert-warning">
+  <h5><i class="bi bi-exclamation-triangle"></i> Remember!</h5>
+  By registering and using this website, you acknowledge that you understand and agree to the website regulations.
+</div>

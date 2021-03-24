@@ -48,7 +48,7 @@ export class AuthFormsComponent implements AfterViewInit {
       placeholder: 'Repeat password',
       name: 'repeatPassword',
       icon: 'bi-eye',
-      info: 'This must be equals to password. Min 8 and max 50 characters. Please use: upper and lower letters, special characters [#?!@$%^&*-+], digits.',
+      info: 'This must be equals to password.',
       type: {
         value: 'password',
         error: 'This is not correct password format!'
@@ -110,7 +110,7 @@ export class AuthFormsComponent implements AfterViewInit {
   private liveValidation(): void {
     const BUTTON = document.querySelector('[type="submit"]');
     document.querySelectorAll('input').forEach((input, index) => {
-      const INFO_CONTAINER = document.querySelector('#' + input.name + '-validation');
+      const INFO_CONTAINER = document.querySelector('#' + this.inputsParams[index].name + '-validation');
 
       input.addEventListener('keyup', (event) => {
         if (this.inputsParams[index].required && input.value.length === 0) {
