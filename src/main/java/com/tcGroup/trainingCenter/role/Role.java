@@ -27,6 +27,11 @@ import java.util.Set;
 @Data
 public class Role extends AuditData {
 
+    public interface Roles{
+        public static final String ADMIN = "ADMIN";
+        public static final String USER = "USER";
+    }
+
     @Id
     @Column(name = "ROL_ID")
     @GeneratedValue

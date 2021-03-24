@@ -1,5 +1,6 @@
 package com.tcGroup.trainingCenter.security.configuration;
 
+import com.tcGroup.trainingCenter.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,14 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // TODO Enable after M-003B
-    // @Autowired
-    // private IUserService userService;
+     @Autowired
+     private AccountService accountService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // TODO Enable after M-003B
-        // auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+         auth.userDetailsService(accountService).passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Bean
@@ -36,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index").permitAll()
+        http.authorizeRequests().antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index", "/register").permitAll()
                 .anyRequest().authenticated().and().csrf().ignoringAntMatchers("/phpmyadmin/**").and().headers()
                 .frameOptions().sameOrigin();
     }
