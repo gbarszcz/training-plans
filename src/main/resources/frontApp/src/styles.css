@@ -8167,6 +8167,9 @@ input:focus {
   outline: none;
 }
 
+.success {
+  color: var(--bs-success);
+}
 .success input {
   border-color: var(--bs-success);
   color: var(--bs-success);
@@ -8189,6 +8192,9 @@ input:focus {
   border-color: var(--bs-success);
 }
 
+.warning {
+  color: var(--bs-warning);
+}
 .warning input {
   border-color: var(--bs-warning);
   color: var(--bs-warning);
@@ -8211,6 +8217,9 @@ input:focus {
   border-color: var(--bs-warning);
 }
 
+.danger {
+  color: var(--bs-danger);
+}
 .danger input {
   border-color: var(--bs-danger);
   color: var(--bs-danger);
@@ -8236,24 +8245,53 @@ input:focus {
 label {
   position: relative;
 }
-label.required:after {
+label.required,
+label .required {
+  position: relative;
+}
+label.required:after,
+label .required:after {
   content: "*";
   position: absolute;
-  top: 1rem;
   right: 0.25rem;
   font-weight: bold;
 }
-label.success.required:after {
+label.required:after {
+  top: 1rem;
+}
+label .required:after {
+  top: -0.1rem;
+}
+label.success.required:after,
+label.success .required:after {
   color: var(--bs-success);
 }
-label.warning.required:after {
+label.warning.required:after,
+label.warning .required:after {
   color: var(--bs-warning);
 }
-label.danger.required:after {
+label.danger.required:after,
+label.danger .required:after {
   color: var(--bs-danger);
 }
+label .input-group-text {
+  padding: 0;
+  font-size: 1.25rem;
+  transition: all 0.3s ease-in-out;
+}
+label .input-group-text > * {
+  padding: 0.35rem 0.668rem;
+}
+label .bi-eye-slash,
 label .bi-eye {
   cursor: pointer;
+}
+label .bi-info-circle {
+  padding: 0.25rem 0.8rem 0.45rem;
+  cursor: help;
+}
+label .bi-info-circle:before {
+  font-size: 0.975rem;
 }
 
 fieldset {

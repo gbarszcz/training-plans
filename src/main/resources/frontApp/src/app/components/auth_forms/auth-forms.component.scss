@@ -1,13 +1,34 @@
 @import "./../../../scss/bootstrap/functions";
 @import "./../../../scss/bootstrap/variables";
 
+#password-strength,
 .validation {
   box-sizing: content-box;
-  min-height: .875rem;
+  height: .875rem;
+  display: inline-block;
+  vertical-align: middle;
+  font: {
+    weight: bold;
+  }
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+#password-strength {
+  width: 4.55rem;
+  display: none;
+  line-height: 100%;
+  text-align: center;
+  font: {
+    size: .7rem;
+  }
+  padding: $spacer / 4 $spacer / 2;
+}
+
+.validation {
   line-height: 1;
   font: {
     size: .875rem;
-    weight: bold;
   }
   padding: .15rem 0;
 }
@@ -28,4 +49,45 @@
   .validation {
     color: var(--bs-danger);
   }
+}
+
+.success,
+.warning,
+.danger {
+  .validation {
+    opacity: 1;
+  }
+}
+
+#password-strength {
+  &.success,
+  &.warning,
+  &.danger {
+    display: inline-block;
+    color: var(--bs-secondary);
+    opacity: 1;
+  }
+}
+
+
+#password-strength {
+  &.success {
+    background-color: var(--bs-success);
+  }
+}
+
+#password-strength {
+  &.warning {
+    background-color: var(--bs-warning);
+  }
+}
+
+#password-strength {
+  &.danger {
+    background-color: var(--bs-danger);
+  }
+}
+
+button {
+  text-transform: capitalize;
 }

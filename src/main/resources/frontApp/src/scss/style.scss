@@ -227,6 +227,8 @@ input {
 }
 
 .success {
+  color: var(--bs-success);
+
   input {
     border-color: var(--bs-success);
     color: var(--bs-success);
@@ -256,6 +258,8 @@ input {
 }
 
 .warning {
+  color: var(--bs-warning);
+
   input {
     border-color: var(--bs-warning);
     color: var(--bs-warning);
@@ -285,6 +289,8 @@ input {
 }
 
 .danger {
+  color: var(--bs-danger);
+
   input {
     border-color: var(--bs-danger);
     color: var(--bs-danger);
@@ -316,18 +322,33 @@ input {
 label {
   position: relative;
 
-  &.required {
+  &.required,
+  .required {
+    position: relative;
+
     &:after {
       content: '*';
       position: absolute;
-      top: 1rem;
       right: .25rem;
       font-weight: bold;
     }
   }
 
+  &.required {
+    &:after {
+      top: 1rem;
+    }
+  }
+
+  .required {
+    &:after {
+      top: -.1rem;
+    }
+  }
+
   &.success {
-    &.required {
+    &.required,
+    .required {
       &:after {
         color: var(--bs-success);
       }
@@ -335,7 +356,8 @@ label {
   }
 
   &.warning {
-    &.required {
+    &.required,
+    .required {
       &:after {
         color: var(--bs-warning);
       }
@@ -343,15 +365,36 @@ label {
   }
 
   &.danger {
-    &.required {
+    &.required,
+    .required {
       &:after {
         color: var(--bs-danger);
       }
     }
   }
 
+  .input-group-text {
+    padding: 0;
+    font-size: 1.25rem;
+    transition: $transition-base;
+
+    & > * {
+      padding: .35rem .668rem;
+    }
+  }
+
+  .bi-eye-slash,
   .bi-eye {
     cursor: pointer;
+  }
+
+  .bi-info-circle {
+    padding: .25rem .8rem .45rem;
+    cursor: help;
+
+    &:before {
+      font-size: .975rem;
+    }
   }
 }
 

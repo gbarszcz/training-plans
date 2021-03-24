@@ -1,9 +1,15 @@
 <form>
   <fieldset>
     <legend>{{formType}}</legend>
-    <label *ngFor="let input of inputsParams" class="{{input.required.value ? 'required' : ''}}">
+    <label *ngFor="let input of inputsParams">
+      <div *ngIf="formType === 'register' && input.name === 'password'" id="password-strength"></div>
       <div id="{{input.name}}-validation" class="validation"></div>
-      <div class="input-group">
+      <div class="input-group{{input.required.value ? ' required' : ''}}">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="bi bi-info-circle" title="{{input.info}}"></i>
+          </span>
+        </div>
         <div class="input-group-prepend">
           <span class="input-group-text">
             <i class="bi {{input.icon}}"></i>
