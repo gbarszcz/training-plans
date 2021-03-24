@@ -1,11 +1,11 @@
 package com.tcGroup.trainingCenter.account;
 
 import com.tcGroup.trainingCenter.role.Role;
+import com.tcGroup.trainingCenter.utility.context.UserContext;
 import com.tcGroup.trainingCenter.utility.logic.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,7 @@ public class AccountServiceImpl extends AbstractService implements AccountServic
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String accountEmail) throws UsernameNotFoundException {
+    public UserContext loadUserByUsername(String accountEmail) throws UsernameNotFoundException {
         Account account = accountRepository.findByAccountEmail(accountEmail);
         if (account == null) {
             throw new UsernameNotFoundException("Account with email address " + accountEmail + " not found.");
@@ -29,6 +29,6 @@ public class AccountServiceImpl extends AbstractService implements AccountServic
         Set<GrantedAuthority> grantedAuthorities = roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toSet());
 
-        return new org.springframework.security.core.userdetails.User(account.getAccountEmail(), account.getAccountPassword(), grantedAuthorities);
+        return new UserContext(account, grantedAuthorities);
     }
 }

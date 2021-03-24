@@ -1,7 +1,10 @@
 package com.tcGroup.trainingCenter.utility.context;
 
 import java.util.Collection;
+import java.util.Set;
 
+import com.tcGroup.trainingCenter.account.Account;
+import com.tcGroup.trainingCenter.account.AccountStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,50 +12,51 @@ public class UserContext implements UserDetails {
 
     private static final long serialVersionUID = -8763266680941529428L;
 
+    private Account account;
+    private Set<GrantedAuthority> grantedAuthorities;
+
+    public UserContext(Account account, Set<GrantedAuthority> grantedAuthorities) {
+        this.account = account;
+        this.grantedAuthorities = grantedAuthorities;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.grantedAuthorities;
     }
 
     @Override
     public String getPassword() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.account.getAccountPassword();
     }
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.account.getAccountEmail();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return true;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return true;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     public Long getUserId() {
-        return null;
+        return this.account.getId();
     }
 
 }
