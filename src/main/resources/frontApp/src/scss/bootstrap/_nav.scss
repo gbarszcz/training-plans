@@ -17,12 +17,12 @@ a.dropdown-item,
   padding: $nav-link-padding-y $nav-link-padding-x;
   @include font-size($nav-link-font-size);
   font-weight: $nav-link-font-weight;
-  color: $thirtary;
+  color: $tertiary;
   text-decoration: none;
   cursor: pointer;
 
   &:visited {
-    color: $thirtary;
+    color: $tertiary;
   }
 
   &:hover,

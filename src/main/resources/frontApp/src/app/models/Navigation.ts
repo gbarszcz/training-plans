@@ -27,8 +27,8 @@ export class Navigation {
    * */
   constructor(navJSON: string, currentRoute: string) {
     const NAV = JSON.parse(navJSON);
-    NAV.mainNav = this.ifItemDisabledUpdateUpdateItem(NAV.mainNav);
-    NAV.subNav = this.ifItemDisabledUpdateUpdateItem(NAV.subNav);
+    NAV.mainNav = this.updateIfItemDisabled(NAV.mainNav);
+    NAV.subNav = this.updateIfItemDisabled(NAV.subNav);
 
     this.currentRoute = currentRoute;
     this.brandItem = NAV.brandItem;
@@ -37,7 +37,7 @@ export class Navigation {
     this.secNavItems = NAV.subNav;
   }
 
-  private ifItemDisabledUpdateUpdateItem(navItems: INavigationItem[]): INavigationItem[] {
+  private updateIfItemDisabled(navItems: INavigationItem[]): INavigationItem[] {
     navItems.forEach((item) => {
       if (item.disabled) {
         item.link = '';

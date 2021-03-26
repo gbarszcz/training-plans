@@ -8,6 +8,13 @@ import {HttpClient} from '@angular/common/http';
 export class AppService {
   constructor(private http: HttpClient) { }
 
+  sendUserRegistration(registerData: any): string {
+    this.http.post('http://localhost:8080/register', registerData).subscribe(res => {
+      return res;
+    });
+    return '';
+  }
+
   /** sub nav should be for url param */
   getNavigation(url: string): string {
     // todo api
@@ -225,7 +232,7 @@ export class AppService {
             "value": "Sign in"
           }],
           "subItems": [],
-          "link": "/login",
+          "link": "/signin",
           "disabled": false,
           "divider": false,
           "left": true
@@ -346,7 +353,7 @@ export class AppService {
             "value": "Sign in"
           }],
           "subItems": [],
-          "link": "/login",
+          "link": "/signin",
           "disabled": false,
           "divider": false,
           "left": true

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 
 import {IPageContent} from '../../models/IPageContent';
 
@@ -8,9 +8,14 @@ import {IPageContent} from '../../models/IPageContent';
 })
 
 export class SectionPageComponent implements OnDestroy{
+  @Output() URLEvent = new EventEmitter<string>();
   @Input() sections: IPageContent[] = [];
 
   ngOnDestroy(): void {
     this.sections = [];
+  }
+
+  changeURL(URL: string): void {
+    this.URLEvent.emit(URL);
   }
 }

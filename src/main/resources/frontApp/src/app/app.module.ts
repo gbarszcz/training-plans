@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,9 +10,7 @@ import { SocialMediaComponent } from './components/social_media/social-media.com
 import { FooterComponent } from './components/footer/footer.component';
 import { SectionPageComponent } from './components/section_page/section-page.component';
 import { SearchComponent } from './components/search/search.component';
-import { SessionComponent } from './components/session/session.component';
 import { AuthFormsComponent } from './components/auth_forms/auth-forms.component';
-import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,14 +20,13 @@ import {ReactiveFormsModule} from '@angular/forms';
     FooterComponent,
     SectionPageComponent,
     SearchComponent,
-    SessionComponent,
     AuthFormsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -14,8 +14,18 @@
   transition: $transition-base;
 
   &:hover {
-    background: $thirtary;
+    background: $tertiary;
   }
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: $primary;
+  background: $tertiary;
+}
+
+::selection {
+  color: $primary;
+  background: $tertiary;
 }
 
 @keyframes slideIn {
@@ -49,7 +59,7 @@ footer {
     }
 
     &:hover {
-      color:  $thirtary;
+      color:  $tertiary;
     }
   }
 
@@ -66,7 +76,7 @@ footer {
       }
 
       &:hover {
-        color:  $thirtary;
+        color:  $tertiary;
       }
     }
 
@@ -116,10 +126,10 @@ footer {
         }
 
         &:hover {
-          color:  $thirtary !important;
+          color:  $tertiary !important;
 
           &:before {
-            background-color: $thirtary;
+            background-color: $tertiary;
           }
         }
       }
@@ -373,6 +383,10 @@ label {
     }
   }
 
+  .input-group {
+    margin-top: -1px;
+  }
+
   .input-group-text {
     padding: 0;
     font-size: 1.25rem;
@@ -405,7 +419,7 @@ fieldset {
 }
 
 .section {
-  color: $thirtary;
+  color: $tertiary;
   background-color: $primary;
 
   b {
@@ -444,10 +458,10 @@ fieldset {
 
   &.section_pr {
     background-color: $primary;
-    color: $thirtary;
+    color: $tertiary;
 
     h1 {
-      color: $thirtary;
+      color: $tertiary;
     }
 
     p {
@@ -511,12 +525,12 @@ fieldset {
     }
 
     p {
-      color: $thirtary;
+      color: $tertiary;
     }
   }
 
   &.section_th {
-    background-color: $thirtary;
+    background-color: $tertiary;
     color: $primary;
 
     h1 {

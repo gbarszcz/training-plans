@@ -1,12 +1,16 @@
-import {AfterViewInit, Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'auth-forms',
   templateUrl: './auth-forms.component.html',
   styleUrls: ['./auth-forms.component.css']
 })
-export class AuthFormsComponent implements AfterViewInit {
-  @Input() formType = 'register';
+export class AuthFormsComponent implements OnInit {
+  @Output() URLEvent = new EventEmitter<string>();
+  @Input() formType = '';
+  resources: any | null = null;
+  formData: any = {};
   inputsParams = [
     {
       placeholder: 'Email',
@@ -25,6 +29,10 @@ export class AuthFormsComponent implements AfterViewInit {
         value: true,
         error: 'This is required field'
       },
+      err: {
+        isErr: false,
+        message: ''
+      }
     },
     {
       placeholder: 'Password',
@@ -43,6 +51,14 @@ export class AuthFormsComponent implements AfterViewInit {
         value: true,
         error: 'This is required field'
       },
+      err: {
+        isErr: false,
+        message: ''
+      },
+      strength: {
+        level: '',
+        message: ''
+      }
     },
     {
       placeholder: 'Repeat password',
@@ -51,7 +67,7 @@ export class AuthFormsComponent implements AfterViewInit {
       info: 'This must be equals to password.',
       type: {
         value: 'password',
-        error: 'This is not correct password format!'
+        error: 'This is not equals with password field!'
       },
       max: {
         value: 50,
@@ -61,10 +77,21 @@ export class AuthFormsComponent implements AfterViewInit {
         value: true,
         error: 'This is required field'
       },
+      err: {
+        isErr: false,
+        message: ''
+      }
     }
   ];
+  button = {
+    disabled: true,
+    text: this.formType
+  };
 
-  constructor() {
+  constructor(private service: AppService) {
+  }
+
+  ngOnInit(): void {
     if (this.formType !== 'register') {
       this.inputsParams = this.inputsParams.filter((input) => {
         return input.name !== 'repeatPassword';
@@ -73,159 +100,125 @@ export class AuthFormsComponent implements AfterViewInit {
     this.formType = this.formType.replace('-', ' ');
   }
 
-  ngAfterViewInit(): void {
-    this.inputsEvents();
-  }
-
-  private inputsEvents(): void {
-    this.clickPasswordTrigger();
-    if (this.formType === 'register') {
-      this.liveValidation();
+  post(): void {
+    this.resources = this.service.sendUserRegistration(this.formData);
+    if (this.resources.ok) {
+      localStorage.setItem('token', this.resources.token);
+      this.URLEvent.emit('/profile');
+    } else if (this.resources.status === 400) {
+      this.prepareErrorFields(this.resources.errFields);
+      this.disableButton();
+    } else if (this.resources.status === 401) {
+      // todo
+    } else {
+      // todo
     }
-    this.passwordStrength();
   }
 
-  private clickPasswordTrigger(): void {
-    const PASSWORD_TYPE_TRIGGERS = document.querySelectorAll('.bi-eye');
-
-    PASSWORD_TYPE_TRIGGERS.forEach((trigger) => {
-      const INPUT = trigger.closest('.input-group')?.querySelector('input');
-
-      if (INPUT) {
-        trigger.addEventListener('click', e => {
-          if (trigger.classList.contains('bi-eye')) {
-            trigger.classList.remove('bi-eye');
-            trigger.classList.add('bi-eye-slash');
-            INPUT.setAttribute('type', 'text');
-          } else if (trigger.classList.contains('bi-eye-slash')) {
-            trigger.classList.remove('bi-eye-slash');
-            trigger.classList.add('bi-eye');
-            INPUT.setAttribute('type', 'password');
-          }
-        });
-      }
+  private prepareErrorFields(errFields: any[]): void {
+    errFields.forEach((field) => {
+      this.inputsParams.filter((input) => {
+        return input.name === field.name;
+      })[0].err = {
+        isErr: true,
+        message: field.message
+      };
     });
   }
 
-  private liveValidation(): void {
-    const BUTTON = document.querySelector('[type="submit"]');
-    document.querySelectorAll('input').forEach((input, index) => {
-      const INFO_CONTAINER = document.querySelector('#' + this.inputsParams[index].name + '-validation');
-
-      input.addEventListener('keyup', (event) => {
-        if (this.inputsParams[index].required && input.value.length === 0) {
-          // @ts-ignore
-          this.markInput(INFO_CONTAINER, 'danger', this.inputsParams[index].required.error);
-        } else if (this.isNotCorrectType(input.value, index)) {
-          // @ts-ignore
-          this.markInput(INFO_CONTAINER, 'danger', this.inputsParams[index].type.error);
-        } else if (input.value.length > this.inputsParams[index].max.value) {
-          // @ts-ignore
-          this.markInput(INFO_CONTAINER, 'danger', this.inputsParams[index].max.error);
-          // @ts-ignore
-        } else if (this.inputsParams[index].name === 'password') {
-          const REPEAT_PASSWORD_INPUT = document.querySelector('[name="repeatPassword"]');
-          // @ts-ignore
-          if (REPEAT_PASSWORD_INPUT.value && REPEAT_PASSWORD_INPUT.value !== input.value) {
-            // @ts-ignore
-            this.markInput(INFO_CONTAINER, 'danger', null);
-            // @ts-ignore
-            this.markInput(REPEAT_PASSWORD_INPUT.closest('label'), 'danger', 'This is not equals with password field!');
-          } else {
-            // @ts-ignore
-            this.markInput(INFO_CONTAINER, 'danger', null);
-            // @ts-ignore
-            this.markInput(REPEAT_PASSWORD_INPUT.closest('label'), 'danger', null);
-          }
-        } else if (this.inputsParams[index].name === 'repeatPassword') {
-          // @ts-ignore
-          const PASSWORD_VALUE = document.querySelector('[name="password"]')?.value;
-          if (PASSWORD_VALUE && PASSWORD_VALUE !== input.value) {
-            // @ts-ignore
-            this.markInput(INFO_CONTAINER, 'danger', 'This is not equals with password field!');
-          } else {
-            // @ts-ignore
-            this.markInput(INFO_CONTAINER, 'danger', null);
-          }
-        } else {
-          // @ts-ignore
-          this.markInput(INFO_CONTAINER, 'danger', null);
-        }
-
-        // @ts-ignore
-        this.disableButton(BUTTON);
-      });
-    });
+  isPassword(index: number): boolean {
+    // it must be by the name because the type can be changed
+    return (this.inputsParams[index].name === 'password' || this.inputsParams[index].name === 'repeatPassword');
   }
 
-  private isNotCorrectType(value: string, index: number): boolean {
+  togglePasswordDisplay(index: number): void {
+    this.inputsParams[index].icon = this.inputsParams[index].icon === 'bi-eye' ? 'bi-eye-slash' : 'bi-eye';
+    this.inputsParams[index].type.value = this.inputsParams[index].type.value === 'password' ? 'text' : 'password';
+  }
+
+  liveValidation(index: number): void {
+    let input = this.inputsParams[index];
+    const INPUT_VALUE = this.formData[input.name.toString()];
+
+    if (input.required && INPUT_VALUE === 0) {
+      input = this.setErrInfo(input, input.required.error);
+    } else if (input.name === 'repeatPassword') {
+      input = this.setErrInfo(input, this.checkRepeatPasswordIsNotEquals() ? input.type.error : null);
+    } else if (this.isNotCorrectType(input)) {
+      input = this.setErrInfo(input, input.type.error);
+    } else if (INPUT_VALUE.length > input.max.value) {
+      input = this.setErrInfo(input, input.max.error);
+    } else if (input.name === 'password') {
+      const REPEAT_PASSWORD_INPUT = this.inputsParams.filter((inputParam) => {
+        return inputParam.name === 'repeatPassword';
+      })[0];
+      this.setErrInfo(input, null);
+      this.setErrInfo(REPEAT_PASSWORD_INPUT, this.checkRepeatPasswordIsNotEquals() ? input.type.error : null);
+    } else {
+      this.setErrInfo(input, null);
+    }
+    if (input.name === 'password') {
+      this.passwordStrength(input, input.err.isErr ? null : INPUT_VALUE);
+    }
+    this.inputsParams[index] = input;
+    this.disableButton();
+  }
+
+  setErrInfo(target: any, message: string | null): any {
+    target.err.isErr = message;
+    target.err.message = target.err.isErr ? message : '';
+    return target;
+  }
+
+  checkRepeatPasswordIsNotEquals(): boolean {
+    return this.formData.password && this.formData.repeatPassword && this.formData.password !== this.formData.repeatPassword;
+  }
+
+  private isNotCorrectType(input: any): boolean {
+    // it must be by the name because the type can be changed
+    const VALUE_TO_TEST = this.formData[input.name.toString()];
     let re;
-    switch (this.inputsParams[index].type.value) {
+    switch (input.name) {
       case 'email':
         re = /\S+@\S+\.\S+/;
-        return !re.test(value);
+        return !re.test(VALUE_TO_TEST);
       case 'password':
-        re = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+]).{8,' + this.inputsParams[index].max.value + '}$');
-        return !re.test(value);
+        re = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+]).{8,' + input.max.value + '}$');
+        return !re.test(VALUE_TO_TEST);
       default:
-        return (typeof value !== 'string');
+        return (typeof VALUE_TO_TEST !== 'string');
     }
   }
 
-  private markInput(infoContainer: Element, level: string, message: string | null): void {
-    const LABEL = infoContainer.closest('label');
-
-    if (LABEL) {
-      if (message != null) {
-        if (!LABEL.classList.contains(level)) {
-          LABEL.classList.add(level);
-          // @ts-ignore
-          infoContainer.innerHTML = message;
-        }
-      } else {
-        if (LABEL.classList.contains(level)) {
-          LABEL.classList.remove(level);
-          // @ts-ignore
-          infoContainer.innerHTML = '';
-        }
+  private disableButton(): void {
+    let errCount = this.inputsParams.filter((inputParam) => {
+      return inputParam.err.isErr;
+    }).length;
+    this.inputsParams.filter((inputParam) => {
+      return inputParam.required;
+    }).forEach((input) => {
+      if (!this.formData[input.name.toString()]) {
+        ++errCount;
       }
-    }
+    });
+
+    this.button.disabled = errCount > 0;
   }
 
-  private disableButton(button: Element): void {
-    if (document.querySelectorAll('.danger').length > 0) {
-      button?.setAttribute('disabled', 'disabled');
+  private passwordStrength(input: any, password: string | null): void {
+    const PASS_STRENGTH = this.calculatePasswordStrength(password || '', 8, input.max.value);
+    if (PASS_STRENGTH === 0) {
+      input.strength.level = '';
+      input.strength.message = '';
+    } else if (PASS_STRENGTH < 9) {
+      input.strength.level = 'danger';
+      input.strength.message = 'Weak';
+    } else if (PASS_STRENGTH >= 9 && PASS_STRENGTH <= 10) {
+      input.strength.level = 'warning';
+      input.strength.message = 'Medium';
     } else {
-      for (const input of this.inputsParams) {
-        // @ts-ignore
-        if (input.required.value && !document.querySelector('[name="' + input.name + '"]')?.value) {
-          button?.setAttribute('disabled', 'disabled');
-          return;
-        }
-      }
-
-      button?.removeAttribute('disabled');
-    }
-  }
-
-  private passwordStrength(): void {
-    const PASSWORD_INPUT = document.querySelector('[type="password"]');
-    if (PASSWORD_INPUT) {
-      const PASSWORD_INFO_CONTAINER = document.querySelector('#password-strength');
-
-      PASSWORD_INPUT.addEventListener('keyup', (e) => {
-        // @ts-ignore
-        if (PASSWORD_INPUT.value.length > 0) {
-          // @ts-ignore
-          const LEVEL = this.calculatePasswordStrength(PASSWORD_INPUT.value, 8,
-            this.inputsParams.filter((x) => x.name === 'password')[0].max.value);
-          // @ts-ignore
-          this.displayPasswordStrength(PASSWORD_INFO_CONTAINER, LEVEL);
-        } else {
-          // @ts-ignore
-          this.markPasswordStrength(PASSWORD_INFO_CONTAINER);
-        }
-      });
+      input.strength.level = 'success';
+      input.strength.message = 'Strong';
     }
   }
 
@@ -235,54 +228,45 @@ export class AuthFormsComponent implements AfterViewInit {
     const SPECIALCASES_REGEX = /[#?!@$%^&*-+]/;
     const DIGITS_REGEX = /[0-9]/;
 
-    let level = 0;
+    let strength = 0;
     if (LOWERCASES_REGEX.test(value)) {
-      ++level;
+      ++strength;
     }
     if (UPPERCASES_REGEX.test(value)) {
-      ++level;
+      ++strength;
     }
     if (DIGITS_REGEX.test(value)) {
-      ++level;
+      ++strength;
     }
     if (new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+]).{' + min + ',' + max + '}$').test(value)) {
-      ++level;
+      ++strength;
     }
     if (SPECIALCASES_REGEX.test(value)) {
-      level += 2;
+      strength += 2;
     }
-    level += value.length * min / max;
-    level += (value.length - value.replace(DIGITS_REGEX, '').length) * min / max;
-    level += (value.length - value.replace(UPPERCASES_REGEX, '').length) * min / max;
-    level += (value.length - value.replace(LOWERCASES_REGEX, '').length) * min / max;
-    level += (value.length - value.replace(SPECIALCASES_REGEX, '').length) * min / max;
-    level += String.prototype.concat(...new Set(value)).length / max;
 
-    console.log(String.prototype.concat(...new Set(value)).length / max);
+    const VALUE_LENGTH = value.length;
+    strength += VALUE_LENGTH * min / max;
+    strength += (VALUE_LENGTH - value.replace(DIGITS_REGEX, '').length) * min / max * 1.25;
+    strength += (VALUE_LENGTH - value.replace(UPPERCASES_REGEX, '').length) * min / max;
+    strength += (VALUE_LENGTH - value.replace(LOWERCASES_REGEX, '').length) * min / max;
+    strength += (VALUE_LENGTH - value.replace(SPECIALCASES_REGEX, '').length) * min / max * 1.7;
+    strength += String.prototype.concat(...new Set(value)).length / max * 2;
+    strength += this.countCharacterTypeChanges(value) / max * 2;
 
-    return level;
+    return strength;
   }
 
-  private displayPasswordStrength(infoContainer: Element, level: number): void {
-    console.log(level);
-    if (level < 8.25) {
-      this.markPasswordStrength(infoContainer, 'danger', 'Weak');
-    } else if (level >= 8.25 && level <= 9) {
-      this.markPasswordStrength(infoContainer, 'warning', 'Good');
-    } else {
-      this.markPasswordStrength(infoContainer, 'success', 'Strong');
-    }
-  }
+  private countCharacterTypeChanges(value: string): number {
+    const LOWERCASES_REGEX = /[a-z]{3,}/;
+    const UPPERCASES_REGEX = /[A-Z]{3,}/;
+    const SPECIALCASES_REGEX = /[#?!@$%^&*-+]{2,}/;
+    const DIGITS_REGEX = /[0-9]{3,}/;
 
-  private markPasswordStrength(infoContainer: Element, level: string | null, message: string | null): void {
-    infoContainer.className = '';
-
-    if (level !== null && message !== null) {
-      infoContainer.classList.add(level);
-      infoContainer.innerHTML = message;
-    }
-    else {
-      infoContainer.innerHTML = '';
-    }
+    const CHANGES = value.replace(SPECIALCASES_REGEX, '')
+      .replace(LOWERCASES_REGEX, '')
+      .replace(UPPERCASES_REGEX, '')
+      .replace(DIGITS_REGEX, '').length;
+    return value.length - CHANGES;
   }
 }
