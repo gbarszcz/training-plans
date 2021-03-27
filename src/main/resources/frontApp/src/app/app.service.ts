@@ -6,12 +6,16 @@ import {HttpClient} from '@angular/common/http';
 })
 
 export class AppService {
+  private serverPort = 3000;
+
   constructor(private http: HttpClient) { }
 
-  sendUserRegistration(registerData: any): string {
-    this.http.post('http://localhost:8080/register', registerData).subscribe(res => {
-      return res;
-    });
+  sendUserAuthData(registerData: any, endpoint: string): string {
+    this.http.post(window.location.protocol + '//' + window.location.hostname + `:${this.serverPort}/${endpoint}`, registerData)
+      .subscribe(res => {
+        return res;
+      }
+    );
     return '';
   }
 
@@ -82,10 +86,10 @@ export class AppService {
         {
           "content": [{
             "type": 4,
-            "value": "Sign in"
+            "value": "Login"
           }],
           "subItems": [],
-          "link": "/signin",
+          "link": "/login",
           "disabled": false,
           "divider": false,
           "left": true
@@ -229,10 +233,10 @@ export class AppService {
         {
           "content": [{
             "type": 4,
-            "value": "Sign in"
+            "value": "Login"
           }],
           "subItems": [],
-          "link": "/signin",
+          "link": "/login",
           "disabled": false,
           "divider": false,
           "left": true
@@ -350,10 +354,10 @@ export class AppService {
         {
           "content": [{
             "type": 4,
-            "value": "Sign in"
+            "value": "Login"
           }],
           "subItems": [],
-          "link": "/signin",
+          "link": "/login",
           "disabled": false,
           "divider": false,
           "left": true
@@ -431,7 +435,7 @@ export class AppService {
         },
         "content": [{
           "column": "col-12 col-md-11 col-lg-7 col-xxl-6",
-          "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/signin' class='btn btn_alt'>Sign in</a>&#10;<a href='/register' class='btn'>Register</a>",
+          "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/login' class='btn btn_alt'>Login</a>&#10;<a href='/register' class='btn'>Register</a>",
           "component": null
         }],
         "background": "assets/images/gymguy.jpg"
@@ -529,7 +533,7 @@ export class AppService {
     ]
 }
     `;
-    } else if ('/register') {
+    } else if (url === '/register') {
       return `
 {
     "type": "section",
@@ -548,7 +552,7 @@ export class AppService {
         "content": [
           {
             "column": "col-12 col-lg-6",
-            "text": "<p>Aliquam purusmassa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/signin' class='btn btn_alt'>Sign in</a>",
+            "text": "<p>Aliquam purusmassa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/login' class='btn btn_alt'>Login</a>",
             "component": null
           },
           {

@@ -23,7 +23,7 @@ export class AuthFormsComponent implements OnInit {
       },
       max: {
         value: 150,
-        error: 'Length of this value is to height'
+        error: 'Provided value is too long'
       },
       required: {
         value: true,
@@ -45,7 +45,7 @@ export class AuthFormsComponent implements OnInit {
       },
       max: {
         value: 50,
-        error: 'Length of this value is to height'
+        error: 'Provided value is too long'
       },
       required: {
         value: true,
@@ -67,11 +67,11 @@ export class AuthFormsComponent implements OnInit {
       info: 'This must be equals to password.',
       type: {
         value: 'password',
-        error: 'This is not equals with password field!'
+        error: 'This is not equal with password field!'
       },
       max: {
         value: 50,
-        error: 'Length of this value is to height'
+        error: 'Provided value is too long'
       },
       required: {
         value: true,
@@ -101,15 +101,13 @@ export class AuthFormsComponent implements OnInit {
   }
 
   post(): void {
-    this.resources = this.service.sendUserRegistration(this.formData);
+    this.resources = this.service.sendUserAuthData(this.formData, this.formType);
     if (this.resources.ok) {
       localStorage.setItem('token', this.resources.token);
       this.URLEvent.emit('/profile');
     } else if (this.resources.status === 400) {
       this.prepareErrorFields(this.resources.errFields);
       this.disableButton();
-    } else if (this.resources.status === 401) {
-      // todo
     } else {
       // todo
     }
@@ -143,8 +141,8 @@ export class AuthFormsComponent implements OnInit {
     if (input.required && INPUT_VALUE === 0) {
       input = this.setErrInfo(input, input.required.error);
     } else if (input.name === 'repeatPassword') {
-      input = this.setErrInfo(input, this.checkRepeatPasswordIsNotEquals() ? input.type.error : null);
-    } else if (this.isNotCorrectType(input)) {
+      input = this.setErrInfo(input, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
+    } else if (!this.isCorrectType(input)) {
       input = this.setErrInfo(input, input.type.error);
     } else if (INPUT_VALUE.length > input.max.value) {
       input = this.setErrInfo(input, input.max.error);
@@ -153,7 +151,7 @@ export class AuthFormsComponent implements OnInit {
         return inputParam.name === 'repeatPassword';
       })[0];
       this.setErrInfo(input, null);
-      this.setErrInfo(REPEAT_PASSWORD_INPUT, this.checkRepeatPasswordIsNotEquals() ? input.type.error : null);
+      this.setErrInfo(REPEAT_PASSWORD_INPUT, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
     } else {
       this.setErrInfo(input, null);
     }
@@ -170,39 +168,31 @@ export class AuthFormsComponent implements OnInit {
     return target;
   }
 
-  checkRepeatPasswordIsNotEquals(): boolean {
-    return this.formData.password && this.formData.repeatPassword && this.formData.password !== this.formData.repeatPassword;
+  checkRepeatPasswordIsEqual(): boolean {
+    return this.formData.password && this.formData.repeatPassword && this.formData.password === this.formData.repeatPassword;
   }
 
-  private isNotCorrectType(input: any): boolean {
+  private isCorrectType(input: any): boolean {
     // it must be by the name because the type can be changed
-    const VALUE_TO_TEST = this.formData[input.name.toString()];
+    const INPUT_VALUE = this.formData[input.name.toString()];
     let re;
     switch (input.name) {
       case 'email':
         re = /\S+@\S+\.\S+/;
-        return !re.test(VALUE_TO_TEST);
+        return re.test(INPUT_VALUE);
       case 'password':
         re = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+]).{8,' + input.max.value + '}$');
-        return !re.test(VALUE_TO_TEST);
+        return re.test(INPUT_VALUE);
       default:
-        return (typeof VALUE_TO_TEST !== 'string');
+        return (typeof INPUT_VALUE === 'string');
     }
   }
 
   private disableButton(): void {
-    let errCount = this.inputsParams.filter((inputParam) => {
-      return inputParam.err.isErr;
+    const ERR_COUNT = this.inputsParams.filter((inputParam) => {
+      return inputParam.err.isErr || (inputParam.required && !this.formData[inputParam.name.toString()]);
     }).length;
-    this.inputsParams.filter((inputParam) => {
-      return inputParam.required;
-    }).forEach((input) => {
-      if (!this.formData[input.name.toString()]) {
-        ++errCount;
-      }
-    });
-
-    this.button.disabled = errCount > 0;
+    this.button.disabled = ERR_COUNT > 0;
   }
 
   private passwordStrength(input: any, password: string | null): void {
