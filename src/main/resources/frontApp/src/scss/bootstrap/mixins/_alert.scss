@@ -2,8 +2,4 @@
   color: $color;
   @include gradient-bg($background);
   border-color: $border;
-
-  .alert-link {
-    color: shade-color($color, 20%);
-  }
 }

@@ -1,14 +1,14 @@
 <div class="{{position}}">
   <div class="{{position ? 'container' : ''}}">
-    <div class="alert alert-{{level}} {{displayHideButton ? 'alert-dismissible' : ''}}"
+    <div class="alert alert-{{alert?.level}} {{alert?.displayHideButton ? 'alert-dismissible' : ''}}"
          role="alert">
       <h5>
-        <i class="bi {{icon}}"></i> {{header}}
+        <i class="bi {{icon.get(alert?.level || 'info')}}"></i> {{alert?.header}}
       </h5>
 
-      {{text}}
+      {{alert?.text}}
 
-      <button *ngIf="displayHideButton"
+      <button *ngIf="alert?.displayHideButton || false"
               (click)="hideAlert()"
               type="button"
               class="btn-close">

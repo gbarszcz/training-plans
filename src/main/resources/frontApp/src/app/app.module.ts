@@ -11,7 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SectionPageComponent } from './components/section_page/section-page.component';
 import { SearchComponent } from './components/search/search.component';
 import { AuthFormsComponent } from './components/auth_forms/auth-forms.component';
-import { AlertComponent } from './components/aletr/alert/alert.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [

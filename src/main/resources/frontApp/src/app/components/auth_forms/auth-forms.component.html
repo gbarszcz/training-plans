@@ -26,35 +26,28 @@
         <input [(ngModel)]="formData[input.name.toString()]"
                (keyup)="liveValidation(i)"
                class="form-control"
-               placeholder="{{input.placeholder}}"
-               type="{{input.type.value}}"
-               max="{{input.max.value}}"
-               name="{{input.name}}"
-               required="{{input.required.value ? 'required' : ''}}">
+               [placeholder]="input.placeholder"
+               [type]="input.type.value"
+               [max]="input.max.value"
+               [name]="input.name"
+               [required]="input.required.value">
       </div>
     </label>
 
-    <button (click)="post()" [disabled]="button.disabled" class="btn btn_alt" type="submit">{{button.text}}</button>
+    <button (click)="post()" [disabled]="button.disabled" class="btn btn_alt" type="submit">
+      {{button.text}}
+    </button>
   </fieldset>
 </form>
 
-<app-alert *ngIf="isRegisterForm()"
-           [displayHideButton]="false"
-           [level]="'warning'"
-           [header]="'Remember!'"
-           [text]="'By registering and using this website, you acknowledge that you understand and agree to the website regulations.'">
-</app-alert>
+<app-alert *ngIf="isRegisterForm()" [alert]="infoAlert"></app-alert>
 
 <div *ngIf="alerts">
   <div *ngFor="let alert of alerts">
     <app-alert *ngIf="alert.show"
                (hideEvent)="hideAlert($event)"
-               [id]="alert.id.toString()"
-               [displayHideButton]="true"
-               [level]="'danger'"
-               [position]="'fixed-top'"
-               [header]="alert.header"
-               [text]="alert.text">
+               [alert]="alert"
+               [position]="'fixed-top'">
     </app-alert>
   </div>
 </div>

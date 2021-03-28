@@ -3,4 +3,6 @@ export interface IAlert {
   header: string;
   text: string;
   show: boolean;
+  level: string;
+  displayHideButton: boolean;
 }
