@@ -33,7 +33,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              {"input": "src/scripts/jQuery.min.js"},
+              {"input": "src/scripts/popper.min.js"},
+              {"input": "src/scripts/bootstrap.min.js"}
+            ]
           },
           "configurations": {
             "production": {

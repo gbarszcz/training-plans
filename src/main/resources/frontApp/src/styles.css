@@ -6,6 +6,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/blob/main/LICENSE)
  */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css");
 .m-0 {
   margin: 0 !important;
 }
@@ -6648,18 +6649,12 @@ a.navbar-brand {
   background-image: var(--bs-gradient);
   border-color: #0073ff;
 }
-.alert-primary .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
-}
 
 .alert-secondary {
   color: var(--bs-secondary);
   background-color: #fbfdff;
   background-image: var(--bs-gradient);
   border-color: #fbfdff;
-}
-.alert-secondary .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
 }
 
 .alert-tertiary {
@@ -6668,18 +6663,12 @@ a.navbar-brand {
   background-image: var(--bs-gradient);
   border-color: #202428;
 }
-.alert-tertiary .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
-}
 
 .alert-info {
   color: var(--bs-secondary);
   background-color: #92bdfe;
   background-image: var(--bs-gradient);
   border-color: #92bdfe;
-}
-.alert-info .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
 }
 
 .alert-success {
@@ -6688,9 +6677,6 @@ a.navbar-brand {
   background-image: var(--bs-gradient);
   border-color: #198754;
 }
-.alert-success .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
-}
 
 .alert-warning {
   color: var(--bs-secondary);
@@ -6698,18 +6684,12 @@ a.navbar-brand {
   background-image: var(--bs-gradient);
   border-color: #ffc107;
 }
-.alert-warning .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
-}
 
 .alert-danger {
   color: var(--bs-secondary);
   background-color: #dc3545;
   background-image: var(--bs-gradient);
   border-color: #dc3545;
-}
-.alert-danger .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
 }
 
 @keyframes progress-bar-stripes {
