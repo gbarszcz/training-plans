@@ -6639,7 +6639,7 @@ a.navbar-brand {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 1.25rem 1rem;
+  padding: 1rem 1rem;
 }
 
 .alert-primary {
@@ -8077,6 +8077,7 @@ footer .navbar-footer .active a:hover:before {
   background-color: var(--bs-tertiary);
 }
 
+#login,
 #register,
 section,
 .image-hero_content {
@@ -8457,24 +8458,31 @@ fieldset {
   z-index: 1;
 }
 
+#login,
 #register {
   min-height: 100vh;
   display: flex;
   align-items: center;
   background-color: var(--bs-secondary);
 }
+#login video,
 #register video {
   height: 100%;
   width: auto;
   opacity: 0.15;
   transform: translateX(0) translateY(-50%) scale(1.25);
 }
+#login .row > *,
 #register .row > * {
   align-self: center;
 }
 
 legend {
   text-transform: capitalize;
+}
+
+.row .fixed-top .alert {
+  margin: 0 calc(var(--bs-gutter-x) / -2);
 }
 
 .alert h1, .alert .h1,

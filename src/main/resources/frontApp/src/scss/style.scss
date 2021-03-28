@@ -137,6 +137,7 @@ footer {
   }
 }
 
+#login,
 #register,
 section,
 .image-hero_content {
@@ -588,6 +589,7 @@ fieldset {
   }
 }
 
+#login,
 #register {
   min-height: 100vh;
   display: flex;
@@ -610,6 +612,14 @@ fieldset {
 
 legend {
   text-transform: capitalize;
+}
+
+.row {
+  .fixed-top {
+    .alert {
+      margin: 0 calc(var(--#{$variable-prefix}gutter-x) / -2);
+    }
+  }
 }
 
 .alert {

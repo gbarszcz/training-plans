@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 
 export class AppService {
-  private serverPort = 3000;
+  private serverPort = 8080;
 
   constructor(private http: HttpClient) { }
 
@@ -553,6 +553,39 @@ export class AppService {
           {
             "column": "col-12 col-lg-6",
             "text": "<p>Aliquam purusmassa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/login' class='btn btn_alt'>Login</a>",
+            "component": null
+          },
+          {
+            "column": "col-12 col-lg-6",
+            "text": null,
+            "component": "auth"
+          }
+        ],
+        "background": "assets/videos/trening.mp4"
+      }
+    ]
+}
+      `;
+    } else if (url === '/login') {
+      return `
+{
+    "type": "section",
+    "sections": [
+      {
+        "metaData": {
+          "id": "login",
+          "type": "section_se",
+          "background": "background_video"
+        },
+        "headerInfos": {
+          "title": "Lorem ipsum",
+          "subTitle": "Aenean tempor porta ante non aliquam",
+          "insideFirstColumn": true
+        },
+        "content": [
+          {
+            "column": "col-12 col-lg-6",
+            "text": "<p>Aliquam purusmassa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/register' class='btn btn_alt'>Register</a>",
             "component": null
           },
           {

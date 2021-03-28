@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppService} from '../../app.service';
+import {IAlert} from '../../models/IAlert';
 
 @Component({
   selector: 'auth-forms',
@@ -85,7 +86,16 @@ export class AuthFormsComponent implements OnInit {
   ];
   button = {
     disabled: true,
-    text: this.formType
+    text: 'Send'
+  };
+  alerts: IAlert[] = [];
+  infoAlert: IAlert = {
+    id: -1,
+    show: true,
+    header: 'Remember!',
+    text: 'By registering and using this website, you acknowledge that you understand and agree to the website regulations.',
+    level: 'warning',
+    displayHideButton: false
   };
 
   constructor(private service: AppService) {
@@ -98,6 +108,7 @@ export class AuthFormsComponent implements OnInit {
       });
     }
     this.formType = this.formType.replace('-', ' ');
+    this.button.text = this.formType;
   }
 
   post(): void {
@@ -109,19 +120,23 @@ export class AuthFormsComponent implements OnInit {
       this.prepareErrorFields(this.resources.errFields);
       this.disableButton();
     } else {
-      // todo
+      this.alerts.push({
+        id: this.alerts.length,
+        show: true,
+        header: 'Sorry! We have encountered a problem...',
+        text: 'Please try again later :\'(',
+        level: 'danger',
+        displayHideButton: true
+      });
     }
   }
 
-  private prepareErrorFields(errFields: any[]): void {
-    errFields.forEach((field) => {
-      this.inputsParams.filter((input) => {
-        return input.name === field.name;
-      })[0].err = {
-        isErr: true,
-        message: field.message
-      };
-    });
+  hideAlert(alertID: string): void {
+    this.alerts[+alertID].show = false;
+  }
+
+  isRegisterForm(): boolean {
+    return this.formType === 'register';
   }
 
   isPassword(index: number): boolean {
@@ -135,6 +150,23 @@ export class AuthFormsComponent implements OnInit {
   }
 
   liveValidation(index: number): void {
+    if (this.isRegisterForm()) {
+      this.registrationValidation(index);
+    }
+    this.disableButton();
+  }
+
+  setErrInfo(target: any, message: string | null): any {
+    target.err.isErr = message;
+    target.err.message = target.err.isErr ? message : '';
+    return target;
+  }
+
+  checkRepeatPasswordIsEqual(): boolean {
+    return this.formData.password && this.formData.repeatPassword && this.formData.password === this.formData.repeatPassword;
+  }
+
+  private registrationValidation(index: number): void {
     let input = this.inputsParams[index];
     const INPUT_VALUE = this.formData[input.name.toString()];
 
@@ -159,17 +191,17 @@ export class AuthFormsComponent implements OnInit {
       this.passwordStrength(input, input.err.isErr ? null : INPUT_VALUE);
     }
     this.inputsParams[index] = input;
-    this.disableButton();
   }
 
-  setErrInfo(target: any, message: string | null): any {
-    target.err.isErr = message;
-    target.err.message = target.err.isErr ? message : '';
-    return target;
-  }
-
-  checkRepeatPasswordIsEqual(): boolean {
-    return this.formData.password && this.formData.repeatPassword && this.formData.password === this.formData.repeatPassword;
+  private prepareErrorFields(errFields: any[]): void {
+    errFields.forEach((field) => {
+      this.inputsParams.filter((input) => {
+        return input.name === field.name;
+      })[0].err = {
+        isErr: true,
+        message: field.message
+      };
+    });
   }
 
   private isCorrectType(input: any): boolean {

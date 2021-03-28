@@ -9,6 +9,7 @@ const routes: Routes = [
     component: AppComponent,
     children: [
       { path: 'register', component: AuthFormsComponent },
+      { path: 'login', component: AuthFormsComponent },
     ]
   },
 ];
