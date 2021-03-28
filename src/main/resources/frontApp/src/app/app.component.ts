@@ -12,9 +12,9 @@ import { Location } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   navigation: Navigation | null = null;
+  socialMedia: ISocialMedia[] = [];
   pageContent: IPageContent[] = [];
   pageType = 'section';
-  socialMedia: ISocialMedia[] = [];
   url: string;
 
   constructor(private appService: AppService, private router: Router, private location: Location) {

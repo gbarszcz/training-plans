@@ -1,0 +1,93 @@
+@import "./../../../scss/bootstrap/functions";
+@import "./../../../scss/bootstrap/variables";
+
+#password-strength,
+.validation {
+  box-sizing: content-box;
+  height: .875rem;
+  display: inline-block;
+  vertical-align: middle;
+  font: {
+    weight: bold;
+  }
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+#password-strength {
+  width: 4.55rem;
+  display: none;
+  line-height: 100%;
+  text-align: center;
+  font: {
+    size: .7rem;
+  }
+  padding: .2rem $spacer / 2 .1rem;
+}
+
+.validation {
+  line-height: 1;
+  font: {
+    size: .875rem;
+  }
+  padding: .15rem 0;
+}
+
+.success {
+  .validation {
+    color: var(--bs-success);
+  }
+}
+
+.warning {
+  .validation {
+    color: var(--bs-warning);
+  }
+}
+
+.danger {
+  .validation {
+    color: var(--bs-danger);
+  }
+}
+
+.success,
+.warning,
+.danger {
+  .validation {
+    opacity: 1;
+  }
+}
+
+#password-strength {
+  &.success,
+  &.warning,
+  &.danger {
+    display: inline-block;
+    color: var(--bs-secondary);
+    opacity: 1;
+  }
+}
+
+
+#password-strength {
+  &.success {
+    background-color: var(--bs-success);
+  }
+}
+
+#password-strength {
+  &.warning {
+    background-color: var(--bs-warning);
+  }
+}
+
+#password-strength {
+  &.danger {
+    background-color: var(--bs-danger);
+  }
+}
+
+button {
+  text-transform: capitalize;
+}

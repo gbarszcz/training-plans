@@ -14,8 +14,18 @@
   transition: $transition-base;
 
   &:hover {
-    background: $thirtary;
+    background: $tertiary;
   }
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: $primary;
+  background: $tertiary;
+}
+
+::selection {
+  color: $primary;
+  background: $tertiary;
 }
 
 @keyframes slideIn {
@@ -49,7 +59,7 @@ footer {
     }
 
     &:hover {
-      color:  $thirtary;
+      color:  $tertiary;
     }
   }
 
@@ -66,7 +76,7 @@ footer {
       }
 
       &:hover {
-        color:  $thirtary;
+        color:  $tertiary;
       }
     }
 
@@ -116,10 +126,10 @@ footer {
         }
 
         &:hover {
-          color:  $thirtary !important;
+          color:  $tertiary !important;
 
           &:before {
-            background-color: $thirtary;
+            background-color: $tertiary;
           }
         }
       }
@@ -127,7 +137,7 @@ footer {
   }
 }
 
-
+#register,
 section,
 .image-hero_content {
   padding: 5.5rem 0 4.75rem;
@@ -226,8 +236,190 @@ input {
   }
 }
 
+.success {
+  color: var(--bs-success);
+
+  input {
+    border-color: var(--bs-success);
+    color: var(--bs-success);
+
+    &::placeholder {
+      color: var(--bs-success);
+    }
+
+    &:-ms-input-placeholder {
+      color: var(--bs-success);
+    }
+
+    &::-ms-input-placeholder {
+      color: var(--bs-success);
+    }
+
+    &:focus {
+      background-color: var(--bs-success);
+      color: $secondary;
+    }
+  }
+
+  .input-group-text {
+    background-color: var(--bs-success);
+    border-color: var(--bs-success);
+  }
+}
+
+.warning {
+  color: var(--bs-warning);
+
+  input {
+    border-color: var(--bs-warning);
+    color: var(--bs-warning);
+
+    &::placeholder {
+      color: var(--bs-warning);
+    }
+
+    &:-ms-input-placeholder {
+      color: var(--bs-warning);
+    }
+
+    &::-ms-input-placeholder {
+      color: var(--bs-warning);
+    }
+
+    &:focus {
+      background-color: var(--bs-warning);
+      color: $secondary;
+    }
+  }
+
+  .input-group-text {
+    background-color: var(--bs-warning);
+    border-color: var(--bs-warning);
+  }
+}
+
+.danger {
+  color: var(--bs-danger);
+
+  input {
+    border-color: var(--bs-danger);
+    color: var(--bs-danger);
+
+    &::placeholder {
+      color: var(--bs-danger);
+    }
+
+    &:-ms-input-placeholder {
+      color: var(--bs-danger);
+    }
+
+    &::-ms-input-placeholder {
+      color: var(--bs-danger);
+    }
+
+    &:focus {
+      background-color: var(--bs-danger);
+      color: $secondary;
+    }
+  }
+
+  .input-group-text {
+    background-color: var(--bs-danger);
+    border-color: var(--bs-danger);
+  }
+}
+
+label {
+  position: relative;
+
+  &.required,
+  .required {
+    position: relative;
+
+    &:after {
+      content: '*';
+      position: absolute;
+      right: .25rem;
+      font-weight: bold;
+    }
+  }
+
+  &.required {
+    &:after {
+      top: 1rem;
+    }
+  }
+
+  .required {
+    &:after {
+      top: -.1rem;
+    }
+  }
+
+  &.success {
+    &.required,
+    .required {
+      &:after {
+        color: var(--bs-success);
+      }
+    }
+  }
+
+  &.warning {
+    &.required,
+    .required {
+      &:after {
+        color: var(--bs-warning);
+      }
+    }
+  }
+
+  &.danger {
+    &.required,
+    .required {
+      &:after {
+        color: var(--bs-danger);
+      }
+    }
+  }
+
+  .input-group {
+    margin-top: -1px;
+  }
+
+  .input-group-text {
+    padding: 0;
+    font-size: 1.25rem;
+    transition: $transition-base;
+
+    & > * {
+      padding: .35rem .668rem;
+    }
+  }
+
+  .bi-eye-slash,
+  .bi-eye {
+    cursor: pointer;
+  }
+
+  .bi-info-circle {
+    padding: .25rem .8rem .45rem;
+    cursor: help;
+
+    &:before {
+      font-size: .975rem;
+    }
+  }
+}
+
+fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .section {
-  color: $thirtary;
+  color: $tertiary;
   background-color: $primary;
 
   b {
@@ -266,10 +458,10 @@ input {
 
   &.section_pr {
     background-color: $primary;
-    color: $thirtary;
+    color: $tertiary;
 
     h1 {
-      color: $thirtary;
+      color: $tertiary;
     }
 
     p {
@@ -333,12 +525,12 @@ input {
     }
 
     p {
-      color: $thirtary;
+      color: $tertiary;
     }
   }
 
   &.section_th {
-    background-color: $thirtary;
+    background-color: $tertiary;
     color: $primary;
 
     h1 {
@@ -380,7 +572,7 @@ input {
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translateX(0) translateY(-50%);
+    transform: translateX(0) translateY(-50%) scale(1.05);
     z-index: 0;
     opacity: .25;
 
@@ -393,5 +585,40 @@ input {
   .section {
     background-color: transparent;
     z-index: 1;
+  }
+}
+
+#register {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: $secondary;
+
+  video {
+    height: 100%;
+    width: auto;
+    opacity: .15;
+    transform: translateX(0) translateY(-50%) scale(1.25);
+  }
+
+  .row {
+    &>* {
+      align-self: center;
+    }
+  }
+}
+
+legend {
+  text-transform: capitalize;
+}
+
+.alert {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $secondary;
   }
 }

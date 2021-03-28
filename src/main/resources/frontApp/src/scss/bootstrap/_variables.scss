@@ -30,8 +30,8 @@ $colors: (
 $theme-colors: (
   "primary": $main,
   "secondary": $light,
-  "thirtary": $dark,
-  "info": $blue,
+  "tertiary": $dark,
+  "info": #92bdfe,
   "success": $green,
   "warning": $yellow,
   "danger": $red
@@ -41,7 +41,7 @@ $theme-colors: (
 // css var colors
 $primary: var(--bs-primary) !default;
 $secondary: var(--bs-secondary) !default;
-$thirtary: var(--bs-thirtary) !default;
+$tertiary: var(--bs-tertiary) !default;
 $danger: var(--bs-danger) !default;
 $warning: var(--bs-warning) !default;
 $success: var(--bs-success) !default;
@@ -81,7 +81,7 @@ $spacers: (
 // Settings for the `<body>` element.
 
 $body-bg: $secondary !default;
-$body-color: $thirtary !default;
+$body-color: $tertiary !default;
 $body-text-align: null !default;
 
 
@@ -235,7 +235,7 @@ $hr-height: $border-width !default;
 
 $legend-margin-bottom: .5rem !default;
 $legend-font-size: 1.5rem !default;
-$legend-font-weight: null !default;
+$legend-font-weight: bold !default;
 
 $mark-padding: .2em !default;
 
@@ -264,15 +264,15 @@ $table-th-font-weight: null !default;
 
 $table-striped-color: $table-color !default;
 $table-striped-bg-factor: .05 !default;
-$table-striped-bg: rgba($thirtary, $table-striped-bg-factor) !default;
+$table-striped-bg: rgba($tertiary, $table-striped-bg-factor) !default;
 
 $table-active-color: $table-color !default;
 $table-active-bg-factor: .1 !default;
-$table-active-bg: rgba($thirtary, $table-active-bg-factor) !default;
+$table-active-bg: rgba($tertiary, $table-active-bg-factor) !default;
 
 $table-hover-color: $table-color !default;
 $table-hover-bg-factor: .075 !default;
-$table-hover-bg: rgba($thirtary, $table-hover-bg-factor) !default;
+$table-hover-bg: rgba($tertiary, $table-hover-bg-factor) !default;
 
 $table-border-factor: .1 !default;
 $table-border-width: $border-width !default;
@@ -463,7 +463,7 @@ $form-select-color: $input-color !default;
 $form-select-bg: $input-bg !default;
 $form-select-bg-position: right $form-select-padding-x center !default;
 $form-select-bg-size: 16px 12px !default; // In pixels because image dimensions
-$form-select-indicator-color: $thirtary !default;
+$form-select-indicator-color: $tertiary !default;
 $form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>") !default;
 
 $form-select-feedback-icon-padding-end: $form-select-padding-x * 2.5 + $form-select-indicator-padding !default;
@@ -496,7 +496,7 @@ $form-range-thumb-height: $form-range-thumb-width !default;
 $form-range-thumb-bg: $primary !default;
 $form-range-thumb-border: 0 !default;
 $form-range-thumb-border-radius: 1rem !default;
-$form-range-thumb-box-shadow: 0 .1rem .25rem rgba($thirtary, .1) !default;
+$form-range-thumb-box-shadow: 0 .1rem .25rem rgba($tertiary, .1) !default;
 $form-range-thumb-transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
 $form-file-button-color: $input-color !default;
@@ -602,7 +602,7 @@ $navbar-dark-active-color: $primary !default;
 $navbar-dark-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 $navbar-dark-toggler-border-color: $navbar-dark-color !default;
 
-$navbar-light-color: $thirtary !default;
+$navbar-light-color: $tertiary !default;
 $navbar-light-hover-color: $primary !default;
 $navbar-light-active-color: $primary !default;
 $navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
@@ -692,11 +692,11 @@ $card-spacer-x: $spacer !default;
 $card-title-spacer-y: $spacer / 2 !default;
 $card-border-width: $border-width !default;
 $card-border-radius: $border-radius !default;
-$card-border-color: rgba($thirtary, .125) !default;
+$card-border-color: rgba($tertiary, .125) !default;
 $card-inner-border-radius: subtract($card-border-radius, $card-border-width) !default;
 $card-cap-padding-y: $card-spacer-y / 2 !default;
 $card-cap-padding-x: $card-spacer-x !default;
-$card-cap-bg: rgba($thirtary, .03) !default;
+$card-cap-bg: rgba($tertiary, .03) !default;
 $card-cap-color: null !default;
 $card-height: null !default;
 $card-color: null !default;
@@ -712,7 +712,7 @@ $accordion-padding-x: 1.25rem !default;
 $accordion-color: $body-color !default;
 $accordion-bg: transparent !default;
 $accordion-border-width: $border-width !default;
-$accordion-border-color: rgba($thirtary, .125) !default;
+$accordion-border-color: rgba($tertiary, .125) !default;
 $accordion-border-radius: $border-radius !default;
 
 $accordion-body-padding-y: $accordion-padding-y !default;
@@ -736,7 +736,7 @@ $accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/20
 $tooltip-font-size: $font-size-sm !default;
 $tooltip-max-width: 200px !default;
 $tooltip-color: $secondary !default;
-$tooltip-bg: $thirtary !default;
+$tooltip-bg: $tertiary !default;
 $tooltip-border-radius: $border-radius !default;
 $tooltip-opacity: .9 !default;
 $tooltip-padding-y: $spacer / 4 !default;
@@ -762,7 +762,7 @@ $popover-font-size: $font-size-sm !default;
 $popover-bg: $secondary !default;
 $popover-max-width: 276px !default;
 $popover-border-width: $border-width !default;
-$popover-border-color: rgba($thirtary, .2) !default;
+$popover-border-color: rgba($tertiary, .2) !default;
 
 $popover-header-padding-y: .5rem !default;
 $popover-header-padding-x: $spacer !default;
@@ -824,7 +824,7 @@ $modal-content-bg: $secondary !default;
 $modal-content-border-color: $primary !default;
 $modal-content-border-width: $border-width !default;
 
-$modal-backdrop-bg: $thirtary !default;
+$modal-backdrop-bg: $tertiary !default;
 $modal-backdrop-opacity: .5 !default;
 $modal-header-border-color: $border-color !default;
 $modal-footer-border-color: $modal-header-border-color !default;
@@ -879,7 +879,7 @@ $progress-bar-transition: width .6s ease !default;
 
 $list-group-color: null !default;
 $list-group-bg: $secondary !default;
-$list-group-border-color: rgba($thirtary, .125) !default;
+$list-group-border-color: rgba($tertiary, .125) !default;
 $list-group-border-width: $border-width !default;
 $list-group-border-radius: $border-radius !default;
 
@@ -962,8 +962,8 @@ $carousel-control-next-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w
 $carousel-transition-duration: .6s !default;
 $carousel-transition: transform $carousel-transition-duration ease-in-out !default; // Define transform transition first if using multiple transitions (e.g., `transform 2s ease, opacity .5s ease-out`)
 
-$carousel-dark-indicator-active-bg: $thirtary !default;
-$carousel-dark-caption-color: $thirtary !default;
+$carousel-dark-indicator-active-bg: $tertiary !default;
+$carousel-dark-caption-color: $tertiary !default;
 $carousel-dark-control-icon-filter: invert(1) grayscale(100) !default;
 
 
@@ -985,7 +985,7 @@ $btn-close-width: 1em !default;
 $btn-close-height: $btn-close-width !default;
 $btn-close-padding-x: .25em !default;
 $btn-close-padding-y: $btn-close-padding-x !default;
-$btn-close-color: $thirtary !default;
+$btn-close-color: $tertiary !default;
 $btn-close-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$btn-close-color}'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>") !default;
 $btn-close-opacity: .5 !default;
 $btn-close-hover-opacity: .75 !default;
@@ -1002,6 +1002,6 @@ $kbd-padding-y: .2rem !default;
 $kbd-padding-x: .4rem !default;
 $kbd-font-size: $code-font-size !default;
 $kbd-color: $secondary !default;
-$kbd-bg: $thirtary !default;
+$kbd-bg: $tertiary !default;
 
 $pre-color: null !default;

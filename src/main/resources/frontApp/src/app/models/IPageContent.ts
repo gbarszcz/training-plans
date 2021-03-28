@@ -1,7 +1,7 @@
 export enum SectionType {
   primary = 'section_pr',
   secondary = 'section_se',
-  thirtary = 'section_th'
+  tertiary = 'section_th'
 }
 
 export enum SectionBackground {

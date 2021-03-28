@@ -42,9 +42,9 @@
 // Generate contextual modifier classes for colorizing the alert.
 
 @each $state, $value in $theme-colors {
-  $alert-background: shift-color($value, $alert-bg-scale);
-  $alert-border: shift-color($value, $alert-border-scale);
-  $alert-color: shift-color($value, $alert-color-scale);
+  $alert-background: $value;
+  $alert-border: $value;
+  $alert-color: $secondary;
   .alert-#{$state} {
     @include alert-variant($alert-background, $alert-border, $alert-color);
   }
