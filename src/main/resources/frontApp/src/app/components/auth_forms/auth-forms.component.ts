@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppService} from '../../app.service';
+import {IAlert} from "../../models/IAlert";
 
 @Component({
   selector: 'auth-forms',
@@ -85,8 +86,9 @@ export class AuthFormsComponent implements OnInit {
   ];
   button = {
     disabled: true,
-    text: this.formType
+    text: 'Send'
   };
+  alerts: IAlert[] = [];
 
   constructor(private service: AppService) {
   }
@@ -98,6 +100,7 @@ export class AuthFormsComponent implements OnInit {
       });
     }
     this.formType = this.formType.replace('-', ' ');
+    this.button.text = this.formType;
   }
 
   post(): void {
@@ -109,19 +112,21 @@ export class AuthFormsComponent implements OnInit {
       this.prepareErrorFields(this.resources.errFields);
       this.disableButton();
     } else {
-      // todo
+      this.alerts.push({
+        id: this.alerts.length,
+        show: true,
+        header: 'Sorry! We have encountered a problem...',
+        text: 'Please try again later :\'('
+      });
     }
   }
 
-  private prepareErrorFields(errFields: any[]): void {
-    errFields.forEach((field) => {
-      this.inputsParams.filter((input) => {
-        return input.name === field.name;
-      })[0].err = {
-        isErr: true,
-        message: field.message
-      };
-    });
+  hideAlert(alertID: string): void {
+    this.alerts[+alertID].show = false;
+  }
+
+  isRegisterForm(): boolean {
+    return this.formType === 'register';
   }
 
   isPassword(index: number): boolean {
@@ -135,30 +140,32 @@ export class AuthFormsComponent implements OnInit {
   }
 
   liveValidation(index: number): void {
-    let input = this.inputsParams[index];
-    const INPUT_VALUE = this.formData[input.name.toString()];
+    if (this.isRegisterForm()) {
+      let input = this.inputsParams[index];
+      const INPUT_VALUE = this.formData[input.name.toString()];
 
-    if (input.required && INPUT_VALUE === 0) {
-      input = this.setErrInfo(input, input.required.error);
-    } else if (input.name === 'repeatPassword') {
-      input = this.setErrInfo(input, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
-    } else if (!this.isCorrectType(input)) {
-      input = this.setErrInfo(input, input.type.error);
-    } else if (INPUT_VALUE.length > input.max.value) {
-      input = this.setErrInfo(input, input.max.error);
-    } else if (input.name === 'password') {
-      const REPEAT_PASSWORD_INPUT = this.inputsParams.filter((inputParam) => {
-        return inputParam.name === 'repeatPassword';
-      })[0];
-      this.setErrInfo(input, null);
-      this.setErrInfo(REPEAT_PASSWORD_INPUT, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
-    } else {
-      this.setErrInfo(input, null);
+      if (input.required && INPUT_VALUE === 0) {
+        input = this.setErrInfo(input, input.required.error);
+      } else if (input.name === 'repeatPassword') {
+        input = this.setErrInfo(input, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
+      } else if (!this.isCorrectType(input)) {
+        input = this.setErrInfo(input, input.type.error);
+      } else if (INPUT_VALUE.length > input.max.value) {
+        input = this.setErrInfo(input, input.max.error);
+      } else if (input.name === 'password') {
+        const REPEAT_PASSWORD_INPUT = this.inputsParams.filter((inputParam) => {
+          return inputParam.name === 'repeatPassword';
+        })[0];
+        this.setErrInfo(input, null);
+        this.setErrInfo(REPEAT_PASSWORD_INPUT, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
+      } else {
+        this.setErrInfo(input, null);
+      }
+      if (input.name === 'password') {
+        this.passwordStrength(input, input.err.isErr ? null : INPUT_VALUE);
+      }
+      this.inputsParams[index] = input;
     }
-    if (input.name === 'password') {
-      this.passwordStrength(input, input.err.isErr ? null : INPUT_VALUE);
-    }
-    this.inputsParams[index] = input;
     this.disableButton();
   }
 
@@ -170,6 +177,17 @@ export class AuthFormsComponent implements OnInit {
 
   checkRepeatPasswordIsEqual(): boolean {
     return this.formData.password && this.formData.repeatPassword && this.formData.password === this.formData.repeatPassword;
+  }
+
+  private prepareErrorFields(errFields: any[]): void {
+    errFields.forEach((field) => {
+      this.inputsParams.filter((input) => {
+        return input.name === field.name;
+      })[0].err = {
+        isErr: true,
+        message: field.message
+      };
+    });
   }
 
   private isCorrectType(input: any): boolean {
