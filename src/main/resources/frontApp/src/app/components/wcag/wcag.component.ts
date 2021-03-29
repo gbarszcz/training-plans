@@ -33,6 +33,12 @@ export class WcagComponent {
     }
   ];
 
+  constructor() {
+    if (this.isSessionStorageWcagSet()) {
+      this.setWCAG();
+    }
+  }
+
   wcagChange(index: number): void {
     const ACTIVE_ITEM = this.wcagItems.filter(item => {
       return item.type === this.wcagItems[index].type && item.active;
@@ -66,26 +72,54 @@ export class WcagComponent {
     const STYLES = new Map([
       ['--font-size', variant === 'increase' ? '--font-size-inc' : '--font-size-inc2']
     ]);
-    this.setStyles(STYLES, reset);
+    this.setStyles(STYLES, reset, variant);
   }
 
-  private setStyles(styles: Map<string, string>, reset: boolean, variant: string | null = null): void {
+  private setStyles(styles: Map<string, string>, reset: boolean, variant: string): void {
     const HTML = document.getElementsByTagName('html')[0];
     if (reset) {
       styles.forEach((value, variable) => {
         document.documentElement.style.removeProperty(variable);
       });
-      if (variant) {
+      if (!this.isSessionStorageWcagSet('color') && !this.isSessionStorageWcagSet('font')) {
+        sessionStorage.removeItem('wcag');
+      }
+      if (styles.size > 1) {
+        sessionStorage.removeItem('color');
         HTML.className = '';
+      } else {
+        sessionStorage.removeItem('font');
       }
     } else {
       styles.forEach((value, variable) => {
         document.documentElement.style.setProperty(variable, `var(${value})`);
       });
-      if (variant) {
+      sessionStorage.setItem('wcag', 'true');
+      if (styles.size > 1) {
+        sessionStorage.setItem('color', variant || '');
         HTML.className = 'wcag';
         HTML.classList.add(variant);
+      } else {
+        sessionStorage.setItem('font', variant || '');
       }
     }
+  }
+
+  private isSessionStorageWcagSet(name: string = 'wcag'): boolean {
+    return sessionStorage.getItem(name) !== null;
+  }
+
+  private getFromSession(name: string): string | null {
+    return sessionStorage.getItem(name);
+  }
+
+  private setWCAG(): void {
+    ['color', 'font'].forEach(type => {
+      if (this.isSessionStorageWcagSet(type)) {
+        this.wcagChange(this.wcagItems.findIndex(item => {
+          return item.variant === this.getFromSession(type);
+        }));
+      }
+    });
   }
 }
