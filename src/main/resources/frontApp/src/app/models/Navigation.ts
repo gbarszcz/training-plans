@@ -7,14 +7,13 @@ interface INavigationItem {
   link: string;
   disabled: boolean;
   divider: boolean;
-  left: boolean;
 }
 
 export class Navigation {
   readonly brandItem: IStringItem;
-  readonly leftNavItems: INavigationItem[];
-  readonly rightNavItems: INavigationItem[];
+  readonly navItems: INavigationItem[];
   readonly secNavItems: INavigationItem[];
+  readonly account: INavigationItem;
   readonly currentRoute: string;
 
   /**
@@ -32,8 +31,12 @@ export class Navigation {
 
     this.currentRoute = currentRoute;
     this.brandItem = NAV.brandItem;
-    this.leftNavItems = NAV.mainNav.filter((navItem: INavigationItem) => navItem.left);
-    this.rightNavItems = NAV.mainNav.filter((navItem: INavigationItem) => !navItem.left);
+    this.account = NAV.mainNav.filter((navItem: INavigationItem) => {
+      return navItem.content.filter(item => {
+        return item.value === 'Account';
+      }).length > 0;
+    })[0];
+    this.navItems = NAV.mainNav.filter((navItem: INavigationItem) => navItem.link !== this.account.link);
     this.secNavItems = NAV.subNav;
   }
 
@@ -47,25 +50,26 @@ export class Navigation {
     return navItems;
   }
 
-  public createNavItemContent(item: IStringItem[]): string {
+  public createNavItemContent(items: IStringItem[] | undefined): string {
     let html = '';
 
-    item.forEach((content) => {
-      switch (content.type) {
-        case EStringItemType.i: {
-          html += '<i class="bi ' + content.value + '"></i> ';
-          break;
+    if (typeof items !== 'undefined') {
+      items.forEach((content) => {
+        switch (content.type) {
+          case EStringItemType.i: {
+            html += `<i class="bi ${content.value}"></i> `;
+            break;
+          }
+          case EStringItemType.img: {
+            html += `<img src="${content.value}"> `;
+            break;
+          }
+          default: {
+            html += `<span>${content.value}</span> `;
+          }
         }
-        case EStringItemType.img: {
-          html += '<img src="' + content.value + '">';
-          break;
-        }
-        default: {
-          html += content.value;
-        }
-      }
-    });
-
+      });
+    }
     return html;
   }
 }

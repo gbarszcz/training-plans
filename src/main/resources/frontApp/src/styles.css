@@ -5876,6 +5876,7 @@ a.dropdown-item,
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
+  font-weight: bold;
   color: var(--bs-tertiary);
   text-decoration: none;
   cursor: pointer;
@@ -5984,6 +5985,7 @@ a.dropdown-item:before,
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
+  font-weight: bold;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -6010,6 +6012,7 @@ a.navbar-brand {
 .nav_secondary {
   margin: -0.35rem 0 -0.25rem;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 @media (min-width: 992px) {
   .nav_secondary {
@@ -7961,6 +7964,18 @@ html {
   animation-name: slideIn;
 }
 
+nav .mr-auto i:before {
+  font-weight: bold !important;
+}
+
+#account-nav-item i {
+  line-height: 1;
+  font-size: calc(2.5rem - 2px);
+}
+#account-nav-item .nav-link > * {
+  vertical-align: middle;
+}
+
 footer .navbar-brand {
   margin: 0 auto;
   font-size: 72px;
@@ -8034,11 +8049,16 @@ footer .navbar-footer .active a:hover:before {
   background-color: var(--bs-tertiary);
 }
 
-#login,
-#register,
-section,
-.image-hero_content {
+section {
   padding: 5.5rem 0 4.75rem;
+}
+section:first-of-type {
+  padding: 10rem 0 4.75rem;
+}
+@media screen and (min-width: 768px) {
+  section:first-of-type {
+    padding: 5.5rem 0 4.75rem;
+  }
 }
 
 .image-hero_container {
@@ -8082,11 +8102,6 @@ section,
   position: relative;
   margin: 1.5rem 0;
   padding: 0.1rem 0 0.1rem 1.5rem;
-}
-@media (max-width: 850px) and (max-height: 410px) {
-  .image-hero_container .image-hero_content p {
-    display: none;
-  }
 }
 .image-hero_container .image-hero_content p:before {
   content: "";

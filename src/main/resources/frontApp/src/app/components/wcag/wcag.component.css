@@ -7,6 +7,7 @@
   height: 100%;
   display: inline-flex;
   margin: 0 0.25rem;
+  font-weight: bold;
   text-align: center;
   color: inherit;
   cursor: pointer;
@@ -33,21 +34,28 @@
 #wcag a#wcag-color-light:visited {
   color: var(--bs-dark);
 }
+#wcag a#wcag-font-increase, #wcag a#wcag-font-increase2, #wcag a#wcag-color-dark, #wcag a#wcag-color-light {
+  align-items: center;
+  line-height: 1;
+}
+#wcag a#wcag-font-increase span, #wcag a#wcag-font-increase2 span, #wcag a#wcag-color-dark span, #wcag a#wcag-color-light span {
+  width: 100%;
+}
+#wcag a#wcag-font-increase, #wcag a#wcag-font-increase2 {
+  margin: 0;
+  padding: 0 0.25rem;
+}
 #wcag a#wcag-font-increase.active, #wcag a#wcag-font-increase2.active {
   opacity: 0.25;
 }
 #wcag a#wcag-color-dark, #wcag a#wcag-color-light {
+  padding: 0 0.5rem;
   border: 2px solid;
 }
 #wcag a#wcag-color-dark.active, #wcag a#wcag-color-light.active {
   background-color: #fbfdff;
   border-color: var(--bs-main);
   color: var(--bs-main) !important;
-}
-#wcag a#wcag-font-increase, #wcag a#wcag-font-increase2, #wcag a#wcag-color-dark, #wcag a#wcag-color-light {
-  padding: 0 0.5rem;
-  align-items: center;
-  line-height: 1;
 }
 
 /*# sourceMappingURL=wcag.component.css.map */

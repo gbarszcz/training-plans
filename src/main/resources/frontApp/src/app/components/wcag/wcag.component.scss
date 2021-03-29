@@ -10,6 +10,7 @@
     height: 100%;
     display: inline-flex;
     margin: 0 $nav-link-padding-x / 4;
+    font-weight: bold;
     text-align: center;
     color: inherit;
     cursor: pointer;
@@ -44,7 +45,22 @@
       }
 
       &font-increase,
+      &font-increase2,
+      &color-dark,
+      &color-light {
+        align-items: center;
+        line-height: 1;
+
+        span {
+          width: 100%;
+        }
+      }
+
+      &font-increase,
       &font-increase2 {
+        margin: 0;
+        padding: 0 $nav-link-padding-x / 4;
+
         &.active {
           opacity: .25;
         }
@@ -52,6 +68,7 @@
 
       &color-dark,
       &color-light {
+        padding: 0 $nav-link-padding-x / 2;
         border: $border-width $border-style;
 
         &.active {
@@ -59,15 +76,6 @@
           border-color: var(--bs-main);
           color: var(--bs-main) !important;
         }
-      }
-
-      &font-increase,
-      &font-increase2,
-      &color-dark,
-      &color-light {
-        padding: 0 $nav-link-padding-x / 2;
-        align-items: center;
-        line-height: 1;
       }
     }
   }
