@@ -1,31 +1,5 @@
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: $secondary;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: $primary;
-  transition: $transition-base;
-
-  &:hover {
-    background: $tertiary;
-  }
-}
-
-::-moz-selection { /* Code for Firefox */
-  color: $primary;
-  background: $tertiary;
-}
-
-::selection {
-  color: $primary;
-  background: $tertiary;
+html {
+  font-size: var(--font-size);
 }
 
 @keyframes slideIn {
@@ -59,7 +33,7 @@ footer {
     }
 
     &:hover {
-      color:  $tertiary;
+      color: $tertiary;
     }
   }
 
@@ -76,7 +50,7 @@ footer {
       }
 
       &:hover {
-        color:  $tertiary;
+        color: $tertiary;
       }
     }
 
@@ -126,7 +100,7 @@ footer {
         }
 
         &:hover {
-          color:  $tertiary !important;
+          color: $tertiary !important;
 
           &:before {
             background-color: $tertiary;
@@ -146,9 +120,11 @@ section,
 
 .image-hero_container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
   padding-top: 0;
   padding-bottom: 0;
+  align-items: center;
   overflow: hidden;
   position: relative;
 
@@ -174,10 +150,8 @@ section,
   .image-hero_content {
     width: auto;
     height: 100%;
-    display: flex;
     padding-left: var(--#{$variable-prefix}gutter-x, #{$container-padding-x});
     padding-right: var(--#{$variable-prefix}gutter-x, #{$container-padding-x});
-    align-items: center;
     position: relative;
 
     p {
@@ -470,25 +444,25 @@ fieldset {
     }
 
     .btn {
-      border-color: $light;
-      color: $light !important;
+      border-color: $secondary;
+      color: $secondary !important;
 
       &:hover,
       &:focus {
-        background-color: $light;
+        background-color: $secondary;
         color: $primary !important;
         outline: none;
         box-shadow: none;
       }
 
       &.btn_alt {
-        background-color: $light;
+        background-color: $secondary;
         color: $primary !important;
 
         &:hover,
         &:focus {
           background-color: transparent;
-          color: $light !important;
+          color: $secondary !important;
         }
       }
     }
@@ -604,7 +578,7 @@ fieldset {
   }
 
   .row {
-    &>* {
+    & > * {
       align-self: center;
     }
   }
@@ -623,12 +597,113 @@ legend {
 }
 
 .alert {
+  color: $dark;
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    color: $secondary;
+    color: $dark;
+  }
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: $dark;
+  background: $main;
+}
+
+::selection {
+  color: $dark;
+  background: $main;
+}
+
+html:not(.wcag) {
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: $secondary;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $primary;
+    transition: $transition-base;
+
+    &:hover {
+      background: $tertiary;
+    }
+  }
+}
+
+.wcag {
+  a.dropdown-item, .nav-link {
+    color: $primary;
+  }
+
+  .image-hero_container {
+    color: $primary;
+
+    .image-hero {
+      opacity: 0;
+    }
+  }
+
+  #login.background_video,
+  #register.background_video,
+  .background_video {
+    color: $primary;
+
+    video {
+      opacity: 0;
+    }
+  }
+
+  .section {
+    &.section_pr,
+    &.section_th {
+      color: $secondary;
+
+      h1 {
+        color: $secondary;
+      }
+    }
+
+    &.section_th {
+      .btn {
+        border-color: $secondary;
+        color: $secondary !important;
+      }
+    }
+  }
+
+  &.light {
+    .section {
+      &.section_se,
+      &.section_th {
+        color: $primary;
+
+        h1,
+        p {
+          color: $primary;
+        }
+      }
+
+      &.section_th {
+        .btn {
+          border-color: $primary;
+          color: $primary !important;
+
+          &:hover {
+            color: $secondary !important;
+          }
+        }
+      }
+    }
   }
 }

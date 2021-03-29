@@ -1,0 +1,10 @@
+<div id="wcag">
+  <a *ngFor="let item of wcagItems; let i = index"
+     (click)="wcagChange(i)"
+     [id]="'wcag-' + item.type + '-' + item.variant"
+     class="{{item.active ? 'active' : ''}}">
+    <div>
+      {{item.text}}
+    </div>
+  </a>
+</div>

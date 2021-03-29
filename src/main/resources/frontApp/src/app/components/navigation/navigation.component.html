@@ -36,6 +36,9 @@
         </li>
       </ul>
       <ul *ngIf="position == 'fixed'" class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <app-wcag></app-wcag>
+        </li>
         <li *ngFor="let navItem of navigation?.rightNavItems"
             class="nav-item{{navItem.subItems.length > 0 ? ' dropdown' : ''}}">
           <a *ngIf="navItem.subItems.length == 0" class="nav-link{{navItem.disabled ? ' disabled' : ''}}"

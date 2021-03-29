@@ -1,0 +1,74 @@
+@import "./../../../scss/bootstrap/functions";
+@import "./../../../scss/bootstrap/variables";
+
+#wcag {
+  height: 100%;
+
+  a {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    height: 100%;
+    display: inline-flex;
+    margin: 0 $nav-link-padding-x / 4;
+    text-align: center;
+    color: inherit;
+    cursor: pointer;
+
+    &:visited {
+      color: inherit;
+    }
+
+    &:before {
+      content: unset;
+    }
+
+    &#wcag- {
+      &color-dark {
+        border-color: var(--bs-yellow);
+        background-color: var(--bs-dark);
+        color: var(--bs-yellow);
+
+        &:visited {
+          color: var(--bs-yellow);
+        }
+      }
+
+      &color-light {
+        border-color: var(--bs-dark);
+        background-color: var(--bs-yellow);
+        color: var(--bs-dark);
+
+        &:visited {
+          color: var(--bs-dark);
+        }
+      }
+
+      &font-increase,
+      &font-increase2 {
+        &.active {
+          opacity: .25;
+        }
+      }
+
+      &color-dark,
+      &color-light {
+        border: $border-width $border-style;
+
+        &.active {
+          background-color: $light;
+          border-color: var(--bs-main);
+          color: var(--bs-main) !important;
+        }
+      }
+
+      &font-increase,
+      &font-increase2,
+      &color-dark,
+      &color-light {
+        padding: 0 $nav-link-padding-x / 2;
+        align-items: center;
+        line-height: 1;
+      }
+    }
+  }
+}
