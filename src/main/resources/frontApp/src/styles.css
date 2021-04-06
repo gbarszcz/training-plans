@@ -2621,8 +2621,8 @@
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
   --font-size: 16px;
-  --font-size-inc: 20px;
-  --font-size-inc2: 24px;
+  --font-size-xl: 20px;
+  --font-size-lg: 24px;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }

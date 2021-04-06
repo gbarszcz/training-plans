@@ -34,18 +34,18 @@
 #wcag a#wcag-color-light:visited {
   color: var(--bs-dark);
 }
-#wcag a#wcag-font-increase, #wcag a#wcag-font-increase2, #wcag a#wcag-color-dark, #wcag a#wcag-color-light {
+#wcag a#wcag-font-increase-xl, #wcag a#wcag-font-increase-lg, #wcag a#wcag-color-dark, #wcag a#wcag-color-light {
   align-items: center;
   line-height: 1;
 }
-#wcag a#wcag-font-increase span, #wcag a#wcag-font-increase2 span, #wcag a#wcag-color-dark span, #wcag a#wcag-color-light span {
+#wcag a#wcag-font-increase-xl span, #wcag a#wcag-font-increase-lg span, #wcag a#wcag-color-dark span, #wcag a#wcag-color-light span {
   width: 100%;
 }
-#wcag a#wcag-font-increase, #wcag a#wcag-font-increase2 {
+#wcag a#wcag-font-increase-xl, #wcag a#wcag-font-increase-lg {
   margin: 0;
   padding: 0 0.25rem;
 }
-#wcag a#wcag-font-increase.active, #wcag a#wcag-font-increase2.active {
+#wcag a#wcag-font-increase-xl.active, #wcag a#wcag-font-increase-lg.active {
   opacity: 0.25;
 }
 #wcag a#wcag-color-dark, #wcag a#wcag-color-light {

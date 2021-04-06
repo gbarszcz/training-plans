@@ -44,8 +44,8 @@
         }
       }
 
-      &font-increase,
-      &font-increase2,
+      &font-increase-xl,
+      &font-increase-lg,
       &color-dark,
       &color-light {
         align-items: center;
@@ -56,8 +56,8 @@
         }
       }
 
-      &font-increase,
-      &font-increase2 {
+      &font-increase-xl,
+      &font-increase-lg {
         margin: 0;
         padding: 0 $nav-link-padding-x / 4;
 

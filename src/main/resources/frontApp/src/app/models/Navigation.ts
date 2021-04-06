@@ -13,7 +13,7 @@ export class Navigation {
   readonly brandItem: IStringItem;
   readonly navItems: INavigationItem[];
   readonly secNavItems: INavigationItem[];
-  readonly account: INavigationItem;
+  readonly account: INavigationItem | null;
   readonly currentRoute: string;
 
   /**
@@ -31,13 +31,26 @@ export class Navigation {
 
     this.currentRoute = currentRoute;
     this.brandItem = NAV.brandItem;
-    this.account = NAV.mainNav.filter((navItem: INavigationItem) => {
+    this.account = this.getAccountItem(NAV);
+    this.navItems = this.getMainNavItem(NAV);
+    this.secNavItems = NAV.subNav;
+  }
+
+  private getAccountItem(nav: any): INavigationItem | null {
+    return nav.mainNav.filter((navItem: INavigationItem) => {
       return navItem.content.filter(item => {
         return item.value === 'Account';
-      }).length > 0;
-    })[0];
-    this.navItems = NAV.mainNav.filter((navItem: INavigationItem) => navItem.link !== this.account.link);
-    this.secNavItems = NAV.subNav;
+      }).length;
+    })[0] || null;
+  }
+
+  private getMainNavItem(nav: any): INavigationItem[] {
+    return nav.mainNav.filter((navItem: INavigationItem) => {
+      if (this.account) {
+        return navItem.link !== this.account.link;
+      }
+      return true;
+    });
   }
 
   private updateIfItemDisabled(navItems: INavigationItem[]): INavigationItem[] {
