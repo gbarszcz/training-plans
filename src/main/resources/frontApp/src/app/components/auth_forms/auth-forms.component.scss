@@ -64,7 +64,7 @@
   &.warning,
   &.danger {
     display: inline-block;
-    color: var(--bs-secondary);
+    color: $dark;
     opacity: 1;
   }
 }

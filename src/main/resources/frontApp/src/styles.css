@@ -6,6 +6,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/blob/main/LICENSE)
  */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css");
 .m-0 {
   margin: 0 !important;
 }
@@ -2619,6 +2620,9 @@
   --bs-success: #198754;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
+  --font-size: 16px;
+  --font-size-xl: 20px;
+  --font-size-lg: 24px;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
@@ -5872,6 +5876,7 @@ a.dropdown-item,
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
+  font-weight: bold;
   color: var(--bs-tertiary);
   text-decoration: none;
   cursor: pointer;
@@ -5980,6 +5985,7 @@ a.dropdown-item:before,
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
+  font-weight: bold;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -6006,6 +6012,7 @@ a.navbar-brand {
 .nav_secondary {
   margin: -0.35rem 0 -0.25rem;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 @media (min-width: 992px) {
   .nav_secondary {
@@ -6648,18 +6655,12 @@ a.navbar-brand {
   background-image: var(--bs-gradient);
   border-color: #0073ff;
 }
-.alert-primary .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
-}
 
 .alert-secondary {
   color: var(--bs-secondary);
   background-color: #fbfdff;
   background-image: var(--bs-gradient);
   border-color: #fbfdff;
-}
-.alert-secondary .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
 }
 
 .alert-tertiary {
@@ -6668,18 +6669,12 @@ a.navbar-brand {
   background-image: var(--bs-gradient);
   border-color: #202428;
 }
-.alert-tertiary .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
-}
 
 .alert-info {
   color: var(--bs-secondary);
   background-color: #92bdfe;
   background-image: var(--bs-gradient);
   border-color: #92bdfe;
-}
-.alert-info .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
 }
 
 .alert-success {
@@ -6688,9 +6683,6 @@ a.navbar-brand {
   background-image: var(--bs-gradient);
   border-color: #198754;
 }
-.alert-success .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
-}
 
 .alert-warning {
   color: var(--bs-secondary);
@@ -6698,18 +6690,12 @@ a.navbar-brand {
   background-image: var(--bs-gradient);
   border-color: #ffc107;
 }
-.alert-warning .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
-}
 
 .alert-danger {
   color: var(--bs-secondary);
   background-color: #dc3545;
   background-image: var(--bs-gradient);
   border-color: #dc3545;
-}
-.alert-danger .alert-link {
-  color: shade-color(var(--bs-secondary), 20%);
 }
 
 @keyframes progress-bar-stripes {
@@ -7955,34 +7941,8 @@ a.navbar-brand {
 /*! --------------------------- End: Bootstrap ---------------------------
 
 *** ------------------------------ MyStyles ------------------------------ */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: var(--bs-secondary);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--bs-primary);
-  transition: all 0.3s ease-in-out;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--bs-tertiary);
-}
-
-::-moz-selection {
-  /* Code for Firefox */
-  color: var(--bs-primary);
-  background: var(--bs-tertiary);
-}
-
-::selection {
-  color: var(--bs-primary);
-  background: var(--bs-tertiary);
+html {
+  font-size: var(--font-size);
 }
 
 @keyframes slideIn {
@@ -8002,6 +7962,18 @@ a.navbar-brand {
   -webkit-animation-fill-mode: both;
   -webkit-animation-name: slideIn;
   animation-name: slideIn;
+}
+
+nav .mr-auto i:before {
+  font-weight: bold !important;
+}
+
+#account-nav-item i {
+  line-height: 1;
+  font-size: calc(2.5rem - 2px);
+}
+#account-nav-item .nav-link > * {
+  vertical-align: middle;
 }
 
 footer .navbar-brand {
@@ -8077,18 +8049,25 @@ footer .navbar-footer .active a:hover:before {
   background-color: var(--bs-tertiary);
 }
 
-#login,
-#register,
-section,
-.image-hero_content {
+section {
   padding: 5.5rem 0 4.75rem;
+}
+section:first-of-type {
+  padding: 10rem 0 4.75rem;
+}
+@media screen and (min-width: 768px) {
+  section:first-of-type {
+    padding: 5.5rem 0 4.75rem;
+  }
 }
 
 .image-hero_container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
   padding-top: 0;
   padding-bottom: 0;
+  align-items: center;
   overflow: hidden;
   position: relative;
 }
@@ -8115,21 +8094,14 @@ section,
 .image-hero_container .image-hero_content {
   width: auto;
   height: 100%;
-  display: flex;
   padding-left: var(--bs-gutter-x, 0.75rem);
   padding-right: var(--bs-gutter-x, 0.75rem);
-  align-items: center;
   position: relative;
 }
 .image-hero_container .image-hero_content p {
   position: relative;
   margin: 1.5rem 0;
   padding: 0.1rem 0 0.1rem 1.5rem;
-}
-@media (max-width: 850px) and (max-height: 410px) {
-  .image-hero_container .image-hero_content p {
-    display: none;
-  }
 }
 .image-hero_container .image-hero_content p:before {
   content: "";
@@ -8358,22 +8330,22 @@ fieldset {
   color: var(--bs-secondary);
 }
 .section.section_pr .btn {
-  border-color: #fbfdff;
-  color: #fbfdff !important;
+  border-color: var(--bs-secondary);
+  color: var(--bs-secondary) !important;
 }
 .section.section_pr .btn:hover, .section.section_pr .btn:focus {
-  background-color: #fbfdff;
+  background-color: var(--bs-secondary);
   color: var(--bs-primary) !important;
   outline: none;
   box-shadow: none;
 }
 .section.section_pr .btn.btn_alt {
-  background-color: #fbfdff;
+  background-color: var(--bs-secondary);
   color: var(--bs-primary) !important;
 }
 .section.section_pr .btn.btn_alt:hover, .section.section_pr .btn.btn_alt:focus {
   background-color: transparent;
-  color: #fbfdff !important;
+  color: var(--bs-secondary) !important;
 }
 .section.section_pr input {
   border-color: var(--bs-secondary);
@@ -8485,6 +8457,9 @@ legend {
   margin: 0 calc(var(--bs-gutter-x) / -2);
 }
 
+.alert {
+  color: #202428;
+}
 .alert h1, .alert .h1,
 .alert h2,
 .alert .h2,
@@ -8496,7 +8471,82 @@ legend {
 .alert .h5,
 .alert h6,
 .alert .h6 {
+  color: #202428;
+}
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: #202428;
+  background: #0073ff;
+}
+
+::selection {
+  color: #202428;
+  background: #0073ff;
+}
+
+html:not(.wcag) {
+  /* Track */
+  /* Handle */
+}
+html:not(.wcag)::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+html:not(.wcag)::-webkit-scrollbar-track {
+  background: var(--bs-secondary);
+}
+html:not(.wcag)::-webkit-scrollbar-thumb {
+  background: var(--bs-primary);
+  transition: all 0.3s ease-in-out;
+}
+html:not(.wcag)::-webkit-scrollbar-thumb:hover {
+  background: var(--bs-tertiary);
+}
+
+.wcag a.dropdown-item, .wcag .nav-link {
+  color: var(--bs-primary);
+}
+.wcag .image-hero_container {
+  color: var(--bs-primary);
+}
+.wcag .image-hero_container .image-hero {
+  opacity: 0;
+}
+.wcag #login.background_video,
+.wcag #register.background_video,
+.wcag .background_video {
+  color: var(--bs-primary);
+}
+.wcag #login.background_video video,
+.wcag #register.background_video video,
+.wcag .background_video video {
+  opacity: 0;
+}
+.wcag .section.section_pr, .wcag .section.section_th {
   color: var(--bs-secondary);
+}
+.wcag .section.section_pr h1, .wcag .section.section_pr .h1, .wcag .section.section_th h1, .wcag .section.section_th .h1 {
+  color: var(--bs-secondary);
+}
+.wcag .section.section_th .btn {
+  border-color: var(--bs-secondary);
+  color: var(--bs-secondary) !important;
+}
+.wcag.light .section.section_se, .wcag.light .section.section_th {
+  color: var(--bs-primary);
+}
+.wcag.light .section.section_se h1, .wcag.light .section.section_se .h1,
+.wcag.light .section.section_se p, .wcag.light .section.section_th h1, .wcag.light .section.section_th .h1,
+.wcag.light .section.section_th p {
+  color: var(--bs-primary);
+}
+.wcag.light .section.section_th .btn {
+  border-color: var(--bs-primary);
+  color: var(--bs-primary) !important;
+}
+.wcag.light .section.section_th .btn:hover {
+  color: var(--bs-secondary) !important;
 }
 
 /*! --------------------------- End: MyStyles ---------------------------- */

@@ -44,8 +44,7 @@ export class AppService {
       "subItems": [],
       "link": "/",
       "disabled": false,
-      "divider": false,
-      "left": true
+      "divider": false
     },
     {
       "content": [
@@ -108,8 +107,7 @@ export class AppService {
       ],
       "link": "",
       "disabled": false,
-      "divider": false,
-      "left": false
+      "divider": false
     }
   ],
   "subNav": [
@@ -255,8 +253,7 @@ export class AppService {
       ],
       "link": "",
       "disabled": false,
-      "divider": false,
-      "left": false
+      "divider": false
     }
   ],
   "subNav": [
@@ -376,8 +373,7 @@ export class AppService {
       ],
       "link": "",
       "disabled": false,
-      "divider": false,
-      "left": false
+      "divider": false
     }
   ],
   "subNav": []

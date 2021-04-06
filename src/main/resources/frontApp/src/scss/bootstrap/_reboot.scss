@@ -44,7 +44,7 @@
 body {
   margin: 0; // 1
   font-family: $font-family-base;
-  @include font-size($font-size-base);
+  font-size: $font-size-base;
   font-weight: $font-weight-normal;
   line-height: $line-height-normal;
   color: $body-color;

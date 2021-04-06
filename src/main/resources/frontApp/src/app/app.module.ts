@@ -12,6 +12,7 @@ import { SectionPageComponent } from './components/section_page/section-page.com
 import { SearchComponent } from './components/search/search.component';
 import { AuthFormsComponent } from './components/auth_forms/auth-forms.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { WcagComponent } from './components/wcag/wcag.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AlertComponent } from './components/alert/alert.component';
     SectionPageComponent,
     SearchComponent,
     AuthFormsComponent,
-    AlertComponent
+    AlertComponent,
+    WcagComponent
   ],
   imports: [
     BrowserModule,

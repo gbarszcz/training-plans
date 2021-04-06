@@ -44,7 +44,7 @@
 
 #password-strength.success, #password-strength.warning, #password-strength.danger {
   display: inline-block;
-  color: var(--bs-secondary);
+  color: #202428;
   opacity: 1;
 }
 

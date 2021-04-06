@@ -7,14 +7,13 @@ interface INavigationItem {
   link: string;
   disabled: boolean;
   divider: boolean;
-  left: boolean;
 }
 
 export class Navigation {
   readonly brandItem: IStringItem;
-  readonly leftNavItems: INavigationItem[];
-  readonly rightNavItems: INavigationItem[];
+  readonly navItems: INavigationItem[];
   readonly secNavItems: INavigationItem[];
+  readonly account: INavigationItem | null;
   readonly currentRoute: string;
 
   /**
@@ -32,9 +31,26 @@ export class Navigation {
 
     this.currentRoute = currentRoute;
     this.brandItem = NAV.brandItem;
-    this.leftNavItems = NAV.mainNav.filter((navItem: INavigationItem) => navItem.left);
-    this.rightNavItems = NAV.mainNav.filter((navItem: INavigationItem) => !navItem.left);
+    this.account = this.getAccountItem(NAV);
+    this.navItems = this.getMainNavItem(NAV);
     this.secNavItems = NAV.subNav;
+  }
+
+  private getAccountItem(nav: any): INavigationItem | null {
+    return nav.mainNav.filter((navItem: INavigationItem) => {
+      return navItem.content.filter(item => {
+        return item.value === 'Account';
+      }).length;
+    })[0] || null;
+  }
+
+  private getMainNavItem(nav: any): INavigationItem[] {
+    return nav.mainNav.filter((navItem: INavigationItem) => {
+      if (this.account) {
+        return navItem.link !== this.account.link;
+      }
+      return true;
+    });
   }
 
   private updateIfItemDisabled(navItems: INavigationItem[]): INavigationItem[] {
@@ -47,25 +63,26 @@ export class Navigation {
     return navItems;
   }
 
-  public createNavItemContent(item: IStringItem[]): string {
+  public createNavItemContent(items: IStringItem[] | undefined): string {
     let html = '';
 
-    item.forEach((content) => {
-      switch (content.type) {
-        case EStringItemType.i: {
-          html += '<i class="bi ' + content.value + '"></i> ';
-          break;
+    if (typeof items !== 'undefined') {
+      items.forEach((content) => {
+        switch (content.type) {
+          case EStringItemType.i: {
+            html += `<i class="bi ${content.value}"></i> `;
+            break;
+          }
+          case EStringItemType.img: {
+            html += `<img src="${content.value}"> `;
+            break;
+          }
+          default: {
+            html += `<span>${content.value}</span> `;
+          }
         }
-        case EStringItemType.img: {
-          html += '<img src="' + content.value + '">';
-          break;
-        }
-        default: {
-          html += content.value;
-        }
-      }
-    });
-
+      });
+    }
     return html;
   }
 }
