@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import com.tcGroup.trainingCenter.user.entity.AccountData;
+import com.tcGroup.trainingCenter.user.enumeration.AccountStatus;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,22 +38,22 @@ public class UserContext implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.account.getAccountStatus() == AccountData.ACCOUNT_STATUSES.ACTIVE;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.account.getAccountStatus() == AccountData.ACCOUNT_STATUSES.ACTIVE;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.account.getAccountStatus() == AccountData.ACCOUNT_STATUSES.ACTIVE;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     @Override
     public boolean isEnabled() {
-        return this.account.getAccountStatus() == AccountData.ACCOUNT_STATUSES.ACTIVE;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     public Long getUserId() {

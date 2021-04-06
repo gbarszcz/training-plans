@@ -1,5 +1,6 @@
 package com.tcGroup.trainingCenter.user.entity;
 
+import com.tcGroup.trainingCenter.user.enumeration.RoleName;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
 
@@ -18,18 +19,14 @@ import java.util.Set;
 @Data
 public class RoleData extends AuditData {
 
-        public interface Roles {
-                public static final String ADMIN = "ADMIN";
-                public static final String USER = "USER";
-        }
-
         @Id
         @Column(name = "ROL_ID")
         @GeneratedValue
         protected long id;
 
         @Column(name = "ROL_NAME")
-        private String roleName;
+        @Enumerated(EnumType.STRING)
+        private RoleName roleName;
 
         @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "roles")
         Set<AccountData> accounts;

@@ -1,6 +1,7 @@
 package com.tcGroup.trainingCenter.user.dao;
 
 import com.tcGroup.trainingCenter.user.entity.AccountData;
+import com.tcGroup.trainingCenter.user.enumeration.AccountStatus;
 import com.tcGroup.trainingCenter.user.repository.AccountRepository;
 import com.tcGroup.trainingCenter.utility.context.UserContext;
 import com.tcGroup.trainingCenter.utility.logic.AbstractDAO;
@@ -22,8 +23,8 @@ public class AccountDAO extends AbstractDAO<AccountData, Long> {
     @Override
     public void removeItem(UserContext ctx, AccountData accountData) {
         super.removeItem(ctx, accountData);
-        AccountData foundAccount = getRepository().findByAccountEmail(accountData.getAccountEmail());
-        foundAccount.setAccountStatus(AccountData.ACCOUNT_STATUSES.INACTIVE);
+        AccountData foundAccount = this.findAccountByEmail(accountData.getAccountEmail());
+        foundAccount.setAccountStatus(AccountStatus.INACTIVE);
         getRepository().save(foundAccount);
     }
 

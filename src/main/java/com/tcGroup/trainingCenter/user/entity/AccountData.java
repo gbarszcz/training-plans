@@ -1,5 +1,7 @@
 package com.tcGroup.trainingCenter.user.entity;
 
+import com.tcGroup.trainingCenter.user.enumeration.AccountStatus;
+import com.tcGroup.trainingCenter.user.enumeration.converter.AccountStatusConverter;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
 
@@ -37,7 +39,8 @@ public class AccountData extends AuditData {
         private String accountPassword;
 
         @Column(name = "ACC_STATUS")
-        private String accountStatus;
+        @Convert(converter = AccountStatusConverter.class)
+        private AccountStatus accountStatus;
 
         @ManyToMany(cascade = CascadeType.PERSIST)
         @JoinTable(name = "ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "ACC_ID"), inverseJoinColumns = @JoinColumn(name = "ROL_ID"))

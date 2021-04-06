@@ -3,8 +3,9 @@ package com.tcGroup.trainingCenter.user.controller;
 import java.util.regex.Pattern;
 
 import com.tcGroup.trainingCenter.user.entity.AccountData;
-import com.tcGroup.trainingCenter.user.registration.RegistrationRequest;
+import com.tcGroup.trainingCenter.user.request.RegistrationRequest;
 import com.tcGroup.trainingCenter.user.service.AccountManagementService;
+import com.tcGroup.trainingCenter.user.service.RegistrationService;
 import com.tcGroup.trainingCenter.utility.AppParams;
 import com.tcGroup.trainingCenter.utility.logic.AbstractController;
 
@@ -16,15 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-public class AccountManagementController extends AbstractController {
+public class RegistrationController extends AbstractController {
 
     @Autowired
     public AccountManagementService accountService;
 
+    @Autowired
+    public RegistrationService registrationService;
+
     @PostMapping("/register")
     public Long register(@RequestBody RegistrationRequest registrationRequest) {
         Pattern patternEmail = Pattern.compile(AppParams.EMAIL_REGEX);
-        Pattern patternPassword = Pattern.compile(AppParams.PASSWORD_POLICY);
+        Pattern patternPassword = Pattern.compile(AppParams.PASSWORD_REGEX);
 
         String email = registrationRequest.getEmail();
         String password = registrationRequest.getPassword();
@@ -43,7 +47,7 @@ public class AccountManagementController extends AbstractController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password invalid");
         }
 
-        Long accountID = accountService.register(registrationRequest);
+        Long accountID = registrationService.register(registrationRequest);
 
         return accountID;
     }
