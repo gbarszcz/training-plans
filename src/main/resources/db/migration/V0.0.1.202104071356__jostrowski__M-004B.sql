@@ -2,11 +2,11 @@ CREATE TABLE `TRAINING_CENTER`.`TAGS`
 (
     `TAG_ID` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Tag ID',
     `TAG_AUDIT_CD` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT 'Tag creation date',
-    `TAG_AUDIT_CU` INT UNSIGNED NOT NULL COMMENT 'Tag creation user',
-    `TAG_AUDIT_MD` DATETIME NOT NULL COMMENT 'Tag modification date',
-    `TAG_AUDIT_MU` INT UNSIGNED NOT NULL COMMENT 'Tag modification user',
-    `TAG_AUDIT_RD` DATETIME NOT NULL COMMENT 'Tag removal date',
-    `TAG_AUDIT_RU` INT UNSIGNED NOT NULL COMMENT 'Tag removal user',
+    `TAG_AUDIT_CU` INT UNSIGNED COMMENT 'Tag creation user',
+    `TAG_AUDIT_MD` DATETIME COMMENT 'Tag modification date',
+    `TAG_AUDIT_MU` INT UNSIGNED COMMENT 'Tag modification user',
+    `TAG_AUDIT_RD` DATETIME COMMENT 'Tag removal date',
+    `TAG_AUDIT_RU` INT UNSIGNED COMMENT 'Tag removal user',
     `TAG_CODE` VARCHAR(5) NOT NULL COMMENT 'Tag code',
     `TAG_NAME` VARCHAR(50) NOT NULL COMMENT 'Tag name'
 );
@@ -17,17 +17,17 @@ ALTER TABLE `TRAINING_CENTER`.`TAGS` ADD UNIQUE `UN_TAG_NAME_AUDIT_RD`(`TAG_NAME
 CREATE TABLE `TRAINING_CENTER`.`EXERCISES` (
     `EXC_ID` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `EXC_AUDIT_CD` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT 'Exercise creation date',
-    `EXC_AUDIT_CU` INT UNSIGNED NOT NULL COMMENT 'Exercise creation user',
-    `EXC_AUDIT_MD` DATETIME NOT NULL COMMENT 'Exercise modification date',
-    `EXC_AUDIT_MU` INT UNSIGNED NOT NULL COMMENT 'Exercise modification user',
-    `EXC_AUDIT_RD` DATETIME NOT NULL COMMENT 'Exercise removal date',
-    `EXC_AUDIT_RU` INT UNSIGNED NOT NULL COMMENT 'Exercise removal user',
+    `EXC_AUDIT_CU` INT UNSIGNED COMMENT 'Exercise creation user',
+    `EXC_AUDIT_MD` DATETIME COMMENT 'Exercise modification date',
+    `EXC_AUDIT_MU` INT UNSIGNED COMMENT 'Exercise modification user',
+    `EXC_AUDIT_RD` DATETIME COMMENT 'Exercise removal date',
+    `EXC_AUDIT_RU` INT UNSIGNED COMMENT 'Exercise removal user',
     `EXC_NAME` VARCHAR(50) NOT NULL COMMENT 'Exercise name',
     `EXC_DESCRIPTION` VARCHAR(255) COMMENT 'Exercise description',
     `EXC_EQ_NEEDED` VARCHAR(255) COMMENT 'Equipment needed to do the exercise',
     `EXC_TAGS` VARCHAR(255) COMMENT 'List of tags, comma separated',
     `EXC_DIFFICULTY_LVL` VARCHAR (1) NOT NULL COMMENT 'Difficulty level for exercise',
     `EXC_DEMO` BOOLEAN NOT NULL DEFAULT 0 COMMENT 'Flag informing if the exercise should be viewed by not registered users'
-)
+);
 
 ALTER TABLE `TRAINING_CENTER`.`EXERCISES` ADD UNIQUE `UN_EXC_NAME_AUDIT_RD`(`EXC_NAME`, `EXC_AUDIT_RD`);

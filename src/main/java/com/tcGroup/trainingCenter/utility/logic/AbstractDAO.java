@@ -20,7 +20,7 @@ public abstract class AbstractDAO<T extends AuditData, ID extends Serializable> 
     }
 
     public T getItem(ID id) {
-        return this.repository.getOne(id);
+        return this.repository.findById(id).orElse(null);
     }
 
     public Long createItem(UserContext ctx, T itemData) {
