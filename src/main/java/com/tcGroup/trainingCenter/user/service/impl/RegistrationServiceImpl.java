@@ -34,7 +34,7 @@ public class RegistrationServiceImpl extends AbstractService implements Registra
         account.setAccountEmail(registrationRequest.getEmail());
         account.setAccountPassword(bCryptPasswordEncoder.encode(registrationRequest.getPassword()));
         account.setAccountStatus(AccountStatus.ACTIVE);
-        account.addRole(roleDAO.findRoleByName(RoleName.USER.toString()));
+        account.addRole(roleDAO.findRoleByName(RoleName.USER));
 
         return accountDAO.createItem(getUserContext(), account);
     }
