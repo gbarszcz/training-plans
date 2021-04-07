@@ -68,7 +68,7 @@ export class AuthFormsComponent implements OnInit {
       info: 'This must be equals to password.',
       type: {
         value: 'password',
-        error: 'This is not equal with password field!'
+        error: 'This field is not equal with password!'
       },
       max: {
         value: 50,
@@ -170,24 +170,32 @@ export class AuthFormsComponent implements OnInit {
     let input = this.inputsParams[index];
     const INPUT_VALUE = this.formData[input.name.toString()];
 
-    if (input.required && INPUT_VALUE === 0) {
+    if (!!input.required.value && !!!INPUT_VALUE) {
       input = this.setErrInfo(input, input.required.error);
     } else if (input.name === 'repeatPassword') {
-      input = this.setErrInfo(input, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
+      input = this.setErrInfo(input, null);
+
+      if (!this.checkRepeatPasswordIsEqual()) {
+        if (!!this.formData.password && !!this.formData.repeatPassword) {
+          input = this.setErrInfo(input, input.type.error);
+        } else if (!!!this.formData.repeatPassword) {
+          input = this.setErrInfo(input, 'This field is empty');
+        }
+      }
     } else if (!this.isCorrectType(input)) {
       input = this.setErrInfo(input, input.type.error);
     } else if (INPUT_VALUE.length > input.max.value) {
       input = this.setErrInfo(input, input.max.error);
     } else if (input.name === 'password') {
-      const REPEAT_PASSWORD_INPUT = this.inputsParams.filter((inputParam) => {
-        return inputParam.name === 'repeatPassword';
-      })[0];
       this.setErrInfo(input, null);
-      this.setErrInfo(REPEAT_PASSWORD_INPUT, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
     } else {
       this.setErrInfo(input, null);
     }
     if (input.name === 'password') {
+      const REPEAT_PASSWORD_INPUT = this.inputsParams.filter((inputParam) => {
+        return inputParam.name === 'repeatPassword';
+      })[0];
+      this.setErrInfo(REPEAT_PASSWORD_INPUT, !this.checkRepeatPasswordIsEqual() && !!this.formData.repeatPassword ? REPEAT_PASSWORD_INPUT.type.error : null);
       this.passwordStrength(input, input.err.isErr ? null : INPUT_VALUE);
     }
     this.inputsParams[index] = input;
