@@ -3,11 +3,14 @@ package com.tcGroup.trainingCenter.domain.entity;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.tcGroup.trainingCenter.domain.enumeration.DifficultyLevel;
+import com.tcGroup.trainingCenter.domain.enumeration.converter.DifficultyLevelConverter;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 
 import lombok.Data;
@@ -29,12 +32,6 @@ public class ExerciseData extends AuditData {
     
     private static final long serialVersionUID = 5311503488834008387L;
 
-    public interface DIFFICULTY_LEVELS {
-        public static final String LOW = "L";
-        public static final String MEDIUM ="M";
-        public static final String HIGH = "H";
-    }
-
     @Id
     @Column(name = "EXC_ID")
     @GeneratedValue
@@ -53,7 +50,8 @@ public class ExerciseData extends AuditData {
     private String exerciseTags;
 
     @Column(name = "EXC_DIFFICULTY_LVL", length = 1, nullable = false)
-    private String exerciseDifficultyLvl = DIFFICULTY_LEVELS.LOW;
+    @Convert(converter = DifficultyLevelConverter.class)
+    private DifficultyLevel exerciseDifficultyLvl = DifficultyLevel.LOW;
 
     @Column(name = "EXC_DEMO") 
     private boolean exerciseDemo = false;
