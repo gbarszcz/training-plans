@@ -112,7 +112,7 @@ export class AuthFormsComponent implements OnInit {
   }
 
   post(): void {
-    this.resources = this.service.sendUserAuthData(this.formData, this.formType);
+    this.resources = this.service.apiPostRequest(this.formType, this.formData);
     if (this.resources.ok) {
       localStorage.setItem('token', this.resources.token);
       this.URLEvent.emit('/profile');
