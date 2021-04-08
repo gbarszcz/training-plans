@@ -24,7 +24,7 @@ CREATE TABLE `TRAINING_CENTER`.`ACCOUNTS` (
   `ACC_AUDIT_MU` int DEFAULT NULL COMMENT 'Account modification user',
   `ACC_AUDIT_RD` datetime DEFAULT NULL COMMENT 'Account removal date',
   `ACC_AUDIT_RU` int DEFAULT NULL COMMENT 'Account removal user',
-  `ACC_EMAIL` varchar(255) DEFAULT NULL,
+  `ACC_EMAIL` varchar(255) NOT NULL COMMENT 'Account email',
   `ACC_PASSWORD` varchar(255) NOT NULL COMMENT 'Account password',
   `ACC_STATUS` varchar(1) NOT NULL DEFAULT 'I' COMMENT 'Account status',
   PRIMARY KEY (`ACC_ID`),
