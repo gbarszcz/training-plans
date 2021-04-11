@@ -7,7 +7,7 @@ public enum DifficultyLevel {
 
     private final String abbreviation;
 
-    private DifficultyLevel(String abbreviation) {
+    DifficultyLevel(String abbreviation) {
         this.abbreviation = abbreviation;
     }
 
