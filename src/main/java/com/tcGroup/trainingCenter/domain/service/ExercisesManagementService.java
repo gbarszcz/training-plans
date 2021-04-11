@@ -9,25 +9,25 @@ public interface ExercisesManagementService {
 
     //--------------------- EXERCISES ----------------------------------
     
-    public List<ExerciseData> getAllExercises();
+    List<ExerciseData> getAllExercises();
 
-    public ExerciseData getExercise(Long id);
+    ExerciseData getExercise(Long id);
 
-    public Long createExercise(ExerciseData exercise);
+    Long createExercise(ExerciseData exercise);
 
-    public Long modifyExercise(ExerciseData exercise);
+    Long modifyExercise(ExerciseData exercise);
 
-    public void removeExercise(Long id);
+    void removeExercise(Long id);
 
     // ----------------------- TAGS -------------------------------------
 
-    public List<TagData> getAllTags();
+    List<TagData> getAllTags();
 
-    public TagData getTag(Long id);
+    TagData getTag(Long id);
 
-    public Long createTag(TagData tag);
+    Long createTag(TagData tag);
 
-    public Long modifyTag(TagData tag);
+    Long modifyTag(TagData tag);
 
-    public void removeTag(Long id);
+    void removeTag(Long id);
 }

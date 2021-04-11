@@ -24,7 +24,7 @@ CREATE TABLE `TRAINING_CENTER`.`EXERCISES` (
     `EXC_AUDIT_RU` INT UNSIGNED COMMENT 'Exercise removal user',
     `EXC_NAME` VARCHAR(50) NOT NULL COMMENT 'Exercise name',
     `EXC_DESCRIPTION` VARCHAR(255) COMMENT 'Exercise description',
-    `EXC_EQ_NEEDED` VARCHAR(255) COMMENT 'Equipment needed to do the exercise',
+    `EXC_EQUIP_NEEDED` VARCHAR(255) COMMENT 'Equipment needed to do the exercise',
     `EXC_TAGS` VARCHAR(255) COMMENT 'List of tags, comma separated',
     `EXC_DIFFICULTY_LVL` VARCHAR (1) NOT NULL COMMENT 'Difficulty level for exercise',
     `EXC_DEMO` BOOLEAN NOT NULL DEFAULT 0 COMMENT 'Flag informing if the exercise should be viewed by not registered users'

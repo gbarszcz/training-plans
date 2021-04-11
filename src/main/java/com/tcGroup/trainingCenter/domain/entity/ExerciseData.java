@@ -43,8 +43,8 @@ public class ExerciseData extends AuditData {
     @Column(name = "EXC_DESCRIPTION", length = 200)
     private String exerciseDescription;
 
-    @Column(name = "EXC_EQ_NEEDED", length = 200)
-    private String exerciseEQNeeded;
+    @Column(name = "EXC_EQUIP_NEEDED", length = 200)
+    private String exerciseEquipNeeded;
 
     @Column(name = "EXC_TAGS", length = 200)
     private String exerciseTags;
