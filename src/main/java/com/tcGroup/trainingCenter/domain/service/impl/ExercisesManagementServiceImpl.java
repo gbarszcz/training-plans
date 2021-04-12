@@ -95,5 +95,10 @@ public class ExercisesManagementServiceImpl extends AbstractService implements E
             tagDAO.removeItem(getUserContext(), tag);
         }
     }
-    
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ExerciseData> getExercisesByTag(Long id) {
+        return exerciseDAO.findExerciseByTag(id);
+    }
 }

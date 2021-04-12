@@ -36,4 +36,9 @@ public class ExercisesManagementController extends AbstractController {
     public List<TagData> getTags() {
         return exercisesManagementService.getAllTags();
     }
+
+    @GetMapping(path = "/exercises/tag/{id}")
+    public List<ExerciseData> getExercisesByTag(@PathVariable Long id) {
+        return exercisesManagementService.getExercisesByTag(id);
+    }
 }
