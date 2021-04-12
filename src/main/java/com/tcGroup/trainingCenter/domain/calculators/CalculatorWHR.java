@@ -3,7 +3,7 @@ package com.tcGroup.trainingCenter.domain.calculators;
 /**
  * @params waist and hipCircumference must be expressed in equal units
  */
-public class CalculatorWHR implements IIndexCalculator{
+public class CalculatorWHR implements IndexCalculator {
     private final double waist;
     private final double hipCircumference;
 

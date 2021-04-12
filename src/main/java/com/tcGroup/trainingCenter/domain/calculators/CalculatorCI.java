@@ -2,7 +2,7 @@ package com.tcGroup.trainingCenter.domain.calculators;
 /**
  * @params weight must be given in kilograms, height must be expressed in meters
  */
-public class CalculatorCI implements IIndexCalculator{
+public class CalculatorCI implements IndexCalculator {
     private final double weight;
     private final double height;
 
