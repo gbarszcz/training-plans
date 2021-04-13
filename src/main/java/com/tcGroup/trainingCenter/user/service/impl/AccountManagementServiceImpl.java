@@ -1,8 +1,11 @@
 package com.tcGroup.trainingCenter.user.service.impl;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.tcGroup.trainingCenter.domain.dao.TrainingPlanTemplateDAO;
+import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplate;
 import com.tcGroup.trainingCenter.user.dao.AccountDAO;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.user.entity.RoleData;
@@ -22,6 +25,9 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
 
     @Autowired
     private AccountDAO accountDAO;
+
+    @Autowired
+    private TrainingPlanTemplateDAO trainingPlanTemplateDAO;
 
     // -------------------------- ACCOUNTS -------------------------------------
 
@@ -45,4 +51,12 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
 
         return new UserContext(account, grantedAuthorities);
     }
+
+    @Override
+    public List<TrainingPlanTemplate> getTrainingPlans() {
+        //TODO after logging in is done
+//        return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(getUserContext().getUserId());
+        return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(1);
+    }
+
 }

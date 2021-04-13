@@ -1,5 +1,6 @@
 package com.tcGroup.trainingCenter.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcGroup.trainingCenter.user.enumeration.AccountStatus;
 import com.tcGroup.trainingCenter.user.enumeration.converter.AccountStatusConverter;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
@@ -22,11 +23,6 @@ import java.util.Set;
 @Data
 public class AccountData extends AuditData {
 
-        public interface ACCOUNT_STATUSES {
-                public static final String ACTIVE = "A";
-                public static final String INACTIVE = "I";
-        }
-
         @Id
         @Column(name = "ACC_ID")
         @GeneratedValue
@@ -36,6 +32,7 @@ public class AccountData extends AuditData {
         private String accountEmail;
 
         @Column(name = "ACC_PASSWORD")
+        @JsonIgnore
         private String accountPassword;
 
         @Column(name = "ACC_STATUS")
@@ -44,6 +41,7 @@ public class AccountData extends AuditData {
 
         @ManyToMany(cascade = CascadeType.PERSIST)
         @JoinTable(name = "ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "ACC_ID"), inverseJoinColumns = @JoinColumn(name = "ROL_ID"))
+        @JsonIgnore
         private Set<RoleData> roles = new HashSet<>();
 
         @Override
