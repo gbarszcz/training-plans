@@ -6,7 +6,6 @@ import com.tcGroup.trainingCenter.user.service.AccountManagementService;
 import com.tcGroup.trainingCenter.user.service.RegistrationService;
 import com.tcGroup.trainingCenter.utility.logic.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
