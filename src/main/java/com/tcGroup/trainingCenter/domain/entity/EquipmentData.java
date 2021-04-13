@@ -11,22 +11,22 @@ import java.util.Set;
 @Entity
 @Table(name = "EQUIPMENTS")
 @AttributeOverrides({
-        @AttributeOverride(name="auditCD", column=@Column(name="EQUIP_AUDIT_CD")),
-        @AttributeOverride(name="auditCU", column=@Column(name="EQUIP_AUDIT_CU")),
-        @AttributeOverride(name="auditMD", column=@Column(name="EQUIP_AUDIT_MD")),
-        @AttributeOverride(name="auditMU", column=@Column(name="EQUIP_AUDIT_MU")),
-        @AttributeOverride(name="auditRD", column=@Column(name="EQUIP_AUDIT_RD")),
-        @AttributeOverride(name="auditRU", column=@Column(name="EQUIP_AUDIT_RU"))
+        @AttributeOverride(name="auditCD", column=@Column(name="EQU_AUDIT_CD")),
+        @AttributeOverride(name="auditCU", column=@Column(name="EQU_AUDIT_CU")),
+        @AttributeOverride(name="auditMD", column=@Column(name="EQU_AUDIT_MD")),
+        @AttributeOverride(name="auditMU", column=@Column(name="EQU_AUDIT_MU")),
+        @AttributeOverride(name="auditRD", column=@Column(name="EQU_AUDIT_RD")),
+        @AttributeOverride(name="auditRU", column=@Column(name="EQU_AUDIT_RU"))
 })
 @Data
 public class EquipmentData extends AuditData {
 
     @Id
-    @Column(name = "EQUIP_ID")
+    @Column(name = "EQU_ID")
     @GeneratedValue
     private Long id;
 
-    @Column(name = "EQUIP_NAME", length = 200, nullable = false)
+    @Column(name = "EQU_NAME", length = 200, nullable = false)
     private String equipmentName;
 
     @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "equipments")

@@ -49,7 +49,7 @@ public class ExerciseData extends AuditData {
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "EXERCISE_EQUIPMENT",
             joinColumns = @JoinColumn(name = "EXC_ID"),
-            inverseJoinColumns = @JoinColumn(name = "EQUIP_ID"))
+            inverseJoinColumns = @JoinColumn(name = "EQU_ID"))
     private List<EquipmentData> equipments;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
