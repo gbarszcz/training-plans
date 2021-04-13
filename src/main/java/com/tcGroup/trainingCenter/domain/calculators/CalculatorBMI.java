@@ -14,7 +14,7 @@ public class CalculatorBMI implements IndexCalculator {
 
     @Override
     public double calculateIndex() {
-        if(weight > 0 && height > 0){
+        if(weight >= 20 && height >= 1){
             double resultBMI = (weight) / (Math.pow(height, 2));
             resultBMI *= 10;
             resultBMI = Math.round(resultBMI);

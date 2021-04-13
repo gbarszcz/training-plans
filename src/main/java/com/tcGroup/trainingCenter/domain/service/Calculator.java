@@ -1,4 +1,4 @@
-package com.tcGroup.trainingCenter.domain;
+package com.tcGroup.trainingCenter.domain.service;
 
 public interface Calculator {
      double calculate();

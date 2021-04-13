@@ -1,4 +1,4 @@
-package com.tcGroup.trainingCenter.domain;
+package com.tcGroup.trainingCenter.domain.service;
 
 import com.tcGroup.trainingCenter.domain.calculators.IndexCalculator;
 import org.springframework.stereotype.Service;
