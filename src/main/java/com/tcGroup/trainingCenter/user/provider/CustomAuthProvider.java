@@ -33,11 +33,11 @@ public class CustomAuthProvider implements AuthenticationProvider {
         try {
             userContext = (UserContext) accountManagementService.loadUserByUsername(email);
         } catch (UsernameNotFoundException e) {
-            throw new BadCredentialsException("Provided credentials are wrong. Try again");
+            throw new BadCredentialsException("Bad credentials");
         }
 
         if (!bCryptPasswordEncoder.matches(password, userContext.getPassword())) {
-            throw new BadCredentialsException("Provided credentials are wrong. Try again");
+            throw new BadCredentialsException("Bad credentials");
         }
         
         return new UsernamePasswordAuthenticationToken(userContext, password, userContext.getAuthorities());

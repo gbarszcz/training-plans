@@ -59,9 +59,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(corsFilter(), SessionManagementFilter.class).httpBasic()
-                .and().authorizeRequests().antMatchers("/resources/**", "/scss/**", "/webjars/**", "/error", "/", "/index", "/register", "/login", "/exercises/**", "/exercise/**", "/tags").permitAll()
-                .and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/login*", "/exercises/**", "/exercise/**", "/tags").and().headers()
+        http.addFilterBefore(corsFilter(), SessionManagementFilter.class).httpBasic().and().authorizeRequests()
+            .antMatchers("/user", "/logout").authenticated()
+            .antMatchers("/resources/**", "/scss/**", "/webjars/**", "/error", "/", "/index", "/register", "/login", "/exercises/**", "/exercise/**", "/tags").permitAll()
+                .and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/login*", "/logout*", "/exercises/**", "/exercise/**", "/tags").and().headers()
                 .frameOptions().sameOrigin()
                 .and().formLogin()
                     .loginPage("/login")
