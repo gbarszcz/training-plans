@@ -30,4 +30,6 @@ public interface ExercisesManagementService {
     Long modifyTag(TagData tag);
 
     void removeTag(Long id);
+
+    List<ExerciseData> getExercisesByTag(Long id);
 }

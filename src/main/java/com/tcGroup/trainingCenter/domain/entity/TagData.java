@@ -1,17 +1,14 @@
 package com.tcGroup.trainingCenter.domain.entity;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "TAGS")
@@ -24,7 +21,6 @@ import lombok.EqualsAndHashCode;
     @AttributeOverride(name="auditRU", column=@Column(name="TAG_AUDIT_RU"))
 })
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class TagData extends AuditData {
 
     @Id
@@ -38,8 +34,28 @@ public class TagData extends AuditData {
     @Column(name = "TAG_NAME", length = 30, nullable = false)
     private String tagName;
 
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "tags")
+    @JsonIgnore
+    private Set<ExerciseData> exercises;
+
     @Override
     public Long getId() {
         return this.id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        TagData tagData = (TagData) o;
+        return id.equals(tagData.id) && tagCode.equals(tagData.tagCode)
+                && tagName.equals(tagData.tagName)
+                && Objects.equals(exercises, tagData.exercises);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id, tagCode, tagName);
     }
 }
