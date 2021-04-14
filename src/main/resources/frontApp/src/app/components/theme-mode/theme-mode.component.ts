@@ -7,11 +7,35 @@ import {Component} from '@angular/core';
 })
 export class ThemeModeComponent {
   storageName = 'theme-mode';
-  themeMode = false;
+  themeMode = 'light';
+  themes = new Map([
+    ['light',
+      {
+        colors: new Map([
+          ['--bs-primary', '--bs-main'],
+          ['--bs-secondary', '--bs-light'],
+          ['--bs-tertiary', '--bs-dark']
+        ]),
+        text: 'Light',
+        icon: 'sun',
+      }
+    ],
+    ['dark',
+      {
+        colors: new Map([
+          ['--bs-primary', '--bs-main'],
+          ['--bs-secondary', '--bs-dark'],
+          ['--bs-tertiary', '--bs-light']
+        ]),
+        text: 'Dark',
+        icon: 'moon-stars',
+      }
+    ]
+  ]);
 
   constructor() {
     if (this.isSessionStorage(this.storageName)) {
-      this.themeMode = !!this.getFromSession(this.storageName);
+      this.themeMode = this.getFromSession(this.storageName) ?? 'light';
       this.setThemeMode();
     }
   }
@@ -25,24 +49,16 @@ export class ThemeModeComponent {
   }
 
   private setThemeMode(): void {
-    const STYLES = new Map([
-      ['--bs-primary', '--bs-main'],
-      ['--bs-secondary', this.themeMode ? '--bs-dark' : '--bs-light'],
-      ['--bs-tertiary', !this.themeMode ? '--bs-dark' : '--bs-light']
-    ]);
-    this.updateStyles(STYLES);
-  }
-
-  private updateStyles(styles: Map<string, string>): void {
     this.removeWCAG();
-    styles.forEach((value, variable) => {
+    // @ts-ignore
+    this.themes.get(this.themeMode).colors.forEach((value, variable) => {
       document.documentElement.style.setProperty(variable, `var(${value})`);
     });
     sessionStorage.setItem(this.storageName, this.themeMode.toString());
   }
 
-  changeThemeMode(): void {
-    this.themeMode = !this.themeMode;
+  changeThemeMode(mode: string): void {
+    this.themeMode = mode;
     this.setThemeMode();
   }
 

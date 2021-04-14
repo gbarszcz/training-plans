@@ -1,7 +1,19 @@
-<div id="theme-mode-switch"
-     class="form-check form-switch">
-  <button (click)="changeThemeMode()" class="btn">
-    <i class="bi bi-{{!themeMode ? 'moon-stars' : 'sun'}}"></i>
-    {{!themeMode ? ' Dark' : 'Light'}}
-  </button>
+<div id="theme-mode-switch">
+  <ul class="navbar-nav">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle"
+         data-toggle="dropdown">
+        <i class="bi bi-{{themes.get(themeMode)?.icon}}"></i>
+        {{themes.get(themeMode)?.text}}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a *ngFor="let theme of themes | keyvalue"
+           (click)="changeThemeMode(theme.key)"
+           class="dropdown-item {{theme.key === themeMode ? 'active' : ''}}">
+          <i class="bi bi-{{theme.value.icon}}"></i>
+          {{theme.value.text}}
+        </a>
+      </div>
+    </li>
+  </ul>
 </div>

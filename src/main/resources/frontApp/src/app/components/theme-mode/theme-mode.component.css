@@ -5,14 +5,37 @@
   padding: 0;
   transform: translateX(50%);
 }
+#theme-mode-switch i:before {
+  font-weight: bold !important;
+}
+#theme-mode-switch .dropdown-menu {
+  width: max-content;
+  min-width: 5rem;
+  max-width: 50vw;
+  position: absolute;
+  display: none;
+  right: auto;
+  left: auto;
+  border: var(--bs-primary) solid 2px;
+}
+#theme-mode-switch .dropdown-menu.show {
+  display: block;
+}
+#theme-mode-switch .dropdown-item {
+  padding: 0.25rem 1rem !important;
+  width: 100%;
+}
+#theme-mode-switch .dropdown-toggle {
+  display: block !important;
+}
 @media (min-width: 992px) {
   #theme-mode-switch {
     right: 0.5rem;
     transform: none;
   }
-}
-#theme-mode-switch i:before {
-  font-weight: bold !important;
+  #theme-mode-switch .dropdown-menu {
+    right: 0.5rem;
+  }
 }
 
 /*# sourceMappingURL=theme-mode.component.css.map */
