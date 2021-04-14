@@ -10,7 +10,6 @@ import {IAlert} from '../../models/IAlert';
 export class AuthFormsComponent implements OnInit {
   @Output() URLEvent = new EventEmitter<string>();
   @Input() formType = '';
-  resources: any | null = null;
   formData: any = {};
   inputsParams = [
     {
@@ -68,7 +67,7 @@ export class AuthFormsComponent implements OnInit {
       info: 'This must be equals to password.',
       type: {
         value: 'password',
-        error: 'This is not equal with password field!'
+        error: 'This field is not equal with password!'
       },
       max: {
         value: 50,
@@ -112,23 +111,30 @@ export class AuthFormsComponent implements OnInit {
   }
 
   post(): void {
-    this.resources = this.service.sendUserAuthData(this.formData, this.formType);
-    if (this.resources.ok) {
-      localStorage.setItem('token', this.resources.token);
-      this.URLEvent.emit('/profile');
-    } else if (this.resources.status === 400) {
-      this.prepareErrorFields(this.resources.errFields);
-      this.disableButton();
-    } else {
-      this.alerts.push({
-        id: this.alerts.length,
-        show: true,
-        header: 'Sorry! We have encountered a problem...',
-        text: 'Please try again later :\'(',
-        level: 'danger',
-        displayHideButton: true
-      });
-    }
+    this.service.apiPostRequest(this.formType, this.formData)
+      .subscribe(
+        (res: any) => {
+          if (res.token) {
+            localStorage.setItem('token', res.token);
+          }
+          this.URLEvent.emit('/profile');
+        },
+        (error: any) => {
+          if (error.status === 400) {
+            this.prepareErrorFields(error.error.errors);
+            this.disableButton();
+          } else {
+            this.alerts.push({
+              id: this.alerts.length,
+              show: true,
+              header: 'Sorry! We have encountered a problem...',
+              text: 'Please try again later :\'(',
+              level: 'danger',
+              displayHideButton: true
+            });
+          }
+        }
+      );
   }
 
   hideAlert(alertID: string): void {
@@ -170,36 +176,44 @@ export class AuthFormsComponent implements OnInit {
     let input = this.inputsParams[index];
     const INPUT_VALUE = this.formData[input.name.toString()];
 
-    if (input.required && INPUT_VALUE === 0) {
+    if (!!input.required.value && !!!INPUT_VALUE) {
       input = this.setErrInfo(input, input.required.error);
     } else if (input.name === 'repeatPassword') {
-      input = this.setErrInfo(input, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
+      input = this.setErrInfo(input, null);
+
+      if (!this.checkRepeatPasswordIsEqual()) {
+        if (!!this.formData.password && !!this.formData.repeatPassword) {
+          input = this.setErrInfo(input, input.type.error);
+        } else if (!!!this.formData.repeatPassword) {
+          input = this.setErrInfo(input, 'This field is empty');
+        }
+      }
     } else if (!this.isCorrectType(input)) {
       input = this.setErrInfo(input, input.type.error);
     } else if (INPUT_VALUE.length > input.max.value) {
       input = this.setErrInfo(input, input.max.error);
     } else if (input.name === 'password') {
-      const REPEAT_PASSWORD_INPUT = this.inputsParams.filter((inputParam) => {
-        return inputParam.name === 'repeatPassword';
-      })[0];
       this.setErrInfo(input, null);
-      this.setErrInfo(REPEAT_PASSWORD_INPUT, !this.checkRepeatPasswordIsEqual() ? input.type.error : null);
     } else {
       this.setErrInfo(input, null);
     }
     if (input.name === 'password') {
+      const REPEAT_PASSWORD_INPUT = this.inputsParams.filter((inputParam) => {
+        return inputParam.name === 'repeatPassword';
+      })[0];
+      this.setErrInfo(REPEAT_PASSWORD_INPUT, !this.checkRepeatPasswordIsEqual() && !!this.formData.repeatPassword ? REPEAT_PASSWORD_INPUT.type.error : null);
       this.passwordStrength(input, input.err.isErr ? null : INPUT_VALUE);
     }
     this.inputsParams[index] = input;
   }
 
-  private prepareErrorFields(errFields: any[]): void {
-    errFields.forEach((field) => {
+  private prepareErrorFields(errors: any[]): void {
+    errors.forEach((error) => {
       this.inputsParams.filter((input) => {
-        return input.name === field.name;
+        return input.name === error.field;
       })[0].err = {
         isErr: true,
-        message: field.message
+        message: error.message
       };
     });
   }

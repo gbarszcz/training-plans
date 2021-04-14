@@ -13,6 +13,7 @@ import { SearchComponent } from './components/search/search.component';
 import { AuthFormsComponent } from './components/auth_forms/auth-forms.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { WcagComponent } from './components/wcag/wcag.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { WcagComponent } from './components/wcag/wcag.component';
     SearchComponent,
     AuthFormsComponent,
     AlertComponent,
-    WcagComponent
+    WcagComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

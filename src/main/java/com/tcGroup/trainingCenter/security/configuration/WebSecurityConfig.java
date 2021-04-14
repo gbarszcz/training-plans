@@ -1,5 +1,6 @@
 package com.tcGroup.trainingCenter.security.configuration;
 
+import com.tcGroup.trainingCenter.security.filter.CORSFilter;
 import com.tcGroup.trainingCenter.user.service.AccountManagementService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.session.SessionManagementFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -34,9 +36,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationManager();
     }
 
+    @Bean
+    CORSFilter corsFilter() {
+        return new CORSFilter();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index", "/register", "/exercises/**", "/exercise/**", "/tags").permitAll()
+        http.addFilterBefore(corsFilter(), SessionManagementFilter.class).authorizeRequests().antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index", "/register", "/exercises/**", "/exercise/**", "/tags").permitAll()
                 .anyRequest().authenticated().and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/exercises/**", "/exercise/**", "/tags").and().headers()
                 .frameOptions().sameOrigin();
     }

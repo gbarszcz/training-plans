@@ -7,16 +7,12 @@ import {HttpClient} from '@angular/common/http';
 
 export class AppService {
   private serverPort = 8080;
+  private url = `${window.location.protocol}//${window.location.hostname}:${this.serverPort}`;
 
   constructor(private http: HttpClient) { }
 
-  sendUserAuthData(registerData: any, endpoint: string): string {
-    this.http.post(window.location.protocol + '//' + window.location.hostname + `:${this.serverPort}/${endpoint}`, registerData)
-      .subscribe(res => {
-        return res;
-      }
-    );
-    return '';
+  apiPostRequest(endpoint: string, data: any): any {
+    return this.http.post<Response>(`${this.url}/${endpoint}`, data);
   }
 
   /** sub nav should be for url param */
