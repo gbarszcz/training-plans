@@ -10,7 +10,6 @@ import {IAlert} from '../../models/IAlert';
 export class AuthFormsComponent implements OnInit {
   @Output() URLEvent = new EventEmitter<string>();
   @Input() formType = '';
-  resources: any | null = null;
   formData: any = {};
   inputsParams = [
     {
@@ -112,23 +111,30 @@ export class AuthFormsComponent implements OnInit {
   }
 
   post(): void {
-    this.resources = this.service.apiPostRequest(this.formType, this.formData);
-    if (this.resources.ok) {
-      localStorage.setItem('token', this.resources.token);
-      this.URLEvent.emit('/profile');
-    } else if (this.resources.status === 400) {
-      this.prepareErrorFields(this.resources.errFields);
-      this.disableButton();
-    } else {
-      this.alerts.push({
-        id: this.alerts.length,
-        show: true,
-        header: 'Sorry! We have encountered a problem...',
-        text: 'Please try again later :\'(',
-        level: 'danger',
-        displayHideButton: true
-      });
-    }
+    this.service.apiPostRequest(this.formType, this.formData)
+      .subscribe(
+        (res: any) => {
+          if (res.token) {
+            localStorage.setItem('token', res.token);
+          }
+          this.URLEvent.emit('/profile');
+        },
+        (error: any) => {
+          if (error.status === 400) {
+            this.prepareErrorFields(error.error.errors);
+            this.disableButton();
+          } else {
+            this.alerts.push({
+              id: this.alerts.length,
+              show: true,
+              header: 'Sorry! We have encountered a problem...',
+              text: 'Please try again later :\'(',
+              level: 'danger',
+              displayHideButton: true
+            });
+          }
+        }
+      );
   }
 
   hideAlert(alertID: string): void {
@@ -201,13 +207,13 @@ export class AuthFormsComponent implements OnInit {
     this.inputsParams[index] = input;
   }
 
-  private prepareErrorFields(errFields: any[]): void {
-    errFields.forEach((field) => {
+  private prepareErrorFields(errors: any[]): void {
+    errors.forEach((error) => {
       this.inputsParams.filter((input) => {
-        return input.name === field.name;
+        return input.name === error.field;
       })[0].err = {
         isErr: true,
-        message: field.message
+        message: error.message
       };
     });
   }

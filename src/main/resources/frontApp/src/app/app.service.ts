@@ -6,19 +6,13 @@ import {HttpClient} from '@angular/common/http';
 })
 
 export class AppService {
-  private resource: any;
   private serverPort = 8080;
   private url = `${window.location.protocol}//${window.location.hostname}:${this.serverPort}`;
 
   constructor(private http: HttpClient) { }
 
   apiPostRequest(endpoint: string, data: any): any {
-    this.http.post(`${this.url}/${endpoint}`, data)
-      .subscribe(res => {
-        this.resource = res;
-      }
-    );
-    return this.resource;
+    return this.http.post<Response>(`${this.url}/${endpoint}`, data);
   }
 
   /** sub nav should be for url param */

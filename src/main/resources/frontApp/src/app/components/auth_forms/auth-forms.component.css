@@ -1,7 +1,7 @@
 #password-strength,
 .validation {
   box-sizing: content-box;
-  height: 0.875rem;
+  min-height: 0.875rem;
   display: inline-block;
   vertical-align: middle;
   font-weight: bold;
