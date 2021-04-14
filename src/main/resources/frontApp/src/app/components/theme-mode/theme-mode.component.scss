@@ -1,0 +1,19 @@
+@import "./../../../scss/bootstrap/functions";
+@import "./../../../scss/bootstrap/variables";
+
+#theme-mode-switch {
+  position: absolute;
+  top: .5rem;
+  right: 50%;
+  padding: 0;
+  transform: translateX(50%);
+
+  @media (min-width: map-get($grid-breakpoints, 'lg')) {
+    right: .5rem;
+    transform: none;
+  }
+
+  i:before {
+    font-weight: bold !important;
+  }
+}

@@ -1,0 +1,7 @@
+<div id="theme-mode-switch"
+     class="form-check form-switch">
+  <button (click)="changeThemeMode()" class="btn">
+    <i class="bi bi-{{!themeMode ? 'moon-stars' : 'sun'}}"></i>
+    {{!themeMode ? ' Dark' : 'Light'}}
+  </button>
+</div>

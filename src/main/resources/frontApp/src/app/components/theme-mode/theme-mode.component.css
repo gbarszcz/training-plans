@@ -1,0 +1,18 @@
+#theme-mode-switch {
+  position: absolute;
+  top: 0.5rem;
+  right: 50%;
+  padding: 0;
+  transform: translateX(50%);
+}
+@media (min-width: 992px) {
+  #theme-mode-switch {
+    right: 0.5rem;
+    transform: none;
+  }
+}
+#theme-mode-switch i:before {
+  font-weight: bold !important;
+}
+
+/*# sourceMappingURL=theme-mode.component.css.map */

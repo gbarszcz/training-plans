@@ -14,6 +14,7 @@ import { AuthFormsComponent } from './components/auth_forms/auth-forms.component
 import { AlertComponent } from './components/alert/alert.component';
 import { WcagComponent } from './components/wcag/wcag.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ThemeModeComponent } from './components/theme-mode/theme-mode.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     AuthFormsComponent,
     AlertComponent,
     WcagComponent,
-    ProfileComponent
+    ProfileComponent,
+    ThemeModeComponent
   ],
   imports: [
     BrowserModule,

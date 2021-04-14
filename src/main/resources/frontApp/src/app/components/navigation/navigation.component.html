@@ -65,6 +65,7 @@
           </div>
         </li>
       </ul>
+      <theme-mode *ngIf="position == 'fixed'"></theme-mode>
     </div>
   </div>
   <hr *ngIf="position == 'fixed' && navigation?.secNavItems?.length">
