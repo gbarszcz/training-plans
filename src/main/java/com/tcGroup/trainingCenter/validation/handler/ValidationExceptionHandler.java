@@ -1,7 +1,11 @@
 package com.tcGroup.trainingCenter.validation.handler;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+
+import com.tcGroup.trainingCenter.validation.response.ValidationErrorResponse;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,10 +21,14 @@ public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
     
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        FieldError fieldError = ex.getFieldErrors().get(0);
+        List<ValidationErrorResponse> errors = new LinkedList<>();
+        for (FieldError fieldError : ex.getFieldErrors()) {
+            errors.add(new ValidationErrorResponse(fieldError.getField(), fieldError.getDefaultMessage()));
+        }
+
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("field", fieldError.getField());
-        body.put("message", fieldError.getDefaultMessage());
+        body.put("errors", errors);
+        
         return new ResponseEntity<>(body, status);
     }
 }
