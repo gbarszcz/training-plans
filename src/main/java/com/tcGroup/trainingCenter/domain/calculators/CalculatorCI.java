@@ -19,6 +19,6 @@ public class CalculatorCI implements IndexCalculator {
             resultCI /= 10;
             return  resultCI;
         }
-        return 0;
+        throw  new IllegalArgumentException("input value out of range");
     }
 }

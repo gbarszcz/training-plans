@@ -21,6 +21,6 @@ public class CalculatorBMI implements IndexCalculator {
             resultBMI /= 10;
             return resultBMI;
         }
-        return 0;
+        throw new IllegalArgumentException("input value out of range");
     }
 }
