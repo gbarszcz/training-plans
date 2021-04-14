@@ -1,6 +1,6 @@
 package com.tcGroup.trainingCenter.domain.dao;
 
-import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplate;
+import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
 import com.tcGroup.trainingCenter.domain.repository.TrainingPlanTemplateRepository;
 import com.tcGroup.trainingCenter.utility.logic.AbstractDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component(value = "trainingPlanTemplateDAO")
-public class TrainingPlanTemplateDAO extends AbstractDAO<TrainingPlanTemplate, Long> {
+public class TrainingPlanTemplateDAO extends AbstractDAO<TrainingPlanTemplateData, Long> {
 
     @Autowired
     protected void setRepository(TrainingPlanTemplateRepository trainingPlanTemplateRepository) {
@@ -20,7 +20,7 @@ public class TrainingPlanTemplateDAO extends AbstractDAO<TrainingPlanTemplate, L
         return (TrainingPlanTemplateRepository) super.getRepository();
     }
 
-    public List<TrainingPlanTemplate> getTrainingPlanTemplatesForAccount(long accountId) {
+    public List<TrainingPlanTemplateData> getTrainingPlanTemplatesForAccount(long accountId) {
         return getRepository().findAllByAccount_Id(accountId);
     }
 

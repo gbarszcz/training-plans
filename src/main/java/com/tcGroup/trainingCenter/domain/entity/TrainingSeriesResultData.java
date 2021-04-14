@@ -17,7 +17,7 @@ import javax.persistence.*;
         @AttributeOverride(name="auditRU", column=@Column(name="TSR_AUDIT_RU"))
 })
 @Data
-public class TrainingSeriesResult extends AuditData {
+public class TrainingSeriesResultData extends AuditData {
 
     @Id
     @Column(name = "TSR_ID")

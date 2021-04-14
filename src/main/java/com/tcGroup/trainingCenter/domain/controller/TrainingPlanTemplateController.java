@@ -1,6 +1,6 @@
 package com.tcGroup.trainingCenter.domain.controller;
 
-import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplate;
+import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
 import com.tcGroup.trainingCenter.domain.request.TrainingPlanTemplateRequest;
 import com.tcGroup.trainingCenter.domain.service.TrainingPlanTemplateService;
 import com.tcGroup.trainingCenter.utility.logic.AbstractController;
@@ -23,7 +23,7 @@ public class TrainingPlanTemplateController extends AbstractController {
 
     @GetMapping("/plans/template/{id}")
     @ResponseBody
-    public TrainingPlanTemplate getTrainingPlanTemplate(@PathVariable Long id) {
+    public TrainingPlanTemplateData getTrainingPlanTemplate(@PathVariable Long id) {
         return trainingPlanTemplateService.getTrainingPlanById(id);
     }
 }

@@ -18,7 +18,7 @@ import java.util.Date;
         @AttributeOverride(name="auditRU", column=@Column(name="THI_AUDIT_RU"))
 })
 @Data
-public class TrainingHistory extends AuditData {
+public class TrainingHistoryData extends AuditData {
 
     @Id
     @Column(name = "THI_ID")

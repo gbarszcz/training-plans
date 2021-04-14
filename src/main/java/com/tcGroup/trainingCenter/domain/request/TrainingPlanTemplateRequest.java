@@ -1,5 +1,6 @@
 package com.tcGroup.trainingCenter.domain.request;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString
+@AllArgsConstructor
 public class TrainingPlanTemplateRequest {
 
     private final String name;
@@ -19,11 +21,4 @@ public class TrainingPlanTemplateRequest {
 
     private List<TrainingSeriesTemplateDTO> seriesTemplates;
 
-    public TrainingPlanTemplateRequest(String name,
-                                       long accountId,
-                                       List<TrainingSeriesTemplateDTO> seriesTemplates) {
-        this.name = name;
-        this.accountId = accountId;
-        this.seriesTemplates = seriesTemplates;
-    }
 }

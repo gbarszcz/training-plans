@@ -1,15 +1,13 @@
 package com.tcGroup.trainingCenter.domain.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class TrainingSeriesTemplateDTO {
 
     private final long exerciseId;
     private final int trainingUnit;
 
-    public TrainingSeriesTemplateDTO(long exerciseId, int trainingUnit) {
-        this.exerciseId = exerciseId;
-        this.trainingUnit = trainingUnit;
-    }
 }

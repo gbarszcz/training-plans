@@ -17,17 +17,17 @@ import javax.persistence.*;
         @AttributeOverride(name="auditRU", column=@Column(name="TST_AUDIT_RU"))
 })
 @Data
-public class TrainingSeriesTemplate extends AuditData {
+public class TrainingSeriesTemplateData extends AuditData {
 
     @Id
     @Column(name = "TST_ID")
     @GeneratedValue
     protected long id;
 
-    @ManyToOne(targetEntity = TrainingPlanTemplate.class)
+    @ManyToOne(targetEntity = TrainingPlanTemplateData.class)
     @JoinColumn(name = "TST_TPT_ID", referencedColumnName = "TPT_ID")
     @JsonIgnore
-    private TrainingPlanTemplate trainingTemplate;
+    private TrainingPlanTemplateData trainingTemplate;
 
     @ManyToOne(targetEntity = ExerciseData.class)
     @JoinColumn(name = "TST_EXC_ID")

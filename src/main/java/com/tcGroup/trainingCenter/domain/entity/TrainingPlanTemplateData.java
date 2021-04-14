@@ -18,7 +18,7 @@ import java.util.List;
         @AttributeOverride(name="auditRU", column=@Column(name="TPT_AUDIT_RU"))
 })
 @Data
-public class TrainingPlanTemplate extends AuditData {
+public class TrainingPlanTemplateData extends AuditData {
 
     @Id
     @Column(name = "TPT_ID")
@@ -33,7 +33,7 @@ public class TrainingPlanTemplate extends AuditData {
     private AccountData account;
 
     @OneToMany(mappedBy = "trainingTemplate")
-    private List<TrainingSeriesTemplate> trainingSeriesTemplates;
+    private List<TrainingSeriesTemplateData> trainingSeriesTemplateData;
 
     @Override
     public Long getId() {

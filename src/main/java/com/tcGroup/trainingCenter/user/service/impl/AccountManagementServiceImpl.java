@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.tcGroup.trainingCenter.domain.dao.TrainingPlanTemplateDAO;
-import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplate;
+import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
 import com.tcGroup.trainingCenter.user.dao.AccountDAO;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.user.entity.RoleData;
@@ -53,7 +53,7 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
     }
 
     @Override
-    public List<TrainingPlanTemplate> getTrainingPlans() {
+    public List<TrainingPlanTemplateData> getTrainingPlans() {
         //TODO after logging in is done
 //        return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(getUserContext().getUserId());
         return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(1);

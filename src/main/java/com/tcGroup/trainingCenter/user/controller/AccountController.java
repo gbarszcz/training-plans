@@ -1,6 +1,6 @@
 package com.tcGroup.trainingCenter.user.controller;
 
-import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplate;
+import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
 import com.tcGroup.trainingCenter.user.service.AccountManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +16,8 @@ public class AccountController {
 
     @GetMapping("/plans/templates")
     @ResponseBody
-    public List<TrainingPlanTemplate> getTrainingPlanTemplates() {
-        List<TrainingPlanTemplate> templates = accountManagementService.getTrainingPlans();
-
-        return templates;
+    public List<TrainingPlanTemplateData> getTrainingPlanTemplates() {
+        return accountManagementService.getTrainingPlans();
     }
 
 }

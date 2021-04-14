@@ -16,16 +16,16 @@ import javax.persistence.*;
         @AttributeOverride(name="auditRU", column=@Column(name="TSE_AUDIT_RU"))
 })
 @Data
-public class TrainingSeries extends AuditData {
+public class TrainingSeriesData extends AuditData {
 
     @Id
     @Column(name = "TSE_ID")
     @GeneratedValue
     protected long id;
 
-    @ManyToOne(targetEntity = TrainingHistory.class)
+    @ManyToOne(targetEntity = TrainingHistoryData.class)
     @JoinColumn(name = "TSE_THI_ID", referencedColumnName = "THI_ID")
-    private TrainingHistory training;
+    private TrainingHistoryData training;
 
     @ManyToOne(targetEntity = ExerciseData.class)
     @JoinColumn(name = "TSE_EXC_ID", referencedColumnName = "EXC_ID")
@@ -34,9 +34,9 @@ public class TrainingSeries extends AuditData {
     @Column(name = "TSE_UNIT")
     private int trainingUnit;
 
-    @ManyToOne(targetEntity = TrainingSeriesResult.class)
+    @ManyToOne(targetEntity = TrainingSeriesResultData.class)
     @JoinColumn(name = "TSE_TSR_ID", referencedColumnName = "TSR_ID")
-    private TrainingSeriesResult trainingSeriesResult;
+    private TrainingSeriesResultData trainingSeriesResultData;
 
     @Override
     public Long getId() {
