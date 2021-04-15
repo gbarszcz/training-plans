@@ -81,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 httpServletResponse.getWriter().append(new AuthResponse("OK").toString());
                 httpServletResponse.setContentType("application/json");
                 httpServletResponse.setStatus(200);
+                setCORSHeadersForLogin(httpServletRequest, httpServletResponse);
             }
         };
     }
@@ -94,7 +95,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 httpServletResponse.getWriter().append(new AuthResponse(e.getMessage()).toString());
                 httpServletResponse.setContentType("application/json");
                 httpServletResponse.setStatus(401);
+                setCORSHeadersForLogin(httpServletRequest, httpServletResponse);
             }
         };
+    }
+
+    private void setCORSHeadersForLogin(HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setIntHeader("Access-Control-Max-Age", 180);
     }
 }
