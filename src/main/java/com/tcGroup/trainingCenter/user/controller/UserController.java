@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController extends AbstractController {
 
-    @GetMapping("/user")
+    //@GetMapping("/user")
+    //public UserContext getCurrentUser() {
+    //    return this.getUserContext();
+    //}
+
+    @GetMapping("/login")
     public UserContext getCurrentUser() {
         return this.getUserContext();
     }
