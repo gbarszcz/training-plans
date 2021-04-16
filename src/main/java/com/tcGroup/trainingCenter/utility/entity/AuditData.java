@@ -8,6 +8,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @MappedSuperclass
@@ -18,23 +19,29 @@ public class AuditData implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "AUDIT_CD")
+    @JsonIgnore
     private Date auditCD;
 
     @Column(name = "AUDIT_CU")
+    @JsonIgnore
     private Long auditCU;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "AUDIT_MD")
+    @JsonIgnore
     private Date auditMD;
 
     @Column(name = "AUDIT_MU")
+    @JsonIgnore
     private Long auditMU;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "AUDIT_RD")
+    @JsonIgnore
     private Date auditRD;
 
     @Column(name = "AUDIT_RU")
+    @JsonIgnore
     private Long auditRU;
 
     public Long getId() {

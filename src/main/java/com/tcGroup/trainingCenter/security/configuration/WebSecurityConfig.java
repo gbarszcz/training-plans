@@ -43,8 +43,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(corsFilter(), SessionManagementFilter.class).authorizeRequests().antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index", "/register", "/exercises/**", "/exercise/**", "/tags").permitAll()
-                .anyRequest().authenticated().and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/exercises/**", "/exercise/**", "/tags").and().headers()
+        http.addFilterBefore(corsFilter(), SessionManagementFilter.class).authorizeRequests()
+                .antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index",
+                        "/register", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**")
+                .permitAll()
+                .anyRequest().authenticated().and().csrf()
+                .ignoringAntMatchers("/phpmyadmin/**",
+                        "/register", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**")
+                .and().headers()
                 .frameOptions().sameOrigin();
     }
 
