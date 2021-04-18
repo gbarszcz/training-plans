@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RequestMapping("training")
+@RequestMapping("training/plans")
 @RestController
 public class TrainingPlanTemplateController extends AbstractController {
 
     @Autowired
     private TrainingPlanTemplateService trainingPlanTemplateService;
 
-    @PostMapping("/plans/template")
+    @PostMapping("/template")
     public Long addPlanTemplate(@RequestBody @Valid TrainingPlanTemplateRequest request) {
         return trainingPlanTemplateService.addTrainingPlanTemplateForAccount(request);
     }
 
-    @GetMapping("/plans/template/{id}")
+    @GetMapping("/template/{id}")
     @ResponseBody
     public TrainingPlanTemplateData getTrainingPlanTemplate(@PathVariable Long id) {
         return trainingPlanTemplateService.getTrainingPlanById(id);

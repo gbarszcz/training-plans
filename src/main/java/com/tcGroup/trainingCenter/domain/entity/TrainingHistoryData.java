@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "TRAININGS_HISTORY")
@@ -31,6 +32,9 @@ public class TrainingHistoryData extends AuditData {
     @ManyToOne(targetEntity = AccountData.class)
     @JoinColumn(name = "ACC_ID")
     private AccountData account;
+
+    @OneToMany(mappedBy = "training")
+    private List<TrainingSeriesData> trainingSeriesData;
 
     @Override
     public Long getId() {
