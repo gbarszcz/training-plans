@@ -80,14 +80,14 @@ export class WcagComponent {
     styles.forEach((value, variable) => {
       document.documentElement.style.removeProperty(variable);
     });
-    if (!this.isSessionStorageWcagSet('color') && !this.isSessionStorageWcagSet('font')) {
+    if (!this.isSessionStorageWcagSet('wcag-color') && !this.isSessionStorageWcagSet('wcag-font')) {
       sessionStorage.removeItem('wcag');
     }
     if (styles.size > 1) {
-      sessionStorage.removeItem('color');
+      sessionStorage.removeItem('wcag-color');
       HTML.className = '';
     } else {
-      sessionStorage.removeItem('font');
+      sessionStorage.removeItem('wcag-font');
     }
   }
 
@@ -98,11 +98,11 @@ export class WcagComponent {
     });
     sessionStorage.setItem('wcag', 'true');
     if (styles.size > 1) {
-      sessionStorage.setItem('color', variant || '');
+      sessionStorage.setItem('wcag-color', variant || '');
       HTML.className = 'wcag';
-      HTML.classList.add(variant);
+      HTML.classList.add('wcag-' + variant);
     } else {
-      sessionStorage.setItem('font', variant || '');
+      sessionStorage.setItem('wcag-font', variant || '');
     }
   }
 
@@ -115,7 +115,7 @@ export class WcagComponent {
   }
 
   private setWCAG(): void {
-    ['color', 'font'].forEach(type => {
+    ['wcag-color', 'wcag-font'].forEach(type => {
       if (this.isSessionStorageWcagSet(type)) {
         this.wcagChange(this.wcagItems.findIndex(item => {
           return item.variant === this.getFromSession(type);
