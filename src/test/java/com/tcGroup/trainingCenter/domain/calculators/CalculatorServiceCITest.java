@@ -15,25 +15,24 @@ class CalculatorServiceCITest {
     public void shouldReturnExceptionWhenInputWeightIsLessThanZero(){
         CalculatorCI calculatorCI = new CalculatorCI(-1, 1.80);
 
-        try {
-            calculatorCI.calculateIndex();
-            Assertions.fail("Exception wasn't thrown!");
-        }catch (IllegalArgumentException exception){
-            Assertions.assertEquals("input value out of range", exception.getMessage());
-        }
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, calculatorCI::calculateIndex);
 
+        String expectedMessage = "input value out of range";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void shouldReturnExceptionWhenInputHeightIsLessThanZero() {
         CalculatorCI calculatorCI = new CalculatorCI(70, -1);
 
-        try {
-            calculatorCI.calculateIndex();
-            Assertions.fail("Exception wasn't thrown!");
-        } catch (IllegalArgumentException exception) {
-            Assertions.assertEquals("input value out of range", exception.getMessage());
-        }
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, calculatorCI::calculateIndex);
+
+        String expectedMessage = "input value out of range";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 
 }

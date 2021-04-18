@@ -11,27 +11,27 @@ class CalculatorServiceBMITest {
         Assertions.assertEquals(24.7, calculatorBMI.calculateIndex());
     }
 
-    @Test
+    @Test()
     public void shouldReturnExceptionWhenHeightLessThan1Meter() {
-        CalculatorBMI calculatorBMI = new CalculatorBMI(80, 0.99);
+        CalculatorBMI calculatorBMI = new CalculatorBMI(70, 0.99);
 
-        try {
-            calculatorBMI.calculateIndex();
-            Assertions.fail("Exception wasn't thrown!");
-        }catch (IllegalArgumentException exception){
-            Assertions.assertEquals("input value out of range", exception.getMessage());
-        }
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, calculatorBMI::calculateIndex);
+
+        String expectedMessage = "input value out of range";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void shouldReturnExceptionWhenWeightLessThan20Kilograms(){
         CalculatorBMI calculatorBMI = new CalculatorBMI(19, 1.80);
 
-        try {
-            calculatorBMI.calculateIndex();
-            Assertions.fail("Exception wasn't thrown!");
-        }catch (IllegalArgumentException exception){
-            Assertions.assertEquals("input value out of range", exception.getMessage());
-        }
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, calculatorBMI::calculateIndex);
+
+        String expectedMessage = "input value out of range";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 }

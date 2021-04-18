@@ -15,27 +15,24 @@ class CalculatorServiceWHRTest {
     public void shouldReturnExceptionWhenInputWaistIsLessThanZero(){
         CalculatorWHR calculatorWHR = new CalculatorWHR(-30 , 100);
 
-        try{
-            calculatorWHR.calculateIndex();
-            Assertions.fail("Exception wasn't thrown!");
-        } catch (IllegalArgumentException exception) {
-            Assertions.assertEquals("input value out of range", exception.getMessage());
-        }
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, calculatorWHR::calculateIndex);
 
+        String expectedMessage = "input value out of range";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void shouldReturnExceptionWhenInputHipCircumferenceIsLessThanZero(){
         CalculatorWHR calculatorWHR = new CalculatorWHR(90, -40);
 
-        try{
-            calculatorWHR.calculateIndex();
-            Assertions.fail("Exception wasn't thrown!");
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, calculatorWHR::calculateIndex);
 
-        } catch (IllegalArgumentException exception) {
-            Assertions.assertEquals("input value out of range", exception.getMessage());
-        }
+        String expectedMessage = "input value out of range";
+        String actualMessage = exception.getMessage();
 
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 
 }
