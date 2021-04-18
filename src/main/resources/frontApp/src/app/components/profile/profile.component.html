@@ -1,1 +1,122 @@
-<p>profile works!</p>
+<section class="section section_th">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-xl-6">
+        <div class="btn-group">
+          <a href="" class="btn" title="Favorite list">
+            <i class="bi bi-heart"></i>
+          </a>
+          <a href="" class="btn" title="Stats">
+            <i class="bi bi-graph-up"></i>
+          </a>
+          <a href="" class="btn" title="Measurement">
+            <i class="bi bi-rulers"></i>
+          </a>
+        </div>
+        <h1>John Smith</h1>
+        <div>Created at: May 01, 2021</div>
+        <div>Updated at: May 02, 2021</div>
+        <div>Last login at: May 02, 2021</div>
+      </div>
+      <div class="col-12 col-xl-6">
+        <label>
+          <div class="validation"></div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="bi bi-person"></i>
+              </span>
+            </div>
+            <input class="form-control"
+                   type="text"
+                   name="name"
+                   value="John">
+          </div>
+        </label>
+        <label class="input-group">
+          <div class="validation"></div>
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="bi bi-person"></i>
+            </span>
+          </div>
+          <input class="form-control"
+                 type="text"
+                 name="surname"
+                 value="Smith">
+        </label>
+        <label class="input-group">
+          <div class="validation"></div>
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="bi bi-person-badge"></i>
+            </span>
+          </div>
+          <input class="form-control"
+                 type="text"
+                 name="id"
+                 value="@john_smith">
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section_se">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-xl-6">
+        <label>
+          <div class="validation"></div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="bi bi-at"></i>
+            </span>
+            </div>
+            <input class="form-control"
+                   type="email"
+                   name="id"
+                   value="john_smith@email.com">
+          </div>
+        </label>
+
+        <label>
+          <div class="validation"></div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <p>Age</p>
+              </div>
+            </div>
+            <input class="form-control"
+                   type="number"
+                   name="age"
+                   min="12"
+                   max="100"
+                   value="31"
+                   placeholder="Age">
+          </div>
+        </label>
+
+        <label>
+          <div class="validation"></div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <p>About you</p>
+              </div>
+            </div>
+            <textarea class="form-control"
+                      name="describe"
+                      rows="6"
+                      placeholder="About you"></textarea>
+          </div>
+        </label>
+      </div>
+      <div class="col-12 col-xl-6">
+        <auth-forms [formType]="'Change password'"></auth-forms>
+      </div>
+    </div>
+  </div>
+</section>

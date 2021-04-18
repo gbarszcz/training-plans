@@ -1,0 +1,17 @@
+$icon-btn-width: 2.75rem;
+$icon-btn-height: 2.75rem;
+
+section:first-of-type {
+  padding: 10rem 0 4.75rem;
+}
+
+a {
+  width: $icon-btn-width;
+  height: $icon-btn-height;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+.btn-group {
+  margin-bottom: 3.5rem;
+}

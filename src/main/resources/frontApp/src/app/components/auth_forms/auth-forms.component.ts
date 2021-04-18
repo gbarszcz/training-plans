@@ -5,7 +5,7 @@ import {IAlert} from '../../models/IAlert';
 @Component({
   selector: 'auth-forms',
   templateUrl: './auth-forms.component.html',
-  styleUrls: ['./auth-forms.component.css']
+  styleUrls: ['./auth-forms.component.css'],
 })
 export class AuthFormsComponent implements OnInit {
   @Output() URLEvent = new EventEmitter<string>();
@@ -23,6 +23,28 @@ export class AuthFormsComponent implements OnInit {
       },
       max: {
         value: 150,
+        error: 'Provided value is too long'
+      },
+      required: {
+        value: true,
+        error: 'This is required field'
+      },
+      err: {
+        isErr: false,
+        message: ''
+      }
+    },
+    {
+      placeholder: 'Old password',
+      name: 'oldPassword',
+      icon: 'bi-eye',
+      info: 'Enter your actual password.',
+      type: {
+        value: 'password',
+        error: ''
+      },
+      max: {
+        value: 50,
         error: 'Provided value is too long'
       },
       required: {
@@ -101,13 +123,9 @@ export class AuthFormsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.formType !== 'register') {
-      this.inputsParams = this.inputsParams.filter((input) => {
-        return input.name !== 'repeatPassword';
-      });
-    }
-    this.formType = this.formType.replace('-', ' ');
+    this.formType = this.formType.toLowerCase();
     this.button.text = this.formType;
+    this.prepareInoutParams();
   }
 
   post(): void {
@@ -137,12 +155,32 @@ export class AuthFormsComponent implements OnInit {
       );
   }
 
+  prepareInoutParams(): void {
+    if (this.isLoginForm()) {
+      this.inputsParams = this.inputsParams.filter((input) => {
+        return input.name !== 'repeatPassword';
+      });
+    } else if (this.isChangePasswordForm()) {
+      this.inputsParams = this.inputsParams.filter((input) => {
+        return input.name !== 'email';
+      });
+    } else {
+      this.inputsParams = this.inputsParams.filter((input) => {
+        return input.name !== 'oldPassword';
+      });
+    }
+  }
+
   hideAlert(alertID: string): void {
     this.alerts[+alertID].show = false;
   }
 
-  isRegisterForm(): boolean {
-    return this.formType === 'register';
+  isLoginForm(): boolean {
+    return this.formType === 'login';
+  }
+
+  isChangePasswordForm(): boolean {
+    return this.formType === 'change password';
   }
 
   isPassword(index: number): boolean {
@@ -156,7 +194,7 @@ export class AuthFormsComponent implements OnInit {
   }
 
   liveValidation(index: number): void {
-    if (this.isRegisterForm()) {
+    if (!this.isLoginForm()) {
       this.registrationValidation(index);
     }
     this.disableButton();
@@ -188,7 +226,7 @@ export class AuthFormsComponent implements OnInit {
           input = this.setErrInfo(input, 'This field is empty');
         }
       }
-    } else if (!this.isCorrectType(input)) {
+    } else if (input.type.value !== 'oldPassword' && !this.isCorrectType(input)) {
       input = this.setErrInfo(input, input.type.error);
     } else if (INPUT_VALUE.length > input.max.value) {
       input = this.setErrInfo(input, input.max.error);
@@ -201,7 +239,10 @@ export class AuthFormsComponent implements OnInit {
       const REPEAT_PASSWORD_INPUT = this.inputsParams.filter((inputParam) => {
         return inputParam.name === 'repeatPassword';
       })[0];
-      this.setErrInfo(REPEAT_PASSWORD_INPUT, !this.checkRepeatPasswordIsEqual() && !!this.formData.repeatPassword ? REPEAT_PASSWORD_INPUT.type.error : null);
+      this.setErrInfo(
+        REPEAT_PASSWORD_INPUT,
+        !this.checkRepeatPasswordIsEqual() && !!this.formData.repeatPassword ? REPEAT_PASSWORD_INPUT.type.error : null
+      );
       this.passwordStrength(input, input.err.isErr ? null : INPUT_VALUE);
     }
     this.inputsParams[index] = input;

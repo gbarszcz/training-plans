@@ -591,6 +591,8 @@ export class AppService {
     ]
 }
       `;
+    } else if (url === '/profile') {
+      return `{"type": "profile"}`;
     } else {
       return '';
     }

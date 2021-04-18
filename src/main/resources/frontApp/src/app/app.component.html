@@ -1,7 +1,8 @@
 <main-navigation (URLEvent)="changeURL($event)" [position]="'fixed'" [navigation]="navigation"></main-navigation>
 <social-media [position]="'right'" [socialMedia]="socialMedia"></social-media>
 
-<section-page (URLEvent)="changeURL($event)" *ngIf="pageType == 'section'" [sections]="pageContent"></section-page>
+<section-page *ngIf="pageType == 'section'" (URLEvent)="changeURL($event)" [sections]="pageContent"></section-page>
+<user-profile *ngIf="pageType == 'profile'"></user-profile>
 
 <page-footer (URLEvent)="changeURL($event)"
              [navPosition]="'bottom'" [navigation]="navigation"

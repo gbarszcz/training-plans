@@ -1,9 +1,9 @@
-<form>
+<form [id]="'auth-form-' + formType.replace(' ', '-')">
   <fieldset>
-    <legend>{{formType}}</legend>
+    <legend *ngIf="!isChangePasswordForm()">{{formType}}</legend>
     <label *ngFor="let input of inputsParams; let i = index"
            class="{{input.err.isErr ? 'danger' : ''}}">
-      <div *ngIf="isRegisterForm() && input.name === 'password'"
+      <div *ngIf="!isLoginForm() && input.name === 'password'"
            id="password-strength" class="{{input?.strength?.level}}">
         {{input?.strength?.message}}
       </div>
@@ -11,7 +11,7 @@
         {{input.err.isErr ? input.err.message : ''}}
       </div>
       <div class="input-group{{input.required.value ? ' required' : ''}}">
-        <div *ngIf="isRegisterForm()" class="input-group-prepend">
+        <div *ngIf="!isLoginForm()" class="input-group-prepend">
           <span class="input-group-text">
             <i class="bi bi-info-circle" title="{{input.info}}"></i>
           </span>
@@ -40,7 +40,8 @@
   </fieldset>
 </form>
 
-<app-alert *ngIf="isRegisterForm()" [alert]="infoAlert"></app-alert>
+<app-alert *ngIf="!isLoginForm() && !isChangePasswordForm()"
+           [alert]="infoAlert"></app-alert>
 
 <div *ngIf="alerts">
   <div *ngFor="let alert of alerts">

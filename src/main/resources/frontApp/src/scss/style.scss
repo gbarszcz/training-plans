@@ -199,7 +199,48 @@ section {
   }
 }
 
+.validation {
+  display: inline-block;
+  box-sizing: content-box;
+  min-height: .875rem;
+  padding: .15rem 0;
+  vertical-align: middle;
+  opacity: 0;
+  line-height: 1;
+  font: {
+    size: .875rem;
+    weight: bold;
+  }
+  transition: opacity .3s ease-in-out;
+}
 
+.success {
+  .validation {
+    color: var(--bs-success);
+  }
+}
+
+.warning {
+  .validation {
+    color: var(--bs-warning);
+  }
+}
+
+.danger {
+  .validation {
+    color: var(--bs-danger);
+  }
+}
+
+.success,
+.warning,
+.danger {
+  .validation {
+    opacity: 1;
+  }
+}
+
+textarea,
 input {
   width: 100%;
   padding: .375rem .75rem;
@@ -232,6 +273,7 @@ input {
 .success {
   color: var(--bs-success);
 
+  textarea,
   input {
     border-color: var(--bs-success);
     color: var(--bs-success);
@@ -263,6 +305,7 @@ input {
 .warning {
   color: var(--bs-warning);
 
+  textarea,
   input {
     border-color: var(--bs-warning);
     color: var(--bs-warning);
@@ -294,6 +337,7 @@ input {
 .danger {
   color: var(--bs-danger);
 
+  textarea,
   input {
     border-color: var(--bs-danger);
     color: var(--bs-danger);
@@ -381,12 +425,34 @@ label {
   }
 
   .input-group-text {
+    width: 2.825rem;
+    height: 100%;
     padding: 0;
     font-size: 1.25rem;
     transition: $transition-base;
+  }
 
-    & > * {
+  span {
+    &.input-group-text i {
       padding: .35rem .668rem;
+    }
+  }
+
+  div {
+    &.input-group-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        margin: 0;
+        transform: rotate(-90deg);
+        color: $secondary !important;
+        font: {
+          size: 1rem;
+          weight: bold;
+        }
+      }
     }
   }
 
@@ -485,6 +551,7 @@ fieldset {
       }
     }
 
+    textarea,
     input {
       border-color: $secondary;
       color: $secondary;
@@ -723,5 +790,11 @@ html:not(.wcag) {
         }
       }
     }
+  }
+}
+
+.to-right-xl {
+  @media screen and (min-width: map-get($grid-breakpoints, 'xl')) {
+    text-align: right;
   }
 }
