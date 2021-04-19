@@ -21,6 +21,6 @@ public class CalculatorWHR implements IndexCalculator {
             result/=10;
             return  result;
         }
-        throw  new IllegalArgumentException("input value out of range");
+        throw new IllegalArgumentException("input value out of range");
     }
 }

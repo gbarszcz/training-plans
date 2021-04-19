@@ -11,7 +11,7 @@ class CalculatorServiceBMITest {
         Assertions.assertEquals(24.7, calculatorBMI.calculateIndex());
     }
 
-    @Test()
+    @Test
     public void shouldReturnExceptionWhenHeightLessThan1Meter() {
         CalculatorBMI calculatorBMI = new CalculatorBMI(70, 0.99);
 

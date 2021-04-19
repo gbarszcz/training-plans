@@ -5,7 +5,7 @@ import com.tcGroup.trainingCenter.domain.service.CalculatorService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CalculatorServiceServiceIml implements CalculatorService {
+public class CalculatorServiceServiceImpl implements CalculatorService {
     private IndexCalculator calculator;
 
     public IndexCalculator getCalculatorIndex() {
