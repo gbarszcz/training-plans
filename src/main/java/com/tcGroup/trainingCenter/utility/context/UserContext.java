@@ -3,11 +3,13 @@ package com.tcGroup.trainingCenter.utility.context;
 import java.util.Collection;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.user.enumeration.AccountStatus;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.context.request.RequestContextHolder;
 
 public class UserContext implements UserDetails {
 
@@ -27,6 +29,7 @@ public class UserContext implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public String getPassword() {
         return this.account.getAccountPassword();
     }
@@ -58,6 +61,10 @@ public class UserContext implements UserDetails {
 
     public Long getUserId() {
         return this.account.getId();
+    }
+
+    public String getSessionId() {
+        return RequestContextHolder.currentRequestAttributes().getSessionId();
     }
 
 }
