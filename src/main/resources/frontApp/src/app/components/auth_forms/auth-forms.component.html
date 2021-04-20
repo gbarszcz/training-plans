@@ -34,7 +34,10 @@
       </div>
     </label>
 
-    <button (click)="post()" [disabled]="button.disabled" class="btn btn_alt" type="submit">
+    <button (click)="submit()"
+            [disabled]="button.disabled"
+            class="btn btn_alt"
+            type="submit">
       {{button.text}}
     </button>
   </fieldset>

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppService} from '../../app.service';
 import {IAlert} from '../../models/IAlert';
+import {HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'auth-forms',
@@ -128,37 +129,65 @@ export class AuthFormsComponent implements OnInit {
     this.prepareInputParams();
   }
 
-  post(): void {
-    this.service.apiPostRequest(this.formType, this.formData)
-      .subscribe(
-        (res: any) => {
-          if (res.token) {
-            localStorage.setItem('token', res.token);
-          }
-          this.URLEvent.emit('/profile');
-        },
-        (error: any) => {
-          if (error.status === 400) {
-            this.prepareErrorFields(error.error.errors);
-            this.disableButton();
-          } else {
-            this.alerts.push({
-              id: this.alerts.length,
-              show: true,
-              header: 'Sorry! We have encountered a problem...',
-              text: 'Please try again later :\'(',
-              level: 'danger',
-              displayHideButton: true
-            });
-          }
+  submit(): void {
+    if (this.isRegisterForm()) {
+      this.register();
+    } else {
+      this.login();
+    }
+  }
+
+  register(): void {
+    this.service.apiPostRequest(this.formType, this.formData).subscribe(
+      (res: any) => {
+        this.URLEvent.emit('/login');
+      },
+      (error: any) => {
+        if (error.status === 400) {
+          this.prepareErrorFields(error.error.errors);
+          this.disableButton();
+        } else {
+          this.alerts.push({
+            id: this.alerts.length,
+            show: true,
+            header: 'Sorry! We have encountered a problem...',
+            text: 'Please try again later :\'(',
+            level: 'danger',
+            displayHideButton: true
+          });
         }
-      );
+      }
+    );
+  }
+
+  login(): void {
+    const HEADERS = {
+      headers: new HttpHeaders(this.formData ? {
+        authorization: 'Basic ' + btoa(this.formData.email + ':' + this.formData.password)
+      } : {})
+    };
+    this.service.apiGetRequest(this.formType, HEADERS).subscribe(
+      (res: any) => {
+        sessionStorage.setItem('username', res.username);
+        this.URLEvent.emit('/profile');
+      },
+      (error: any) => {
+        this.alerts.push({
+          id: this.alerts.length,
+          show: true,
+          header: error.status === 401 ? 'Oooh nooO !' : 'Sorry! We have encountered a problem...',
+          text: error.status === 401 ? 'This credentials are wrong!' : 'Please try again later :\'(',
+          level: 'danger',
+          displayHideButton: true
+        });
+      }
+    );
   }
 
   prepareInputParams(): void {
     if (this.isLoginForm()) {
       this.inputsParams = this.inputsParams.filter((input) => {
-        return input.name !== 'repeatPassword';
+        return input.name !== 'repeatPassword' && input.name !== 'oldPassword';
       });
     } else if (this.isChangePasswordForm()) {
       this.inputsParams = this.inputsParams.filter((input) => {
@@ -236,12 +265,12 @@ export class AuthFormsComponent implements OnInit {
       this.setErrInfo(input, null);
     }
     if (input.name === 'password') {
-      const REPEAT_PASSWORD_INPUT = this.inputsParams.filter((inputParam) => {
+      const REPEAT_PASSWORD = this.inputsParams.filter((inputParam) => {
         return inputParam.name === 'repeatPassword';
       })[0];
       this.setErrInfo(
-        REPEAT_PASSWORD_INPUT,
-        !this.checkRepeatPasswordIsEqual() && !!this.formData.repeatPassword ? REPEAT_PASSWORD_INPUT.type.error : null
+        REPEAT_PASSWORD,
+        !this.checkRepeatPasswordIsEqual() && !!this.formData.repeatPassword ? REPEAT_PASSWORD.type.error : null
       );
       this.passwordStrength(input, input.err.isErr ? null : INPUT_VALUE);
     }

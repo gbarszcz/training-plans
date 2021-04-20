@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { WcagComponent } from './components/wcag/wcag.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ThemeModeComponent } from './components/theme-mode/theme-mode.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -28,13 +29,15 @@ import { DatePipe } from '@angular/common';
     AlertComponent,
     WcagComponent,
     ProfileComponent,
-    ThemeModeComponent
+    ThemeModeComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    HttpClientXsrfModule,
+    FormsModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
