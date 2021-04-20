@@ -9,7 +9,6 @@ import com.tcGroup.trainingCenter.user.enumeration.AccountStatus;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.context.request.RequestContextHolder;
 
 public class UserContext implements UserDetails {
 
@@ -61,10 +60,6 @@ public class UserContext implements UserDetails {
 
     public Long getUserId() {
         return this.account.getId();
-    }
-
-    public String getSessionId() {
-        return RequestContextHolder.currentRequestAttributes().getSessionId();
     }
 
 }
