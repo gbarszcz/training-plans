@@ -7,7 +7,7 @@ import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
 
 import javax.persistence.*;
-
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -28,14 +28,14 @@ public class AccountData extends AuditData {
         @GeneratedValue
         protected long id;
 
-        @Column(name = "ACC_EMAIL")
+        @Column(name = "ACC_EMAIL", nullable = false)
         private String accountEmail;
 
-        @Column(name = "ACC_PASSWORD")
+        @Column(name = "ACC_PASSWORD", nullable = false)
         @JsonIgnore
         private String accountPassword;
 
-        @Column(name = "ACC_STATUS")
+        @Column(name = "ACC_STATUS", nullable = false)
         @Convert(converter = AccountStatusConverter.class)
         private AccountStatus accountStatus;
 
@@ -43,6 +43,22 @@ public class AccountData extends AuditData {
         @JoinTable(name = "ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "ACC_ID"), inverseJoinColumns = @JoinColumn(name = "ROL_ID"))
         @JsonIgnore
         private Set<RoleData> roles = new HashSet<>();
+
+        @Column(name = "ACC_FIRST_NAME", length = 50)
+        private String firstName;
+
+        @Column(name = "ACC_LAST_NAME", length = 100)
+        private String lastName;
+
+        @Column(name = "ACC_IDENTIFIER", length = 50)
+        private String identifier;
+
+        @Temporal(TemporalType.DATE)
+        @Column(name = "ACC_BIRTHDATE")
+        private Date birthdate;
+
+        @Column(name = "ACC_DESCRIPTION", length = 255)
+        private String description;
 
         @Override
         public Long getId() {
