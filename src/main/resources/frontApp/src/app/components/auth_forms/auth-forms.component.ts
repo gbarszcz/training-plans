@@ -124,7 +124,7 @@ export class AuthFormsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formType = this.formType.toLowerCase();
+    this.formType = this.formType.toLowerCase().replace('-', ' ');
     this.button.text = this.formType;
     this.prepareInputParams();
   }
