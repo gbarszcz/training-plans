@@ -10,6 +10,7 @@ import com.tcGroup.trainingCenter.user.service.RegistrationService;
 import com.tcGroup.trainingCenter.utility.logic.AbstractService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ public class RegistrationServiceImpl extends AbstractService implements Registra
     private AccountDAO accountDAO;
 
     @Autowired
+    @Qualifier("bCryptPasswordEncoder")
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     
     @Override

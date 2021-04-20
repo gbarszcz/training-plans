@@ -3,6 +3,7 @@ package com.tcGroup.trainingCenter.utility.context;
 import java.util.Collection;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.user.enumeration.AccountStatus;
 
@@ -27,6 +28,7 @@ public class UserContext implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public String getPassword() {
         return this.account.getAccountPassword();
     }

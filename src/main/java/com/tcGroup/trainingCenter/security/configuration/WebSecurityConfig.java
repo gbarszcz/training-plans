@@ -1,6 +1,7 @@
 package com.tcGroup.trainingCenter.security.configuration;
 
 import com.tcGroup.trainingCenter.security.filter.CORSFilter;
+import com.tcGroup.trainingCenter.user.provider.CustomAuthProvider;
 import com.tcGroup.trainingCenter.user.service.AccountManagementService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      @Autowired
      private AccountManagementService accountService;
 
+     @Autowired
+     private CustomAuthProvider authProvider;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-         auth.userDetailsService(accountService).passwordEncoder(bCryptPasswordEncoder());
+         auth.userDetailsService(accountService).passwordEncoder(bCryptPasswordEncoder())
+            .and().authenticationProvider(authProvider);
     }
 
-    @Bean
+    @Bean(value = "bCryptPasswordEncoder")
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
@@ -43,15 +48,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(corsFilter(), SessionManagementFilter.class).authorizeRequests()
-                .antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index",
-                        "/register", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**")
-                .permitAll()
-                .anyRequest().authenticated().and().csrf()
-                .ignoringAntMatchers("/phpmyadmin/**",
-                        "/register", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**")
-                .and().headers()
-                .frameOptions().sameOrigin();
+        http.addFilterBefore(corsFilter(), SessionManagementFilter.class).httpBasic().and().authorizeRequests()
+            .antMatchers("/user", "/logout").authenticated()
+            .antMatchers("/resources/**", "/scss/**", "/webjars/**", "/error", "/", "/index", "/register", "/login", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**").permitAll()
+                .and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/login*", "/logout*", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**").and().headers()
+                .frameOptions().sameOrigin()
+                .and().logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .permitAll();
     }
-
 }
