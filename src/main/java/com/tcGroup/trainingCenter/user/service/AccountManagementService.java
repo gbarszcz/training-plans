@@ -12,5 +12,9 @@ public interface AccountManagementService extends UserDetailsService {
 
     AccountData getAccountByEmail(String email);
 
+    AccountData getAccountById(Long id);
+
+    Long modifyAccount(AccountData accountData);
+
     List<TrainingPlanTemplateData> getTrainingPlans();
 }

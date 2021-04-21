@@ -38,6 +38,18 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
     }
 
     @Override
+    @Transactional
+    public AccountData getAccountById(Long accountId) {
+        return accountDAO.getItem(accountId);
+    }
+
+    @Override
+    @Transactional
+    public Long modifyAccount(AccountData accountData) {
+        return accountDAO.modifyItem(getUserContext(), accountData);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public UserContext loadUserByUsername(String accountEmail) throws UsernameNotFoundException {
         AccountData account = accountDAO.findAccountByEmail(accountEmail);
