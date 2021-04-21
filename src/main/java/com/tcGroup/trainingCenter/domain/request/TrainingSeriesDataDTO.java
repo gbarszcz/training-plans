@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class TrainingSeriesDataDTO {
 
     @NotNull
-    private final long trainingSeriesId;
+    private final long id;
     @NotNull
     private final long exerciseId;
     private final int trainingUnit;

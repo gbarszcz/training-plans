@@ -11,7 +11,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class TrainingSeriesResultDataDTO {
 
-    private final long resultId;
+    private final long id;
     private final String iterationUnit;
     private final Double iterationCount;
     private final Double additionalWeight;

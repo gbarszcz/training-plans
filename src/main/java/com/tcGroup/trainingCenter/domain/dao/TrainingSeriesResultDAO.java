@@ -18,5 +18,4 @@ public class TrainingSeriesResultDAO extends AbstractDAO<TrainingSeriesResultDat
         return (TrainingSeriesResultRepository) super.getRepository();
     }
 
-
 }

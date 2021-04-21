@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TrainingHistoryRequest {
 
-    private final long trainingHistoryId;
+    private final long id;
     @NotNull
     //TODO S-003B - account id should be taken from user context
     private final long accountId;

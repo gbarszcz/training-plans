@@ -80,7 +80,7 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
 
     @Transactional
     public TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request) {
-        TrainingHistoryData training = trainingHistoryDAO.getItem(request.getTrainingHistoryId());
+        TrainingHistoryData training = trainingHistoryDAO.getItem(request.getId());
         for (TrainingSeriesDataDTO seriesDataDTO : request.getTrainingSeriesData()) {
             TrainingSeriesData trainingSeriesData = mapToSeriesData(seriesDataDTO);
             trainingSeriesDAO.modifyItem(getUserContext(), trainingSeriesData);
@@ -91,7 +91,7 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
     }
 
     private TrainingSeriesData mapToSeriesData(TrainingSeriesDataDTO seriesDataDTO) {
-        TrainingSeriesData trainingSeriesData = trainingSeriesDAO.getItem(seriesDataDTO.getTrainingSeriesId());
+        TrainingSeriesData trainingSeriesData = trainingSeriesDAO.getItem(seriesDataDTO.getId());
         trainingSeriesData.setTrainingUnit(seriesDataDTO.getTrainingUnit());
 
         ExerciseData exerciseData = exerciseDAO.getItem(seriesDataDTO.getExerciseId());
@@ -106,7 +106,7 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
     }
 
     private TrainingSeriesResultData mapToResultData(TrainingSeriesResultDataDTO resultDTO) {
-        TrainingSeriesResultData trainingSeriesResultData = trainingSeriesResultDAO.getItem(resultDTO.getResultId());
+        TrainingSeriesResultData trainingSeriesResultData = trainingSeriesResultDAO.getItem(resultDTO.getId());
         trainingSeriesResultData.setIterationUnit(IterationUnit.valueOf(resultDTO.getIterationUnit()));
         trainingSeriesResultData.setIterationCount(resultDTO.getIterationCount());
         trainingSeriesResultData.setAdditionalWeight(resultDTO.getAdditionalWeight());
