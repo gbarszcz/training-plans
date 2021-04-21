@@ -1,5 +1,6 @@
 package com.tcGroup.trainingCenter.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class TrainingSeriesData extends AuditData {
 
     @ManyToOne(targetEntity = TrainingHistoryData.class)
     @JoinColumn(name = "TSE_THI_ID", referencedColumnName = "THI_ID")
+    @JsonIgnore
     private TrainingHistoryData training;
 
     @ManyToOne(targetEntity = ExerciseData.class)

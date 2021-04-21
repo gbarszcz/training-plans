@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("trainingPlanTemplateRepository")
 public interface TrainingPlanTemplateRepository extends AbstractRepository<TrainingPlanTemplateData, Long> {
 
     TrainingPlanTemplateData findByName(String name);

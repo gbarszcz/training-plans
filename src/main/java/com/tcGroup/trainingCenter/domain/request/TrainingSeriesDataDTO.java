@@ -6,18 +6,17 @@ import lombok.Getter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Getter
 @EqualsAndHashCode
 @ToString
 @AllArgsConstructor
-public class TrainingPlanTemplateRequest {
+public class TrainingSeriesDataDTO {
 
-    private final String name;
     @NotNull
-    //TODO S-003B - account id should be taken from user context
-    private final long accountId;
-    private final List<TrainingSeriesTemplateDTO> seriesTemplates;
-
+    private final long id;
+    @NotNull
+    private final long exerciseId;
+    private final int trainingUnit;
+    private final TrainingSeriesResultDataDTO trainingSeriesResultData;
 }

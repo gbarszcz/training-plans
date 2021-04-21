@@ -26,7 +26,7 @@ public class TrainingSeriesResultData extends AuditData {
 
     @Column(name = "TSR_ITERATION_UNIT")
     @Enumerated(EnumType.STRING)
-    private IterationUnit name;
+    private IterationUnit iterationUnit;
 
     @Column(name = "TSR_ITERATION_COUNT")
     private Double iterationCount;
