@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -15,6 +14,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { WcagComponent } from './components/wcag/wcag.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ThemeModeComponent } from './components/theme-mode/theme-mode.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { ThemeModeComponent } from './components/theme-mode/theme-mode.component
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

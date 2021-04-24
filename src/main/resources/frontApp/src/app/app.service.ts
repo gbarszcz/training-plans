@@ -15,6 +15,14 @@ export class AppService {
     return this.http.post<Response>(`${this.url}/${endpoint}`, data);
   }
 
+  apiPutRequest(endpoint: string, data: any): any {
+    return this.http.put<Response>(`${this.url}/${endpoint}`, data);
+  }
+
+  apiGetRequest(endpoint: string, options?: object): any {
+    return this.http.get<Response>(`${this.url}/${endpoint}`, options);
+  }
+
   /** sub nav should be for url param */
   getNavigation(url: string): string {
     // todo api
