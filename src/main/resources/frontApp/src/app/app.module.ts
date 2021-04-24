@@ -16,6 +16,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ThemeModeComponent } from './components/theme-mode/theme-mode.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { DatePipe } from '@angular/common';
+import { ExercisesComponent } from './components/exercises/exercises.component';
+import { ExerciseComponent } from './components/exercise/exercise.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +32,15 @@ import { DatePipe } from '@angular/common';
     WcagComponent,
     ProfileComponent,
     ThemeModeComponent,
+    ExercisesComponent,
+    ExerciseComponent,
     LogoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     HttpClientXsrfModule,
     FormsModule,
   ],
