@@ -1,6 +1,7 @@
 package com.tcGroup.trainingCenter.security.configuration;
 
 import com.tcGroup.trainingCenter.security.filter.CORSFilter;
+import com.tcGroup.trainingCenter.security.handler.CORSLogoutSuccessHandler;
 import com.tcGroup.trainingCenter.user.provider.CustomAuthProvider;
 import com.tcGroup.trainingCenter.user.service.AccountManagementService;
 
@@ -42,8 +43,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    CORSFilter corsFilter() {
+    protected CORSFilter corsFilter() {
         return new CORSFilter();
+    }
+
+    @Bean
+    protected CORSLogoutSuccessHandler corsLogoutSuccessHandler() {
+        return new CORSLogoutSuccessHandler();
     }
 
     @Override
@@ -55,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .frameOptions().sameOrigin()
                 .and().logout()
                     .logoutUrl("/logout")
+                    .logoutSuccessHandler(corsLogoutSuccessHandler())
                     .logoutSuccessUrl("/")
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID")
