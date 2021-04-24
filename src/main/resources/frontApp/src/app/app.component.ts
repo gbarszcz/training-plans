@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
       try {
         const TMP = JSON.parse(PAGE_CONTENT_REQUEST);
         this.mockPageContent = TMP.sections;
-        this.pageType = ('sections' in this.mockPageContent) ? TMP.type : ENDPOINT;
+        this.pageType = ('sections' in TMP) ? TMP.type : ENDPOINT;
       } catch (e) {}
       return;
     } // ---

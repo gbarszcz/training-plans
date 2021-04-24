@@ -62,7 +62,7 @@ export class ProfileComponent implements OnChanges {
         value: '',
         text: 'About you',
         placeholder: 'About you',
-        name: 'describe',
+        name: 'description',
         type: 'textarea',
         error: ''
       },
@@ -74,8 +74,6 @@ export class ProfileComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    this.response.createdAt = this.dateFormate(this.response?.createdAt);
-    this.response.updatedAt = this.dateFormate(this.response?.updatedAt);
     this.userName = this.setUserName();
   }
 
@@ -109,7 +107,7 @@ export class ProfileComponent implements OnChanges {
       );
   }
 
-  returnIfHasKay(obj: any, key: string): any | boolean {
+  returnIfHasKey(obj: any, key: string): any | boolean {
     return key in obj ? obj[key] : false;
   }
 
@@ -123,7 +121,7 @@ export class ProfileComponent implements OnChanges {
     });
   }
 
-  private dateFormate(dateString: string | null): string {
+  private dateFormat(dateString: string | null): string {
     if (!!dateString) {
       return this.datePipe.transform(
         new Date(dateString),
@@ -134,14 +132,10 @@ export class ProfileComponent implements OnChanges {
   }
 
   private setUserName(): string {
-    let firstName = 'firstName' in this.response ? this.response.firstName : '';
-    firstName = 'lastName' in this.response.lastName ? (
-      firstName !== '' ? `${firstName} ${this.response.lastName})` : this.response.lastName
-    ) : '';
-    if (!!firstName) {
-      return firstName;
+    let userName = [this.response.firstName, this.response.lastName].filter(Boolean).join(' ');
+    if (!!userName) {
+      userName = this.response.identifier || 'Undefined';
     }
-    firstName = this.response.identifier || 'Undefined';
-    return firstName;
+    return userName;
   }
 }

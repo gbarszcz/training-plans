@@ -19,7 +19,7 @@ export class AuthFormsComponent implements OnInit {
       info: 'This must be an email. For example: name.surname@example.com',
       type: {
         value: 'email',
-        error: 'This is not correct email!'
+        error: 'This is a not correct email!'
       },
       max: {
         value: 150,
@@ -27,7 +27,7 @@ export class AuthFormsComponent implements OnInit {
       },
       required: {
         value: true,
-        error: 'This is required field'
+        error: 'This is a required field'
       },
       err: {
         isErr: false,
@@ -49,7 +49,7 @@ export class AuthFormsComponent implements OnInit {
       },
       required: {
         value: true,
-        error: 'This is required field'
+        error: 'This is a required field'
       },
       err: {
         isErr: false,
@@ -71,7 +71,7 @@ export class AuthFormsComponent implements OnInit {
       },
       required: {
         value: true,
-        error: 'This is required field'
+        error: 'This is a required field'
       },
       err: {
         isErr: false,
@@ -97,7 +97,7 @@ export class AuthFormsComponent implements OnInit {
       },
       required: {
         value: true,
-        error: 'This is required field'
+        error: 'This is a required field'
       },
       err: {
         isErr: false,
@@ -125,7 +125,7 @@ export class AuthFormsComponent implements OnInit {
   ngOnInit(): void {
     this.formType = this.formType.toLowerCase();
     this.button.text = this.formType;
-    this.prepareInoutParams();
+    this.prepareInputParams();
   }
 
   post(): void {
@@ -155,7 +155,7 @@ export class AuthFormsComponent implements OnInit {
       );
   }
 
-  prepareInoutParams(): void {
+  prepareInputParams(): void {
     if (this.isLoginForm()) {
       this.inputsParams = this.inputsParams.filter((input) => {
         return input.name !== 'repeatPassword';
