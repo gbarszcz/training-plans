@@ -18,14 +18,14 @@
 <section class="section section_se">
   <div class="container">
     <div class="row">
-      <div *ngFor="let exercise of content" class="col-12 col-sm-6 col-xl-6">
+      <div *ngFor="let exercise of response" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
         <a [id]="'exercise-' + exercise.id"
-           [href]="'/exercise/id=' + exercise.id"
+           [href]="'/exercise/' + exercise.id"
            class="exercise">
           <div class="exercise-background" [style]="'background-image: url(\'' + exercise.image + '\')'"></div>
           <div class="exercise-info">
-            <b>{{exercise.exerciseName}}</b>
-            <h5>{{exercise.exerciseDifficultyLvl}}</h5>
+            <b>{{exercise.exerciseDifficultyLvl}}</b>
+            <h5>{{exercise.exerciseName}}</h5>
             <p *ngIf="exercise.equipments.length > 0" class="info">
               This exercise need equipment!
             </p>

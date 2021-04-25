@@ -7,7 +7,7 @@ import {IPageContent} from '../../models/IPageContent'; // todo temporary
   styleUrls: ['./exercises.component.css']
 })
 export class ExercisesComponent implements OnInit {
-  @Input() content: IPageContent[] = []; // todo any
+  @Input() response: any | null = null;
 
   constructor() { }
 

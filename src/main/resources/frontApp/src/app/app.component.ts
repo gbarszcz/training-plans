@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
 
   prepareFields(): void {
     this.navigation = new Navigation(this.appService.getNavigation(this.url), this.url) || null;
-    const ENDPOINT = this.url.replace('/', '');
+    const ENDPOINT = this.url.replace('/', '').split('/');
 
     // todo: finally this should be remove - just for mocking sites. ---
     const PAGE_CONTENT_REQUEST = this.appService.getPageContent(this.url);
@@ -42,16 +42,16 @@ export class AppComponent implements OnInit {
       try {
         const TMP = JSON.parse(PAGE_CONTENT_REQUEST);
         this.mockPageContent = TMP.sections;
-        this.pageType = ('sections' in TMP) ? TMP.type : ENDPOINT;
+        this.pageType = ('sections' in TMP) ? TMP.type : ENDPOINT[0];
       } catch (e) {}
       return;
     } // ---
 
-    this.appService.apiGetRequest(ENDPOINT).subscribe(
+    this.appService.apiGetRequest(ENDPOINT.join('/')).subscribe(
       (res: Response) => {
         this.pageContent = res;
         if (!('sections' in this.pageContent)) {
-          this.pageType = ENDPOINT;
+          this.pageType = ENDPOINT[0];
         }
       },
       (error: any) => {

@@ -1,1 +1,31 @@
-<p>exercise works!</p>
+<section class="section section_se">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <b>{{response.exerciseDifficultyLvl}}</b>
+        <h1>{{response.exerciseName}}</h1>
+      </div>
+      <div class="col-12 col-md-6 col-lg-7 col-xl-8">
+        {{response.exerciseDescription}}
+      </div>
+      <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+        <div *ngIf="!!response.tags && response.tags.length > 0" class="tags">
+          <h4>Tags:</h4>
+          <a *ngFor="let tag of response.tags"
+             href="tags/{{tag.id}}"
+             class="badge bg-primary">
+            {{tag.tagName}}
+          </a>
+        </div>
+        <div *ngIf="!!response.equipments && response.equipments.length > 0" class="equipments">
+          <h4>Equipments:</h4>
+          <a *ngFor="let equipment of response.equipments"
+             href="tags/{{equipment.id}}"
+             class="badge bg-primary">
+            {{equipment.equipmentName}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
