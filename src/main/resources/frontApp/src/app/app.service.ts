@@ -1,18 +1,17 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AppService {
-  private serverPort = 8080;
-  private url = `${window.location.protocol}//${window.location.hostname}:${this.serverPort}`;
+  private prefix = "/api"
 
   constructor(private http: HttpClient) { }
 
   apiPostRequest(endpoint: string, data: any): any {
-    return this.http.post<Response>(`${this.url}/${endpoint}`, data);
+    return this.http.post<Response>(`${this.prefix}/${endpoint}`, data);
   }
 
   apiPutRequest(endpoint: string, data: any): any {
@@ -20,7 +19,7 @@ export class AppService {
   }
 
   apiGetRequest(endpoint: string, options?: object): any {
-    return this.http.get<Response>(`${this.url}/${endpoint}`, options);
+    return this.http.get<Response>(`${this.prefix}/${endpoint}`, options);
   }
 
   /** sub nav should be for url param */
