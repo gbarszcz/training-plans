@@ -8624,6 +8624,24 @@ html:not(.wcag)::-webkit-scrollbar-thumb:hover {
   }
 }
 
+.fc h2, .fc .h2 {
+  color: var(--bs-primary);
+}
+.fc .fc-scrollgrid {
+  border-collapse: collapse !important;
+  border: 2px solid var(--bs-primary);
+}
+.fc table tr,
+.fc table td {
+  border-color: var(--bs-primary);
+}
+.fc table tr {
+  border-bottom: 2px solid;
+}
+.fc table td {
+  border-right: 2px solid;
+}
+
 /*! --------------------------- End: MyStyles ---------------------------- */
 
 /*# sourceMappingURL=styles.css.map */

@@ -6,6 +6,8 @@
 <app-exercises *ngIf="pageType === 'exercises'" [response]="pageContent"></app-exercises>
 <app-exercise *ngIf="pageType === 'exercise'" [response]="pageContent"></app-exercise>
 <app-logout *ngIf="url === 'logout'"></app-logout>
+<!--<app-training *ngIf="pageType === 'training'"></app-training>-->
+<app-training></app-training>
 
 <page-footer (URLEvent)="changeURL($event)"
              [navPosition]="'bottom'" [navigation]="navigation"
