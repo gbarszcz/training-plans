@@ -98,7 +98,8 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
         trainingSeriesData.setExercise(exerciseData);
 
         TrainingSeriesResultData trainingSeriesResultData = mapToResultData(seriesDataDTO.getTrainingSeriesResultData());
-        trainingSeriesResultData.setResult(calculateResult(exerciseData, trainingSeriesResultData));
+        Double result = calculateResult(trainingSeriesData.getTraining().getTrainingDate(), trainingSeriesResultData);
+        trainingSeriesResultData.setResult(result);
         trainingSeriesResultDAO.modifyItem(getUserContext(), trainingSeriesResultData);
         trainingSeriesData.setTrainingSeriesResultData(trainingSeriesResultData);
 
@@ -113,10 +114,9 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
         return trainingSeriesResultData;
     }
 
-    //TODO in M-014B
-    private Double calculateResult(ExerciseData exerciseData, TrainingSeriesResultData trainingSeriesResultData) {
-        return (exerciseData.getExerciseDifficultyLvl() == DifficultyLevel.LOW ? 1 : 2)
-                * trainingSeriesResultData.getAdditionalWeight()
-                * trainingSeriesResultData.getIterationCount();
+    private Double calculateResult(Date exerciseDate, TrainingSeriesResultData resultData) {
+        return (getUserContext().getUserWeightByDate(exerciseDate)
+                + resultData.getAdditionalWeight())
+                * resultData.getIterationCount();
     }
 }
