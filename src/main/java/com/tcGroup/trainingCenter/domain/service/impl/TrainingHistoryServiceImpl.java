@@ -82,7 +82,7 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
     public TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request) {
         TrainingHistoryData training = trainingHistoryDAO.getItem(request.getId());
         for (TrainingSeriesDataDTO seriesDataDTO : request.getTrainingSeriesData()) {
-            TrainingSeriesData trainingSeriesData = mapToSeriesData(seriesDataDTO);
+            TrainingSeriesData trainingSeriesData = mapToSeriesData(seriesDataDTO, training.getTrainingDate());
             trainingSeriesDAO.modifyItem(getUserContext(), trainingSeriesData);
         }
         training.setTrainingDate(Date.from(request.getTrainingDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
@@ -90,7 +90,7 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
         return training;
     }
 
-    private TrainingSeriesData mapToSeriesData(TrainingSeriesDataDTO seriesDataDTO) {
+    private TrainingSeriesData mapToSeriesData(TrainingSeriesDataDTO seriesDataDTO, Date trainingDate) {
         TrainingSeriesData trainingSeriesData = trainingSeriesDAO.getItem(seriesDataDTO.getId());
         trainingSeriesData.setTrainingUnit(seriesDataDTO.getTrainingUnit());
 
@@ -98,7 +98,7 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
         trainingSeriesData.setExercise(exerciseData);
 
         TrainingSeriesResultData trainingSeriesResultData = mapToResultData(seriesDataDTO.getTrainingSeriesResultData());
-        Double result = calculateResult(trainingSeriesData.getTraining().getTrainingDate(), trainingSeriesResultData);
+        Double result = calculateResult(trainingDate, trainingSeriesResultData);
         trainingSeriesResultData.setResult(result);
         trainingSeriesResultDAO.modifyItem(getUserContext(), trainingSeriesResultData);
         trainingSeriesData.setTrainingSeriesResultData(trainingSeriesResultData);
@@ -114,9 +114,11 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
         return trainingSeriesResultData;
     }
 
-    private Double calculateResult(Date exerciseDate, TrainingSeriesResultData resultData) {
-        return (getUserContext().getUserWeightByDate(exerciseDate)
-                + resultData.getAdditionalWeight())
+    private Double calculateResult(Date trainingDate, TrainingSeriesResultData resultData) {
+        return 75.5
+// TODO userContext() should be used here, but the endpoint can be called without any authorization
+//        return (getUserContext().getUserWeightByDate(exerciseDate)
+                + resultData.getAdditionalWeight()
                 * resultData.getIterationCount();
     }
 }
