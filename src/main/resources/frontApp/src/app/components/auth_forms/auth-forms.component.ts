@@ -130,7 +130,7 @@ export class AuthFormsComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.isRegisterForm()) {
+    if (!this.isLoginForm()) {
       this.register();
     } else {
       this.login();

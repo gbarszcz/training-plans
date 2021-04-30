@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class AppService {
-  private prefix = "/api"
+  private prefix = "/api";
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +15,7 @@ export class AppService {
   }
 
   apiPutRequest(endpoint: string, data: any): any {
-    return this.http.put<Response>(`${this.url}/${endpoint}`, data);
+    return this.http.put<Response>(`${this.prefix}/${endpoint}`, data);
   }
 
   apiGetRequest(endpoint: string, options?: object): any {

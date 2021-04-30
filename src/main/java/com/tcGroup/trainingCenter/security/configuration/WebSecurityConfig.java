@@ -66,7 +66,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout()
                     .logoutUrl("/logout")
                     .logoutSuccessHandler(corsLogoutSuccessHandler())
-                    .logoutSuccessUrl("/")
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID")
                     .permitAll()
