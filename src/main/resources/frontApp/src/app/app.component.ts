@@ -18,7 +18,11 @@ export class AppComponent implements OnInit {
   pageType = 'section';
   url: string;
 
-  constructor(private appService: AppService, private router: Router, private location: Location) {
+  constructor(
+    private appService: AppService,
+    private location: Location,
+    private router: Router
+  ) {
     this.url = location.path() || '/';
   }
 

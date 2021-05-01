@@ -1,31 +1,85 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AppService {
-  private serverPort = 8080;
-  private url = `${window.location.protocol}//${window.location.hostname}:${this.serverPort}`;
+  private prefix = "/api";
 
   constructor(private http: HttpClient) { }
 
   apiPostRequest(endpoint: string, data: any): any {
-    return this.http.post<Response>(`${this.url}/${endpoint}`, data);
+    return this.http.post<Response>(`${this.prefix}/${endpoint}`, data);
   }
 
   apiPutRequest(endpoint: string, data: any): any {
-    return this.http.put<Response>(`${this.url}/${endpoint}`, data);
+    return this.http.put<Response>(`${this.prefix}/${endpoint}`, data);
   }
 
   apiGetRequest(endpoint: string, options?: object): any {
-    return this.http.get<Response>(`${this.url}/${endpoint}`, options);
+    return this.http.get<Response>(`${this.prefix}/${endpoint}`, options);
   }
 
   /** sub nav should be for url param */
   getNavigation(url: string): string {
-    // todo api
+    // todo
+    const tmp_isUserLogin = !!sessionStorage.getItem('username');
+    let account;
+    if (tmp_isUserLogin) {
+      account = `
+      {
+          "content": [{
+            "type": 4,
+            "value": "Profile"
+          }],
+          "subItems": [],
+          "link": "/profile",
+          "disabled": false,
+          "divider": false,
+          "left": true
+        },
+        {
+          "content": [{
+            "type": 4,
+            "value": "Logout"
+          }],
+          "subItems": [],
+          "link": "/logout",
+          "disabled": false,
+          "divider": false,
+          "left": true
+        },
+      `;
+    }
+    else {
+      account = `
+      {
+          "content": [{
+            "type": 4,
+            "value": "Register"
+          }],
+          "subItems": [],
+          "link": "/register",
+          "disabled": false,
+          "divider": false,
+          "left": true
+        },
+        {
+          "content": [{
+            "type": 4,
+            "value": "Login"
+          }],
+          "subItems": [],
+          "link": "/login",
+          "disabled": false,
+          "divider": false,
+          "left": true
+        },
+      `;
+    }
+
     if (url === '/') {
       return `
 {
@@ -75,28 +129,7 @@ export class AppService {
         }
       ],
       "subItems": [
-        {
-          "content": [{
-            "type": 4,
-            "value": "Register"
-          }],
-          "subItems": [],
-          "link": "/register",
-          "disabled": false,
-          "divider": false,
-          "left": true
-        },
-        {
-          "content": [{
-            "type": 4,
-            "value": "Login"
-          }],
-          "subItems": [],
-          "link": "/login",
-          "disabled": false,
-          "divider": false,
-          "left": true
-        },
+        ${account}
         {
           "content": [{
             "type": 4,
@@ -221,28 +254,7 @@ export class AppService {
         }
       ],
       "subItems": [
-        {
-          "content": [{
-            "type": 4,
-            "value": "Register"
-          }],
-          "subItems": [],
-          "link": "/register",
-          "disabled": false,
-          "divider": false,
-          "left": true
-        },
-        {
-          "content": [{
-            "type": 4,
-            "value": "Login"
-          }],
-          "subItems": [],
-          "link": "/login",
-          "disabled": false,
-          "divider": false,
-          "left": true
-        },
+        ${account}
         {
           "content": [{
             "type": 4,
@@ -341,28 +353,7 @@ export class AppService {
         }
       ],
       "subItems": [
-        {
-          "content": [{
-            "type": 4,
-            "value": "Register"
-          }],
-          "subItems": [],
-          "link": "/register",
-          "disabled": false,
-          "divider": false,
-          "left": true
-        },
-        {
-          "content": [{
-            "type": 4,
-            "value": "Login"
-          }],
-          "subItems": [],
-          "link": "/login",
-          "disabled": false,
-          "divider": false,
-          "left": true
-        },
+        ${account}
         {
           "content": [{
             "type": 4,

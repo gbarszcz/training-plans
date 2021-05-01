@@ -1,6 +1,8 @@
 package com.tcGroup.trainingCenter.security.configuration;
 
 import com.tcGroup.trainingCenter.security.filter.CORSFilter;
+import com.tcGroup.trainingCenter.security.filter.CsrfHeaderFilter;
+import com.tcGroup.trainingCenter.security.handler.CORSLogoutSuccessHandler;
 import com.tcGroup.trainingCenter.user.provider.CustomAuthProvider;
 import com.tcGroup.trainingCenter.user.service.AccountManagementService;
 
@@ -13,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.session.SessionManagementFilter;
 
 @Configuration
@@ -42,8 +45,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    CORSFilter corsFilter() {
+    protected CORSFilter corsFilter() {
         return new CORSFilter();
+    }
+
+    @Bean
+    protected CORSLogoutSuccessHandler corsLogoutSuccessHandler() {
+        return new CORSLogoutSuccessHandler();
     }
 
     @Override
@@ -51,13 +59,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(corsFilter(), SessionManagementFilter.class).httpBasic().and().authorizeRequests()
             .antMatchers("/user", "/logout", "/profile").authenticated()
             .antMatchers("/resources/**", "/scss/**", "/webjars/**", "/error", "/", "/index", "/register", "/login", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**").permitAll()
-                .and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/login*", "/logout*", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**", "/profile").and().headers()
+                .and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/login*", "/logout*", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**", "/profile")
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and().headers()
                 .frameOptions().sameOrigin()
                 .and().logout()
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/")
+                    .logoutSuccessHandler(corsLogoutSuccessHandler())
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID")
-                    .permitAll();
+                    .permitAll()
+                .and()
+                .addFilterAfter(new CsrfHeaderFilter(), SessionManagementFilter.class);
     }
 }

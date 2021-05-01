@@ -3,6 +3,7 @@
 
 <section-page *ngIf="pageType === 'section'" (URLEvent)="changeURL($event)" [sections]="mockPageContent"></section-page>
 <user-profile *ngIf="pageType === 'profile'" [response]="pageContent"></user-profile>
+<app-logout *ngIf="url === '/logout'"></app-logout>
 
 <page-footer (URLEvent)="changeURL($event)"
              [navPosition]="'bottom'" [navigation]="navigation"
