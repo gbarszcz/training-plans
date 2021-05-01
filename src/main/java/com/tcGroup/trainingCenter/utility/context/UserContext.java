@@ -1,6 +1,7 @@
 package com.tcGroup.trainingCenter.utility.context;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -62,4 +63,8 @@ public class UserContext implements UserDetails {
         return this.account.getId();
     }
 
+    //TODO M-017B
+    public Double getUserWeightByDate(Date exerciseDate) {
+        return 75.5;
+    }
 }
