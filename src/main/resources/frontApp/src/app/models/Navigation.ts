@@ -29,7 +29,7 @@ export class Navigation {
     NAV.mainNav = this.updateIfItemDisabled(NAV.mainNav);
     NAV.subNav = this.updateIfItemDisabled(NAV.subNav);
 
-    this.currentRoute = currentRoute;
+    this.currentRoute = `/${currentRoute}`;
     this.brandItem = NAV.brandItem;
     this.account = this.getAccountItem(NAV);
     this.navItems = this.getMainNavItem(NAV);
