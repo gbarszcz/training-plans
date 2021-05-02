@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +80,7 @@ export class AppService {
       `;
     }
 
-    if (url === '/') {
+    if (url === '') {
       return `
 {
   "brandItem": {
@@ -204,7 +204,7 @@ export class AppService {
 }
     `;
     }
-    else if (url === '/something') {
+    else if (url === 'something') {
       return `
 {
   "brandItem": {
@@ -408,7 +408,7 @@ export class AppService {
   }
 
   getPageContent(url: string): string {
-    if (url === '/') {
+    if (url === '') {
       return `
 {
     "type": "section",
@@ -524,7 +524,7 @@ export class AppService {
     ]
 }
     `;
-    } else if (url === '/register') {
+    } else if (url === 'register') {
       return `
 {
     "type": "section",
@@ -557,7 +557,7 @@ export class AppService {
     ]
 }
       `;
-    } else if (url === '/login') {
+    } else if (url === 'login') {
       return `
 {
     "type": "section",
