@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TrainingHistoryService {
 
-    List<TrainingHistoryData> getAllDataForAccount(Long accountId);
+    List<TrainingHistoryData> getAllDataForAccount();
     Long createTrainingPlan(TrainingHistoryRequest request);
     TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request);
     TrainingHistoryData getTrainingPlan(Long id);

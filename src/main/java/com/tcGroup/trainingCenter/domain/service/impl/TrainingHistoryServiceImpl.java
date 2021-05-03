@@ -39,8 +39,9 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
     @Autowired
     private ExerciseDAO exerciseDAO;
 
-    public List<TrainingHistoryData> getAllDataForAccount(Long accountId) {
-        return trainingHistoryDAO.findByAccountId(accountId);
+    @Override
+    public List<TrainingHistoryData> getAllDataForAccount() {
+        return trainingHistoryDAO.findByAccountId(getUserContext().getUserId());
     }
 
     @Override
@@ -79,7 +80,7 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
 
     @Transactional
     public TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request) {
-        TrainingHistoryData training = trainingHistoryDAO.getItem(request.getId());
+        TrainingHistoryData training = this.getTrainingPlan(request.getId());
         List<TrainingSeriesDataDTO> trainingSeriesDataList = request.getTrainingSeriesData();
         mapSeriesDataListToSeriesData(training, trainingSeriesDataList);
         training.setTitle(request.getTitle());

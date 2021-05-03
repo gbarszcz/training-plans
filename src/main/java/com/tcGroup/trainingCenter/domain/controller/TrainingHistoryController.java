@@ -19,7 +19,7 @@ public class TrainingHistoryController extends AbstractController {
 
     @GetMapping("/")
     public List<TrainingHistoryData> getTrainingHistoryData() {
-        return trainingHistoryService.getAllDataForAccount(getUserContext().getUserId());
+        return trainingHistoryService.getAllDataForAccount();
     }
 
     @GetMapping("/{id}")
