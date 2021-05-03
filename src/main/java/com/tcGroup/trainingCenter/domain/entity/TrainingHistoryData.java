@@ -1,5 +1,8 @@
 package com.tcGroup.trainingCenter.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tcGroup.trainingCenter.domain.enumeration.DifficultyLevel;
+import com.tcGroup.trainingCenter.domain.enumeration.converter.DifficultyLevelConverter;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
@@ -31,10 +34,18 @@ public class TrainingHistoryData extends AuditData {
 
     @ManyToOne(targetEntity = AccountData.class)
     @JoinColumn(name = "ACC_ID")
+    @JsonIgnore
     private AccountData account;
 
     @OneToMany(mappedBy = "training")
     private List<TrainingSeriesData> trainingSeriesData;
+
+    @Column(name = "THI_TITLE")
+    private String title;
+
+    @Column(name = "THI_DIFFICULTY_LVL", length = 1)
+    @Convert(converter = DifficultyLevelConverter.class)
+    private DifficultyLevel difficulty;
 
     @Override
     public Long getId() {

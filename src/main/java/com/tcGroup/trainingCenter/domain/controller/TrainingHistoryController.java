@@ -17,9 +17,14 @@ public class TrainingHistoryController extends AbstractController {
     @Autowired
     private TrainingHistoryService trainingHistoryService;
 
-    @GetMapping("/all/{accountId}")
-    public List<TrainingHistoryData> getTrainingHistoryData(@PathVariable Long accountId) {
-        return trainingHistoryService.getAllDataForAccount(accountId);
+    @GetMapping("/")
+    public List<TrainingHistoryData> getTrainingHistoryData() {
+        return trainingHistoryService.getAllDataForAccount(getUserContext().getUserId());
+    }
+
+    @GetMapping("/{id}")
+    public TrainingHistoryData getTrainingData(@PathVariable Long id) {
+        return trainingHistoryService.getTrainingPlan(id);
     }
 
     @PostMapping("/add")

@@ -7,8 +7,7 @@ import java.util.List;
 
 public interface TrainingPlanTemplateService {
 
-    List<TrainingPlanTemplateData> getTrainingPlanTemplatesForAccount(long accountId);
-    List<TrainingPlanTemplateData> getAllTrainingPlans();
+    List<TrainingPlanTemplateData> getTrainingPlanTemplatesForAccount();
     TrainingPlanTemplateData getTrainingPlanById(long id);
     Long addTrainingPlanTemplateForAccount(TrainingPlanTemplateRequest request);
 

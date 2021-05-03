@@ -1,5 +1,6 @@
 package com.tcGroup.trainingCenter.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class TrainingPlanTemplateData extends AuditData {
 
     @ManyToOne(targetEntity = AccountData.class)
     @JoinColumn(name = "ACC_ID", referencedColumnName = "ACC_ID")
+    @JsonIgnore
     private AccountData account;
 
     @OneToMany(mappedBy = "trainingTemplate")

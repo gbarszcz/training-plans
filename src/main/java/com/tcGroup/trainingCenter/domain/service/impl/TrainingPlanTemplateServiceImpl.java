@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service(value = "trainingPlanTemplateService")
 public class TrainingPlanTemplateServiceImpl extends AbstractService implements TrainingPlanTemplateService {
@@ -35,13 +34,8 @@ public class TrainingPlanTemplateServiceImpl extends AbstractService implements 
 
     @Override
     @Transactional(readOnly = true)
-    public List<TrainingPlanTemplateData> getTrainingPlanTemplatesForAccount(long accountId) {
-        return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(accountId);
-    }
-
-    @Override
-    public List<TrainingPlanTemplateData> getAllTrainingPlans() {
-        return trainingPlanTemplateDAO.getItems();
+    public List<TrainingPlanTemplateData> getTrainingPlanTemplatesForAccount() {
+        return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(getUserContext().getUserId());
     }
 
     @Override
@@ -53,7 +47,7 @@ public class TrainingPlanTemplateServiceImpl extends AbstractService implements 
     @Transactional
     public Long addTrainingPlanTemplateForAccount(TrainingPlanTemplateRequest request) {
         TrainingPlanTemplateData template = new TrainingPlanTemplateData();
-        AccountData account = accountDAO.getItem(request.getAccountId());
+        AccountData account = accountDAO.getItem(getUserContext().getUserId());
         template.setName(request.getName());
         template.setAccount(account);
         Long item = trainingPlanTemplateDAO.createItem(getUserContext(), template);

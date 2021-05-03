@@ -10,5 +10,6 @@ public interface TrainingHistoryService {
     List<TrainingHistoryData> getAllDataForAccount(Long accountId);
     Long createTrainingPlan(TrainingHistoryRequest request);
     TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request);
+    TrainingHistoryData getTrainingPlan(Long id);
 
 }
