@@ -4,6 +4,7 @@ package com.tcGroup.trainingCenter.domain.controller;
 import com.tcGroup.trainingCenter.domain.calculators.CalculatorBMI;
 import com.tcGroup.trainingCenter.domain.calculators.CalculatorCI;
 import com.tcGroup.trainingCenter.domain.calculators.CalculatorWHR;
+import com.tcGroup.trainingCenter.domain.enumeration.CalculatorType;
 import com.tcGroup.trainingCenter.domain.service.CalculatorService;
 import com.tcGroup.trainingCenter.utility.logic.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,26 +26,25 @@ public class CalculatorController extends AbstractController {
         this.calculatorService = calculatorService;
     }
 
+    @GetMapping
+    public ResponseEntity<Double> calculateIndex(@RequestParam("calculatorType") CalculatorType type,
+                                                 @RequestParam(required = false) Double weight, @RequestParam(required = false) Double height,
+                                                 @RequestParam(required = false) Double waist, @RequestParam(required = false) Double hipCircumference){
 
-    @GetMapping(path = "/bmi")
-    public ResponseEntity<Double> calculateBMIIndex(@RequestParam double weight, @RequestParam double height){
-        calculatorService.setCalculatorName(new CalculatorBMI(weight, height));
-        return new ResponseEntity<>(calculatorService.calculate() , HttpStatus.OK);
+        if(type.equals(CalculatorType.BMI)){
+            calculatorService.setCalculatorName(new CalculatorBMI(weight, height));
+            return new ResponseEntity<>(calculatorService.calculate() , HttpStatus.OK);
+        }
+        else if(type.equals(CalculatorType.CI)){
+            calculatorService.setCalculatorName(new CalculatorCI(weight, height));
+            return new ResponseEntity<>(calculatorService.calculate() , HttpStatus.OK);
+        }
+        else if(type.equals(CalculatorType.WHR)){
+            calculatorService.setCalculatorName(new CalculatorWHR(waist, hipCircumference));
+            return new ResponseEntity<>(calculatorService.calculate(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-
-    @GetMapping(path = "/ci")
-    public ResponseEntity<Double> calculateCIIndex(@RequestParam double weight, @RequestParam double height){
-        calculatorService.setCalculatorName(new CalculatorCI(weight, height));
-        return new ResponseEntity<>(calculatorService.calculate(), HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/whr")
-    public ResponseEntity<Double> calculateWHRIndex(@RequestParam double waist, @RequestParam double hipCircumference){
-        calculatorService.setCalculatorName(new CalculatorWHR(waist, hipCircumference));
-        return new ResponseEntity<>(calculatorService.calculate(), HttpStatus.OK);
-    }
-
-
-
 
 }
