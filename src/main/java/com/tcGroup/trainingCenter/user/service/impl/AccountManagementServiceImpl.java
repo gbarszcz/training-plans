@@ -5,8 +5,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.tcGroup.trainingCenter.domain.dao.TrainingHistoryDAO;
+import com.tcGroup.trainingCenter.domain.dao.MeasurementDAO;
 import com.tcGroup.trainingCenter.domain.dao.TrainingPlanTemplateDAO;
 import com.tcGroup.trainingCenter.domain.entity.TrainingHistoryData;
+import com.tcGroup.trainingCenter.domain.entity.MeasurementData;
 import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
 import com.tcGroup.trainingCenter.user.dao.AccountDAO;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
@@ -14,7 +16,6 @@ import com.tcGroup.trainingCenter.user.entity.RoleData;
 import com.tcGroup.trainingCenter.user.service.AccountManagementService;
 import com.tcGroup.trainingCenter.utility.context.UserContext;
 import com.tcGroup.trainingCenter.utility.logic.AbstractService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,6 +34,9 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
 
     @Autowired
     private TrainingHistoryDAO trainingHistoryDAO;
+
+    @Autowired
+    private MeasurementDAO measurementDAO;
 
     // -------------------------- ACCOUNTS -------------------------------------
 
@@ -77,5 +81,9 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
     @Override
     public List<TrainingHistoryData> getTrainingHistory() {
         return trainingHistoryDAO.findByAccountId(getUserContext().getUserId());
+    }
+    @Override
+    public List<MeasurementData> getMeasurements() {
+        return measurementDAO.findByAccountId(getUserContext().getUserId());
     }
 }
