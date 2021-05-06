@@ -47,6 +47,7 @@ public class MeasurementServiceImpl extends AbstractService implements Measureme
     public MeasurementData modifyMeasurement(MeasurementData measurementData) {
         try {
             MeasurementData item = getById(measurementData.getId());
+            measurementData.setAccount(accountDAO.getItem(getUserContext().getUserId()));
             measurementDAO.modifyItem(getUserContext(), measurementData);
             return item;
         } catch (IllegalStateException ex) {
