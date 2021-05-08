@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 
 export class AppService {
-  private prefix = "/api";
+  private prefix = '/api';
 
   constructor(private http: HttpClient) { }
 

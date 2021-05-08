@@ -21,13 +21,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'exercises', component: ExercisesComponent },
       { path: 'exercise/:id', component: ExerciseComponent },
-      {
-        path: 'training',
-        component: TrainingManagerComponent,
-        children: [
-
-        ]
-      },
+      { path: 'trainings', component: TrainingManagerComponent },
     ]
   },
 ];

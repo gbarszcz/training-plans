@@ -8618,9 +8618,19 @@ html:not(.wcag)::-webkit-scrollbar-thumb:hover {
   color: var(--bs-secondary) !important;
 }
 
-@media screen and (min-width: 1200px) {
-  .to-right-xl {
+.text-align-center {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .text-align-right-md {
     text-align: right;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .text-align-left-md {
+    text-align: left;
   }
 }
 
@@ -8640,6 +8650,9 @@ html:not(.wcag)::-webkit-scrollbar-thumb:hover {
 }
 .fc table td {
   border-right: 2px solid;
+}
+.fc table a:before {
+  content: unset;
 }
 
 /*! --------------------------- End: MyStyles ---------------------------- */

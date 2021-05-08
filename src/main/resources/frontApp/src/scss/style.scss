@@ -793,9 +793,19 @@ html:not(.wcag) {
   }
 }
 
-.to-right-xl {
-  @media screen and (min-width: map-get($grid-breakpoints, 'xl')) {
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right-md {
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     text-align: right;
+  }
+}
+
+.text-align-left-md {
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    text-align: left;
   }
 }
 
@@ -821,6 +831,12 @@ html:not(.wcag) {
 
     td {
       border-right: $border-width $border-style;
+    }
+
+    a {
+      &:before {
+        content: unset;
+      }
     }
   }
 }

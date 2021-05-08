@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {CalendarOptions} from '@fullcalendar/angular';
 
 @Component({
@@ -6,7 +6,8 @@ import {CalendarOptions} from '@fullcalendar/angular';
   templateUrl: './training-manager.component.html',
   styleUrls: ['./training-manager.component.css']
 })
-export class TrainingManagerComponent {
+export class TrainingManagerComponent implements OnChanges  {
+  @Input() response: any | null = null;
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -20,22 +21,27 @@ export class TrainingManagerComponent {
     },
     themeSystem: 'bootstrap',
     height: '100%',
-    events: [
-      {
-        title: 'Training - push',
-        start: '2021-04-05 17:45'
-      },
-      {
-        title: 'Training - pull',
-        start: '2021-04-07 17:35'
-      },
-      {
-        title: 'Training - legs',
-        start: '2021-04-09 11:45'
-      },
-    ],
+    events: [],
   };
 
   constructor() {
+  }
+
+  ngOnChanges(): void {
+    this.prepareCalendarFields();
+  }
+
+  private prepareCalendarFields(): void {
+    if (!!this.response) {
+      const EVENTS: any[] = [];
+      this.response.trainings.forEach((training: any) => {
+        EVENTS.push({
+          title: training.title,
+          start: training.trainingDate,
+          url: `training/${training.id}`,
+        });
+      });
+      this.calendarOptions.events = EVENTS;
+    }
   }
 }

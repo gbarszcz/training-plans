@@ -1,13 +1,12 @@
 <main-navigation (URLEvent)="changeURL($event)" [position]="'fixed'" [navigation]="navigation"></main-navigation>
 <social-media [position]="'right'" [socialMedia]="socialMedia"></social-media>
 
-<section-page *ngIf="pageType === 'section'" (URLEvent)="changeURL($event)" [sections]="mockPageContent"></section-page>
+<section-page *ngIf="pageType === 'section'" [sections]="mockPageContent" (URLEvent)="changeURL($event)"></section-page>
 <user-profile *ngIf="pageType === 'profile'" [response]="pageContent"></user-profile>
 <app-exercises *ngIf="pageType === 'exercises'" [response]="pageContent"></app-exercises>
 <app-exercise *ngIf="pageType === 'exercise'" [response]="pageContent"></app-exercise>
+<app-training *ngIf="pageType === 'trainings'" [response]="pageContent"></app-training>
 <app-logout *ngIf="url === 'logout'"></app-logout>
-<!--<app-training *ngIf="pageType === 'training'"></app-training>-->
-<app-training></app-training>
 
 <page-footer (URLEvent)="changeURL($event)"
              [navPosition]="'bottom'" [navigation]="navigation"
