@@ -25,10 +25,15 @@ public class MeasurementController extends AbstractController {
         return measurementService.addMeasurement(request);
     }
 
-    @PostMapping("/modify")
+    @PutMapping("/modify")
     @ResponseBody
     public MeasurementData modifyMeasurementData(@RequestBody @Valid MeasurementData request) {
         return measurementService.modifyMeasurement(request);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public boolean deleteMeasurementData(@PathVariable Long id) {
+        return measurementService.deleteMeasurement(id);
     }
 
 }

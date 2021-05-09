@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +22,7 @@ import java.util.Objects;
         @AttributeOverride(name="auditRU", column=@Column(name="MSR_AUDIT_RU"))
 })
 @Data
+@Where(clause = "MSR_AUDIT_RD is null or MSR_AUDIT_RU is null")
 public class MeasurementData extends AuditData {
     @Id
     @Column(name = "MSR_ID")

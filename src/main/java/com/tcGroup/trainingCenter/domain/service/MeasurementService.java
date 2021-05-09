@@ -7,8 +7,8 @@ import java.util.List;
 public interface MeasurementService {
 
     MeasurementData getById(Long id);
-    List<MeasurementData> getAllDataForAccount();
     Long addMeasurement(MeasurementData measurement);
     MeasurementData modifyMeasurement(MeasurementData measurement);
+    boolean deleteMeasurement(Long id);
 
 }

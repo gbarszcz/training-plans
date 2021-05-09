@@ -21,11 +21,6 @@ public class MeasurementServiceImpl extends AbstractService implements Measureme
     private AccountDAO accountDAO;
 
     @Override
-    public List<MeasurementData> getAllDataForAccount() {
-        return measurementDAO.findByAccountId(getUserContext().getUserId());
-    }
-
-    @Override
     public MeasurementData getById(Long id) {
         MeasurementData item = measurementDAO.getItem(id);
         if (item != null && item.getAccount().getId().equals(getUserContext().getUserId())) {
@@ -53,6 +48,18 @@ public class MeasurementServiceImpl extends AbstractService implements Measureme
         } catch (IllegalStateException ex) {
             ex.printStackTrace();
             throw ex;
+        }
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteMeasurement(Long id) {
+        try {
+            MeasurementData item = getById(id);
+            measurementDAO.removeItem(getUserContext(), item);
+            return true;
+        } catch (IllegalStateException ex) {
+            return false;
         }
     }
 
