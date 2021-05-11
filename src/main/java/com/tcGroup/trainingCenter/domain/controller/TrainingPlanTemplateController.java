@@ -16,14 +16,24 @@ public class TrainingPlanTemplateController extends AbstractController {
     @Autowired
     private TrainingPlanTemplateService trainingPlanTemplateService;
 
-    @PostMapping("/template")
+    @PostMapping("/add")
     public Long addPlanTemplate(@RequestBody @Valid TrainingPlanTemplateRequest request) {
         return trainingPlanTemplateService.addTrainingPlanTemplateForAccount(request);
     }
 
-    @GetMapping("/template/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     public TrainingPlanTemplateData getTrainingPlanTemplate(@PathVariable Long id) {
-        return trainingPlanTemplateService.getTrainingPlanById(id);
+        return trainingPlanTemplateService.getTrainingPlanTemplateById(id);
+    }
+
+    @PutMapping("/modify")
+    public TrainingPlanTemplateData modifyPlanTemplate(@RequestBody @Valid TrainingPlanTemplateRequest request) {
+        return trainingPlanTemplateService.modifyTrainingPlanTemplate(request);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public boolean deletePlanTemplate(@PathVariable Long id) {
+        return trainingPlanTemplateService.deleteTrainingPlanTemplate(id);
     }
 }

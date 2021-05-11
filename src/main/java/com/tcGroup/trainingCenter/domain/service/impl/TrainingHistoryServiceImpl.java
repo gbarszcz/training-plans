@@ -121,6 +121,23 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
         }
     }
 
+    @Override
+    @Transactional
+    public boolean deleteTrainingPlan(Long id) {
+        try {
+            TrainingHistoryData item = getTrainingPlan(id);
+            for (TrainingSeriesData series : item.getTrainingSeriesData()) {
+                TrainingSeriesResultData trainingSeriesResultData = series.getTrainingSeriesResultData();
+                trainingSeriesResultDAO.removeItem(getUserContext(), trainingSeriesResultData);
+                trainingSeriesDAO.removeItem(getUserContext(), series);
+            }
+            trainingHistoryDAO.removeItem(getUserContext(), item);
+            return true;
+        } catch (IllegalStateException ex) {
+            return false;
+        }
+    }
+
     private TrainingSeriesData mapToSeriesData(TrainingSeriesDataDTO seriesDataDTO, Date trainingDate) {
         TrainingSeriesData trainingSeriesData = trainingSeriesDAO.getItem(seriesDataDTO.getId());
         trainingSeriesData.setTrainingUnit(seriesDataDTO.getTrainingUnit());

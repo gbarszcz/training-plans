@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,12 +20,13 @@ import java.util.List;
         @AttributeOverride(name="auditRU", column=@Column(name="TPT_AUDIT_RU"))
 })
 @Data
+@Where(clause = "TPT_AUDIT_RD is null or TPT_AUDIT_RU is null")
 public class TrainingPlanTemplateData extends AuditData {
 
     @Id
     @Column(name = "TPT_ID")
     @GeneratedValue
-    protected long id;
+    protected Long id;
 
     @Column(name = "TPT_NAME")
     private String name;

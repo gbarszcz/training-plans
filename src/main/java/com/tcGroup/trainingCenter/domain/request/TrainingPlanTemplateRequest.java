@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TrainingPlanTemplateRequest {
 
+    private final Long id;
     private final String name;
     @NotNull
     private final List<TrainingSeriesTemplateDTO> seriesTemplates;

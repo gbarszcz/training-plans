@@ -58,8 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(corsFilter(), SessionManagementFilter.class).httpBasic().and().authorizeRequests()
             .antMatchers("/user", "/logout", "/profile").authenticated()
-            .antMatchers("/resources/**", "/scss/**", "/webjars/**", "/error", "/", "/index", "/register", "/login", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**").permitAll()
-                .and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/login*", "/logout*", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/training/**", "/profile")
+            .antMatchers("/resources/**", "/scss/**", "/webjars/**", "/error", "/", "/index", "/register", "/login", "/exercises/**", "/exercise/**", "/tags", "/account/**").permitAll()
+                .and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/login*", "/logout*", "/exercises/**", "/exercise/**", "/tags", "/account/**", "/profile")
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and().headers()
                 .frameOptions().sameOrigin()

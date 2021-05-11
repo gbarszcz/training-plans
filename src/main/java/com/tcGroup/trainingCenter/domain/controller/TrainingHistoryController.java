@@ -32,9 +32,14 @@ public class TrainingHistoryController extends AbstractController {
         return trainingHistoryService.createTrainingPlan(request);
     }
 
-    @PostMapping("/modify")
+    @PutMapping("/modify")
     public TrainingHistoryData modifyTrainingData(@RequestBody @Valid TrainingHistoryRequest request) {
         return trainingHistoryService.modifyTrainingPlan(request);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public boolean deleteTrainingData(@PathVariable Long id) {
+        return trainingHistoryService.deleteTrainingPlan(id);
     }
 
 }

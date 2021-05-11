@@ -3,6 +3,7 @@ package com.tcGroup.trainingCenter.domain.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -17,12 +18,13 @@ import javax.persistence.*;
         @AttributeOverride(name="auditRU", column=@Column(name="TSE_AUDIT_RU"))
 })
 @Data
+@Where(clause = "TSE_AUDIT_RD is null or TSE_AUDIT_RU is null")
 public class TrainingSeriesData extends AuditData {
 
     @Id
     @Column(name = "TSE_ID")
     @GeneratedValue
-    protected long id;
+    protected Long id;
 
     @ManyToOne(targetEntity = TrainingHistoryData.class)
     @JoinColumn(name = "TSE_THI_ID", referencedColumnName = "THI_ID")

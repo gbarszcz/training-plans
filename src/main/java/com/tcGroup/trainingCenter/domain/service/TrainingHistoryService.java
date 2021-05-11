@@ -11,5 +11,6 @@ public interface TrainingHistoryService {
     Long createTrainingPlan(TrainingHistoryRequest request);
     TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request);
     TrainingHistoryData getTrainingPlan(Long id);
+    boolean deleteTrainingPlan(Long id);
 
 }

@@ -7,6 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class TrainingSeriesTemplateDTO {
 
+    private final Long id;
     private final long exerciseId;
     private final int trainingUnit;
 

@@ -6,6 +6,7 @@ import com.tcGroup.trainingCenter.domain.enumeration.converter.DifficultyLevelCo
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,12 +23,13 @@ import java.util.List;
         @AttributeOverride(name="auditRU", column=@Column(name="THI_AUDIT_RU"))
 })
 @Data
+@Where(clause = "THI_AUDIT_RD is null or THI_AUDIT_RU is null")
 public class TrainingHistoryData extends AuditData {
 
     @Id
     @Column(name = "THI_ID")
     @GeneratedValue
-    protected long id;
+    protected Long id;
 
     @Column(name = "THI_DATE")
     private Date trainingDate;
