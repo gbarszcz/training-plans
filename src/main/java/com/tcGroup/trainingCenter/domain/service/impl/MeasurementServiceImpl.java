@@ -63,4 +63,9 @@ public class MeasurementServiceImpl extends AbstractService implements Measureme
         }
     }
 
+    @Override
+    public List<MeasurementData> getMeasurements() {
+        return measurementDAO.findByAccountId(getUserContext().getUserId());
+    }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequestMapping("measurement")
 @RestController
@@ -14,6 +15,13 @@ public class MeasurementController extends AbstractController {
 
     @Autowired
     private MeasurementService measurementService;
+
+
+    @GetMapping("/")
+    @ResponseBody
+    public List<MeasurementData> getMeasurementsForAccount() {
+        return measurementService.getMeasurements();
+    }
 
     @GetMapping("/{id}")
     public MeasurementData getMeasurementData(@PathVariable Long id) {

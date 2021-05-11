@@ -16,6 +16,7 @@ import com.tcGroup.trainingCenter.user.entity.RoleData;
 import com.tcGroup.trainingCenter.user.service.AccountManagementService;
 import com.tcGroup.trainingCenter.utility.context.UserContext;
 import com.tcGroup.trainingCenter.utility.logic.AbstractService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

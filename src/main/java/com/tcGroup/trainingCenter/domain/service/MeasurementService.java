@@ -10,5 +10,6 @@ public interface MeasurementService {
     Long addMeasurement(MeasurementData measurement);
     MeasurementData modifyMeasurement(MeasurementData measurement);
     boolean deleteMeasurement(Long id);
+    List<MeasurementData> getMeasurements();
 
 }

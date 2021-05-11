@@ -29,10 +29,4 @@ public class AccountController extends AbstractController {
         return new AccountTrainingsPlansResponse(trainingHistory, trainingPlans);
     }
 
-    @GetMapping("/measurements")
-    @ResponseBody
-    public List<MeasurementData> getMeasurementsForAccount() {
-        return accountManagementService.getMeasurements();
-    }
-
 }
