@@ -23,11 +23,9 @@ public class MeasurementServiceImpl extends AbstractService implements Measureme
     @Override
     public MeasurementData getById(Long id) {
         MeasurementData item = measurementDAO.getItem(id);
-        if (item != null && item.getAccount().getId().equals(getUserContext().getUserId())) {
-            return item;
-        } else {
+        if (item == null || !item.getAccount().getId().equals(getUserContext().getUserId()))
             throw new IllegalStateException("No measurement of given id was found");
-        }
+        return item;
     }
 
     @Override
