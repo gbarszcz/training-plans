@@ -8,6 +8,7 @@ import {ExercisesComponent} from './components/exercises/exercises.component';
 import {ExerciseComponent} from './components/exercise/exercise.component';
 import {DeauthGuard} from './deauth.guard';
 import {LogoutComponent} from './components/logout/logout.component';
+import {TrainingManagerComponent} from './components/training/training-manager.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'exercises', component: ExercisesComponent },
       { path: 'exercise/:id', component: ExerciseComponent },
+      { path: 'trainings', component: TrainingManagerComponent },
     ]
   },
 ];

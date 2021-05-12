@@ -793,8 +793,50 @@ html:not(.wcag) {
   }
 }
 
-.to-right-xl {
-  @media screen and (min-width: map-get($grid-breakpoints, 'xl')) {
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right-md {
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     text-align: right;
+  }
+}
+
+.text-align-left-md {
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    text-align: left;
+  }
+}
+
+.fc {
+  h2 {
+    color: $primary;
+  }
+
+  .fc-scrollgrid {
+    border-collapse: collapse !important;
+    border: $border-width $border-style $border-color;
+  }
+
+  table {
+    tr,
+    td {
+      border-color: $border-color;
+    }
+
+    tr {
+      border-bottom: $border-width $border-style;
+    }
+
+    td {
+      border-right: $border-width $border-style;
+    }
+
+    a {
+      &:before {
+        content: unset;
+      }
+    }
   }
 }

@@ -8618,10 +8618,41 @@ html:not(.wcag)::-webkit-scrollbar-thumb:hover {
   color: var(--bs-secondary) !important;
 }
 
-@media screen and (min-width: 1200px) {
-  .to-right-xl {
+.text-align-center {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .text-align-right-md {
     text-align: right;
   }
+}
+
+@media screen and (min-width: 768px) {
+  .text-align-left-md {
+    text-align: left;
+  }
+}
+
+.fc h2, .fc .h2 {
+  color: var(--bs-primary);
+}
+.fc .fc-scrollgrid {
+  border-collapse: collapse !important;
+  border: 2px solid var(--bs-primary);
+}
+.fc table tr,
+.fc table td {
+  border-color: var(--bs-primary);
+}
+.fc table tr {
+  border-bottom: 2px solid;
+}
+.fc table td {
+  border-right: 2px solid;
+}
+.fc table a:before {
+  content: unset;
 }
 
 /*! --------------------------- End: MyStyles ---------------------------- */

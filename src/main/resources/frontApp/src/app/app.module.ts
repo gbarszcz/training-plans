@@ -18,6 +18,19 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { DatePipe } from '@angular/common';
 import { ExercisesComponent } from './components/exercises/exercises.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
+import { TrainingManagerComponent } from './components/training/training-manager.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import bootstrapPlugin from '@fullcalendar/bootstrap';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
+  bootstrapPlugin,
+]);
 
 @NgModule({
   declarations: [
@@ -34,7 +47,8 @@ import { ExerciseComponent } from './components/exercise/exercise.component';
     ThemeModeComponent,
     ExercisesComponent,
     ExerciseComponent,
-    LogoutComponent
+    LogoutComponent,
+    TrainingManagerComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +56,7 @@ import { ExerciseComponent } from './components/exercise/exercise.component';
     HttpClientModule,
     FormsModule,
     HttpClientXsrfModule,
-    FormsModule,
+    FullCalendarModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

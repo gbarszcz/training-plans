@@ -1,0 +1,44 @@
+<section id="top" class="section section_se">
+  <div class="container">
+    <div id="training-calendar">
+      <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+    <button class="btn btn_alt">
+      <i class="bi bi-calendar-plus"></i>
+      Add training
+    </button>
+  </div>
+</section>
+
+<section class="section section_pr">
+  <div class="container">
+    <search-exercises></search-exercises>
+  </div>
+</section>
+
+<section *ngIf="!!response && !!response.trainingTemplates" class="section section_se">
+  <div class="container">
+    <div *ngIf="response.trainingTemplates.length > 0" class="row">
+      <h1 class="col-12 col-md-6 text-align-center text-align-left-md">Training plans</h1>
+      <b class="col-12 col-md-6 text-align-center text-align-right-md">
+        {{response.trainingTemplates.length}}
+      </b>
+      <div *ngFor="let template of response.trainingTemplates" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+        <a [href]="'training/' + template.id" class="training">
+          <div class="training-background" [style]="'background-image: url()'"></div>
+          <div class="training-info">
+            <b *ngIf="!!template.difficulty">{{template.difficulty}}</b>
+            <h5>{{template.name}}</h5>
+            <p *ngIf="!!template.equipment" class="info">
+              This exercise need equipment!
+            </p>
+            <p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <h1 *ngIf="response.trainingTemplates.length === 0" class="row">
+      No training plans searched
+    </h1>
+  </div>
+</section>
