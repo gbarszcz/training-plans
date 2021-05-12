@@ -114,11 +114,10 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
     @Override
     public TrainingHistoryData getTrainingPlan(Long id) {
         TrainingHistoryData item = trainingHistoryDAO.getItem(id);
-        if (item != null && item.getAccount().getId().equals(getUserContext().getUserId())) {
-            return item;
-        } else {
+        if (item == null || !item.getAccount().getId().equals(getUserContext().getUserId())) {
             throw new IllegalStateException("No training plan of given id was found");
         }
+        return item;
     }
 
     @Override

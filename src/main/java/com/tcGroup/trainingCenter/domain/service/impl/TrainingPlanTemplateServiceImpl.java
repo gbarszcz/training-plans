@@ -44,11 +44,10 @@ public class TrainingPlanTemplateServiceImpl extends AbstractService implements 
     @Override
     public TrainingPlanTemplateData getTrainingPlanTemplateById(Long id) {
         TrainingPlanTemplateData item = trainingPlanTemplateDAO.getItem(id);
-        if (item != null && item.getAccount().getId().equals(getUserContext().getUserId())) {
-            return item;
-        } else {
+        if (item == null || !item.getAccount().getId().equals(getUserContext().getUserId())) {
             throw new IllegalStateException("No training plan template of given id was found");
         }
+        return item;
     }
 
     @Override
