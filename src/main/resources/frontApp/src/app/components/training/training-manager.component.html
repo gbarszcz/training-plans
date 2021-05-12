@@ -3,10 +3,83 @@
     <div id="training-calendar">
       <full-calendar [options]="calendarOptions"></full-calendar>
     </div>
-    <button class="btn btn_alt">
+    <button (click)="sendMethod = 'post'"
+            type="button"
+            class="btn btn_alt"
+            data-toggle="modal"
+            data-target="#addTraining">
       <i class="bi bi-calendar-plus"></i>
       Add training
     </button>
+  </div>
+
+  <div id="addTraining"
+       class="modal fade"
+       tabindex="-1"
+       aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add training</h4>
+          <button type="button"
+                  class="btn-close"
+                  data-dismiss="modal"
+                  aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <search-exercises></search-exercises>
+
+          <br>
+          <form *ngIf="trainingsTemplates.length > 0" class="row">
+            <label class="col-12 col-md-6">
+              <input [(ngModel)]="trainingFormData.title"
+                     type="text"
+                     name="title"
+                     placeholder="Title"
+                     class="form-control"
+                     required>
+            </label>
+            <label class="col-12 col-md-6">
+              <input [(ngModel)]="trainingFormData.trainingDate"
+                     type="date"
+                     name="trainingDate"
+                     placeholder="Training date"
+                     class="form-control"
+                     required>
+            </label>
+            <h5 class="col-12 col-md-6 text-align-center text-align-left-md">Training plans</h5>
+            <b class="col-12 col-md-6 text-align-center text-align-right-md">
+              {{trainingsTemplates.length}}
+            </b>
+            <div *ngFor="let template of trainingsTemplates"
+                 class="col-12 col-md-6 col-lg-4 col-xl-3">
+              <div (click)="setTemplate(template.id)"
+                   [class]="(trainingFormData.templateId == template.id ? 'success' : '') + ' training'">
+                <div class="training-background" [style]="'background-image: url()'"></div>
+                <div class="training-info">
+                  <b *ngIf="!!template.difficulty">{{template.difficulty}}</b>
+                  <h5>{{template.name}}</h5>
+                  <p *ngIf="!!template.equipment" class="info">
+                    This exercise needs equipment!
+                  </p>
+                  <p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu.</p>
+                </div>
+              </div>
+            </div>
+          </form>
+          <h5 *ngIf="trainingsTemplates.length === 0">
+            No training plans found
+          </h5>
+        </div>
+        <div class="modal-footer">
+          <button (click)="upsertTraining()" type="button" class="btn btn_alt">
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -24,21 +97,21 @@
         {{response.trainingTemplates.length}}
       </b>
       <div *ngFor="let template of response.trainingTemplates" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
-        <a [href]="'training/' + template.id" class="training">
+        <a [href]="'template/' + template.id" class="training">
           <div class="training-background" [style]="'background-image: url()'"></div>
           <div class="training-info">
             <b *ngIf="!!template.difficulty">{{template.difficulty}}</b>
             <h5>{{template.name}}</h5>
             <p *ngIf="!!template.equipment" class="info">
-              This exercise need equipment!
+              This exercise needs equipment!
             </p>
             <p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu.</p>
           </div>
         </a>
       </div>
     </div>
-    <h1 *ngIf="response.trainingTemplates.length === 0" class="row">
-      No training plans searched
+    <h1 *ngIf="response.trainingTemplates.length === 0">
+      No training plans found
     </h1>
   </div>
 </section>

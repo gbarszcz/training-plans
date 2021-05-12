@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     ['register', 'register'],
     ['exercise', 'exercise'],
     ['exercises', 'exercises'],
-    ['trainings', 'account/trainings-plans'],
+    ['trainings-dashboard', 'account/trainings-plans'],
   ]);
   navigation: Navigation | null = null;
   socialMedia: ISocialMedia[] = [];
