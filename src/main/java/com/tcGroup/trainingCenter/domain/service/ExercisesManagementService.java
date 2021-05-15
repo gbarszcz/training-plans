@@ -4,12 +4,16 @@ import java.util.List;
 
 import com.tcGroup.trainingCenter.domain.entity.ExerciseData;
 import com.tcGroup.trainingCenter.domain.entity.TagData;
+import com.tcGroup.trainingCenter.domain.searchCriteria.ExercisesSearchCriteria;
+import com.tcGroup.trainingCenter.domain.searchCriteria.TagsSearchCriteria;
 
 public interface ExercisesManagementService {
 
     //--------------------- EXERCISES ----------------------------------
     
     List<ExerciseData> getAllExercises();
+
+    List<ExerciseData> getAllExercises(ExercisesSearchCriteria searchCriteria);
 
     ExerciseData getExercise(Long id);
 
@@ -22,6 +26,8 @@ public interface ExercisesManagementService {
     // ----------------------- TAGS -------------------------------------
 
     List<TagData> getAllTags();
+
+    List<TagData> getAllTags(TagsSearchCriteria searchCriteria);
 
     TagData getTag(Long id);
 

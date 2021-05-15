@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.tcGroup.trainingCenter.utility.context.UserContext;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
+import com.tcGroup.trainingCenter.utility.searchCriteria.SearchCriteria;
 
 public abstract class AbstractDAO<T extends AuditData, ID extends Serializable> {
 
@@ -13,6 +14,10 @@ public abstract class AbstractDAO<T extends AuditData, ID extends Serializable> 
 
     protected void validate() {
 
+    }
+
+    public List<T> getItems(SearchCriteria<T> searchCriteria) {
+        return this.repository.findAll(searchCriteria);
     }
 
     public List<T> getItems() {
