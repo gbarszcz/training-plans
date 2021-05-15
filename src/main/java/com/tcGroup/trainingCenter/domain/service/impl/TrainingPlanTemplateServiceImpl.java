@@ -1,8 +1,12 @@
 package com.tcGroup.trainingCenter.domain.service.impl;
 
+import java.util.List;
+
 import com.tcGroup.trainingCenter.domain.dao.ExerciseDAO;
-import com.tcGroup.trainingCenter.domain.entity.ExerciseData;
+import com.tcGroup.trainingCenter.domain.dao.TrainingPlanTemplateDAO;
 import com.tcGroup.trainingCenter.domain.dao.TrainingSeriesTemplateDAO;
+import com.tcGroup.trainingCenter.domain.entity.ExerciseData;
+import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
 import com.tcGroup.trainingCenter.domain.entity.TrainingSeriesTemplateData;
 import com.tcGroup.trainingCenter.domain.request.TrainingPlanTemplateRequest;
 import com.tcGroup.trainingCenter.domain.dao.TrainingPlanTemplateDAO;
@@ -14,6 +18,7 @@ import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.utility.AppParams;
 import com.tcGroup.trainingCenter.utility.ApplicationException;
 import com.tcGroup.trainingCenter.utility.logic.AbstractService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

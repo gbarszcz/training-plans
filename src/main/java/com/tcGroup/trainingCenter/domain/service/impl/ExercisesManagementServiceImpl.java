@@ -6,6 +6,8 @@ import com.tcGroup.trainingCenter.domain.dao.ExerciseDAO;
 import com.tcGroup.trainingCenter.domain.dao.TagDAO;
 import com.tcGroup.trainingCenter.domain.entity.ExerciseData;
 import com.tcGroup.trainingCenter.domain.entity.TagData;
+import com.tcGroup.trainingCenter.domain.searchCriteria.ExercisesSearchCriteria;
+import com.tcGroup.trainingCenter.domain.searchCriteria.TagsSearchCriteria;
 import com.tcGroup.trainingCenter.domain.service.ExercisesManagementService;
 import com.tcGroup.trainingCenter.utility.logic.AbstractService;
 
@@ -28,6 +30,16 @@ public class ExercisesManagementServiceImpl extends AbstractService implements E
     @Transactional
     public List<ExerciseData> getAllExercises() {
         return exerciseDAO.getItems();
+    }
+
+    @Override
+    @Transactional
+    public List<ExerciseData> getAllExercises(ExercisesSearchCriteria searchCriteria) {
+        if (getUserContext() == null) {
+            searchCriteria.setExerciseDemo(true);
+        }
+        
+        return exerciseDAO.getItems(searchCriteria);
     }
 
     @Override
@@ -65,6 +77,12 @@ public class ExercisesManagementServiceImpl extends AbstractService implements E
     @Transactional
     public List<TagData> getAllTags() {
         return tagDAO.getItems();
+    }
+
+    @Override
+    @Transactional
+    public List<TagData> getAllTags(TagsSearchCriteria searchCriteria) {
+        return tagDAO.getItems(searchCriteria);
     }
 
     @Override
