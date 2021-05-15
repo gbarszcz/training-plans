@@ -1,5 +1,7 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {Component} from '@angular/core';
 
+import {AppService} from '../../app.service';
+import {Location} from '@angular/common';
 import {IPageContent} from '../../models/IPageContent';
 
 @Component({
@@ -7,15 +9,34 @@ import {IPageContent} from '../../models/IPageContent';
   templateUrl: './section-page.component.html'
 })
 
-export class SectionPageComponent implements OnDestroy{
-  @Output() URLEvent = new EventEmitter<string>();
-  @Input() sections: IPageContent[] = [];
+export class SectionPageComponent {
+  sections: IPageContent[] = [];
+  endpoint = '/';
 
-  ngOnDestroy(): void {
-    this.sections = [];
+  constructor(private appService: AppService, private location: Location) {
+    this.prepareFields();
   }
 
-  changeURL(URL: string): void {
-    this.URLEvent.emit(URL);
+  private prepareFields(): void {
+    this.endpoint = this.location.path() || '/';
+    // todo: finally this should be removed - just for mocking sites. ---
+    const PAGE_CONTENT_REQUEST = this.appService.getPageContent(this.endpoint);
+    if (!!PAGE_CONTENT_REQUEST) {
+      try {
+        const TMP = JSON.parse(PAGE_CONTENT_REQUEST);
+        this.sections = TMP.sections;
+      } catch (e) {
+        console.error(e.message);
+      }
+      return;
+    } // ---
+    this.appService.apiGetRequest(this.endpoint).subscribe(
+      (res: any) => {
+        this.sections = res.sections;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 }

@@ -1,7 +1,7 @@
 <nav class="{{position == 'fixed' ? 'navbar fixed-top navbar-expand-lg' : 'navbar-footer'}}">
   <div class="container">
     <a *ngIf="navigation?.currentRoute != '/'"
-       (click)="changeURL('/')"
+       [routerLink]="'/'"
        class="navbar-brand">
       {{navigation?.brandItem?.value}}
     </a>
@@ -24,12 +24,12 @@
         <li *ngFor="let navItem of navigation?.navItems"
             class="nav-item{{navItem.subItems.length > 0 ? ' dropdown' : ''}}{{navigation?.currentRoute == navItem.link ? ' active' : ''}}">
           <a *ngIf="navItem.subItems.length == 0"
-             (click)="changeURL(navItem.link)"
+             [href]="navItem.link"
              [innerHTML]="navigation?.createNavItemContent(navItem.content)"
              class="nav-link{{navItem.disabled ? ' disabled' : ''}}">
           </a>
           <a *ngIf="navItem.subItems.length > 0"
-             (click)="changeURL(navItem.link)"
+             [href]="navItem.link"
              [innerHTML]="navigation?.createNavItemContent(navItem.content)"
              class="nav-link dropdown-toggle"
              data-toggle="dropdown">
@@ -38,7 +38,7 @@
             <div *ngFor="let subItem of navItem.subItems">
               <div *ngIf="subItem.divider" class="dropdown-divider"></div>
               <a class="dropdown-item{{subItem.disabled ? ' disabled' : ''}}"
-                 (click)="changeURL(subItem.link)">
+                 [routerLink]="subItem.link">
                 {{subItem.content[0].value}}
               </a>
             </div>
@@ -58,7 +58,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <div *ngFor="let subItem of navigation?.account?.subItems">
               <div *ngIf="subItem.divider" class="dropdown-divider"></div>
-              <a (click)="changeURL(subItem.link)" class="dropdown-item{{subItem.disabled ? ' disabled' : ''}}">
+              <a [routerLink]="subItem.link" class="dropdown-item{{subItem.disabled ? ' disabled' : ''}}">
                 {{subItem.content[0].value}}
               </a>
             </div>
@@ -72,7 +72,7 @@
   <div *ngIf="navigation?.secNavItems?.length" class="container">
     <ul class="navbar-nav nav_secondary">
       <li *ngFor="let subNavItem of navigation?.secNavItems" class="nav-item">
-        <a class="nav-link" href="{{subNavItem.link}}">{{subNavItem.content[0].value}}</a>
+        <a class="nav-link" [href]="subNavItem.link">{{subNavItem.content[0].value}}</a>
       </li>
     </ul>
   </div>

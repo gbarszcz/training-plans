@@ -1,13 +1,14 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component} from '@angular/core';
 import {CalendarOptions} from '@fullcalendar/angular';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'app-training',
   templateUrl: './training-manager.component.html',
   styleUrls: ['./training-manager.component.css']
 })
-export class TrainingManagerComponent implements OnChanges  {
-  @Input() response: any | null = null;
+export class TrainingManagerComponent {
+  response: any | null = null;
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -24,24 +25,27 @@ export class TrainingManagerComponent implements OnChanges  {
     events: [],
   };
 
-  constructor() {
-  }
-
-  ngOnChanges(): void {
+  constructor(private appService: AppService) {
     this.prepareCalendarFields();
   }
 
   private prepareCalendarFields(): void {
-    if (!!this.response) {
-      const EVENTS: any[] = [];
-      this.response.trainings.forEach((training: any) => {
-        EVENTS.push({
-          title: training.title,
-          start: training.trainingDate,
-          url: `training/${training.id}`,
-        });
-      });
-      this.calendarOptions.events = EVENTS;
-    }
+    this.appService.apiGetRequest('account/trainings-plans').subscribe(
+      (res: any) => {
+        res.trainings.forEach((training: any) => {
+            const EVENTS: any[] = [];
+            EVENTS.push({
+              title: training.title,
+              start: training.trainingDate,
+              url: `training/${training.id}`,
+            });
+            this.calendarOptions.events = EVENTS;
+          }
+        );
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 }

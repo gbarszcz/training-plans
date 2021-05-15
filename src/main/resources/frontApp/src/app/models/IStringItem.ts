@@ -1,6 +1,6 @@
-import {EStringItemType} from '../enums/EStringItemType';
+import {StringItemType} from '../enums/StringItemType';
 
 export interface IStringItem {
-  type: EStringItemType;
+  type: StringItemType;
   value: string;
 }

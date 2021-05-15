@@ -14,7 +14,6 @@ export class FooterComponent implements OnInit {
   @Input() navPosition = 'bottom';
   @Input() smPosition = '';
   @Input() socialMedia: ISocialMedia[] = [];
-  @Output() URLEvent = new EventEmitter<string>();
   footerText = '';
   footerCopyright = '';
 
@@ -28,9 +27,5 @@ export class FooterComponent implements OnInit {
       this.footerText = INFOS.text || '';
       this.footerCopyright = INFOS.copyright || '';
     }
-  }
-
-  public changeURL(url: string): void {
-    this.URLEvent.emit(url);
   }
 }

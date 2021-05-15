@@ -1,7 +1,7 @@
 <footer>
   <div class="container">
     <a *ngIf="navigation?.currentRoute != '/'" class="navbar-brand"
-       (click)="changeURL(navigation?.currentRoute || '/')">
+       [routerLink]="navigation?.currentRoute || '/'">
       {{navigation?.brandItem?.value}}
     </a>
     <a *ngIf="navigation?.currentRoute == '/'" class="navbar-brand" href="#top">
@@ -16,7 +16,7 @@
         <social-media [position]="smPosition" [socialMedia]="socialMedia"></social-media>
       </div>
     </div>
-    <main-navigation (URLEvent)="changeURL($event)" [position]="'bottom'" [navigation]="navigation"></main-navigation>
+    <app-navigation [position]="'bottom'" [navigation]="navigation"></app-navigation>
   </div>
   <hr>
   <div class="container" [innerHTML]="footerCopyright">
