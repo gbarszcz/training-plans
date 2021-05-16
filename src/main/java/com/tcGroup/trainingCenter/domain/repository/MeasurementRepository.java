@@ -4,11 +4,13 @@ import com.tcGroup.trainingCenter.domain.entity.MeasurementData;
 import com.tcGroup.trainingCenter.utility.logic.AbstractRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository("measurementRepository")
 public interface MeasurementRepository extends AbstractRepository<MeasurementData, Long> {
 
     List<MeasurementData> findAllByAccount_Id(long accountId);
+    List<MeasurementData> findAllByAccount_IdAndMeasurementDateBetween(long accountId, Date startDate, Date endDate);
 
 }

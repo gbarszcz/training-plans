@@ -6,6 +6,7 @@ import com.tcGroup.trainingCenter.utility.logic.AbstractDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Component("measurementDAO")
@@ -22,6 +23,10 @@ public class MeasurementDAO extends AbstractDAO<MeasurementData, Long> {
 
     public List<MeasurementData> findByAccountId(Long id) {
         return this.getRepository().findAllByAccount_Id(id);
+    }
+
+    public List<MeasurementData> findByAccountIdAndMeasurementDate(Long id, Date startDate, Date endDate) {
+        return this.getRepository().findAllByAccount_IdAndMeasurementDateBetween(id, startDate, endDate);
     }
 
 }
