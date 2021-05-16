@@ -11,13 +11,17 @@ import com.tcGroup.trainingCenter.domain.request.TrainingSeriesTemplateDTO;
 import com.tcGroup.trainingCenter.domain.service.TrainingPlanTemplateService;
 import com.tcGroup.trainingCenter.user.dao.AccountDAO;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
+import com.tcGroup.trainingCenter.utility.AppParams;
+import com.tcGroup.trainingCenter.utility.ApplicationException;
 import com.tcGroup.trainingCenter.utility.logic.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 @Service(value = "trainingPlanTemplateService")
@@ -42,10 +46,11 @@ public class TrainingPlanTemplateServiceImpl extends AbstractService implements 
     }
 
     @Override
-    public TrainingPlanTemplateData getTrainingPlanTemplateById(Long id) {
+    public TrainingPlanTemplateData getTrainingPlanTemplateById(Long id) throws ApplicationException {
         TrainingPlanTemplateData item = trainingPlanTemplateDAO.getItem(id);
         if (item == null || !item.getAccount().getId().equals(getUserContext().getUserId())) {
-            throw new IllegalStateException("No training plan template of given id was found");
+            throw new ApplicationException(ResourceBundle.getBundle(AppParams.EXCEPTION_MESSAGES_RESOURCE, Locale.getDefault())
+                    .getString("training.template.invalidId"), id);
         }
         return item;
     }
@@ -66,7 +71,7 @@ public class TrainingPlanTemplateServiceImpl extends AbstractService implements 
 
     @Override
     @Transactional
-    public TrainingPlanTemplateData modifyTrainingPlanTemplate(TrainingPlanTemplateRequest request) {
+    public TrainingPlanTemplateData modifyTrainingPlanTemplate(TrainingPlanTemplateRequest request) throws ApplicationException {
         TrainingPlanTemplateData trainingPlanTemplate = getTrainingPlanTemplateById(request.getId());
         List<TrainingSeriesTemplateDTO> requestSeriesTemplatesDTO = request.getSeriesTemplates();
         mapRequestToTrainingSeries(trainingPlanTemplate, requestSeriesTemplatesDTO);
@@ -117,16 +122,12 @@ public class TrainingPlanTemplateServiceImpl extends AbstractService implements 
 
     @Override
     @Transactional
-    public boolean deleteTrainingPlanTemplate(Long id) {
-        try {
-            TrainingPlanTemplateData item = getTrainingPlanTemplateById(id);
-            for (TrainingSeriesTemplateData templateData: item.getTrainingSeriesTemplateData()) {
-                trainingSeriesTemplateDAO.removeItem(getUserContext(), templateData);
-            }
-            trainingPlanTemplateDAO.removeItem(getUserContext(), item);
-            return true;
-        } catch (IllegalStateException ex) {
-            return false;
+    public boolean deleteTrainingPlanTemplate(Long id) throws ApplicationException {
+        TrainingPlanTemplateData item = getTrainingPlanTemplateById(id);
+        for (TrainingSeriesTemplateData templateData: item.getTrainingSeriesTemplateData()) {
+            trainingSeriesTemplateDAO.removeItem(getUserContext(), templateData);
         }
+        trainingPlanTemplateDAO.removeItem(getUserContext(), item);
+        return true;
     }
 }

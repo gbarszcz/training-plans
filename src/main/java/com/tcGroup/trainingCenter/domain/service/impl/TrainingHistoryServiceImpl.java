@@ -10,6 +10,8 @@ import com.tcGroup.trainingCenter.domain.request.TrainingSeriesResultDataDTO;
 import com.tcGroup.trainingCenter.domain.service.TrainingHistoryService;
 import com.tcGroup.trainingCenter.user.dao.AccountDAO;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
+import com.tcGroup.trainingCenter.utility.AppParams;
+import com.tcGroup.trainingCenter.utility.ApplicationException;
 import com.tcGroup.trainingCenter.utility.logic.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,7 +81,7 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
     }
 
     @Transactional
-    public TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request) {
+    public TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request) throws ApplicationException {
         TrainingHistoryData training = this.getTrainingPlan(request.getId());
         List<TrainingSeriesDataDTO> trainingSeriesDataList = request.getTrainingSeriesData();
         mapSeriesDataListToSeriesData(training, trainingSeriesDataList);
@@ -112,29 +114,26 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
     }
 
     @Override
-    public TrainingHistoryData getTrainingPlan(Long id) {
+    public TrainingHistoryData getTrainingPlan(Long id) throws ApplicationException {
         TrainingHistoryData item = trainingHistoryDAO.getItem(id);
         if (item == null || !item.getAccount().getId().equals(getUserContext().getUserId())) {
-            throw new IllegalStateException("No training plan of given id was found");
+            throw new ApplicationException(ResourceBundle.getBundle(AppParams.EXCEPTION_MESSAGES_RESOURCE, Locale.getDefault())
+                    .getString("training.history.invalidId"), id);
         }
         return item;
     }
 
     @Override
     @Transactional
-    public boolean deleteTrainingPlan(Long id) {
-        try {
-            TrainingHistoryData item = getTrainingPlan(id);
-            for (TrainingSeriesData series : item.getTrainingSeriesData()) {
-                TrainingSeriesResultData trainingSeriesResultData = series.getTrainingSeriesResultData();
-                trainingSeriesResultDAO.removeItem(getUserContext(), trainingSeriesResultData);
-                trainingSeriesDAO.removeItem(getUserContext(), series);
-            }
-            trainingHistoryDAO.removeItem(getUserContext(), item);
-            return true;
-        } catch (IllegalStateException ex) {
-            return false;
+    public boolean deleteTrainingPlan(Long id) throws ApplicationException {
+        TrainingHistoryData item = getTrainingPlan(id);
+        for (TrainingSeriesData series : item.getTrainingSeriesData()) {
+            TrainingSeriesResultData trainingSeriesResultData = series.getTrainingSeriesResultData();
+            trainingSeriesResultDAO.removeItem(getUserContext(), trainingSeriesResultData);
+            trainingSeriesDAO.removeItem(getUserContext(), series);
         }
+        trainingHistoryDAO.removeItem(getUserContext(), item);
+        return true;
     }
 
     private TrainingSeriesData mapToSeriesData(TrainingSeriesDataDTO seriesDataDTO, Date trainingDate) {
