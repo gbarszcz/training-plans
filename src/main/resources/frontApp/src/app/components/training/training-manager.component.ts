@@ -1,15 +1,16 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {CalendarOptions} from '@fullcalendar/angular';
-import {AppService} from '../../app.service';
-import {IAlert} from '../../models/IAlert';
+import { Component, Input } from '@angular/core';
+import { CalendarOptions } from '@fullcalendar/angular';
+import { AppService } from '../../app.service';
+import { IAlert } from '../../models/IAlert';
 
 @Component({
   selector: 'app-training',
   templateUrl: './training-manager.component.html',
   styleUrls: ['./training-manager.component.css']
 })
-export class TrainingManagerComponent implements OnChanges {
+export class TrainingManagerComponent {
   @Input() response: any | null = null;
+  mainEndpoint = 'training/history';
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     dateClick: this.handleDateClick.bind(this),
@@ -33,9 +34,6 @@ export class TrainingManagerComponent implements OnChanges {
   sendMethod = 'post';
 
   constructor(private service: AppService) {
-  }
-
-  ngOnChanges(): void {
     this.prepareCalendarFields();
   }
 
@@ -43,13 +41,13 @@ export class TrainingManagerComponent implements OnChanges {
     this.service.apiGetRequest('account/trainings-plans').subscribe(
       (res: any) => {
         res.trainings.forEach((training: any) => {
-            this.events.push({
-              title: training.title,
-              start: training.trainingDate,
-              url: `training/${training.id}`,
-            });
-            this.calendarOptions.events = this.events;
-          }
+          this.events.push({
+            title: training.title,
+            start: training.trainingDate,
+            url: `training/${training.id}`,
+          });
+          this.calendarOptions.events = this.events;
+        }
         );
       },
       (error: any) => {
@@ -89,7 +87,7 @@ export class TrainingManagerComponent implements OnChanges {
   }
 
   private post(): void {
-    this.service.apiPostRequest('training/history/add', this.trainingFormData).subscribe(
+    this.service.apiPostRequest(this.mainEndpoint, this.trainingFormData).subscribe(
       (res: any) => {
         this.alerts.push({
           id: this.alerts.length,
@@ -121,7 +119,7 @@ export class TrainingManagerComponent implements OnChanges {
   }
 
   private put(): void {
-    this.service.apiPutRequest('training/history/modify', this.trainingFormData).subscribe(
+    this.service.apiPutRequest(this.mainEndpoint, this.trainingFormData).subscribe(
       (res: any) => {
         this.alerts.push({
           id: this.alerts.length,
