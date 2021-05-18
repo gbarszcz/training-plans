@@ -83,8 +83,4 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
     public List<TrainingHistoryData> getTrainingHistory() {
         return trainingHistoryDAO.findByAccountId(getUserContext().getUserId());
     }
-    @Override
-    public List<MeasurementData> getMeasurements() {
-        return measurementDAO.findByAccountId(getUserContext().getUserId());
-    }
 }

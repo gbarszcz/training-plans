@@ -22,6 +22,4 @@ public interface AccountManagementService extends UserDetailsService {
 
     List<TrainingHistoryData> getTrainingHistory();
 
-    List<MeasurementData> getMeasurements();
-
 }
