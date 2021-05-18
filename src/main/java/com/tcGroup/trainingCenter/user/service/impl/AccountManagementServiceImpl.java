@@ -5,8 +5,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.tcGroup.trainingCenter.domain.dao.TrainingHistoryDAO;
+import com.tcGroup.trainingCenter.domain.dao.MeasurementDAO;
 import com.tcGroup.trainingCenter.domain.dao.TrainingPlanTemplateDAO;
 import com.tcGroup.trainingCenter.domain.entity.TrainingHistoryData;
+import com.tcGroup.trainingCenter.domain.entity.MeasurementData;
 import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
 import com.tcGroup.trainingCenter.user.dao.AccountDAO;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
@@ -33,6 +35,9 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
 
     @Autowired
     private TrainingHistoryDAO trainingHistoryDAO;
+
+    @Autowired
+    private MeasurementDAO measurementDAO;
 
     // -------------------------- ACCOUNTS -------------------------------------
 
