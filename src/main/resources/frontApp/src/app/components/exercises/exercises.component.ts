@@ -1,17 +1,26 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {IPageContent} from '../../models/IPageContent'; // todo temporary
+import {Component} from '@angular/core';
+import {AppService} from '../../app.service'; // todo temporary
 
 @Component({
   selector: 'app-exercises',
   templateUrl: './exercises.component.html',
   styleUrls: ['./exercises.component.css']
 })
-export class ExercisesComponent implements OnInit {
-  @Input() response: any | null = null;
+export class ExercisesComponent {
+  response: any | null = null;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private appService: AppService) {
+    this.prepareFields();
   }
 
+  private prepareFields(): void {
+    this.appService.apiGetRequest('exercises').subscribe(
+      (res: any) => {
+        this.response = res;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
 }

@@ -1,4 +1,4 @@
-export enum EStringItemType {
+export enum StringItemType {
   'img',
   'svg',
   'i',

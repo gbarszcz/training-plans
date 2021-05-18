@@ -3,7 +3,7 @@ import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/co
 import {Navigation} from '../../models/Navigation';
 
 @Component({
-  selector: 'main-navigation',
+  selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
@@ -11,7 +11,6 @@ import {Navigation} from '../../models/Navigation';
 export class NavigationComponent implements AfterViewInit {
   @Input() position = 'fixed';
   @Input() navigation: Navigation | null = null;
-  @Output() URLEvent = new EventEmitter<string>();
 
   ngAfterViewInit(): void {
     this.navEvent();
@@ -53,9 +52,5 @@ export class NavigationComponent implements AfterViewInit {
         }
       });
     }
-  }
-
-  public changeURL(url: string): void {
-    this.URLEvent.emit(url);
   }
 }

@@ -1,5 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {DatePipe} from '@angular/common';
+import {Component} from '@angular/core';
 import {IAlert} from '../../models/IAlert';
 import {AppService} from '../../app.service';
 
@@ -8,8 +7,7 @@ import {AppService} from '../../app.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnChanges {
-  @Input() response: any | null = null;
+export class ProfileComponent {
   userName = 'Undefined';
   formData: any = {};
   userData: any = {
@@ -46,7 +44,7 @@ export class ProfileComponent implements OnChanges {
         icon: 'bi-at',
         require: true,
         placeholder: 'Email',
-        name: 'email',
+        name: 'accountEmail',
         type: 'email',
         error: ''
       },
@@ -70,11 +68,8 @@ export class ProfileComponent implements OnChanges {
   };
   alerts: IAlert[] = [];
 
-  constructor(private datePipe: DatePipe, private service: AppService) {
-  }
-
-  ngOnChanges(): void {
-    this.userName = this.setUserName();
+  constructor(private service: AppService) {
+    this.prepareFields();
   }
 
   put(): void {
@@ -111,6 +106,18 @@ export class ProfileComponent implements OnChanges {
     return key in obj ? obj[key] : false;
   }
 
+  private prepareFields(): void {
+    this.service.apiGetRequest('profile').subscribe(
+      (res: any) => {
+        this.formData = res;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+    this.setUserName();
+  }
+
   private prepareErrorFields(errors: any[]): void {
     ['user', 'about'].forEach((variant: string) => {
       errors.forEach((error) => {
@@ -121,20 +128,10 @@ export class ProfileComponent implements OnChanges {
     });
   }
 
-  private dateFormat(dateString: string | null): string {
-    if (!!dateString) {
-      return this.datePipe.transform(
-        new Date(dateString),
-        'MMMM d, y'
-      )?.toString() || 'Undefined';
-    }
-    return 'Undefined';
-  }
-
   private setUserName(): string {
-    let userName = [this.response.firstName, this.response.lastName].filter(Boolean).join(' ');
+    let userName = [this.formData.firstName, this.formData.lastName].filter(Boolean).join(' ');
     if (!!userName) {
-      userName = this.response.identifier || 'Undefined';
+      userName = this.formData.identifier || 'Undefined';
     }
     return userName;
   }

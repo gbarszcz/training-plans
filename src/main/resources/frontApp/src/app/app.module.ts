@@ -15,7 +15,6 @@ import { WcagComponent } from './components/wcag/wcag.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ThemeModeComponent } from './components/theme-mode/theme-mode.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { DatePipe } from '@angular/common';
 import { ExercisesComponent } from './components/exercises/exercises.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import { TrainingManagerComponent } from './components/training/training-manager.component';
@@ -58,7 +57,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     HttpClientXsrfModule,
     FullCalendarModule,
   ],
-  providers: [DatePipe],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
