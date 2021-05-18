@@ -10,15 +10,15 @@ import com.tcGroup.trainingCenter.domain.request.TrainingSeriesResultDataDTO;
 import com.tcGroup.trainingCenter.domain.service.TrainingHistoryService;
 import com.tcGroup.trainingCenter.user.dao.AccountDAO;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
+import com.tcGroup.trainingCenter.utility.AppParams;
+import com.tcGroup.trainingCenter.utility.ApplicationException;
 import com.tcGroup.trainingCenter.utility.logic.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service(value = "trainingHistoryService")
 public class TrainingHistoryServiceImpl extends AbstractService implements TrainingHistoryService {
@@ -41,17 +41,19 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
     @Autowired
     private ExerciseDAO exerciseDAO;
 
-    public List<TrainingHistoryData> getAllDataForAccount(Long accountId) {
-        return trainingHistoryDAO.findByAccountId(accountId);
+    @Override
+    public List<TrainingHistoryData> getAllDataForAccount() {
+        return trainingHistoryDAO.findByAccountId(getUserContext().getUserId());
     }
 
     @Override
     @Transactional
     public Long createTrainingPlan(TrainingHistoryRequest request) {
-        AccountData account = accountDAO.getItem(request.getAccountId());
+        AccountData account = accountDAO.getItem(getUserContext().getUserId());
         TrainingPlanTemplateData template = trainingPlanTemplateDAO.getItem(request.getTemplateId());
 
         TrainingHistoryData training = new TrainingHistoryData();
+        training.setTitle(request.getTitle());
         training.setTrainingDate(Date.from(request.getTrainingDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
         training.setAccount(account);
 
@@ -79,15 +81,59 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
     }
 
     @Transactional
-    public TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request) {
-        TrainingHistoryData training = trainingHistoryDAO.getItem(request.getId());
-        for (TrainingSeriesDataDTO seriesDataDTO : request.getTrainingSeriesData()) {
-            TrainingSeriesData trainingSeriesData = mapToSeriesData(seriesDataDTO, training.getTrainingDate());
-            trainingSeriesDAO.modifyItem(getUserContext(), trainingSeriesData);
-        }
+    public TrainingHistoryData modifyTrainingPlan(TrainingHistoryRequest request) throws ApplicationException {
+        TrainingHistoryData training = this.getTrainingPlan(request.getId());
+        List<TrainingSeriesDataDTO> trainingSeriesDataList = request.getTrainingSeriesData();
+        mapSeriesDataListToSeriesData(training, trainingSeriesDataList);
+        training.setTitle(request.getTitle());
         training.setTrainingDate(Date.from(request.getTrainingDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+
         trainingHistoryDAO.modifyItem(getUserContext(), training);
         return training;
+    }
+
+    private void mapSeriesDataListToSeriesData(TrainingHistoryData training, List<TrainingSeriesDataDTO> trainingSeriesDataList) {
+        double difficultySum = 0d;
+
+        for (TrainingSeriesDataDTO seriesDataDTO : trainingSeriesDataList) {
+            TrainingSeriesData trainingSeriesData = mapToSeriesData(seriesDataDTO, training.getTrainingDate());
+            difficultySum += trainingSeriesData.getExercise().getExerciseDifficultyLvl().getLevel();
+            trainingSeriesDAO.modifyItem(getUserContext(), trainingSeriesData);
+        }
+        Optional<DifficultyLevel> difficultyLevel = calculateTrainingDifficulty(difficultySum, trainingSeriesDataList.size());
+        difficultyLevel.ifPresent(training::setDifficulty);
+    }
+
+    private Optional<DifficultyLevel> calculateTrainingDifficulty(double difficultySum, int exercisesCount) {
+        Optional<DifficultyLevel> difficultyLevel = Optional.empty();
+        if (difficultySum != 0 && exercisesCount > 0) {
+            double difficulty = Math.ceil(difficultySum / exercisesCount);
+            difficultyLevel = Arrays.stream(DifficultyLevel.values()).filter(d -> d.getLevel() == difficulty).findAny();
+        }
+        return difficultyLevel;
+    }
+
+    @Override
+    public TrainingHistoryData getTrainingPlan(Long id) throws ApplicationException {
+        TrainingHistoryData item = trainingHistoryDAO.getItem(id);
+        if (item == null || !item.getAccount().getId().equals(getUserContext().getUserId())) {
+            throw new ApplicationException(ResourceBundle.getBundle(AppParams.EXCEPTION_MESSAGES_RESOURCE, Locale.getDefault())
+                    .getString("training.history.invalidId"), id);
+        }
+        return item;
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteTrainingPlan(Long id) throws ApplicationException {
+        TrainingHistoryData item = getTrainingPlan(id);
+        for (TrainingSeriesData series : item.getTrainingSeriesData()) {
+            TrainingSeriesResultData trainingSeriesResultData = series.getTrainingSeriesResultData();
+            trainingSeriesResultDAO.removeItem(getUserContext(), trainingSeriesResultData);
+            trainingSeriesDAO.removeItem(getUserContext(), series);
+        }
+        trainingHistoryDAO.removeItem(getUserContext(), item);
+        return true;
     }
 
     private TrainingSeriesData mapToSeriesData(TrainingSeriesDataDTO seriesDataDTO, Date trainingDate) {

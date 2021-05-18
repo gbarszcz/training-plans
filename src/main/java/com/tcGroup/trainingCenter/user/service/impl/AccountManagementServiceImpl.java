@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.tcGroup.trainingCenter.domain.dao.TrainingHistoryDAO;
 import com.tcGroup.trainingCenter.domain.dao.TrainingPlanTemplateDAO;
+import com.tcGroup.trainingCenter.domain.entity.TrainingHistoryData;
 import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
 import com.tcGroup.trainingCenter.user.dao.AccountDAO;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
@@ -28,6 +30,9 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
 
     @Autowired
     private TrainingPlanTemplateDAO trainingPlanTemplateDAO;
+
+    @Autowired
+    private TrainingHistoryDAO trainingHistoryDAO;
 
     // -------------------------- ACCOUNTS -------------------------------------
 
@@ -66,9 +71,11 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
 
     @Override
     public List<TrainingPlanTemplateData> getTrainingPlans() {
-        //TODO after logging in is done
-//        return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(getUserContext().getUserId());
-        return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(1);
+        return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(getUserContext().getUserId());
     }
 
+    @Override
+    public List<TrainingHistoryData> getTrainingHistory() {
+        return trainingHistoryDAO.findByAccountId(getUserContext().getUserId());
+    }
 }

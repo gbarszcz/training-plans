@@ -1,13 +1,15 @@
 package com.tcGroup.trainingCenter.domain.enumeration;
 
 public enum DifficultyLevel {
-    LOW("L"),
-    MEDIUM("M"),
-    HIGH("H");
+    LOW(1, "L"),
+    MEDIUM(2, "M"),
+    HIGH(3, "H");
 
+    private final double level;
     private final String abbreviation;
 
-    DifficultyLevel(String abbreviation) {
+    DifficultyLevel(double level, String abbreviation) {
+        this.level = level;
         this.abbreviation = abbreviation;
     }
 
@@ -25,5 +27,9 @@ public enum DifficultyLevel {
 
     public String getAbbreviation() {
         return abbreviation;
+    }
+
+    public double getLevel() {
+        return level;
     }
 }

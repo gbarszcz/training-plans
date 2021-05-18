@@ -3,6 +3,7 @@ package com.tcGroup.trainingCenter.domain.entity;
 import com.tcGroup.trainingCenter.domain.enumeration.IterationUnit;
 import com.tcGroup.trainingCenter.utility.entity.AuditData;
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -17,12 +18,13 @@ import javax.persistence.*;
         @AttributeOverride(name="auditRU", column=@Column(name="TSR_AUDIT_RU"))
 })
 @Data
+@Where(clause = "TSR_AUDIT_RD is null or TSR_AUDIT_RU is null")
 public class TrainingSeriesResultData extends AuditData {
 
     @Id
     @Column(name = "TSR_ID")
     @GeneratedValue
-    protected long id;
+    protected Long id;
 
     @Column(name = "TSR_ITERATION_UNIT")
     @Enumerated(EnumType.STRING)

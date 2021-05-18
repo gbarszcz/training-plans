@@ -14,10 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 public class TrainingPlanTemplateRequest {
 
+    private final Long id;
     private final String name;
     @NotNull
-    //TODO S-003B - account id should be taken from user context
-    private final long accountId;
     private final List<TrainingSeriesTemplateDTO> seriesTemplates;
 
 }
