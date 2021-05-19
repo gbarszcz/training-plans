@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -196,6 +196,19 @@ export class AppService {
       ],
       "subItems": [],
       "link": "#plans",
+      "disabled": false,
+      "divider": false,
+      "left": true
+    },
+    {
+      "content": [
+        {
+          "type": 4,
+          "value": "Measurements"
+        }
+      ],
+      "subItems": [],
+      "link": "#measurements",
       "disabled": false,
       "divider": false,
       "left": true
@@ -520,6 +533,26 @@ export class AppService {
           }
         ],
         "background": null
+      },
+        {
+        "metaData": {
+          "id": "measurements",
+          "type": "section_pr",
+          "background": "background_video"
+        },
+        "headerInfos": {
+          "title": "Measurements",
+          "subTitle": "Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis.",
+          "insideFirstColumn": false
+        },
+        "content": [
+          {
+            "column": "col-12 col-lg-6",
+            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/measurement' class='btn'>Go to measurements</a>",
+            "component": "Measurements"
+          }
+        ],
+        "background": "assets/videos/trening.mp4"
       }
     ]
 }
