@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppService} from '../../app.service';
 import {IAlert} from '../../models/IAlert';
 import {HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'auth-forms',
@@ -9,7 +10,6 @@ import {HttpHeaders} from '@angular/common/http';
   styleUrls: ['./auth-forms.component.css'],
 })
 export class AuthFormsComponent implements OnInit {
-  @Output() URLEvent = new EventEmitter<string>();
   @Input() formType = '';
   formData: any = {};
   inputsParams = [
@@ -20,7 +20,7 @@ export class AuthFormsComponent implements OnInit {
       info: 'This must be an email. For example: name.surname@example.com',
       type: {
         value: 'email',
-        error: 'This is a not correct email!'
+        error: 'This is not a correct email!'
       },
       max: {
         value: 150,
@@ -39,7 +39,7 @@ export class AuthFormsComponent implements OnInit {
       placeholder: 'Old password',
       name: 'oldPassword',
       icon: 'bi-eye',
-      info: 'Enter your actual password.',
+      info: 'Enter your current password.',
       type: {
         value: 'password',
         error: ''
@@ -120,7 +120,7 @@ export class AuthFormsComponent implements OnInit {
     displayHideButton: false
   };
 
-  constructor(private service: AppService) {
+  constructor(private service: AppService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -140,7 +140,7 @@ export class AuthFormsComponent implements OnInit {
   register(): void {
     this.service.apiPostRequest(this.formType, this.formData).subscribe(
       (res: any) => {
-        this.URLEvent.emit('/login');
+        this.router.navigate(['/login']);
       },
       (error: any) => {
         if (error.status === 400) {
@@ -169,7 +169,7 @@ export class AuthFormsComponent implements OnInit {
     this.service.apiGetRequest(this.formType, HEADERS).subscribe(
       (res: any) => {
         sessionStorage.setItem('username', res.username);
-        this.URLEvent.emit('/profile');
+        this.router.navigate(['/profile']);
       },
       (error: any) => {
         this.alerts.push({

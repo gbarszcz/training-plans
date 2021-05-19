@@ -1,5 +1,5 @@
 import {IStringItem} from './IStringItem';
-import {EStringItemType} from '../enums/EStringItemType';
+import {StringItemType} from '../enums/StringItemType';
 
 interface INavigationItem {
   content: IStringItem[];
@@ -29,7 +29,7 @@ export class Navigation {
     NAV.mainNav = this.updateIfItemDisabled(NAV.mainNav);
     NAV.subNav = this.updateIfItemDisabled(NAV.subNav);
 
-    this.currentRoute = `/${currentRoute}`;
+    this.currentRoute = currentRoute;
     this.brandItem = NAV.brandItem;
     this.account = this.getAccountItem(NAV);
     this.navItems = this.getMainNavItem(NAV);
@@ -69,11 +69,11 @@ export class Navigation {
     if (typeof items !== 'undefined') {
       items.forEach((content) => {
         switch (content.type) {
-          case EStringItemType.i: {
+          case StringItemType.i: {
             html += `<i class="bi ${content.value}"></i> `;
             break;
           }
-          case EStringItemType.img: {
+          case StringItemType.img: {
             html += `<img src="${content.value}"> `;
             break;
           }

@@ -15,13 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 public class TrainingHistoryRequest {
 
-    private final long id;
+    private final Long id;
     @NotNull
-    //TODO S-003B - account id should be taken from user context
-    private final long accountId;
     private final long templateId;
     @NotNull
     private final LocalDate trainingDate;
+    private final String title;
     private final List<TrainingSeriesDataDTO> trainingSeriesData;
 
 }

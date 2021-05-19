@@ -1,11 +1,16 @@
 package com.tcGroup.trainingCenter.user.controller;
 
+import com.tcGroup.trainingCenter.domain.entity.TrainingHistoryData;
 import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
+import com.tcGroup.trainingCenter.domain.entity.MeasurementData;
+import com.tcGroup.trainingCenter.user.response.AccountTrainingsPlansResponse;
 import com.tcGroup.trainingCenter.user.service.AccountManagementService;
 import com.tcGroup.trainingCenter.utility.logic.AbstractController;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -16,10 +21,12 @@ public class AccountController extends AbstractController {
     @Autowired
     AccountManagementService accountManagementService;
 
-    @GetMapping("/plans/templates")
+    @GetMapping("/trainings-plans")
     @ResponseBody
-    public List<TrainingPlanTemplateData> getTrainingPlanTemplates() {
-        return accountManagementService.getTrainingPlans();
+    public AccountTrainingsPlansResponse getTrainingsAndTemplates() {
+        List<TrainingPlanTemplateData> trainingPlans = accountManagementService.getTrainingPlans();
+        List<TrainingHistoryData> trainingHistory = accountManagementService.getTrainingHistory();
+        return new AccountTrainingsPlansResponse(trainingHistory, trainingPlans);
     }
 
 }

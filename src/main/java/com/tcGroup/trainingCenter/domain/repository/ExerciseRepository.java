@@ -10,6 +10,6 @@ import java.util.List;
 @Repository("exerciseRepo")
 public interface ExerciseRepository extends AbstractRepository<ExerciseData, Long> {
 
-    List<ExerciseData> findByTags_Id(long id);
+    List<ExerciseData> findByTags_Id(Long id);
     
 }

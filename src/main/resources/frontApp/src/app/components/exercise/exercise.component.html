@@ -12,7 +12,7 @@
         <div *ngIf="!!response.tags && response.tags.length > 0" class="tags">
           <h4>Tags:</h4>
           <a *ngFor="let tag of response.tags"
-             href="tags/{{tag.id}}"
+             routerLink="tags/{{tag.id}}"
              class="badge bg-primary">
             {{tag.tagName}}
           </a>
@@ -20,7 +20,7 @@
         <div *ngIf="!!response.equipments && response.equipments.length > 0" class="equipments">
           <h4>Equipments:</h4>
           <a *ngFor="let equipment of response.equipments"
-             href="tags/{{equipment.id}}"
+             routerLink="tags/{{equipment.id}}"
              class="badge bg-primary">
             {{equipment.equipmentName}}
           </a>
