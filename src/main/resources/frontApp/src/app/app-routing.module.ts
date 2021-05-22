@@ -11,6 +11,7 @@ import { SectionPageComponent } from './components/section_page/section-page.com
 import { MeasurementComponent } from './components/measurement/measurement.component';
 import {TrainingPageComponent} from './components/trainings-components/training-page/training-page.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: SectionPageComponent },
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: 'training/:id', component: TrainingPageComponent, canActivate: [AuthGuard] },
   { path: 'measurement', component: MeasurementComponent, canActivate: [AuthGuard] },
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({
