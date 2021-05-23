@@ -23,6 +23,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
+import { MeasurementComponent } from './components/measurement/measurement.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -48,6 +51,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ExerciseComponent,
     LogoutComponent,
     TrainingManagerComponent,
+    MeasurementComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     HttpClientXsrfModule,
     FullCalendarModule,
+    FormsModule,
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
