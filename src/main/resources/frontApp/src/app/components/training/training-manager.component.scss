@@ -1,11 +1,15 @@
 @import "./../../../scss/bootstrap/functions";
 @import "./../../../scss/bootstrap/variables";
 
+.alert {
+  z-index: 1100;
+}
+
 #training-calendar {
   height: 80vh;
 }
 
-button {
+.btn_alt {
   width: 100%;
 }
 
@@ -75,6 +79,31 @@ button {
     .training-info {
       background-color: $secondary;
       transform: translateY(0);
+    }
+  }
+}
+
+.modal-dialog {
+  h4 {
+    line-height: 1;
+  }
+
+  .modal-footer {
+    padding: 0;
+
+    button {
+      margin: -$border-width / 2 0;
+    }
+  }
+
+  .training {
+    cursor: pointer;
+
+    &.success {
+      &,
+      & * {
+        color: $success !important;
+      }
     }
   }
 }

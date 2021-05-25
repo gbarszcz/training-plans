@@ -1,8 +1,12 @@
+.alert {
+  z-index: 1100;
+}
+
 #training-calendar {
   height: 80vh;
 }
 
-button {
+.btn_alt {
   width: 100%;
 }
 
@@ -65,6 +69,22 @@ button {
 .training:hover .training-info {
   background-color: var(--bs-secondary);
   transform: translateY(0);
+}
+
+.modal-dialog h4 {
+  line-height: 1;
+}
+.modal-dialog .modal-footer {
+  padding: 0;
+}
+.modal-dialog .modal-footer button {
+  margin: -1px 0;
+}
+.modal-dialog .training {
+  cursor: pointer;
+}
+.modal-dialog .training.success, .modal-dialog .training.success * {
+  color: var(--bs-success) !important;
 }
 
 /*# sourceMappingURL=training-manager.component.css.map */
