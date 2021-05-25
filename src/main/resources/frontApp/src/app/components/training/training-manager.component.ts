@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {CalendarOptions} from '@fullcalendar/angular';
+import { ESearchOption } from 'src/app/enums/ESearchOption';
 import {AppService} from '../../app.service';
 import {IAlert} from '../../models/IAlert';
 import {Location} from '@angular/common';
@@ -12,6 +13,7 @@ import {Location} from '@angular/common';
 export class TrainingManagerComponent {
   @Input() response: any | null = null;
   mainEndpoint = 'training/history';
+  searchOption: ESearchOption = ESearchOption.templates;
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     dateClick: this.handleDateClick.bind(this),
@@ -39,7 +41,11 @@ export class TrainingManagerComponent {
   }
 
   private prepareCalendarFields(): void {
-    this.service.apiGetRequest('account/trainings-plans').subscribe(
+    this.setResults(this.service.apiGetRequest('account/trainings-plans'));
+  }
+
+  setResults(results: any) {
+    results.subscribe(
       (res: any) => {
         res.trainings.forEach((training: any) => {
             this.events.push({

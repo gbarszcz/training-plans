@@ -21,9 +21,6 @@ export class SearchComponent {
   }
 
   search() {
-    this.service.apiPostRequest(this.searchOption, {name: this.searchTerm}).subscribe((data: any) => {
-      this.data = data;
-    });
-    this.results.emit(this.data);
+    this.results.emit(this.service.apiPostRequest(this.searchOption, {name: this.searchTerm}));
   }
 }
