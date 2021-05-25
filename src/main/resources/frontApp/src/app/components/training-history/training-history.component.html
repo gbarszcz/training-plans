@@ -1,0 +1,44 @@
+<div *ngIf="alerts">
+  <div *ngFor="let alert of alerts">
+    <app-alert *ngIf="alert.show"
+               [alert]="alert"
+               [position]="'fixed-top'">
+    </app-alert>
+  </div>
+</div>
+
+<section id="top" class="section section_se">
+  <div class="container">
+    <div *ngIf="!!response && response.length > 0" class="training">
+      <div class="sort-bar dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          <i class="bi bi-{{sortOptions[sortOptionIndex].icon}}"></i>
+          {{sortOptions[sortOptionIndex].name}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a *ngFor="let options of sortOptions; let i = index"
+             (click)="sortBy(i)"
+             class="dropdown-item {{sortOptionIndex === i ? 'active' : ''}}">
+            <i class="bi bi-{{options.icon}}"></i>
+            {{options.name}}
+          </a>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div *ngFor="let training of response" class="col-12 col-md-6 col-lg-4 col-xxl-3">
+          <a class="card" routerLink="training/{{training.id}}">
+            <div class="difficulty">{{training.difficulty}}</div>
+            <div class="trainingDate">{{dateFormatted(training.trainingDate)}}</div>
+            <div class="title">{{training.title}}</div>
+          </a>
+          <a class="delete" (click)="delete(training.id)">
+            <i class="bi bi-trash"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h1 *ngIf="!!!response || response.length === 0">No training found</h1>
+  </div>
+</section>

@@ -12,6 +12,7 @@ import { MeasurementComponent } from './components/measurement/measurement.compo
 import {TrainingPageComponent} from './components/trainings-components/training-page/training-page.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
+import {TrainingHistoryComponent} from './components/training-history/training-history.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: SectionPageComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' },
+  {path: 'trainings-history', component: TrainingHistoryComponent},
 ];
 
 @NgModule({

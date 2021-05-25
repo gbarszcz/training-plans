@@ -14,6 +14,10 @@ export class AppService {
     return this.http.post<Response>(`${this.prefix}/${endpoint}`, data);
   }
 
+  apiDeleteRequest(endpoint: string, data: any): any {
+    return this.http.delete<Response>(`${this.prefix}/${endpoint}`, data);
+  }
+
   apiPutRequest(endpoint: string, data: any): any {
     return this.http.put<Response>(`${this.prefix}/${endpoint}`, data);
   }
