@@ -12,6 +12,7 @@ import com.tcGroup.trainingCenter.utility.logic.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,11 @@ public class ExercisesManagementController extends AbstractController {
     //--------------------- EXERCISES ----------------------------------
 
     @GetMapping(path = "/exercises")
+    public List<ExerciseData> getExercises() {
+        return exercisesManagementService.getAllExercises(new ExercisesSearchCriteria());
+    }
+
+    @PostMapping(path = "/exercises")
     public List<ExerciseData> getExercises(@RequestBody ExercisesSearchCriteria searchCriteria) {
         return exercisesManagementService.getAllExercises(searchCriteria);
     }

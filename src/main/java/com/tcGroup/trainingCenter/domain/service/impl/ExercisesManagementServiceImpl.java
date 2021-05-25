@@ -36,7 +36,7 @@ public class ExercisesManagementServiceImpl extends AbstractService implements E
     @Transactional
     public List<ExerciseData> getAllExercises(ExercisesSearchCriteria searchCriteria) {
         if (getUserContext() == null) {
-            searchCriteria.setExerciseDemo(true);
+            searchCriteria.setDemo(true);
         }
         
         return exerciseDAO.getItems(searchCriteria);

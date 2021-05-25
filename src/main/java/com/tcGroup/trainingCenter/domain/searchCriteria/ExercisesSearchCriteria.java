@@ -14,14 +14,14 @@ import lombok.Data;
 public class ExercisesSearchCriteria extends SearchCriteria<ExerciseData> {
 
     @SearchField(field = "exerciseName", operation = SearchOperation.MATCH)
-    private String exerciseName;
+    private String name;
 
     @SearchField(field = "exerciseName", operation = SearchOperation.IN)
-    private List<String> exerciseNameIn;
+    private List<String> nameIn;
 
     @SearchField(field = "exerciseDifficultyLvl", operation = SearchOperation.EQUAL)
-    private DifficultyLevel exerciseDifficultyLevel;
+    private DifficultyLevel difficultyLevel;
 
     @SearchField(field = "exerciseDemo", operation = SearchOperation.EQUAL)
-    private Boolean exerciseDemo;
+    private Boolean demo;
 }
