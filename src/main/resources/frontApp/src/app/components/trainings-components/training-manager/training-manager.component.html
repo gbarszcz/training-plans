@@ -94,7 +94,7 @@
 
 <section class="section section_pr">
   <div class="container">
-    <app-search></app-search>
+    <app-search [searchOption]="searchOption" (results)="setResults($event)"></app-search>
   </div>
 </section>
 

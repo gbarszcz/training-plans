@@ -31,7 +31,14 @@ export class ExercisesComponent {
   }
 
   setResults(results: any) {
-    this.response = results;
+    results.subscribe(
+      (res: any) => {
+        this.response = res;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 
 }

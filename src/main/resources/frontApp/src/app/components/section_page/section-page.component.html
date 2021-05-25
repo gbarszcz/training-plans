@@ -22,7 +22,6 @@
           <b>{{section.headerInfos.subTitle}}</b>
         </div>
         <div [innerHTML]="content.text"></div>
-        <app-search *ngIf="content.component == 'search'"></app-search>
         <auth-forms *ngIf="content.component == 'auth'" [formType]="section.metaData.id"></auth-forms>
       </div>
     </div>

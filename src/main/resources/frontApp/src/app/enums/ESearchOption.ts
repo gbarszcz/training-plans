@@ -1,7 +1,7 @@
 export enum ESearchOption {
   all = "all",
   trainings = "trainings",
-  templates = "templates",
+  templates = "account/trainings-plans",
   exercises = "exercises",
   equipments = "equipments",
   tags = "tags",
