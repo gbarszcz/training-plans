@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ESearchOption} from 'src/app/enums/ESearchOption';
 import {AppService} from '../../app.service'; // todo temporary
 
 @Component({
@@ -8,6 +9,8 @@ import {AppService} from '../../app.service'; // todo temporary
 })
 export class ExercisesComponent {
   response: any | null = null;
+
+  searchOption: ESearchOption = ESearchOption.exercises;
 
   constructor(private appService: AppService) {
     this.prepareFields();
@@ -23,4 +26,12 @@ export class ExercisesComponent {
       }
     );
   }
+
+  ngOnInit(): void {
+  }
+
+  setResults(results: any) {
+    this.response = results;
+  }
+
 }

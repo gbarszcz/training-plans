@@ -9,7 +9,7 @@
         primis in faucibus.
       </p>
       <p class="col-12 col-md-4 col-xl-6">
-        <search-exercises></search-exercises>
+        <app-search [searchOption]="searchOption" (results)="setResults($event)"></app-search>
       </p>
     </div>
   </div>
