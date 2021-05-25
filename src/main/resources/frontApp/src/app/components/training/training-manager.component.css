@@ -1,3 +1,7 @@
+.alert {
+  z-index: 1100;
+}
+
 #training-calendar {
   height: 80vh;
 }

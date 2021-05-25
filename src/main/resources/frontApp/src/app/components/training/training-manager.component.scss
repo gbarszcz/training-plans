@@ -1,6 +1,10 @@
 @import "./../../../scss/bootstrap/functions";
 @import "./../../../scss/bootstrap/variables";
 
+.alert {
+  z-index: 1100;
+}
+
 #training-calendar {
   height: 80vh;
 }

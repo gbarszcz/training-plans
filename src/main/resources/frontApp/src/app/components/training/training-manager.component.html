@@ -1,3 +1,12 @@
+<div *ngIf="alerts" class="alert">
+  <div *ngFor="let alert of alerts">
+    <app-alert *ngIf="alert.show"
+               [alert]="alert"
+               [position]="'fixed-top'">
+    </app-alert>
+  </div>
+</div>
+
 <section id="top" class="section section_se">
   <div class="container">
     <div id="training-calendar">

@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/angular';
-import { AppService } from '../../app.service';
-import { IAlert } from '../../models/IAlert';
+import {Component, Input} from '@angular/core';
+import {CalendarOptions} from '@fullcalendar/angular';
+import {AppService} from '../../app.service';
+import {IAlert} from '../../models/IAlert';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-training',
@@ -33,7 +34,7 @@ export class TrainingManagerComponent {
   alerts: IAlert[] = [];
   sendMethod = 'post';
 
-  constructor(private service: AppService) {
+  constructor(private service: AppService, private location: Location) {
     this.prepareCalendarFields();
   }
 
@@ -41,31 +42,20 @@ export class TrainingManagerComponent {
     this.service.apiGetRequest('account/trainings-plans').subscribe(
       (res: any) => {
         res.trainings.forEach((training: any) => {
-          this.events.push({
-            title: training.title,
-            start: training.trainingDate,
-            url: `training/${training.id}`,
-          });
-          this.calendarOptions.events = this.events;
-        }
+            this.events.push({
+              title: training.title,
+              start: training.trainingDate,
+              url: `training/${training.id}`,
+            });
+            this.trainingsTemplates = res.trainingTemplates;
+            this.calendarOptions.events = this.events;
+          }
         );
       },
       (error: any) => {
         console.error(error);
       }
     );
-  }
-
-  private eventRemove(id: number): void {
-    this.events.splice(
-      this.events.indexOf(
-        this.events.filter((e: any) => {
-          return e.id === id;
-        })[0]
-      ),
-      1
-    );
-    this.calendarOptions.events = this.events;
   }
 
   setTemplate(templateId: number): void {
@@ -97,13 +87,7 @@ export class TrainingManagerComponent {
           level: 'success',
           displayHideButton: true
         });
-        this.events.push({
-          id: res.trainingId,
-          title: this.trainingFormData.title,
-          start: this.trainingFormData.trainingDate,
-          url: `training/${res.trainingId}`,
-        });
-        this.calendarOptions.events = this.events;
+        window.location.href = this.location.path();
       },
       (error: any) => {
         this.alerts.push({
