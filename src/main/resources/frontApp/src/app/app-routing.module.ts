@@ -6,9 +6,10 @@ import { ExercisesComponent } from './components/exercises/exercises.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import { DeauthGuard } from './deauth.guard';
 import { LogoutComponent } from './components/logout/logout.component';
-import { TrainingManagerComponent } from './components/training/training-manager.component';
+import { TrainingManagerComponent } from './components/trainings-components/training-manager/training-manager.component';
 import { SectionPageComponent } from './components/section_page/section-page.component';
 import { MeasurementComponent } from './components/measurement/measurement.component';
+import {TrainingPageComponent} from './components/trainings-components/training-page/training-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: SectionPageComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'exercises', component: ExercisesComponent },
   { path: 'exercise/:id', component: ExerciseComponent },
-  { path: 'trainings', component: TrainingManagerComponent, canActivate: [AuthGuard] },
+  { path: 'trainings-dashboard', component: TrainingManagerComponent, canActivate: [AuthGuard] },
+  { path: 'training/:id', component: TrainingPageComponent, canActivate: [AuthGuard] },
   { path: 'measurement', component: MeasurementComponent, canActivate: [AuthGuard] },
 ];
 

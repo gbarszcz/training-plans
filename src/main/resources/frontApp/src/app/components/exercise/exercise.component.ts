@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AppService} from '../../app.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-exercise',
@@ -9,12 +10,12 @@ import {AppService} from '../../app.service';
 export class ExerciseComponent {
   response: any | null = null;
 
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, private route: ActivatedRoute) {
     this.prepareFields();
   }
 
   private prepareFields(): void {
-    this.appService.apiGetRequest('profile').subscribe(
+    this.appService.apiGetRequest('exercise/' + this.route.snapshot.params.id).subscribe(
       (res: any) => {
         this.response = res;
       },

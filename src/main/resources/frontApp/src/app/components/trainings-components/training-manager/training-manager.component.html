@@ -98,14 +98,14 @@
   </div>
 </section>
 
-<section *ngIf="!!response && !!response.trainingTemplates" class="section section_se">
+<section class="section section_se">
   <div class="container">
-    <div *ngIf="response.trainingTemplates.length > 0" class="row">
+    <div *ngIf="trainingsTemplates.length > 0" class="row">
       <h1 class="col-12 col-md-6 text-align-center text-align-left-md">Training plans</h1>
       <b class="col-12 col-md-6 text-align-center text-align-right-md">
-        {{response.trainingTemplates.length}}
+        {{trainingsTemplates.length}}
       </b>
-      <div *ngFor="let template of response.trainingTemplates" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+      <div *ngFor="let template of trainingsTemplates" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
         <a [routerLink]="'training/' + template.id" class="training">
           <div class="training-background" [style]="'background-image: url()'"></div>
           <div class="training-info">
@@ -119,7 +119,7 @@
         </a>
       </div>
     </div>
-    <h1 *ngIf="response.trainingTemplates.length === 0">
+    <h1 *ngIf="trainingsTemplates.length === 0">
       No training plans found
     </h1>
   </div>

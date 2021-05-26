@@ -17,7 +17,7 @@ import { ThemeModeComponent } from './components/theme-mode/theme-mode.component
 import { LogoutComponent } from './components/logout/logout.component';
 import { ExercisesComponent } from './components/exercises/exercises.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
-import { TrainingManagerComponent } from './components/training/training-manager.component';
+import { TrainingManagerComponent } from './components/trainings-components/training-manager/training-manager.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -27,6 +27,7 @@ import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { MeasurementComponent } from './components/measurement/measurement.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { TrainingPageComponent } from './components/trainings-components/training-page/training-page.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -55,6 +56,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     TrainingManagerComponent,
     MeasurementComponent,
     ChartComponent,
+    TrainingPageComponent,
   ],
   imports: [
     BrowserModule,
