@@ -1,1 +1,75 @@
-<p>calculators works!</p>
+<section class="section section_se" xmlns="">
+  <div class="container">
+    <p>
+      Difficulty level: <span class="bold"></span>
+    </p>
+    <form class="row">
+      <div class="save-section">
+        <a class="btn btn_alt">Save</a>
+      </div>
+      <label class="col-12 col-md-6 col-lg-7 col-xl-8 col-xxl-9">
+        <input
+               type="text"
+               name="title"
+               placeholder="Title"
+               class="form-control"
+               required>
+      </label>
+      <label class="col-12 col-md-6 col-lg-5 col-xl-4 col-xxl-3">
+        <input
+               type="date"
+               name="trainingDate"
+               placeholder="Training date"
+               class="form-control"
+               required>
+      </label>
+      <div class="col-12 col-sm-6 col-md-4 col-xl-4 xol-xxl-2">
+        <fieldset>
+          <legend>
+          </legend>
+          <table>
+            <thead>
+            <tr>
+              <th>Weight</th>
+              <th>Height</th>
+              <th>Result</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                <label>
+                  <input
+                    name="weight"
+                    [(ngModel)]="weight"
+                    class="form-control"
+                    required>
+                </label>
+              </td>
+              <td>
+                <label>
+                  <input
+                         name="height"
+                         [(ngModel)]="height"
+                         class="form-control"
+                         required>
+                </label>
+              </td>
+              <td>
+<!--                dasda-->
+<!--                <div class="box">dasd</div>-->
+
+              </td>
+            </tr>
+
+            <tr>
+                <button  type="submit" class="btn btn-primary" (click)="calculateBMI(weight, height)">Calculate BMI</button>
+            </tr>
+
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+    </form>
+  </div>
+</section>

@@ -13,6 +13,7 @@ import {TrainingPageComponent} from './components/trainings-components/training-
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {TrainingHistoryComponent} from './components/trainings-components/training-history/training-history.component';
+import {CalculatorsComponent} from './components/calculators/calculators.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: SectionPageComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' },
   { path: 'trainings-history', component: TrainingHistoryComponent },
+  { path: 'calculators', component: CalculatorsComponent},
 ];
 
 @NgModule({
