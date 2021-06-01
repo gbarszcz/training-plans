@@ -1,4 +1,9 @@
 .box{
   border: #0074D9 solid 2px;
-  height: 100%;
+  height: 40px;
+  width: 100%;
+  margin: 0 0 1rem;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
 }
