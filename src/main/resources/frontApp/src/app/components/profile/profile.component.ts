@@ -110,12 +110,12 @@ export class ProfileComponent {
     this.service.apiGetRequest('profile').subscribe(
       (res: any) => {
         this.formData = res;
+        this.setUserName();
       },
       (error: any) => {
         console.error(error);
       }
     );
-    this.setUserName();
   }
 
   private prepareErrorFields(errors: any[]): void {
@@ -128,11 +128,11 @@ export class ProfileComponent {
     });
   }
 
-  private setUserName(): string {
+  private setUserName() {
     let userName = [this.formData.firstName, this.formData.lastName].filter(Boolean).join(' ');
     if (!!userName) {
       userName = this.formData.identifier || 'Undefined';
     }
-    return userName;
+    this.userName = userName;
   }
 }

@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class TrainingSeriesDataDTO {
 
-    @NotNull
     private final Long id;
     @NotNull
     private final long exerciseId;

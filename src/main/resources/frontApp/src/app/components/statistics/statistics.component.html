@@ -1,0 +1,60 @@
+<section class="section section_th">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-xl-6">
+        <div class="btn-group">
+          <a href="" class="btn" title="Favorite list">
+            <i class="bi bi-heart"></i>
+          </a>
+          <a href="/statistic" class="btn" title="Stats">
+            <i class="bi bi-graph-up"></i>
+          </a>
+          <a href="/measurement" class="btn" title="Measurement">
+            <i class="bi bi-rulers"></i>
+          </a>
+        </div>
+        <h1>Statistics</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section_se">
+  <div class="container">
+    <div class="col-12 col-xl-6">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+            {{activePeriod.viewValue}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a *ngFor="let period of periods" (click)="periodChange(period)"
+               class="dropdown-item {{activePeriod.viewValue === period.viewValue ? 'active' : ''}}">
+              {{period.viewValue}}
+            </a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+            {{selectedExercise?.exerciseName}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a *ngFor="let exercise of exercises" (click)="exerciseChange(exercise)"
+               class="dropdown-item {{selectedExercise?.id === exercise.id ? 'active' : ''}}">
+              {{exercise.exerciseName}}
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="selectedStatistics">
+      <h1>{{selectedStatistics.exercise?.exerciseName}}</h1>
+      <app-chart [data]="chartData" [labels]="dates"></app-chart>
+      <p>Max reps: {{selectedStatistics.aggregates.maxReps}}</p>
+      <p>Min reps: {{selectedStatistics.aggregates.minReps}}</p>
+      <p>Average reps: {{selectedStatistics.aggregates.avgReps.toFixed(2)}}</p>
+    </div>
+
+  </div>
+</section>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ChartDataSets } from 'chart.js';
 import { AppService } from 'src/app/app.service';
 import { IAlert } from 'src/app/models/IAlert';
+import {IPeriod, Period} from '../../models/Period';
 
 @Component({
   selector: 'app-measurement',
@@ -13,18 +13,14 @@ export class MeasurementComponent {
   measurements: Measurement[] = []
   alerts: IAlert[] = [];
   formData: any = {};
-
-  periods: Period[] = [
-    { value: 'weeks', viewValue: 'Week' },
-    { value: 'months', viewValue: 'Month' },
-    { value: 'years', viewValue: 'Year' }
-  ];
-  activePeriod: Period = { value: '', viewValue: 'All' }
+  periods: IPeriod[] = []
+  activePeriod: IPeriod = { value: '', viewValue: 'All' }
   dates: string[] = []
   measurementData: any = {}
 
   constructor(private service: AppService) {
     this.periodChange(this.activePeriod)
+    this.periods = new Period().values
   }
 
   returnIfHasKey(obj: any, key: string): any | boolean {
@@ -287,7 +283,7 @@ export class MeasurementComponent {
     }
   }
 
-  periodChange(period: Period) {
+  periodChange(period: IPeriod) {
     let params = {
       period: period.value,
       duration: 1
@@ -346,11 +342,6 @@ export class MeasurementComponent {
   hideAlert(alertID: string): void {
     this.alerts[+alertID].show = false;
   }
-}
-
-interface Period {
-  value: string;
-  viewValue: string;
 }
 
 export interface Measurement {

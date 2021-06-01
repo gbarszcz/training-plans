@@ -28,6 +28,7 @@ import { MeasurementComponent } from './components/measurement/measurement.compo
 import { ChartComponent } from './components/chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { TrainingPageComponent } from './components/trainings-components/training-page/training-page.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -57,6 +58,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MeasurementComponent,
     ChartComponent,
     TrainingPageComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,

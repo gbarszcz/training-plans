@@ -136,6 +136,11 @@ public class TrainingHistoryServiceImpl extends AbstractService implements Train
         return true;
     }
 
+    @Override
+    public List<TrainingHistoryData> getStatisticsForPeriod(Date startDate, Date endDate) {
+        return trainingHistoryDAO.findByAccountIdAndTrainingDate(getUserContext().getUserId(), startDate, endDate);
+    }
+
     private TrainingSeriesData mapToSeriesData(TrainingSeriesDataDTO seriesDataDTO, Date trainingDate) {
         TrainingSeriesData trainingSeriesData = trainingSeriesDAO.getItem(seriesDataDTO.getId());
         trainingSeriesData.setTrainingUnit(seriesDataDTO.getTrainingUnit());
