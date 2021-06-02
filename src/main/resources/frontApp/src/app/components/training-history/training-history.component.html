@@ -28,9 +28,9 @@
       <div class="row">
         <div *ngFor="let training of response" class="col-12 col-md-6 col-lg-4 col-xxl-3">
           <a class="card" routerLink="training/{{training.id}}">
-            <div class="difficulty">{{training.difficulty}}</div>
+            <div class="difficulty">{{training.difficulty || 'Undefined'}}</div>
             <div class="trainingDate">{{dateFormatted(training.trainingDate)}}</div>
-            <div class="title">{{training.title}}</div>
+            <div class="title">{{training.title || 'Undefined'}}</div>
           </a>
           <a class="delete" (click)="delete(training.id)">
             <i class="bi bi-trash"></i>

@@ -35,34 +35,18 @@ export class TrainingHistoryComponent {
       icon: 'caret-up'
     }
   ];
-  response: any[] = [
-    {
-      title: 'title 1',
-      trainingDate: '2021-05-15T16:53:19.670Z',
-      difficulty: 'hard'
-    },
-    {
-      title: 'title 2',
-      trainingDate: '2021-05-16T16:53:19.670Z',
-      difficulty: 'low'
-    },
-    {
-      title: 'title 3',
-      trainingDate: '2021-05-17T16:53:19.670Z',
-      difficulty: 'medium'
-    },
-  ];
+  response: any[] = [];
   alerts: IAlert[] = [];
 
   constructor(private service: AppService) {
     this.prepareFields();
-    this.sortBy(this.sortOptionIndex);
   }
 
   private prepareFields(): void {
     this.service.apiGetRequest('training/history').subscribe(
       (res: any) => {
         this.response = res || [];
+        this.sortBy();
       },
       (error: any) => {
         console.error(error);
@@ -70,18 +54,24 @@ export class TrainingHistoryComponent {
     );
   }
 
-  sortBy(index: number): void {
+  sortBy(index: number = 0): void {
     this.sortOptionIndex = index;
-    this.response = this.response?.sort((x: any, y: any) => {
-      const SORT_BY = this.sortOptions[index].name;
-      if (SORT_BY === 'Date') {
-        return new Date(x.trainingDate).getTime() - new Date(x.trainingDate).getTime();
-      }
-      return x[this.sortOptions[index].name.toLowerCase()].localeCompare(y[this.sortOptions[index].name.toLowerCase()]);
-    });
+    if (this.sortOptions[index].name === 'Date') {
+      this.response = this.response?.sort((x: any, y: any) => {
+          return new Date(x.trainingDate).getTime() - new Date(y.trainingDate).getTime();
+      });
+    } else {
+      this.response = this.response?.sort((x: any, y: any) => {
+        return this.getTrainingName(x, index).localeCompare(this.getTrainingName(y, index));
+      });
+    }
     if (this.sortOptions[index].icon === 'caret-up') {
       this.response = this.response?.reverse();
     }
+  }
+
+  private getTrainingName(training: any, index: number): string {
+    return training[this.sortOptions[index].name.toLowerCase()] || 'Undefined';
   }
 
   dateFormatted(date: string): string {
@@ -91,7 +81,7 @@ export class TrainingHistoryComponent {
   }
 
   delete(trainingId: string): void {
-    this.service.apiDeleteRequest('training/history', {id: trainingId}).subscribe(
+    this.service.apiDeleteRequest(`training/history/${trainingId}`).subscribe(
       (res: any) => {
         this.alerts.push({
           id: this.alerts.length,
