@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CalendarOptions} from '@fullcalendar/angular';
-import {AppService} from '../../app.service';
-import {IAlert} from '../../models/IAlert';
+import {AppService} from '../../../app.service';
+import {IAlert} from '../../../models/IAlert';
 import {Location} from '@angular/common';
 
 @Component({
