@@ -458,7 +458,7 @@ export class AppService {
         "content": [
           {
             "column": "col-12 col-md-8 col-lg-6",
-            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='#' class='btn'>Learn more</a>",
+            "text": "<p>Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis. Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>&#10;<a href='/statistics' class='btn'>Learn more</a>",
             "component": null
           },
           {
