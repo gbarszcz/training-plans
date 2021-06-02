@@ -34,13 +34,13 @@
             </a>
           </div>
         </li>
-        <li class="nav-item dropdown">
+        <li *ngIf="selectedExercise" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown">
-            {{selectedExercise?.exerciseName}}
+            {{selectedExercise.exerciseName}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a *ngFor="let exercise of exercises" (click)="exerciseChange(exercise)"
-               class="dropdown-item {{selectedExercise?.id === exercise.id ? 'active' : ''}}">
+               class="dropdown-item {{selectedExercise.id === exercise.id ? 'active' : ''}}">
               {{exercise.exerciseName}}
             </a>
           </div>
@@ -58,3 +58,10 @@
 
   </div>
 </section>
+
+<div *ngIf="alerts">
+  <div *ngFor="let alert of alerts">
+    <app-alert *ngIf="alert.show" (hideEvent)="hideAlert($event)" [alert]="alert" [position]="'fixed-top'">
+    </app-alert>
+  </div>
+</div>

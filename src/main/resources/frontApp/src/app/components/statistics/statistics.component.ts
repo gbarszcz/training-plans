@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { ChartDataSets } from 'chart.js';
 import {IPeriod, Period} from '../../models/Period';
+import {IAlert} from '../../models/IAlert';
 
 @Component({
   selector: 'app-statistics',
@@ -10,6 +11,7 @@ import {IPeriod, Period} from '../../models/Period';
 })
 export class StatisticsComponent implements OnInit {
   response: any | null = null;
+  alerts: IAlert[] = [];
   exercises: Exercise[] | null = null
   periods: IPeriod[] = []
   activePeriod: IPeriod = { value: '', viewValue: 'All' }
@@ -39,7 +41,14 @@ export class StatisticsComponent implements OnInit {
         }
       },
       (error: any) => {
-        console.error(error);
+        this.alerts.push({
+          id: this.alerts.length,
+          show: true,
+          header: 'Sorry! We have encountered a problem...',
+          text: 'Please try again later :\'(',
+          level: 'danger',
+          displayHideButton: true
+        });
       }
     );
   }
@@ -53,7 +62,14 @@ export class StatisticsComponent implements OnInit {
         this.refreshData()
       },
       (error: any) => {
-        console.error(error);
+        this.alerts.push({
+          id: this.alerts.length,
+          show: true,
+          header: 'Sorry! We have encountered a problem...',
+          text: 'Please try again later :\'(',
+          level: 'danger',
+          displayHideButton: true
+        });
       }
     );
   }
@@ -69,6 +85,16 @@ export class StatisticsComponent implements OnInit {
         this.response = res
         this.activePeriod = period
         this.refreshData()
+      },
+      (error: any) => {
+        this.alerts.push({
+          id: this.alerts.length,
+          show: true,
+          header: 'Sorry! We have encountered a problem...',
+          text: 'Please try again later :\'(',
+          level: 'danger',
+          displayHideButton: true
+        });
       }
     )
   }
@@ -85,6 +111,10 @@ export class StatisticsComponent implements OnInit {
 
   exerciseChange(exercise: Exercise) {
     this.getStatistics(exercise.id)
+  }
+
+  hideAlert(alertID: string): void {
+    this.alerts[+alertID].show = false;
   }
 }
 
