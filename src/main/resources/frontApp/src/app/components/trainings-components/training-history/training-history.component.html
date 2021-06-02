@@ -27,7 +27,7 @@
       <hr>
       <div class="row">
         <div *ngFor="let training of response" class="col-12 col-md-6 col-lg-4 col-xxl-3">
-          <a class="card" routerLink="training/{{training.id}}">
+          <a class="card" routerLink="../training/{{training.id}}">
             <div class="difficulty">{{training.difficulty || 'Undefined'}}</div>
             <div class="trainingDate">{{dateFormatted(training.trainingDate)}}</div>
             <div class="title">{{training.title || 'Undefined'}}</div>

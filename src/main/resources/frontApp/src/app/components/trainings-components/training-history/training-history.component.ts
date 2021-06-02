@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {AppService} from '../../app.service';
-import {IAlert} from '../../models/IAlert';
+import {AppService} from '../../../app.service';
+import {IAlert} from '../../../models/IAlert';
 
 @Component({
   selector: 'training-history',
