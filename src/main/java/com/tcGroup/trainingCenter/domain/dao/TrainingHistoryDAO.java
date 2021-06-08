@@ -6,11 +6,11 @@ import com.tcGroup.trainingCenter.utility.logic.AbstractDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Component("trainingHistoryDAO")
 public class TrainingHistoryDAO extends AbstractDAO<TrainingHistoryData, Long> {
-
 
     @Autowired
     protected void setRepository(TrainingHistoryRepository repository) {
@@ -25,4 +25,7 @@ public class TrainingHistoryDAO extends AbstractDAO<TrainingHistoryData, Long> {
         return this.getRepository().findAllByAccount_Id(id);
     }
 
+    public List<TrainingHistoryData> findByAccountIdAndTrainingDate(Long userId, Date startDate, Date endDate) {
+        return this.getRepository().findAllByAccount_IdAndTrainingDateBetween(userId, startDate, endDate);
+    }
 }

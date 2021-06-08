@@ -10,6 +10,7 @@ import { TrainingManagerComponent } from './components/trainings-components/trai
 import { SectionPageComponent } from './components/section_page/section-page.component';
 import { MeasurementComponent } from './components/measurement/measurement.component';
 import {TrainingPageComponent} from './components/trainings-components/training-page/training-page.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: SectionPageComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'trainings-dashboard', component: TrainingManagerComponent, canActivate: [AuthGuard] },
   { path: 'training/:id', component: TrainingPageComponent, canActivate: [AuthGuard] },
   { path: 'measurement', component: MeasurementComponent, canActivate: [AuthGuard] },
+  { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
