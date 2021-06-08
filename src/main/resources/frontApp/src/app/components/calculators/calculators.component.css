@@ -8,6 +8,16 @@
   vertical-align: middle;
 }
 
+.section_pr{
+  height: 20rem;
+}
+
+.title{
+  text-align: center;
+  padding: 5%;
+  font-size: xxx-large;
+}
+
 .BMI{
   position: relative;
   transform: translateX(-5%) translateY(100%) scale(1);
