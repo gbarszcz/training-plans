@@ -7,3 +7,19 @@
   display: inline-block;
   vertical-align: middle;
 }
+
+.BMI{
+  position: relative;
+  transform: translateX(-5%) translateY(100%) scale(1);
+}
+
+.CI{
+  position: relative;
+  transform: translateX(32.5%) translateY(-10%) scale(1);
+}
+
+.WHR{
+  position: relative;
+  transform: translateX(70%) translateY(-120%) scale(1);
+}
+
