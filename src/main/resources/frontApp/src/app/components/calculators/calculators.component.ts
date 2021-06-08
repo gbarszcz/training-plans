@@ -18,6 +18,7 @@ export class CalculatorsComponent implements OnInit {
   heightCI = 0;
   hipCircumference = 0;
   waist = 0;
+  resultWHR = 0;
 
   constructor(private service: AppService) {
   }
@@ -52,6 +53,24 @@ export class CalculatorsComponent implements OnInit {
       (res: any) => {
         this.response = res;
         this.resultCI = this.response.body;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  public calculateWHR(waist: number, hipCircumference: number): void {
+    this.waist = waist;
+    this.hipCircumference = hipCircumference;
+
+    this.service.apiGetRequest('calculate', {params: {
+        calculatorType: 'WHR',
+        waist: this.waist,
+        hipCircumference: this.hipCircumference}, observe: 'response'}).subscribe(
+      (res: any) => {
+        this.response = res;
+        this.resultWHR = this.response.body;
       },
       (error: any) => {
         console.error(error);
