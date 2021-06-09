@@ -1,0 +1,54 @@
+.pagination {
+  display: flex;
+  @include list-unstyled();
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  color: $pagination-color;
+  background-color: $pagination-bg;
+  border: $pagination-border-width solid $pagination-border-color;
+  @include transition($pagination-transition);
+
+  &:hover {
+    z-index: 2;
+    background-color: $pagination-hover-bg;
+    border-color: $pagination-hover-border-color;
+  }
+
+  &:focus {
+    z-index: 3;
+    background-color: $pagination-focus-bg;
+    outline: $pagination-focus-outline;
+  }
+}
+
+.page-item {
+  &:not(:first-child) .page-link {
+    margin-left: $pagination-margin-start;
+  }
+
+  &.active .page-link {
+    z-index: 3;
+    color: $pagination-active-color;
+    @include gradient-bg($pagination-active-bg);
+    border-color: $pagination-active-border-color;
+  }
+
+  &.disabled .page-link {
+    pointer-events: none;
+  }
+}
+
+
+//
+// Sizing
+//
+@include pagination-size($pagination-padding-y, $pagination-padding-x, null, $pagination-border-radius);
+
+.pagination-lg {
+}
+
+.pagination-sm {
+}

@@ -1,0 +1,57 @@
+<form [id]="'auth-form-' + formType.replace(' ', '-')">
+  <fieldset>
+    <legend *ngIf="!isChangePasswordForm()">{{formType}}</legend>
+    <label *ngFor="let input of inputsParams; let i = index"
+           class="{{input.err.isErr ? 'danger' : ''}}">
+      <div *ngIf="!isLoginForm() && input.name === 'password'"
+           id="password-strength" class="{{input?.strength?.level}}">
+        {{input?.strength?.message}}
+      </div>
+      <div class="validation">
+        {{input.err.isErr ? input.err.message : ''}}
+      </div>
+      <div class="input-group{{input.required.value ? ' required' : ''}}">
+        <div *ngIf="!isLoginForm()" class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="bi bi-info-circle" title="{{input.info}}"></i>
+          </span>
+        </div>
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i (click)="isPassword(i) ? togglePasswordDisplay(i) : null"
+               class="bi {{input.icon}}">
+            </i>
+          </span>
+        </div>
+        <input [(ngModel)]="formData[input.name.toString()]"
+               (keyup)="liveValidation(i)"
+               class="form-control"
+               [placeholder]="input.placeholder"
+               [type]="input.type.value"
+               [max]="input.max.value"
+               [name]="input.name"
+               [required]="input.required.value">
+      </div>
+    </label>
+
+    <button (click)="submit()"
+            [disabled]="button.disabled"
+            class="btn btn_alt"
+            type="submit">
+      {{button.text}}
+    </button>
+  </fieldset>
+</form>
+
+<app-alert *ngIf="!isLoginForm() && !isChangePasswordForm()"
+           [alert]="infoAlert"></app-alert>
+
+<div *ngIf="alerts">
+  <div *ngFor="let alert of alerts">
+    <app-alert *ngIf="alert.show"
+               (hideEvent)="hideAlert($event)"
+               [alert]="alert"
+               [position]="'fixed-top'">
+    </app-alert>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+.bold {
+  font-weight: bold;
+}
+
+form.row {
+  overflow: unset;
+}
+
+.save-section {
+  height: 100%;
+  width: max-content;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+}
+.save-section button {
+  position: sticky;
+  top: 5rem;
+  left: 0;
+}
+
+fieldset {
+  display: block;
+}
+
+.col-12 {
+  z-index: 1;
+}
+.col-12:hover {
+  z-index: 2;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: center;
+}
+
+/*# sourceMappingURL=training-page.component.css.map */

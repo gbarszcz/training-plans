@@ -1,5 +1,11 @@
 package com.tcGroup.trainingCenter.security.configuration;
 
+import com.tcGroup.trainingCenter.security.filter.CORSFilter;
+import com.tcGroup.trainingCenter.security.filter.CsrfHeaderFilter;
+import com.tcGroup.trainingCenter.security.handler.CORSLogoutSuccessHandler;
+import com.tcGroup.trainingCenter.user.provider.CustomAuthProvider;
+import com.tcGroup.trainingCenter.user.service.AccountManagementService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,22 +15,26 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.session.SessionManagementFilter;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // TODO Enable after M-003B
-    // @Autowired
-    // private IUserService userService;
+     @Autowired
+     private AccountManagementService accountService;
+
+     @Autowired
+     private CustomAuthProvider authProvider;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // TODO Enable after M-003B
-        // auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+         auth.userDetailsService(accountService).passwordEncoder(bCryptPasswordEncoder())
+            .and().authenticationProvider(authProvider);
     }
 
-    @Bean
+    @Bean(value = "bCryptPasswordEncoder")
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
@@ -34,11 +44,46 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationManager();
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/resources/**", "/scss/**", "/webjars/**", "/", "/index").permitAll()
-                .anyRequest().authenticated().and().csrf().ignoringAntMatchers("/phpmyadmin/**").and().headers()
-                .frameOptions().sameOrigin();
+    @Bean
+    protected CORSFilter corsFilter() {
+        return new CORSFilter();
     }
 
+    @Bean
+    protected CORSLogoutSuccessHandler corsLogoutSuccessHandler() {
+        return new CORSLogoutSuccessHandler();
+    }
+    private static final String[] AUTH_WHITELIST = {
+            // -- Swagger UI v2
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+            // other public endpoints of your API may be appended to this array
+    };
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.addFilterBefore(corsFilter(), SessionManagementFilter.class).httpBasic().and().authorizeRequests()
+            .antMatchers("/user", "/logout", "/profile").authenticated()
+            .antMatchers(AUTH_WHITELIST).anonymous()
+            .antMatchers("/resources/**", "/scss/**", "/webjars/**", "/error", "/", "/index", "/register", "/login", "/exercises**", "/exercise/**", "/tags", "/account/**").permitAll()
+                .and().csrf().ignoringAntMatchers("/phpmyadmin/**", "/register", "/login*", "/logout*", "/exercises**", "/exercise/**", "/tags", "/account/**", "/profile")
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and().headers()
+                .frameOptions().sameOrigin()
+                .and().logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessHandler(corsLogoutSuccessHandler())
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .permitAll()
+                .and()
+                .addFilterAfter(new CsrfHeaderFilter(), SessionManagementFilter.class);
+    }
 }

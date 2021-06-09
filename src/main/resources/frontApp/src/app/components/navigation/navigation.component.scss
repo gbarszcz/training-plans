@@ -1,0 +1,23 @@
+@import "./../../../scss/bootstrap/functions";
+@import "./../../../scss/bootstrap/variables";
+
+#account-nav-item {
+  .nav-link {
+    padding: {
+      top: 0;
+      bottom: 0;
+    }
+  }
+}
+
+li {
+  order: 2;
+
+  &#account-nav-item {
+    order: 1;
+  }
+
+  @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+    order: 1;
+  }
+}

@@ -1,0 +1,109 @@
+@import "../../../../scss/bootstrap/functions";
+@import "../../../../scss/bootstrap/variables";
+
+.alert {
+  z-index: 1100;
+}
+
+#training-calendar {
+  height: 80vh;
+}
+
+.btn_alt {
+  width: 100%;
+}
+
+.training-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  opacity: 0.35;
+  background-position: center;
+  background-size: 100% auto;
+  transform: translateX(-50%) translateY(-50%) scale(1.5);
+  transition: $transition-base;
+  z-index: 1;
+}
+
+.training-info {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 0 $spacer / 4;
+  overflow: auto;
+  background-color: transparent;
+  transform: translateY(calc(100% - 1.5rem));
+  transition: $transition-base;
+  z-index: 2;
+
+  b {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    padding: $spacer / 4 0;
+    font-size: .9rem;
+    color: $tertiary;
+
+    &.info {
+      padding-top: 0;
+      font-size: .825rem;
+      color: var(--bs-info);
+    }
+  }
+}
+
+.training {
+  width: 100%;
+  height: 200px;
+  display: block;
+  border: $border-width $border-style;
+  position: relative;
+  overflow: hidden;
+  background-color: $tertiary;
+
+  &:before,
+  &:after {
+    content: unset;
+  }
+
+  &:hover {
+    .training-background {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-50%) scale(1.75);
+    }
+
+    .training-info {
+      background-color: $secondary;
+      transform: translateY(0);
+    }
+  }
+}
+
+.modal-dialog {
+  h4 {
+    line-height: 1;
+  }
+
+  .modal-footer {
+    padding: 0;
+
+    button {
+      margin: -$border-width / 2 0;
+    }
+  }
+
+  .training {
+    cursor: pointer;
+
+    &.success {
+      &,
+      & * {
+        color: $success !important;
+      }
+    }
+  }
+}

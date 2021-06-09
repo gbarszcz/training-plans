@@ -1,0 +1,96 @@
+<section class="section section_th">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-xl-6">
+        <div class="btn-group">
+          <a href="" class="btn" title="Favorite list">
+            <i class="bi bi-heart"></i>
+          </a>
+          <a href="/statistics" class="btn" title="Stats">
+            <i class="bi bi-graph-up"></i>
+          </a>
+          <a href="/measurement" class="btn" title="Measurement">
+            <i class="bi bi-rulers"></i>
+          </a>
+        </div>
+        <h1>{{userName}}</h1>
+      </div>
+      <form class="col-12 col-xl-6">
+        <label *ngFor="let data of userData.user" [class]="!!data.error ? 'danger' : ''">
+          <div class="validation">
+            {{!!data.error ? data.error : ''}}
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend" [title]="data.placeholder">
+              <span *ngIf="returnIfHasKey(data, 'icon')" class="input-group-text">
+                <i class="bi {{returnIfHasKey(data, 'icon')}}"></i>
+              </span>
+              <div *ngIf="!!returnIfHasKey(data, 'text')" class="input-group-text">
+                <p>{{returnIfHasKey(data, 'text')}}</p>
+              </div>
+            </div>
+            <input *ngIf="data.type !== 'textarea'"
+                   [(ngModel)]="formData[data.name.toString()]"
+                   [type]="data.type"
+                   [name]="data.name"
+                   [placeholder]="data.placeholder"
+                   [required]="returnIfHasKey(data, 'require')"
+                   class="form-control">
+
+            <textarea *ngIf="data.type === 'textarea'"
+                      [(ngModel)]="formData[data.name.toString()]"
+                      [name]="data.name"
+                      [placeholder]="data.placeholder"
+                      [required]="returnIfHasKey(data, 'require')"
+                      class="form-control"
+                      rows="4"></textarea>
+          </div>
+        </label>
+        <button (click)="put()" class="btn">Save</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section section_se">
+  <div class="container">
+    <div class="row">
+      <form class="col-12 col-xl-6">
+        <label *ngFor="let data of userData.about" [class]="!!data.error ? 'danger' : ''">
+          <div class="validation">
+            {{!!data.error ? data.error : ''}}
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend" [title]="data.placeholder">
+              <span *ngIf="returnIfHasKey(data, 'icon')" class="input-group-text">
+                <i class="bi {{returnIfHasKey(data, 'icon')}}"></i>
+              </span>
+              <div *ngIf="!!returnIfHasKey(data, 'text')" class="input-group-text">
+                <p>{{returnIfHasKey(data, 'text')}}</p>
+              </div>
+            </div>
+            <input *ngIf="data.type !== 'textarea'"
+                   [(ngModel)]="formData[data.name.toString()]"
+                   [type]="data.type"
+                   [name]="data.name"
+                   [placeholder]="data.placeholder"
+                   [required]="returnIfHasKey(data, 'require')"
+                   class="form-control">
+
+            <textarea *ngIf="data.type === 'textarea'"
+                      [(ngModel)]="formData[data.name.toString()]"
+                      [name]="data.name"
+                      [placeholder]="data.placeholder"
+                      [required]="returnIfHasKey(data, 'require')"
+                      class="form-control"
+                      rows="4"></textarea>
+          </div>
+        </label>
+        <button (click)="put()" class="btn">Save</button>
+      </form>
+      <div class="col-12 col-xl-6">
+        <auth-forms [formType]="'Change password'"></auth-forms>
+      </div>
+    </div>
+  </div>
+</section>

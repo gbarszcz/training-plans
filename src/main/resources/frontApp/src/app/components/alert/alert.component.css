@@ -1,0 +1,9 @@
+.fixed-top {
+  top: calc(2px + 5.5rem);
+}
+
+.alert {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+/*# sourceMappingURL=alert.component.css.map */

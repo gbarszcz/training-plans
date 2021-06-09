@@ -1,0 +1,10 @@
+@import "./../../../scss/bootstrap/functions";
+@import "./../../../scss/bootstrap/variables";
+
+.fixed-top {
+  top: calc(#{$border-width} + 5.5rem);
+}
+
+.alert {
+  border-color: rgba(black, .3);
+}

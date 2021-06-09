@@ -1,0 +1,113 @@
+//
+// Base styles
+//
+
+.accordion-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: $accordion-button-padding-y $accordion-button-padding-x;
+  @include font-size($font-size-base);
+  color: $accordion-button-color;
+  text-align: left; // Reset button style
+  background-color: $accordion-button-bg;
+  border: $accordion-border-width solid $accordion-border-color;
+  overflow-anchor: none;
+  @include transition($accordion-transition);
+
+  &.collapsed {
+    border-bottom-width: 0;
+  }
+
+  &:not(.collapsed) {
+
+    &::after {
+    }
+  }
+
+  // Accordion icon
+  &::after {
+    flex-shrink: 0;
+    width: $accordion-icon-width;
+    height: $accordion-icon-width;
+    margin-left: auto;
+    content: "";
+    background-image: escape-svg($accordion-button-icon);
+    background-repeat: no-repeat;
+    background-size: $accordion-icon-width;
+    @include transition($accordion-icon-transition);
+  }
+
+  &:hover {
+    z-index: 2;
+  }
+
+  &:focus {
+    z-index: 3;
+    outline: 0;
+  }
+}
+
+.accordion-header {
+  margin-bottom: 0;
+}
+
+.accordion-item {
+  &:first-of-type {
+    .accordion-button {
+    }
+  }
+
+  &:last-of-type {
+    .accordion-button {
+      // Only set a border-radius on the last item if the accordion is collapsed
+      &.collapsed {
+        border-bottom-width: $accordion-border-width;
+      }
+    }
+
+    .accordion-collapse {
+      border-bottom-width: $accordion-border-width;
+    }
+  }
+}
+
+.accordion-collapse {
+  border: solid $accordion-border-color;
+  border-width: 0 $accordion-border-width;
+}
+
+.accordion-body {
+  padding: $accordion-body-padding-y $accordion-body-padding-x;
+}
+
+
+// Flush accordion items
+//
+// Remove borders and border-radius to keep accordion items edge-to-edge.
+
+.accordion-flush {
+  .accordion-button {
+    border-right: 0;
+    border-left: 0;
+  }
+
+  .accordion-collapse {
+    border-width: 0;
+  }
+
+  .accordion-item {
+    &:first-of-type {
+      .accordion-button {
+        border-top-width: 0;
+      }
+    }
+
+    &:last-of-type {
+      .accordion-button.collapsed {
+        border-bottom-width: 0;
+      }
+    }
+  }
+}

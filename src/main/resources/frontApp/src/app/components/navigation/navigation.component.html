@@ -1,0 +1,79 @@
+<nav class="{{position == 'fixed' ? 'navbar fixed-top navbar-expand-lg' : 'navbar-footer'}}">
+  <div class="container">
+    <a *ngIf="navigation?.currentRoute != '/'"
+       [routerLink]="'/'"
+       class="navbar-brand">
+      {{navigation?.brandItem?.value}}
+    </a>
+    <a *ngIf="navigation?.currentRoute == '/'" class="navbar-brand" href="#top">
+      {{navigation?.brandItem?.value}}
+    </a>
+    <button *ngIf="position == 'fixed'"
+            class="navbar-toggler collapsed"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav_primary{{position == 'fixed' ? ' collapse navbar-collapse' : ''}}"
+         id="{{position == 'fixed' ? 'navbarSupportedContent' : ''}}">
+      <ul class="navbar-nav mr-auto">
+        <li *ngFor="let navItem of navigation?.navItems"
+            class="nav-item{{navItem.subItems.length > 0 ? ' dropdown' : ''}}{{navigation?.currentRoute == navItem.link ? ' active' : ''}}">
+          <a *ngIf="navItem.subItems.length == 0"
+             [href]="navItem.link"
+             [innerHTML]="navigation?.createNavItemContent(navItem.content)"
+             class="nav-link{{navItem.disabled ? ' disabled' : ''}}">
+          </a>
+          <a *ngIf="navItem.subItems.length > 0"
+             [href]="navItem.link"
+             [innerHTML]="navigation?.createNavItemContent(navItem.content)"
+             class="nav-link dropdown-toggle"
+             data-toggle="dropdown">
+          </a>
+          <div *ngIf="navItem.subItems.length > 0" class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div *ngFor="let subItem of navItem.subItems">
+              <div *ngIf="subItem.divider" class="dropdown-divider"></div>
+              <a class="dropdown-item{{subItem.disabled ? ' disabled' : ''}}"
+                 [routerLink]="subItem.link">
+                {{subItem.content[0].value}}
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ul *ngIf="position == 'fixed'" class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <app-wcag></app-wcag>
+        </li>
+        <li id="account-nav-item" class="nav-item dropdown">
+          <a (click)="navigation?.account?.link"
+             [innerHTML]="navigation?.createNavItemContent(navigation?.account?.content)"
+             class="nav-link dropdown-toggle"
+             data-toggle="dropdown">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div *ngFor="let subItem of navigation?.account?.subItems">
+              <div *ngIf="subItem.divider" class="dropdown-divider"></div>
+              <a [routerLink]="subItem.link" class="dropdown-item{{subItem.disabled ? ' disabled' : ''}}">
+                {{subItem.content[0].value}}
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <theme-mode *ngIf="position == 'fixed'"></theme-mode>
+    </div>
+  </div>
+  <hr *ngIf="position == 'fixed' && navigation?.secNavItems?.length">
+  <div *ngIf="navigation?.secNavItems?.length" class="container">
+    <ul class="navbar-nav nav_secondary">
+      <li *ngFor="let subNavItem of navigation?.secNavItems" class="nav-item">
+        <a class="nav-link" [href]="subNavItem.link">{{subNavItem.content[0].value}}</a>
+      </li>
+    </ul>
+  </div>
+</nav>

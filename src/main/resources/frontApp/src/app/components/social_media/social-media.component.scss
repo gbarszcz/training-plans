@@ -1,0 +1,82 @@
+@import "./../../../scss/bootstrap/functions";
+@import "./../../../scss/bootstrap/variables";
+
+.sm-container {
+  margin: 0 auto;
+  z-index: 9999;
+
+  .sm-item {
+    width: max-content;
+    max-width: 100%;
+    padding: 0 $spacer / 2;
+
+    &,
+    &:visited {
+      color: $secondary;
+    }
+
+    &:hover {
+      color: $tertiary;
+    }
+
+    & > * {
+      padding: 0 $spacer / 4;
+      vertical-align: middle;
+    }
+
+    &:before {
+      content: unset;
+    }
+  }
+
+  &.sm-left,
+  &.sm-right {
+    position: fixed;
+    width: min-content;
+    top: 50%;
+
+    @media screen and (max-width: (map-get($grid-breakpoints, 'md') - 1)) {
+      display: none;
+    }
+
+    .sm-item {
+      width: max-content;
+      display: block;
+      padding: $spacer/4 0 !important;
+      background-color: $primary;
+      color: $secondary !important;
+      line-height: 1;
+
+      i {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &.sm-right {
+    right: 0;
+    transform: translateY(-50%) translateX(calc(100% - #{2rem + ($spacer / 2)}));
+
+    .sm-item {
+      &:hover {
+        transform: translateX(calc(-100% + #{2rem + ($spacer / 2)}));
+      }
+    }
+  }
+
+  &.sm-left {
+    left: 0;
+    transform: translateY(-50%) translateX(calc(-100% + #{2rem + ($spacer / 2)}));
+
+    .sm-item {
+      display: flex;
+      flex-flow: row-reverse;
+      align-items: center;
+      margin-left: auto;
+
+      &:hover {
+        transform: translateX(calc(100% - #{2rem + ($spacer / 2)}));
+      }
+    }
+  }
+}

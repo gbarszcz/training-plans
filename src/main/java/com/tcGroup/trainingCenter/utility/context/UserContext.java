@@ -1,6 +1,12 @@
 package com.tcGroup.trainingCenter.utility.context;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tcGroup.trainingCenter.user.entity.AccountData;
+import com.tcGroup.trainingCenter.user.enumeration.AccountStatus;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,50 +15,56 @@ public class UserContext implements UserDetails {
 
     private static final long serialVersionUID = -8763266680941529428L;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return null;
+    private AccountData account;
+    private Set<GrantedAuthority> grantedAuthorities;
+
+    public UserContext(AccountData account, Set<GrantedAuthority> grantedAuthorities) {
+        this.account = account;
+        this.grantedAuthorities = grantedAuthorities;
     }
 
     @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.grantedAuthorities;
+    }
+
+    @Override
+    @JsonIgnore
     public String getPassword() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.account.getAccountPassword();
     }
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.account.getAccountEmail();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return true;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return true;
+        return this.account.getAccountStatus() == AccountStatus.ACTIVE;
     }
 
     public Long getUserId() {
-        return null;
+        return this.account.getId();
     }
 
+    //TODO M-017B
+    public Double getUserWeightByDate(Date exerciseDate) {
+        return 75.5;
+    }
 }

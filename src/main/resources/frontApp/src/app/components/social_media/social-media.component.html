@@ -1,0 +1,6 @@
+<div *ngIf="socialMedia.length > 0" class="sm-container{{position == '' ? '' : ' sm-' + position}}">
+  <a *ngFor="let sm of socialMedia" href="{{sm.link}}" target="_blank" class="sm-item">
+    <i class="{{sm.icon ? 'bi ' + sm.icon : ''}}"></i>
+    <b>{{sm.name}}</b>
+  </a>
+</div>

@@ -1,0 +1,81 @@
+<section class="section section_th">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-xl-6">
+        <div class="btn-group">
+          <a href="" class="btn" title="Favorite list">
+            <i class="bi bi-heart"></i>
+          </a>
+          <a href="/statistics" class="btn" title="Stats">
+            <i class="bi bi-graph-up"></i>
+          </a>
+          <a href="/measurement" class="btn" title="Measurement">
+            <i class="bi bi-rulers"></i>
+          </a>
+        </div>
+        <h1>Measurements</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section_se">
+  <div class="container">
+    <div class="col-12 col-xl-6">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+            {{activePeriod.viewValue}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a *ngFor="let period of periods" (click)="periodChange(period)"
+              class="dropdown-item {{activePeriod.viewValue === period.viewValue ? 'active' : ''}}">
+              {{period.viewValue}}
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <form>
+      <div class="row" *ngFor="let data of measurementData.measurements">
+        <div class="col-12 col-xl-3">
+          <label [class]="!!data.error ? 'danger' : ''">
+            <div class="validation">
+              {{!!data.error ? data.error : ''}}
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend" [title]="data.placeholder">
+                <span *ngIf="returnIfHasKey(data, 'icon')" class="input-group-text">
+                  <i class="bi {{returnIfHasKey(data, 'icon')}}"></i>
+                </span>
+                <div *ngIf="!!returnIfHasKey(data, 'text')" class="input-group-text">
+                  <p>{{returnIfHasKey(data, 'text')}}</p>
+                </div>
+              </div>
+              <input *ngIf="data.type !== 'textarea'" [(ngModel)]="formData[data.name.toString()]" [type]="data.type"
+                [name]="data.name" [placeholder]="data.placeholder" [required]="returnIfHasKey(data, 'require')"
+                [min]="data.min" [max]="data.max" class="form-control">
+
+              <textarea *ngIf="data.type === 'textarea'" [(ngModel)]="formData[data.name.toString()]" [name]="data.name"
+                [placeholder]="data.placeholder" [required]="returnIfHasKey(data, 'require')" class="form-control"
+                rows="4"></textarea>
+            </div>
+          </label>
+        </div>
+        <!-- <div class="col-12 col-xl-2"></div> -->
+        <div class="col-12 col-xl-9">
+          <app-chart *ngIf="data.chartData" [data]="data.chartData" [labels]="dates"></app-chart>
+        </div>
+      </div>
+      <button class="btn" (click)="post()">Save</button>
+    </form>
+  </div>
+</section>
+
+<div *ngIf="alerts">
+  <div *ngFor="let alert of alerts">
+    <app-alert *ngIf="alert.show" (hideEvent)="hideAlert($event)" [alert]="alert" [position]="'fixed-top'">
+    </app-alert>
+  </div>
+</div>

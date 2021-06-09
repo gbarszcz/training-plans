@@ -1,0 +1,71 @@
+.card {
+  padding-top: 2.25rem;
+  position: relative;
+  text-align: left;
+}
+
+.difficulty,
+.trainingDate,
+.delete {
+  padding: 0.25rem 0.75rem;
+  position: absolute;
+}
+
+.difficulty,
+.trainingDate {
+  top: -2px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.difficulty,
+.delete {
+  width: max-content;
+  max-width: 100%;
+  background-color: var(--bs-primary);
+  color: var(--bs-secondary);
+}
+
+.difficulty {
+  left: 0;
+  text-transform: uppercase;
+}
+
+.trainingDate {
+  right: 0;
+}
+
+.delete {
+  padding-right: calc(.75rem - 2px);
+  bottom: calc(.75rem - 2px);
+  right: calc(.75rem + 2px);
+  font-size: 1.25rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0s ease-in-out 0s;
+}
+.delete:hover {
+  background-color: var(--bs-secondary);
+  color: var(--bs-primary);
+}
+
+a:before {
+  content: unset;
+}
+
+.col-12 {
+  position: relative;
+}
+.col-12:hover .card {
+  background-color: var(--bs-primary);
+  color: var(--bs-secondary);
+}
+.col-12:hover .delete {
+  opacity: 1;
+  transition: 0.3s ease-in-out 0.3s;
+}
+.col-12:hover .delete:hover {
+  transition: 0.3s ease-in-out;
+}
+
+/*# sourceMappingURL=training-history.component.css.map */

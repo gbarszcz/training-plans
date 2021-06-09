@@ -1,0 +1,38 @@
+<section class="section section_pr">
+  <div class="container">
+    <h1>Exercises</h1>
+    <div class="row">
+      <p class="col-12 col-md-8 col-xl-6">
+        Lorem ipsum dolor sit amet.
+        Aliquam purus massa, lobortis non bibendum sed, vestibulum quis arcu. Vestibulum sodales imperdiet mollis.
+        Mauris turpis dolor, gravida vel porttitor dictum, facilisis in eros. Interdum et malesuada fames ac ante ipsum
+        primis in faucibus.
+      </p>
+      <p class="col-12 col-md-4 col-xl-6">
+        <app-search [searchOption]="searchOption" (results)="setResults($event)"></app-search>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section section_se">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let exercise of response" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+        <a [id]="'exercise-' + exercise.id"
+           [routerLink]="'/exercise/' + exercise.id"
+           class="exercise">
+          <div class="exercise-background" [style]="'background-image: url(\'' + exercise.image + '\')'"></div>
+          <div class="exercise-info">
+            <b>{{exercise.exerciseDifficultyLvl}}</b>
+            <h5>{{exercise.exerciseName}}</h5>
+            <p *ngIf="exercise.equipments.length > 0" class="info">
+              This exercise needs equipment!
+            </p>
+            <p>{{exercise.exerciseDescription}}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
