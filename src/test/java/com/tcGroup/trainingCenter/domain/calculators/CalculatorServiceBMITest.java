@@ -7,13 +7,13 @@ class CalculatorServiceBMITest {
 
     @Test
     public void shouldReturnAValidValue(){
-        CalculatorBMI calculatorBMI = new CalculatorBMI(80, 1.80);
+        CalculatorBMI calculatorBMI = new CalculatorBMI(80, 180);
         Assertions.assertEquals(24.7, calculatorBMI.calculateIndex());
     }
 
     @Test
     public void shouldReturnExceptionWhenHeightLessThan1Meter() {
-        CalculatorBMI calculatorBMI = new CalculatorBMI(70, 0.99);
+        CalculatorBMI calculatorBMI = new CalculatorBMI(70, 99);
 
         Exception exception = Assertions.assertThrows(IllegalArgumentException.class, calculatorBMI::calculateIndex);
 
@@ -25,7 +25,7 @@ class CalculatorServiceBMITest {
 
     @Test
     public void shouldReturnExceptionWhenWeightLessThan20Kilograms(){
-        CalculatorBMI calculatorBMI = new CalculatorBMI(19, 1.80);
+        CalculatorBMI calculatorBMI = new CalculatorBMI(19, 180);
 
         Exception exception = Assertions.assertThrows(IllegalArgumentException.class, calculatorBMI::calculateIndex);
 

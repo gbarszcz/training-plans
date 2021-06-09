@@ -7,13 +7,13 @@ class CalculatorServiceCITest {
 
     @Test
     public void shouldReturnAValidValue(){
-        CalculatorCI calculatorCI = new CalculatorCI(70, 1.80);
+        CalculatorCI calculatorCI = new CalculatorCI(70, 180);
         Assertions.assertEquals(12, calculatorCI.calculateIndex());
     }
 
     @Test
     public void shouldReturnExceptionWhenInputWeightIsLessThanZero(){
-        CalculatorCI calculatorCI = new CalculatorCI(-1, 1.80);
+        CalculatorCI calculatorCI = new CalculatorCI(-1, 180);
 
         Exception exception = Assertions.assertThrows(IllegalArgumentException.class, calculatorCI::calculateIndex);
 

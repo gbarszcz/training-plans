@@ -1,6 +1,6 @@
 package com.tcGroup.trainingCenter.domain.calculators;
 /**
- * @params weight must be given in kilograms, height must be expressed in meters
+ * @params weight must be given in kilograms, height must be expressed in centymeters
  */
 public class CalculatorCI implements IndexCalculator {
     private final double weight;
@@ -12,8 +12,8 @@ public class CalculatorCI implements IndexCalculator {
     }
     @Override
     public double calculateIndex() {
-        if(weight > 0 && height > 0){
-            double resultCI =(weight) / (Math.pow(height, 3));
+        if(weight > 20 && height > 100){
+            double resultCI =(weight) / (Math.pow(height/100, 3));
             resultCI *= 10;
             resultCI = Math.round(resultCI);
             resultCI /= 10;
