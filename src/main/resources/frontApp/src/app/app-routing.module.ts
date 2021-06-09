@@ -29,10 +29,11 @@ const routes: Routes = [
   { path: 'training', redirectTo: '/trainings-dashboard' },
   { path: 'measurement', component: MeasurementComponent, canActivate: [AuthGuard] },
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
-  { path: '404', component: NotFoundComponent },
-  { path: '**', redirectTo: '/404' },
   { path: 'trainings-history', component: TrainingHistoryComponent },
   { path: 'calculators', component: CalculatorsComponent},
+
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({
