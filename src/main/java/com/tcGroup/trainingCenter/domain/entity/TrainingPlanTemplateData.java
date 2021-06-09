@@ -20,7 +20,6 @@ import java.util.List;
         @AttributeOverride(name="auditRU", column=@Column(name="TPT_AUDIT_RU"))
 })
 @Data
-@Where(clause = "TPT_AUDIT_RD is null or TPT_AUDIT_RU is null")
 public class TrainingPlanTemplateData extends AuditData {
 
     @Id

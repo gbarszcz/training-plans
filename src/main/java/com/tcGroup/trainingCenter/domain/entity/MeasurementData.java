@@ -24,7 +24,6 @@ import java.util.Objects;
         @AttributeOverride(name="auditRU", column=@Column(name="MSR_AUDIT_RU"))
 })
 @Data
-@Where(clause = "MSR_AUDIT_RD is null or MSR_AUDIT_RU is null")
 public class MeasurementData extends AuditData {
     @Id
     @Column(name = "MSR_ID")
