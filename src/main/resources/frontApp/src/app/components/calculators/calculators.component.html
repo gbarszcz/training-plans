@@ -1,0 +1,173 @@
+<section class="section section_pr" xmlns="">
+  <div>
+    <h1 class="title">Index calculators</h1>
+  </div>
+</section>
+
+<section  class="section section_se" xmlns="">
+  <div class="container">
+      <div class="BMI">
+        <div class="col-12 col-sm-6 col-md-4 col-xl-4 xol-xxl-2">
+          <fieldset>
+            <legend>
+            </legend>
+            <table>
+              <thead>
+              <tr>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Result</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <label>
+                    <input
+                      name="weight"
+                      [(ngModel)]="weightBMI"
+                      class="form-control"
+                      required>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input
+                      name="height"
+                      [(ngModel)]="heightBMI"
+                      class="form-control"
+                      required>
+                  </label>
+                </td>
+                <td>
+                  <!--                dasda-->
+                  <!--                <div class="box">dasd</div>-->
+
+                  <div class="box" >
+                  <span class="resultBMI">
+                    {{resultBMI}}
+                  </span>
+                  </div>
+
+                </td>
+              </tr>
+
+              <tr>
+                <button  type="submit" class="btn btn-primary" (click)="calculateBMI(weightBMI, heightBMI)">Calculate BMI</button>
+              </tr>
+
+              </tbody>
+            </table>
+          </fieldset>
+        </div>
+      </div>
+      <div class="CI">
+        <div class="col-12 col-sm-6 col-md-4 col-xl-4 xol-xxl-2">
+          <fieldset>
+            <legend>
+            </legend>
+            <table>
+              <thead>
+              <tr>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Result</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <label>
+                    <input
+                      name="weightCI"
+                      [(ngModel)]="weightCI"
+                      class="form-control"
+                      required>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input
+                      name="heightCI"
+                      [(ngModel)]="heightCI"
+                      class="form-control"
+                      required>
+                  </label>
+                </td>
+                <td>
+                  <!--                dasda-->
+                  <!--                <div class="box">dasd</div>-->
+
+                  <div class="box" >
+                  <span class="resultBMI">
+                    {{resultCI}}
+                  </span>
+                  </div>
+
+                </td>
+              </tr>
+
+              <tr>
+                <button  type="submit" class="btn btn-primary" (click)="calculateCI(weightCI, heightCI)">Calculate CI</button>
+              </tr>
+
+              </tbody>
+            </table>
+          </fieldset>
+        </div>
+      </div>
+      <div class="WHR">
+        <div class="col-12 col-sm-6 col-md-4 col-xl-4 xol-xxl-2">
+          <fieldset>
+            <legend>
+            </legend>
+            <table>
+              <thead>
+              <tr>
+                <th>Waist</th>
+                <th>Hip circumference</th>
+                <th>Result</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <label>
+                    <input
+                      name="waist"
+                      [(ngModel)]="waist"
+                      class="form-control"
+                      required>
+                  </label>
+                </td>
+                <td>
+                  <label>
+                    <input
+                      name="hipCircumference"
+                      [(ngModel)]="hipCircumference"
+                      class="form-control"
+                      required>
+                  </label>
+                </td>
+                <td>
+
+                  <div class="box" >
+                  <span class="resultWHR">
+                    {{resultWHR}}
+                  </span>
+                  </div>
+
+                </td>
+              </tr>
+
+              <tr>
+                <button  type="submit" class="btn btn-primary" (click)="calculateWHR(waist, hipCircumference)">Calculate WHR</button>
+              </tr>
+
+              </tbody>
+            </table>
+          </fieldset>
+        </div>
+      </div>
+  </div>
+</section>
