@@ -80,7 +80,7 @@ export class AppService {
       `;
     }
 
-    if (url === '/') {
+    if (!tmp_isUserLogin || url === '/login' || url === '/register') {
       return `
 {
   "brandItem": {
@@ -103,19 +103,6 @@ export class AppService {
       "link": "/",
       "disabled": false,
       "divider": false
-    },
-    {
-      "content": [
-        {
-          "type": 4,
-          "value": "Something"
-        }
-      ],
-      "subItems": [],
-      "link": "/something",
-      "disabled": false,
-      "divider": false,
-      "left": true
     },
     {
       "content": [
@@ -217,105 +204,6 @@ export class AppService {
 }
     `;
     }
-    else if (url === '/something') {
-      return `
-{
-  "brandItem": {
-    "type": 3,
-    "value": "TC4U"
-  },
-  "mainNav": [
-    {
-      "content": [
-        {
-          "type": 2,
-          "value": "bi-house-door"
-        },
-        {
-          "type": 4,
-          "value": "Home"
-        }
-      ],
-      "subItems": [],
-      "link": "/",
-      "disabled": false,
-      "divider": false,
-      "left": true
-    },
-    {
-      "content": [
-        {
-          "type": 4,
-          "value": "Something"
-        }
-      ],
-      "subItems": [],
-      "link": "/something",
-      "disabled": false,
-      "divider": false,
-      "left": true
-    },
-    {
-      "content": [
-        {
-          "type": 2,
-          "value": "bi-person-circle"
-        },
-        {
-          "type": 4,
-          "value": "Account"
-        }
-      ],
-      "subItems": [
-        ${account}
-        {
-          "content": [{
-            "type": 4,
-            "value": "Policy"
-          }],
-          "subItems": [],
-          "link": "/policy",
-          "disabled": true,
-          "divider": true,
-          "left": true
-        }
-      ],
-      "link": "",
-      "disabled": false,
-      "divider": false
-    }
-  ],
-  "subNav": [
-    {
-      "content": [
-        {
-          "type": 4,
-          "value": "Top"
-        }
-      ],
-      "subItems": [],
-      "link": "#top",
-      "disabled": false,
-      "divider": false,
-      "left": true
-    },
-    {
-      "content": [
-        {
-          "type": 4,
-          "value": "Rogal"
-        }
-      ],
-      "subItems": [],
-      "link": "#rogal",
-      "disabled": false,
-      "divider": false,
-      "left": true
-    }
-  ]
-}
-    `;
-    }
     else {
       return `
 {
@@ -345,11 +233,56 @@ export class AppService {
       "content": [
         {
           "type": 4,
-          "value": "Something"
+          "value": "Calculators"
         }
       ],
       "subItems": [],
-      "link": "/something",
+      "link": "/calculators",
+      "disabled": false,
+      "divider": false,
+      "left": true
+    },
+    {
+      "content": [
+        {
+          "type": 4,
+          "value": "Exercises"
+        }
+      ],
+      "subItems": [],
+      "link": "/exercises",
+      "disabled": false,
+      "divider": false,
+      "left": true
+    },
+    {
+      "content": [
+        {
+          "type": 4,
+          "value": "Trainings"
+        }
+      ],
+      "subItems": [
+        {
+          "content": [
+            {
+              "type": 4,
+              "value": "Dashboard"
+            }
+          ],
+          "link": "/trainings-dashboard"
+        },
+        {
+          "content": [
+            {
+              "type": 4,
+              "value": "History"
+            }
+          ],
+          "link": "/trainings-history"
+        }
+      ],
+      "link": "/trainings",
       "disabled": false,
       "divider": false,
       "left": true
