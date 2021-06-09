@@ -29,6 +29,7 @@ import { ChartComponent } from './components/chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { TrainingPageComponent } from './components/trainings-components/training-page/training-page.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -59,6 +60,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ChartComponent,
     TrainingPageComponent,
     StatisticsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
