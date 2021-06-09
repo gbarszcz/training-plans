@@ -10,6 +10,7 @@ import com.tcGroup.trainingCenter.domain.dao.TrainingPlanTemplateDAO;
 import com.tcGroup.trainingCenter.domain.entity.TrainingHistoryData;
 import com.tcGroup.trainingCenter.domain.entity.MeasurementData;
 import com.tcGroup.trainingCenter.domain.entity.TrainingPlanTemplateData;
+import com.tcGroup.trainingCenter.domain.searchCriteria.TrainingPlanTemplatesSearchCriteria;
 import com.tcGroup.trainingCenter.user.dao.AccountDAO;
 import com.tcGroup.trainingCenter.user.entity.AccountData;
 import com.tcGroup.trainingCenter.user.entity.RoleData;
@@ -77,6 +78,11 @@ public class AccountManagementServiceImpl extends AbstractService implements Acc
     @Override
     public List<TrainingPlanTemplateData> getTrainingPlans() {
         return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(getUserContext().getUserId());
+    }
+
+    @Override
+    public List<TrainingPlanTemplateData> getTrainingPlans(TrainingPlanTemplatesSearchCriteria searchCriteria) {
+        return trainingPlanTemplateDAO.getTrainingPlanTemplatesForAccount(getUserContext().getUserId(), searchCriteria);
     }
 
     @Override

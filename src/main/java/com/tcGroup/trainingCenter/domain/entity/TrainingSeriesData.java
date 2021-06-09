@@ -18,7 +18,6 @@ import javax.persistence.*;
         @AttributeOverride(name="auditRU", column=@Column(name="TSE_AUDIT_RU"))
 })
 @Data
-@Where(clause = "TSE_AUDIT_RD is null or TSE_AUDIT_RU is null")
 public class TrainingSeriesData extends AuditData {
 
     @Id

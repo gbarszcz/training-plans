@@ -38,7 +38,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <search-exercises></search-exercises>
+          <app-search [searchOption]="searchOption" (results)="setResults($event)"></app-search>
 
           <br>
           <form *ngIf="trainingsTemplates.length > 0" class="row">
@@ -94,7 +94,7 @@
 
 <section class="section section_pr">
   <div class="container">
-    <search-exercises></search-exercises>
+    <app-search [searchOption]="searchOption" (results)="setResults($event)"></app-search>
   </div>
 </section>
 
