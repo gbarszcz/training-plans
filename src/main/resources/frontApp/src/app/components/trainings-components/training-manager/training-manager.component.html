@@ -106,7 +106,7 @@
         {{trainingsTemplates.length}}
       </b>
       <div *ngFor="let template of trainingsTemplates" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
-        <a [routerLink]="'training/' + template.id" class="training">
+        <a [routerLink]="'../training/' + template.id" class="training">
           <div class="training-background" [style]="'background-image: url()'"></div>
           <div class="training-info">
             <b *ngIf="!!template.difficulty">{{template.difficulty}}</b>
